@@ -5,6 +5,10 @@ Rails.application.routes.draw do
       post 'login_as'
     end
   end
+
+  get 'users/:id/complete_profile', to: 'users#complete_profile', as: 'complete_profile'
+  patch 'users/:id/complete_profile', to: 'users#update', as: 'update_profile'
+
   resources :cadenas do
     resources :invitations
   end

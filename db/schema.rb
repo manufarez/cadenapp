@@ -115,7 +115,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_161726) do
     t.string "password"
     t.string "password_confirmation"
     t.string "phone"
-    t.string "location"
+    t.string "address"
+    t.string "zip"
+    t.string "city"
     t.boolean "is_admin", default: false
     t.boolean "accepts_terms"
     t.datetime "created_at", null: false

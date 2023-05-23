@@ -10,7 +10,7 @@
       </div>
       <% if devise_mapping.rememberable? %>
         <div class="flex items-center mb-4 space-x-2 text-sm field text-silver">
-          <%= f.check_box :remember_me, class:'rounded bg-steel focus:ring-0 focus:ring-offset-0' %>
+          <%= f.check_box :remember_me, class:'rounded bg-steel focus:ring-0 focus:ring-offset-0 hover:cursor-pointer' %>
           <%= f.label :remember_me, "Acordarse de mi cuenta" %>
         </div>
       <% end %>

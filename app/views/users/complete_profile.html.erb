@@ -1,0 +1,51 @@
+<div class="flex justify-center">
+  <div class="text-white w-80 font-manrope">
+    <h2 class="mb-6 text-3xl font-bold">Completar perfil</h2>
+
+    <div class="mb-10">
+      <%= form_for(@user, url: update_profile_path(@user)) do |f| %>
+        <%= render "users/shared/error_messages", resource: @user %>
+        <div class="flex mb-4 space-x-3">
+          <div>
+            <%= f.label :sex, "Sexo", class:'text-silver text-sm' %>
+            <select name="user[sex]" id="user_sex" class="w-full input">
+              <option value="F">F</option>
+              <option value="M">M</option>
+              <option value="O">Otro</option>
+            </select>
+          </div>
+          <div>
+            <%= f.label :dob, "Fecha de nacimiento", class:'text-silver text-sm' %>
+            <%= f.date_field :dob, value: (@user.dob.present? ? @user.dob.strftime('%Y-%m-%d') : ''), class: "input w-full date" %>
+          </div>
+        </div>
+        <div class="mb-4">
+          <%= f.label :phone, "N° de teléfono", class:'text-silver text-sm' %>
+          <%= f.text_field :phone, class: "input w-full", placeholder:'3148083065' %>
+        </div>
+        <div class="mb-4">
+          <%= f.label :identification_type, "Identificacíon", class:'text-silver text-sm' %>
+          <select class="w-full mb-4 input" name="user[identification_type]" id="user_identification_type">
+            <option value="CC">Cédula de ciudadanía</option>
+            <option value="CE">Cédula de extranjería</option>
+            <option value="PP">Pasaporte</option>
+          </select>
+          <%= f.text_field :identification_number, autofocus: true, class:'input w-full', placeholder:'N° de identificacíon' %>
+        </div>
+        <div class="mb-4">
+          <%= f.label :address, "Domicilio", class:'text-silver text-sm' %>
+          <%= f.text_field :address, autofocus: true, class:'input w-full mb-4', placeholder:'Dirección' %>
+          <%= f.text_field :zip, autofocus: true, class:'input w-full mb-4', placeholder:'Código postal/ZIP' %>
+          <%= f.text_field :city, autofocus: true, class:'input w-full', placeholder:'Ciudad' %>
+        </div>
+        <div class="flex items-center mb-4 space-x-2 text-sm field text-silver">
+          <%= f.check_box :accepts_terms, class:'rounded bg-steel focus:ring-0 focus:ring-offset-0 hover:cursor-pointer' %>
+          <label for="user[accepts_terms]" id="user_accepts_terms">Acepto <a class="text-primary_blue hover:underline" href="https://www.gov.co/terminos-y-condiciones" target="_blank">términos y condiciones</a></label>
+        </div>
+        <div class="actions">
+          <%= f.submit "Finalizar perfil", class:'btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

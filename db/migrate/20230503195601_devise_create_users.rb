@@ -42,7 +42,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.string :password
       t.string :password_confirmation
       t.string :phone
-      t.string :location
+      t.string :address
+      t.string :zip
+      t.string :city
       t.boolean :is_admin, default: false
       t.boolean :accepts_terms
 

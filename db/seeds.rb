@@ -29,7 +29,9 @@ puts "Creating 100 fake users..."
   user.password = Faker::Internet.password(min_length: 8)
   user.password_confirmation = user.password
   user.phone = Faker::PhoneNumber.cell_phone
-  user.location = Faker::Address.city
+  user.city = Faker::Address.city
+  user.zip = Faker::Address.zip_code
+  user.address = Faker::Address.street_address
   user.accepts_terms = true
   image = URI.parse("https://i.pravatar.cc/256").open
   user.avatar.attach(io: image, filename: "avatar.png" , content_type: "image/png")
