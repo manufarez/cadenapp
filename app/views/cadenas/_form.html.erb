@@ -17,12 +17,12 @@
 
   <div class="my-5">
     <%= form.label :total_participants, class:'text-white' %>
-    <%= form.number_field :total_participants, class: "block border-none rounded-xl text-white bg-steel outline-none p-4 mt-2 w-full", min: 12, data: {cadena_target: "participants", action:"cadena#updateInstallments"} %>
+    <%= form.number_field :total_participants, class: "block border-none rounded-xl text-white bg-steel outline-none p-4 mt-2 w-full", min: 12, data: {cadena_target: "participants", action:"cadena#updateInstallments cadena#updateEndDate"} %>
   </div>
 
   <div class="my-5">
     <%= form.label :periodicity, class:'text-white' %>
-    <%= form.select :periodicity, options_for_select([['Quincenal', 'quincenal'], ['Mensual', 'mensual']]), {}, class: "block border-none rounded-xl text-white bg-steel outline-none p-4 mt-2 w-full", data: {cadena_target: "periodicity", action:"cadena#updateInstallments"} %>
+    <%= form.select :periodicity, options_for_select([['Quincenal', 'quincenal'], ['Mensual', 'mensual']]), {}, class: "block border-none rounded-xl text-white bg-steel outline-none p-4 mt-2 w-full", data: {cadena_target: "periodicity", action:"cadena#updateInstallments cadena#updateEndDate"} %>
   </div>
 
   <div class="my-5">
@@ -43,13 +43,13 @@
 
   <div class="my-5">
     <%= form.label :end_date, class:'text-white' %>
-    <%= form.date_field :end_date, readonly: true, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 mt-2 w-full", data:{cadena_target:"endDate"} %>
+    <%= form.date_field :end_date, readonly: true, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 mt-2 w-full hover:cursor-not-allowed", data:{cadena_target:"endDate"} %>
   </div>
 
 
   <div class="my-5">
     <%= form.label :saving_goal, class:'text-white' %>
-    <%= form.number_field :saving_goal, readonly: true, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 mt-2 w-full", data:{cadena_target:"savingGoal"} %>
+    <%= form.number_field :saving_goal, readonly: true, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 mt-2 w-full hover:cursor-not-allowed", data:{cadena_target:"savingGoal"} %>
   </div>
 
   <div class="inline">

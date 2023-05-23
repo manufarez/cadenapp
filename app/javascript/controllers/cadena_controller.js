@@ -13,11 +13,16 @@ export default class extends Controller {
   updateEndDate() {
     const installments = parseInt(this.installmentsTarget.value, 10);
     const startDate = this.startDateTarget.value;
+    const periodicity = this.periodicityTarget.value;
+
 
     if (installments && startDate) {
       const endDate = new Date(startDate);
-      endDate.setMonth(endDate.getMonth() + installments);
-
+      if (periodicity === "mensual") {
+        endDate.setMonth(endDate.getMonth() + installments);
+      } else if (periodicity === "quincenal") {
+        endDate.setDate(endDate.getDate() + (installments * 15));
+      }
       const formattedEndDate = endDate.toISOString().split("T")[0];
       this.endDateTarget.value = formattedEndDate;
     } else {
@@ -27,14 +32,8 @@ export default class extends Controller {
 
   updateInstallments() {
     const participants = parseInt(this.participantsTarget.value, 10);
-    const periodicity = this.periodicityTarget.value;
-
-    if (periodicity === "mensual") {
-      this.installmentsTarget.value = participants.toString();
-    } else if (periodicity === "quincenal") {
-      this.installmentsTarget.value = (participants * 2).toString();
-    }
-
+    if (!participants) return;
+    this.installmentsTarget.value = participants.toString();
     this.updateSavingGoal();
   }
 
