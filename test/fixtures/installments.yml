@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2023-05-21
+  transactions_expected: 1
+  transactions_made: 1
+  total_due: 9.99
+  total_paid: 9.99
+  position: 1
+  account_id: 
+  status: MyString
+  debitors: MyString
+  creditors: MyString
+  installment_fee: 1.5
+  installment_number: 1
+
+two:
+  date: 2023-05-21
+  transactions_expected: 1
+  transactions_made: 1
+  total_due: 9.99
+  total_paid: 9.99
+  position: 1
+  account_id: 
+  status: MyString
+  debitors: MyString
+  creditors: MyString
+  installment_fee: 1.5
+  installment_number: 1

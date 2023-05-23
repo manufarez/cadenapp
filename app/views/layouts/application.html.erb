@@ -36,6 +36,8 @@
 
   <body class="flex flex-col justify-between min-h-screen bg-night">
     <%= render 'shared/navbar' %>
+      <p class="text-white notice"><%= notice %></p>
+      <p class="text-white alert"><%= alert %></p>
       <main class="mb-auto">
         <%= yield %>
       </main>

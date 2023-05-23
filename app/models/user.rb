@@ -1,0 +1,18 @@
+class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+
+  has_many :participations
+  has_many :cadenas, through: :participations
+  has_one_attached :avatar
+
+  def cadenas_count
+    self.cadenas.count
+  end
+
+  def name
+    return "#{self.first_name} #{self.last_name}"
+  end
+end

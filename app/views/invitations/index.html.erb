@@ -1,0 +1,34 @@
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="inline-block px-3 py-2 mb-5 font-medium text-green-500 rounded-lg bg-green-50" id="notice"><%= notice %></p>
+  <% end %>
+
+
+  <div class="mx-auto text-white max-w-7xl">
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-3xl font-bold leading-6 text-white font-nimbus-ext">Invitations</h1>
+      <%= link_to 'New invitation', new_cadena_invitation_path, class: "rounded-lg py-2 px-4 bg-blue-600 text-white block font-medium" %>
+    </div>
+    <div class="relative mb-12 overflow-x-auto border shadow-md sm:rounded-lg border-jaguar_light/50">
+      <table class="w-full text-sm text-left text-gray-400 border">
+        <thead class="text-xs text-gray-200 uppercase bg-jaguar_light">
+          <tr>
+            <th scope="col" class="px-6 py-3">Name</th>
+            <th scope="col" class="px-6 py-3">Phone</th>
+            <th scope="col" class="px-6 py-3 text-center">Accepted</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @invitations.each do |invitation| %>
+            <tr class="odd:bg-transparent even:bg-night_dark">
+              <td class="px-6 py-4 font-medium text-white whitespace-nowrap"><%= invitation.first_name %> <%= invitation.last_name %></td>
+              <td class="px-6 py-4"><%= invitation.phone %></td>
+              <td class="px-6 py-4 text-center"><%= invitation.accepted %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

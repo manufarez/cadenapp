@@ -83,3 +83,7 @@
   color: blue!important;
   font-size: 1.5em;
 }
+
+.date::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* Inverts the color of the icon */
+}

@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  total_participants: 1
+  installments: 1
+  installment_value: 9.99
+  start_date: 2023-05-03
+  end_date: 2023-05-03
+  periodicity: MyString
+  status: MyString
+  balance: 9.99
+
+two:
+  name: MyString
+  total_participants: 1
+  installments: 1
+  installment_value: 9.99
+  start_date: 2023-05-03
+  end_date: 2023-05-03
+  periodicity: MyString
+  status: MyString
+  balance: 9.99
