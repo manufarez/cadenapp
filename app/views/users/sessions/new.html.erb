@@ -1,26 +1,27 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="flex justify-center text-white font-manrope">
+  <div class="w-80">
+    <h2 class="mb-6 text-3xl font-bold">Conectarse a Cadenapp</h2>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="mb-4 field">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'input w-full', placeholder: 'E-mail' %>
+      </div>
+      <div class="mb-4 field">
+        <%= f.password_field :password, autocomplete: "current-password", class:'input w-full', placeholder: 'Contraseña' %>
+      </div>
+      <% if devise_mapping.rememberable? %>
+        <div class="flex items-center mb-4 space-x-2 text-sm field text-silver">
+          <%= f.check_box :remember_me, class:'rounded bg-steel focus:ring-0 focus:ring-offset-0' %>
+          <%= f.label :remember_me, "Acordarse de mi cuenta" %>
+        </div>
+      <% end %>
+      <div class="mb-10 actions">
+        <%= f.submit "Conectarse", class:'btn-primary' %>
+      </div>
+    <% end %>
+    <div class="flex flex-col items-center space-y-4 text-sm">
+      <%= link_to "Problemas de conexion ?", new_password_path(resource_name), class:'text-primary_blue hover:underline' %>
+      <span class="w-16 border-t border-black_coral"></span>
+      <%= link_to "Inscripción", new_registration_path(resource_name), class:'text-silver hover:underline' %>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>

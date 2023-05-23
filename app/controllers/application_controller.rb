@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_user!
-    unless (user_signed_in? && current_user.is_admin?) || (devise_controller? && action_name == 'new')
+    unless user_signed_in? && current_user.is_admin? || devise_controller? && %w[new create destroy].include?(action_name)
       redirect_to new_user_session_path, notice: "Please login to access this page."
     end
   end

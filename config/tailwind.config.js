@@ -28,7 +28,9 @@ module.exports = {
         ocra:'#e8d1da',
         sazerac:'#f5dcc5',
         silver: '#87889a',
-        steel: '#242533'
+        steel: '#242533',
+        primary_blue: '#2563eb',
+        black_coral:'#585C6F',
       }
     },
   },
