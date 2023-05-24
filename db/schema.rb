@@ -111,7 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_161726) do
     t.string "identification_type"
     t.string "identification_issued_at"
     t.string "sex"
-    t.string "dob"
+    t.date "dob"
     t.string "password"
     t.string "password_confirmation"
     t.string "phone"

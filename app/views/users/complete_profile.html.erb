@@ -16,7 +16,7 @@
           </div>
           <div>
             <%= f.label :dob, "Fecha de nacimiento", class:'text-silver text-sm' %>
-            <%= f.date_field :dob, value: (@user.dob.present? ? @user.dob.strftime('%Y-%m-%d') : ''), class: "input w-full date" %>
+            <%= f.date_field :dob, class: "input w-full date" %>
           </div>
         </div>
         <div class="mb-4">

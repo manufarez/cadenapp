@@ -38,7 +38,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.string :identification_type
       t.string :identification_issued_at
       t.string :sex
-      t.string :dob
+      t.date :dob
       t.string :password
       t.string :password_confirmation
       t.string :phone
