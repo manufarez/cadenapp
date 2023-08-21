@@ -19,71 +19,75 @@
 }
 
 .menu {
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	padding-bottom: 2rem;
-	--marquee-width: 100vw;
-	--offset: 20vw;
-	--move-initial: calc(-25% + var(--offset));
-	--move-final: calc(-50% + var(--offset));
-	--item-font-size: 10vw;
-	counter-reset: menu;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding-bottom: 2rem;
+  --marquee-width: 100vw;
+  --offset: 20vw;
+  --move-initial: calc(-25% + var(--offset));
+  --move-final: calc(-50% + var(--offset));
+  --item-font-size: 10vw;
+  counter-reset: menu;
 }
 
 /* Make sure 3 items are visible in the viewport by setting suitable font size. */
 
 .marquee {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: var(--marquee-width);
-	overflow: hidden;
-	pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--marquee-width);
+  overflow: hidden;
+  pointer-events: none;
 }
 
 .marquee__inner {
-	width: fit-content;
-	display: flex;
-	position: relative;
-	transform: translate3d(var(--move-initial), 0, 0);
-	animation: marquee 10s linear infinite;
-	animation-play-state: paused;
-	opacity: 0;
-	transition: opacity 0.1s;
+  width: fit-content;
+  display: flex;
+  position: relative;
+  transform: translate3d(var(--move-initial), 0, 0);
+  animation: marquee 10s linear infinite;
+  animation-play-state: paused;
+  opacity: 0;
+  transition: opacity 0.1s;
 }
 
 .marquee .marquee__inner {
-	animation-play-state: running;
-	opacity: 1;
-	transition-duration: 1s;
+  animation-play-state: running;
+  opacity: 1;
+  transition-duration: 1s;
 }
 
 .marquee span {
   text-align: center;
-	white-space: nowrap;
-	padding: 0 1vw;
-	font-weight: 900;
-	line-height: 2;
+  white-space: nowrap;
+  padding: 0 1vw;
+  font-weight: 900;
+  line-height: 2;
 }
 
 @keyframes marquee {
-	0% {
-		transform: translate3d(var(--move-initial), 0, 0);
-	}
+  0% {
+    transform: translate3d(var(--move-initial), 0, 0);
+  }
 
-	100% {
-		transform: translate3d(var(--move-final), 0, 0);
-	}
+  100% {
+    transform: translate3d(var(--move-final), 0, 0);
+  }
 }
 
 .subscribe input::placeholder {
-  color: blue!important;
+  color: blue !important;
   font-size: 1.5em;
 }
 
 .date::-webkit-calendar-picker-indicator {
   filter: invert(1); /* Inverts the color of the icon */
+}
+
+#date-input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }

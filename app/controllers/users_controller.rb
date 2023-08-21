@@ -3,7 +3,11 @@ class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:complete_profile, :update]
 
   def index
-    @users = User.all
+    if current_user.is_admin?
+      @users = User.all
+    else
+      redirect_to cadenas_path, alert: "You are logged as #{current_user.email}"
+    end
   end
 
   def login_as

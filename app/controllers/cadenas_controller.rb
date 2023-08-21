@@ -3,11 +3,20 @@ class CadenasController < ApplicationController
 
   # GET /cadenas or /cadenas.json
   def index
-    @cadenas = Cadena.all
+    if current_user.is_admin?
+      @cadenas = Cadena.all
+    else
+      @cadenas = current_user.cadenas
+    end
   end
 
   # GET /cadenas/1 or /cadenas/1.json
   def show
+    if current_user.belongs_to_cadena?(@cadena) || current_user.is_admin?
+      # Proceed with showing the cadena's details
+    else
+      redirect_to root_path, alert: "Ud. no tiene acceso a esta cadena."
+    end
   end
 
   # GET /cadenas/new
@@ -47,8 +56,37 @@ class CadenasController < ApplicationController
     end
   end
 
-  def shuffle
+  def request_approval
     @cadena = Cadena.find(params[:id])
+    @cadena.status = 'approval_requested'
+    @cadena.save
+    redirect_back(fallback_location: root_path, alert: "Request for approval has been sent to participants")
+  end
+
+  def assign_positions
+    @cadena = Cadena.find(params[:id])
+    participations = @cadena.participations
+    participations.shuffle
+    participations.each_with_index do |participation, index|
+      participation.position = index + 1
+      participation.save
+    end
+    @cadena.status = 'started'
+    @cadena.save
+  end
+
+  def remove_user
+    @cadena = Cadena.find(params[:id])
+    user = User.find(params[:user_id])
+
+    participation = @cadena.participations.find_by(user: user)
+    if participation
+      participation.destroy
+      @cadena.set_status
+      redirect_to cadena_path(@cadena), notice: 'User removed from cadena.'
+    else
+      redirect_to cadena_path(@cadena), alert: 'User not found in cadena.'
+    end
   end
 
   # DELETE /cadenas/1 or /cadenas/1.json

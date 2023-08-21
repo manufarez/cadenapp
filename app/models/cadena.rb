@@ -2,28 +2,26 @@ class Cadena < ApplicationRecord
   has_many :participations
   has_many :invitations
   has_many :users, through: :participations
-
-  def approved_participants
-    self.participations.count
-  end
+  enum status: { pending: "pending", complete: "complete", approval_requested: "approval_requested", started: "started", stopped: "stopped", over: "over", archived: "archived" }, _default: "pending"
+  enum periodicity: { bimonthly: "bimonthly", monthly: "monthly" }, _default: "monthly"
 
   def admin
-    self.participations.where(is_admin: true).first.user
+    participations.find_by(is_admin: true)&.user
   end
 
   def missing_participants
-    if self.periodicity == "mensual"
-      self.installments - self.approved_participants
-    elsif self.periodicity == "quincenal"
-      self.installments / 2 - self.approved_participants
+    if self.periodicity == "monthly"
+      self.installments - self.participations.count
+    elsif self.periodicity == "bimonthly"
+      self.installments / 2 - self.participations.count
     end
   end
 
-  def status
-    if self.approved_participants == self.installments
-      "Full"
-    else
-      "#{self.missing_participants.to_s} en espera"
+  def set_status
+    if self.missing_participants > 0
+      self.pending!
+    elsif self.missing_participants == 0
+      self.complete!
     end
   end
 end

@@ -1,0 +1,38 @@
+<ul role="list" class="divide-y divide-gray-700">
+  <% cadena.users.each do |user| %>
+    <li class="py-3 sm:py-4 first:pt-0 last:pb-0">
+      <div class="flex items-center space-x-4">
+        <div class="flex-shrink-0">
+          <%= image_tag user.avatar, alt: "#{user.name} avatar", class:"w-8 h-8 rounded-full" %>
+        </div>
+        <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-white truncate">
+                <%= user.name %>
+            </p>
+            <p class="text-sm text-gray-400 truncate">
+              <%= user.email %>
+            </p>
+        </div>
+
+        <% if user == cadena.admin %>
+          <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Admin</p>
+        <% end %>
+
+        <% if current_user == cadena.admin || current_user.is_admin && user != cadena.admin %>
+          <button id="dropdownUser<%= user.id %>" data-dropdown-toggle="dropdownDotsUser<%= user.id %>" type="button" class="inline-flex items-center text-base font-semibold rounded-full bg-jaguar_light font-manrope text-silver hover:bg-gray-700 focus:ring-gray-500 focus:ring-2 focus:outline-none">
+            <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-5">
+              <path clip-rule="evenodd" fill-rule="evenodd" d="M4.5 12a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm6 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm6 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z"></path>
+            </svg>
+          </button>
+          <div id="dropdownDotsUser<%= user.id %>" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
+              <li>
+                <%= button_to "Eliminar", remove_user_cadena_path(cadena, user, format: :html), method: :delete, class:'block px-4 py-2 hover:bg-gray-100 mr-0 text-left w-full dark:hover:bg-gray-600 dark:hover:text-white' %>
+              </li>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+</ul>

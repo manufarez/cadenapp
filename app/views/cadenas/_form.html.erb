@@ -22,7 +22,7 @@
 
   <div class="my-5">
     <%= form.label :periodicity, class:'text-white' %>
-    <%= form.select :periodicity, options_for_select([['Quincenal', 'quincenal'], ['Mensual', 'mensual']]), {}, class: "block border-none rounded-xl text-white bg-steel outline-none p-4 mt-2 w-full", data: {cadena_target: "periodicity", action:"cadena#updateInstallments cadena#updateEndDate"} %>
+    <%= form.select :periodicity, options_for_select([['Quincenal', 'bimonthly'], ['Mensual', 'monthly']]), {}, class: "block border-none rounded-xl text-white bg-steel outline-none p-4 mt-2 w-full", data: {cadena_target: "periodicity", action:"cadena#updateInstallments cadena#updateEndDate"} %>
   </div>
 
   <div class="my-5">

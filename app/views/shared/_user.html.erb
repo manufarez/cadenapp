@@ -1,0 +1,5 @@
+<button type="button" class="p-2.5 text-sm font-base text-gray-300 bg-gray-800 border border-gray-600 rounded-xl focus:outline-none focus:z-10 focus:ring-4 focus:ring-gray-700 hover:text-white hover:bg-gray-700 mr-3">
+  <% if user_signed_in? %>
+    <%= current_user.email %>
+  <% end %>
+</button>

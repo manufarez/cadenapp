@@ -26,7 +26,7 @@ puts "Creating 100 fake users..."
   user.sex = ["M", "F"].sample
   user.dob = Faker::Date.birthday(min_age: 18, max_age: 65)
   user.email = Faker::Internet.email
-  user.password = Faker::Internet.password(min_length: 8)
+  user.password = user.email
   user.password_confirmation = user.password
   user.phone = Faker::PhoneNumber.cell_phone
   user.city = Faker::Address.city
@@ -47,9 +47,9 @@ puts "Creating 10 fake cadenas..."
   cadena.installment_value = (200000..1000000).step(100000).to_a.sample
   cadena.start_date = Date.today
   cadena.end_date = Date.today + cadena.installments.months
-  cadena.periodicity = "Monthly"
-  cadena.status = "Active"
+  cadena.periodicity = "monthly"
   cadena.balance = 0
+  cadena.complete!
   cadena.save
   puts "Cadena #{cadena.id} created!"
 end
@@ -79,6 +79,8 @@ Cadena.all.each do |cadena|
   3..7.times do
     invitation = Invitation.new
     invitation.cadena_id = cadena.id
+    invitation.sender_id = cadena.users.sample.id
+    invitation.email = Faker::Internet.email
     invitation.phone = Faker::PhoneNumber.cell_phone
     invitation.first_name = Faker::Name.first_name
     invitation.last_name = Faker::Name.last_name

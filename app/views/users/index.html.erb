@@ -1,8 +1,4 @@
 <div class="mx-auto text-white max-w-7xl">
-  <% if user_signed_in? %>
-  <p class="mb-6 text-center">You are logged in as <em><%= current_user.email %></em></p>
-  <% end %>
-
   <div class="relative mb-12 overflow-x-auto border shadow-md sm:rounded-lg border-jaguar_light/50">
     <table class="w-full text-sm text-left text-gray-400 border">
       <thead class="text-xs text-gray-200 uppercase bg-jaguar_light">
@@ -19,7 +15,7 @@
             <td class="px-6 py-4 font-medium text-white whitespace-nowrap"><%= user.first_name %> <%= user.last_name %></td>
             <td class="px-6 py-4"><%= user.email %></td>
             <td class="px-6 py-4 text-center"><%= user.cadenas.count %></td>
-            <td class="px-6 py-4"><%= button_to "Impersonate", login_as_user_path(user), class:'font-medium text-blue-500 hover:underline' %></td>
+            <td class="px-6 py-4"><%= button_to "Impersonate", login_as_user_path(user), class: 'font-medium text-blue-500 hover:underline', data: {turbo: false} %></td>
           </tr>
         <% end %>
       </tbody>

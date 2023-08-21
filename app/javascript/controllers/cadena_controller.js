@@ -1,8 +1,16 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="cadena"
 export default class extends Controller {
-  static targets = ["participants", "installments", "startDate", "endDate", "periodicity", "savingGoal", "installmentValue"];
+  static targets = [
+    "participants",
+    "installments",
+    "startDate",
+    "endDate",
+    "periodicity",
+    "savingGoal",
+    "installmentValue",
+  ];
 
   connect() {
     this.updateEndDate();
@@ -15,13 +23,12 @@ export default class extends Controller {
     const startDate = this.startDateTarget.value;
     const periodicity = this.periodicityTarget.value;
 
-
     if (installments && startDate) {
       const endDate = new Date(startDate);
-      if (periodicity === "mensual") {
+      if (periodicity === "monthly") {
         endDate.setMonth(endDate.getMonth() + installments);
-      } else if (periodicity === "quincenal") {
-        endDate.setDate(endDate.getDate() + (installments * 15));
+      } else if (periodicity === "bimonthly") {
+        endDate.setDate(endDate.getDate() + installments * 15);
       }
       const formattedEndDate = endDate.toISOString().split("T")[0];
       this.endDateTarget.value = formattedEndDate;

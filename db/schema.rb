@@ -75,11 +75,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_161726) do
   end
 
   create_table "invitations", force: :cascade do |t|
+    t.string "token"
+    t.string "email"
     t.string "phone"
     t.string "first_name"
     t.string "last_name"
     t.boolean "accepted", default: false
     t.bigint "cadena_id", null: false
+    t.integer "sender_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cadena_id"], name: "index_invitations_on_cadena_id"

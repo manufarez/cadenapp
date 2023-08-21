@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+  <h2>Hola! Unete a la cadena <%= @invitation.cadena.name %></h2>
+  <p>Has sido invitado por <%= @invitation.sender.first_name + ' ' + @invitation.sender.last_name %>.</p>
+  <p>Dale clic en el siguiente enlace para aceptar la invitación:</p>
+  <p>
+    <%= link_to 'Join the Cadena', accept_cadena_invitation_url(@invitation.cadena, @invitation.token) %>
+  </p>
+  <p>Si no esperaba esta invitación, simplemente puede ignorar este correo electrónico.</p>
+  <p>Saludos!</p>
+  <p>Cadenapp</p>
+</body>
+</html>

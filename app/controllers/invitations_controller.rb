@@ -20,17 +20,34 @@ class InvitationsController < ApplicationController
   def edit
   end
 
+  def accept
+    @cadena = Cadena.find(params[:cadena_id])
+    @invitation = @cadena.invitations.find_by(token: params[:id])
+
+    if @invitation
+      # Handle invitation acceptance logic
+      flash[:error] = 'Bienvenido a la cadena!'
+      redirect_to @cadena
+    else
+      flash[:error] = 'Invalid invitation token.'
+      redirect_to root_path
+    end
+  end
+
   # POST /invitations or /invitations.json
   def create
     @cadena = Cadena.find(params[:cadena_id])
     @invitation = Invitation.new(invitation_params)
     @invitation.cadena_id = @cadena.id
+    @invitation.sender = current_user
 
     respond_to do |format|
       if @invitation.save
-        format.html { redirect_to cadena_invitations_url, notice: "Invitation was successfully created." }
+        InvitationMailer.invite_email(@invitation).deliver_now
+        format.html { redirect_to cadena_invitations_url, notice: "Invitation was successfully sent" }
         format.json { render :show, status: :created, location: @invitation }
       else
+        flash[:error] = 'Invitation failed to send'
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @invitation.errors, status: :unprocessable_entity }
       end
@@ -68,6 +85,6 @@ class InvitationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def invitation_params
-      params.require(:invitation).permit(:phone, :first_name, :last_name, :accepted, :cadena_id)
+      params.require(:invitation).permit(:phone, :email, :first_name, :last_name, :accepted, :cadena_id, :sender_id)
     end
 end

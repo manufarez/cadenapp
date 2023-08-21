@@ -11,7 +11,6 @@ class CreateCadenas < ActiveRecord::Migration[7.0]
       t.string :periodicity
       t.string :status
       t.decimal :balance
-
       t.timestamps
     end
   end

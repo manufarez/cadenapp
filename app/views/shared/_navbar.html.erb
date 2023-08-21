@@ -4,6 +4,8 @@
   <% end %>
 
   <% if current_user %>
+    <%= render 'shared/date_selector' %>
+    <%= render 'shared/user' %>
     <%= link_to destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?" } do %>
       <button type="button" class="p-2.5 text-sm font-medium text-gray-400 bg-gray-800 border border-gray-600 rounded-xl focus:outline-none focus:z-10 focus:ring-4 focus:ring-gray-700 hover:text-white hover:bg-gray-700">
         <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-5">

@@ -35,12 +35,11 @@
   </head>
 
   <body class="flex flex-col justify-between min-h-screen bg-night">
+    <%= render 'shared/flash' %>
     <%= render 'shared/navbar' %>
-      <p class="text-white notice"><%= notice %></p>
-      <p class="text-white alert"><%= alert %></p>
-      <main class="mb-auto">
-        <%= yield %>
-      </main>
+    <main class="mb-auto">
+      <%= yield %>
+    </main>
     <%= render 'shared/footer' %>
   </body>
 </html>

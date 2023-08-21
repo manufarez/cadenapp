@@ -6,11 +6,17 @@
     </div>
     <div class="flex items-center justify-between my-5">
       <div class="font-manrope">
-        <span class="text-2xl font-bold"><%= cadena.total_participants %></span>
+        <span class="text-2xl font-bold"><%= cadena.participations.count %></span>
         <p class="text-sm text-gray-500">participantes</p>
       </div>
       <div>
-        <%= link_to "Invitar", cadena_invitations_path(@cadena), class: "text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-800 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
+        <% if cadena.pending? %>
+          <%= link_to "Invitar participantes", new_cadena_invitation_path(@cadena), class: "text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-800 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
+        <% elsif cadena.complete? %>
+          <%= link_to "Aprobar lista", request_approval_cadena_path(@cadena), class: "text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-800 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
+        <% elsif cadena.approval_requested? %>
+          <%= link_to "Generar orden", cadena_assign_positions_path(@cadena), class: "text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-800 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
+        <% end %>
       </div>
     </div>
     <div class="my-5 font-manrope">
@@ -20,7 +26,7 @@
     <div class="flex justify-between my-5 font-manrope">
       <div>
         <span class="text-2xl font-bold"><%= number_to_currency(cadena.installment_value, precision: 0) %></span>
-        <p class="text-sm text-gray-500"><%= cadena.periodicity == "mensual" ? "por mes" : "por quincena" %></p>
+        <p class="text-sm text-gray-500"><%= cadena.periodicity == "monthly" ? "por mes" : "por quincena" %></p>
       </div>
       <div>
         <span class="text-2xl font-bold">0/<%= cadena.installments %></span>
@@ -43,37 +49,18 @@
       <hr class="mt-6">
     <% end %>
   </div>
-  <% if cadena.approved_participants == cadena.installments %>
-    <button type="button" class="p-4 mb-2 text-sm font-medium text-white bg-purple-700 focus:outline-none hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 rounded-xl dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Empezar cadena</button>
+  <% if cadena.complete? %>
+    <%= button_to 'Cadena full! Start cadena', '/', method: :patch, class:'p-4 mb-2 text-sm font-medium text-white bg-purple-700 focus:outline-none hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 rounded-xl dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 w-full' %>
+  <% elsif cadena.status == 'Complete'  %>
+    <%= button_to 'Cadena approved! Generate order', assign_positions_cadena_path(@cadena), method: :patch, class:'p-4 mb-2 text-sm font-medium text-white bg-primary_blue focus:outline-none hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 rounded-xl dark:hover:bg-blue-700 dark:focus:ring-blue-900 w-full' %>
   <% end %>
-  <% if cadena.approved_participants.nonzero? %>
-    <div class="p-6 rounded-xl bg-night_dark">
-      <div class="flow-root">
-            <ul role="list" class="divide-y divide-gray-700">
-              <% @cadena.users.each do |user| %>
-                <li class="py-3 sm:py-4 first:pt-0 last:pb-0">
-                  <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0">
-                      <%= image_tag user.avatar, alt: "#{user.name} avatar", class:"w-8 h-8 rounded-full" %>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-white truncate">
-                            <%= user.name %>
-                        </p>
-                        <p class="text-sm text-gray-400 truncate">
-                          <%= user.email %>
-                        </p>
-                    </div>
-                    <div class="inline-flex items-center text-base font-semibold rounded-full bg-jaguar_light font-manrope text-silver">
-                      <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-5">
-                        <path clip-rule="evenodd" fill-rule="evenodd" d="M4.5 12a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm6 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm6 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z"></path>
-                      </svg>
-                    </div>
-                  </div>
-                </li>
-              <% end %>
-            </ul>
-      </div>
+  <div class="p-6 rounded-xl bg-night_dark">
+    <div class="flow-root">
+      <% if cadena.pending? || cadena.complete? || cadena.approval_requested? %>
+        <%= render 'cadena_users', cadena: @cadena %>
+      <% elsif cadena.started? %>
+        <%= render 'cadena_participants', cadena: @cadena %>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
