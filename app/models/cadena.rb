@@ -2,6 +2,7 @@ class Cadena < ApplicationRecord
   has_many :participations
   has_many :invitations
   has_many :users, through: :participations
+  before_save :set_status
   enum status: { pending: "pending", complete: "complete", approval_requested: "approval_requested", started: "started", stopped: "stopped", over: "over", archived: "archived" }, _default: "pending"
   enum periodicity: { bimonthly: "bimonthly", monthly: "monthly" }, _default: "monthly"
 
@@ -10,18 +11,26 @@ class Cadena < ApplicationRecord
   end
 
   def missing_participants
-    if self.periodicity == "monthly"
-      self.installments - self.participations.count
-    elsif self.periodicity == "bimonthly"
-      self.installments / 2 - self.participations.count
-    end
+    self.installments - self.participations.count
   end
 
   def set_status
-    if self.missing_participants > 0
-      self.pending!
-    elsif self.missing_participants == 0
-      self.complete!
+    self.status = if missing_participants > 0
+      'pending'
+    else
+      'complete'
     end
+  end
+
+  def status_color
+    status_colors = {
+      'complete' => 'text-primary_blue',
+      'pending' => 'text-pinky',
+      'approval_requested' => 'text-mayo',
+      'started' => 'text-ciel',
+      'stopped' => 'text-red-500'
+    }
+
+    status_colors[status] || ''
   end
 end

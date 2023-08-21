@@ -1,5 +1,10 @@
-<button type="button" class="p-2.5 text-sm font-base text-gray-300 bg-gray-800 border border-gray-600 rounded-xl focus:outline-none focus:z-10 focus:ring-4 focus:ring-gray-700 hover:text-white hover:bg-gray-700 mr-3">
+<%= link_to update_profile_path(current_user), class:"p-2.5 text-sm font-base text-gray-300 bg-gray-800 border border-gray-600 rounded-xl focus:outline-none focus:z-10 focus:ring-4 focus:ring-gray-700 hover:text-white hover:bg-gray-700 mr-2.5 #{current_user.is_admin ? 'border-dashed' : ''}" do  %>
   <% if user_signed_in? %>
-    <%= current_user.email %>
+    <div class="hidden sm:block">
+      <%= current_user.name %>
+    </div>
+    <div class="sm:hidden">
+      <%= current_user.initials %>
+    </div>
   <% end %>
-</button>
+<% end %>

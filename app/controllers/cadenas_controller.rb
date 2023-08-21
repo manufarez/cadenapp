@@ -107,6 +107,6 @@ class CadenasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cadena_params
-      params.require(:cadena).permit(:name, :total_participants, :installments, :installment_value, :start_date, :end_date, :periodicity, :status, :balance)
+      params.require(:cadena).permit(:name, :total_participants, :installments, :installment_value, :start_date, :end_date, :periodicity, :status, :balance, :saving_goal)
     end
 end

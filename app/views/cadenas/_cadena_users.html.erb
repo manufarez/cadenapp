@@ -24,7 +24,7 @@
               <path clip-rule="evenodd" fill-rule="evenodd" d="M4.5 12a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm6 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm6 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z"></path>
             </svg>
           </button>
-          <div id="dropdownDotsUser<%= user.id %>" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+          <div id="dropdownDotsUser<%= user.id %>" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-fit dark:bg-gray-700 dark:divide-gray-600">
             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
               <li>
                 <%= button_to "Eliminar", remove_user_cadena_path(cadena, user, format: :html), method: :delete, class:'block px-4 py-2 hover:bg-gray-100 mr-0 text-left w-full dark:hover:bg-gray-600 dark:hover:text-white' %>

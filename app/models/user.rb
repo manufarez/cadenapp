@@ -25,6 +25,10 @@ class User < ApplicationRecord
     return "#{self.first_name} #{self.last_name}"
   end
 
+  def initials
+    return "#{self.first_name[0]}#{self.last_name[0]}"
+  end
+
   def belongs_to_cadena?(cadena)
     cadenas.include?(cadena)
   end

@@ -8,7 +8,7 @@
   <p>Has sido invitado por <%= @invitation.sender.first_name + ' ' + @invitation.sender.last_name %>.</p>
   <p>Dale clic en el siguiente enlace para aceptar la invitación:</p>
   <p>
-    <%= link_to 'Join the Cadena', accept_cadena_invitation_url(@invitation.cadena, @invitation.token) %>
+    <%= link_to 'Ingresar cadena', accept_cadena_invitation_url(@invitation.cadena, @invitation.token) %>
   </p>
   <p>Si no esperaba esta invitación, simplemente puede ignorar este correo electrónico.</p>
   <p>Saludos!</p>

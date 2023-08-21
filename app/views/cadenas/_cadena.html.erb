@@ -1,8 +1,8 @@
 <div id="<%= dom_id cadena %>" class="flex flex-col">
   <div class="p-6 mb-6 text-white border border-gray-700 rounded-xl">
     <div class="flex space-x-6">
-      <h2 class="text-3xl font-bold leading-6 text-center text-white font-nimbus-ext"><%= cadena.name %></h2>
-      <span class="px-3 py-1 text-xs font-light uppercase border rounded-full border-ciel text-ciel"><%= cadena.status %></span>
+      <h2 class="text-3xl font-bold leading-7 text-left text-white font-nimbus-ext"><%= cadena.name %></h2>
+      <span class="px-3 py-1 text-xs font-light uppercase border rounded-full h-fit border-ciel text-ciel"><%= cadena.status %></span>
     </div>
     <div class="flex items-center justify-between my-5">
       <div class="font-manrope">
@@ -11,7 +11,7 @@
       </div>
       <div>
         <% if cadena.pending? %>
-          <%= link_to "Invitar participantes", new_cadena_invitation_path(@cadena), class: "text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-800 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
+          <%= link_to "Invitar más", new_cadena_invitation_path(@cadena), class: "text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-800 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
         <% elsif cadena.complete? %>
           <%= link_to "Aprobar lista", request_approval_cadena_path(@cadena), class: "text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-800 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
         <% elsif cadena.approval_requested? %>
