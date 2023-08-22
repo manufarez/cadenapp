@@ -6,6 +6,29 @@
       <%= form_for(@user, url: update_profile_path(@user)) do |f| %>
         <%= render "users/shared/error_messages", resource: @user %>
         <div class="flex mb-4 space-x-3">
+          <% if @user.avatar.attached? %>
+            <%= image_tag @user.avatar, class:'rounded-full w-24 h-24 object-fit mx-auto' %>
+          <% end %>
+        </div>
+        <div class="flex flex-col mb-4" data-controller="avatar">
+          <label for="avatar-input" class="text-sm text-silver">Foto de perfil</label>
+          <button class="p-4 text-left border-none bg-steel rounded-xl placeholder:text-sm" id="custom-avatar-button">
+            <% if @user.avatar.attached? %>
+              <span id="avatar-filename">
+                <%= @user.avatar.blob.filename.to_s.truncate(42) %>
+              </span>
+            <% else %>
+              <div class="flex justify-between text-placeholder_gray">
+                <span id="avatar-filename" class="text-sm">Subir foto de perfil</span>
+                <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-5">
+                  <path clip-rule="evenodd" fill-rule="evenodd" d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z"></path>
+                </svg>
+              </div>
+            <% end %>
+          </button>
+          <%= f.file_field :avatar, id: "avatar-input", class:'hidden' %>
+        </div>
+        <div class="flex mb-4 space-x-3">
           <div>
             <%= f.label :sex, "Sexo", class:'text-silver text-sm' %>
             <select name="user[sex]" id="user_sex" class="w-full input">
