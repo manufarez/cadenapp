@@ -1,6 +1,6 @@
 <div class="px-6 mx-auto text-white">
   <div class="flex flex-col mb-6 space-y-2">
-    <h1 class="text-3xl font-bold leading-6 text-white font-nimbus-ext">Usuarios</h1>
+    <h1 class="text-3xl font-bold leading-6 text-white font-nimbus-ext"><%= t('user.users') %></h1>
     <% if current_user.is_admin %>
       <p class="p-1 px-2 text-xs font-semibold tracking-wide uppercase border border-dashed rounded-lg text-placeholder_gray border-placeholder_gray w-fit">
         Super Admin
@@ -11,7 +11,7 @@
     <table class="w-full text-sm text-left text-gray-400 border">
       <thead class="text-xs text-gray-200 uppercase bg-jaguar_light">
         <tr>
-          <th scope="col" class="px-6 py-3">Name</th>
+          <th scope="col" class="px-6 py-3"><%= t('cadena.name') %></th>
           <th scope="col" class="px-6 py-3">E-mail</th>
           <th scope="col" class="px-6 py-3 text-center">Cadenas</th>
           <th></th>
@@ -23,7 +23,7 @@
             <td class="px-6 py-4 font-medium text-white whitespace-nowrap"><%= user.first_name %> <%= user.last_name %></td>
             <td class="px-6 py-4"><%= user.email %></td>
             <td class="px-6 py-4 text-center"><%= user.cadenas.count %></td>
-            <td class="px-6 py-4"><%= button_to "Impersonate", login_as_user_path(user), class: 'font-medium text-blue-500 hover:underline', data: {turbo: false} %></td>
+            <td class="px-6 py-4"><%= button_to t('user.impersonate'), login_as_user_path(user), class: 'font-medium text-blue-500 hover:underline', data: {turbo: false} %></td>
           </tr>
         <% end %>
       </tbody>

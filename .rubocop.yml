@@ -1,8 +1,22 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+
 AllCops:
   NewCops: enable
+  Exclude:
+    - "db/**/*"
+    - "config/**/*"
+    - "script/**/*"
+    - "test/**/*"
+    - "bin/{rails,rake,bundle}"
 Style/Documentation:
   Enabled: false
 Style/EmptyMethod:
   Enabled: false
 Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/StringLiterals:
+  Enabled: false
+Metrics/MethodLength:
   Enabled: false

@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :participations
+  has_many :participations, dependent: :nullify
   has_many :cadenas, through: :participations
   has_one_attached :avatar
   validates :sex, presence: true, on: :update
@@ -16,10 +16,7 @@ class User < ApplicationRecord
   validates :zip, presence: true, on: :update
   validates :city, presence: true, on: :update
   validates :accepts_terms, acceptance: true, on: :update
-
-  def cadenas_count
-    cadenas.count
-  end
+  delegate :count, to: :cadenas, prefix: true
 
   def name
     "#{first_name} #{last_name}"

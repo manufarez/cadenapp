@@ -10,38 +10,38 @@
     </div>
   <% end %>
   <div class="my-5">
-    <%= form.label :name, class:'text-white' %>
+    <%= form.label :name, t('cadena.cadena_name'), class:'text-white' %>
     <%= form.text_field :name, class: "block border-none rounded-xl text-white bg-steel outline-none p-4 mt-2 w-full" %>
   </div>
   <div class="my-5">
-    <%= form.label :total_participants, class:'text-white' %>
+    <%= form.label :total_participants, t('cadena.total_participants'), class:'text-white' %>
     <%= form.number_field :total_participants, class: "block border-none rounded-xl text-white bg-steel outline-none p-4 mt-2 w-full", min: 12, data: {cadena_target: "participants", action:"cadena#updateInstallments cadena#updateEndDate"} %>
   </div>
   <div class="my-5">
-    <%= form.label :periodicity, class:'text-white' %>
+    <%= form.label :periodicity, t('cadena.periodicity'), class:'text-white' %>
     <%= form.select :periodicity, options_for_select([['Quincenal', 'bimonthly'], ['Mensual', 'monthly']]), {}, class: "block border-none rounded-xl text-white bg-steel outline-none p-4 mt-2 w-full", data: {cadena_target: "periodicity", action:"cadena#updateInstallments cadena#updateEndDate"} %>
   </div>
   <div class="my-5">
-    <%= form.label :installments, class:'text-white' %>
+    <%= form.label :installments, t('cadena.installments'), class:'text-white' %>
     <%= form.number_field :installments, class: "block border-none rounded-xl text-white bg-steel outline-none p-4 mt-2 w-full", min: 12, data: {cadena_target:"installments"}, readonly: true %>
   </div>
   <div class="my-5">
-    <%= form.label :installment_value, class:'text-white' %>
+    <%= form.label :installment_value, t('cadena.installment_value'), class:'text-white' %>
     <%= form.text_field :installment_value, class: "block border-none rounded-xl text-white bg-steel outline-none p-4 mt-2 w-full", min: 100000, data:{cadena_target:"installmentValue", action:"cadena#updateSavingGoal"} %>
   </div>
   <div class="my-5">
-    <%= form.label :start_date, class:'text-white' %>
+    <%= form.label :start_date, t('cadena.start_date'), class:'text-white' %>
     <%= form.date_field :start_date, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 mt-2 w-full", data:{cadena_target:"startDate", action:'cadena#updateEndDate'} %>
   </div>
   <div class="my-5">
-    <%= form.label :end_date, class:'text-white' %>
+    <%= form.label :end_date, t('cadena.end_date'), class:'text-white' %>
     <%= form.date_field :end_date, readonly: true, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 mt-2 w-full hover:cursor-not-allowed", data:{cadena_target:"endDate"} %>
   </div>
   <div class="my-5">
-    <%= form.label :saving_goal, class:'text-white' %>
+    <%= form.label :saving_goal, t('cadena.saving_goal'), class:'text-white' %>
     <%= form.number_field :saving_goal, readonly: true, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 mt-2 w-full hover:cursor-not-allowed", data:{cadena_target:"savingGoal"} %>
   </div>
   <div class="inline">
-    <%= form.submit class: "rounded-xl text-white p-4 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <%= form.submit t('cadena.create'), class: "rounded-xl text-white p-4 bg-blue-600 inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>

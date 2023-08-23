@@ -18,6 +18,9 @@ module Cadenapp
       api_token: Rails.application.credentials.postmark_api_token
     }
 
+    config.i18n.default_locale = :es
+    config.i18n.fallbacks = [:es, :en]
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

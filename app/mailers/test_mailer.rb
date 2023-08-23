@@ -3,7 +3,7 @@ class TestMailer < ApplicationMailer
 
   def hello
     mail(
-      subject: 'Hello from Postmark',
+      subject: 'Hello from Postmark', # rubocop:disable Rails/I18nLocaleTexts
       to: 'contacto@cadenapp.com',
       from: 'contacto@cadenapp.com',
       html_body: '<strong>Hello</strong> dear Postmark user.',

@@ -18,15 +18,15 @@ class ApplicationController < ActionController::Base
     session[:global_date] = Date.parse(params[:global_date])
     redirect_back(
       fallback_location: root_path,
-      alert: "Global date set to #{session[:global_date].strftime('%d/%m/%y')}"
+      notice: t('notices.global_date', global_date: session[:global_date].strftime('%d/%m/%y'))
     )
   end
 
   private
 
   def authenticate_user!
-    unless user_signed_in? || devise_controller? && %w[new create destroy update].include?(action_name)
-      redirect_to new_user_session_path, notice: 'Please login to access this page.'
-    end
+    return if user_signed_in? || (devise_controller? && %w[new create destroy update].include?(action_name))
+
+    redirect_to new_user_session_path, notice: t('notices.login_to_access')
   end
 end

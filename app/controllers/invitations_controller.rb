@@ -1,5 +1,6 @@
 class InvitationsController < ApplicationController
-  before_action :set_invitation, only: %i[ show edit update destroy ]
+  before_action :set_invitation, only: %i[show edit destroy]
+  before_action :set_cadena, only: %i[new accept create]
 
   # GET /invitations or /invitations.json
   def index
@@ -12,7 +13,6 @@ class InvitationsController < ApplicationController
 
   # GET /invitations/new
   def new
-    @cadena = Cadena.find(params[:cadena_id])
     @invitation = Invitation.new
   end
 
@@ -21,47 +21,29 @@ class InvitationsController < ApplicationController
   end
 
   def accept
-    @cadena = Cadena.find(params[:cadena_id])
     @invitation = @cadena.invitations.find_by(token: params[:id])
 
     if @invitation
       # Handle invitation acceptance logic
-      flash[:error] = 'Bienvenido a la cadena!'
+      flash[:notice] = t('notices.cadena.invitation.welcome')
       redirect_to @cadena
     else
-      flash[:error] = 'Invalid invitation token.'
+      flash[:error] = t('notices.cadena.invitation.token_error')
       redirect_to root_path
     end
   end
 
   # POST /invitations or /invitations.json
-  def create
-    @cadena = Cadena.find(params[:cadena_id])
-    @invitation = Invitation.new(invitation_params)
-    @invitation.cadena_id = @cadena.id
-    @invitation.sender = current_user
-
+  def create # rubocop:disable Metrics/AbcSize
+    @invitation = Invitation.new(invitation_params.merge(cadena_id: @cadena.id, sender: current_user))
     respond_to do |format|
       if @invitation.save
         InvitationMailer.invite_email(@invitation).deliver_now
-        format.html { redirect_to cadena_invitations_url, notice: 'Invitation was successfully sent' }
+        format.html { redirect_to cadena_invitations_url, notice: t('notices.cadena.invitation.sent') }
         format.json { render :show, status: :created, location: @invitation }
       else
-        flash[:error] = 'Invitation failed to send'
+        flash[:error] = t('notices.cadena.invitation.error')
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @invitation.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /invitations/1 or /invitations/1.json
-  def update
-    respond_to do |format|
-      if @invitation.update(invitation_params)
-        format.html { redirect_to invitation_url(@invitation), notice: 'Invitation was successfully updated.' }
-        format.json { render :show, status: :ok, location: @invitation }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @invitation.errors, status: :unprocessable_entity }
       end
     end
@@ -72,7 +54,7 @@ class InvitationsController < ApplicationController
     @invitation.destroy
 
     respond_to do |format|
-      format.html { redirect_to invitations_url, notice: 'Invitation was successfully destroyed.' }
+      format.html { redirect_to invitations_url, notice: t('notices.cadena.invitation.destroyed') }
       format.json { head :no_content }
     end
   end
@@ -82,6 +64,10 @@ class InvitationsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_invitation
     @invitation = Invitation.find(params[:id])
+  end
+
+  def set_cadena
+    @cadena = Cadena.find(params[:cadena_id])
   end
 
   # Only allow a list of trusted parameters through.

@@ -1,13 +1,9 @@
 class CadenasController < ApplicationController
-  before_action :set_cadena, only: %i[ show edit update destroy ]
+  before_action :set_cadena, only: %i[show edit update destroy]
 
   # GET /cadenas or /cadenas.json
   def index
-    if current_user.is_admin?
-      @cadenas = Cadena.all
-    else
-      @cadenas = current_user.cadenas
-    end
+    @cadenas = current_user.is_admin ? Cadena.all : current_user.cadenas
   end
 
   # GET /cadenas/1 or /cadenas/1.json
@@ -15,7 +11,7 @@ class CadenasController < ApplicationController
     if current_user.belongs_to_cadena?(@cadena) || current_user.is_admin?
       # Proceed with showing the cadena's details
     else
-      redirect_to root_path, alert: 'Ud. no tiene acceso a esta cadena.'
+      redirect_to root_path, alert: t('notices.cadena.access_forbidden')
     end
   end
 
@@ -34,7 +30,7 @@ class CadenasController < ApplicationController
 
     respond_to do |format|
       if @cadena.save
-        format.html { redirect_to cadena_url(@cadena), notice: 'Cadena was successfully created.' }
+        format.html { redirect_to cadena_url(@cadena), notice: t('notices.cadena.creation_success') }
         format.json { render :show, status: :created, location: @cadena }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +43,7 @@ class CadenasController < ApplicationController
   def update
     respond_to do |format|
       if @cadena.update(cadena_params)
-        format.html { redirect_to cadena_url(@cadena), notice: 'Cadena was successfully updated.' }
+        format.html { redirect_to cadena_url(@cadena), notice: t('notices.cadena.update_success') }
         format.json { render :show, status: :ok, location: @cadena }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,7 +56,7 @@ class CadenasController < ApplicationController
     @cadena = Cadena.find(params[:id])
     @cadena.status = 'approval_requested'
     @cadena.save
-    redirect_back(fallback_location: root_path, alert: 'Request for approval has been sent to participants')
+    redirect_back(fallback_location: root_path, notice: t('notices.cadena.request_for_approval_sent'))
   end
 
   def assign_positions
@@ -83,9 +79,9 @@ class CadenasController < ApplicationController
     if participation
       participation.destroy
       @cadena.set_status
-      redirect_to cadena_path(@cadena), notice: 'User removed from cadena.'
+      redirect_to cadena_path(@cadena), notice: t('notices.cadena.user.removed')
     else
-      redirect_to cadena_path(@cadena), alert: 'User not found in cadena.'
+      redirect_to cadena_path(@cadena), notice: t('notices.cadena.user.not_found')
     end
   end
 
@@ -94,7 +90,7 @@ class CadenasController < ApplicationController
     @cadena.destroy
 
     respond_to do |format|
-      format.html { redirect_to cadenas_url, notice: 'Cadena was successfully destroyed.' }
+      format.html { redirect_to cadenas_url, notice: t('notices.cadena.destroyed') }
       format.json { head :no_content }
     end
   end
@@ -108,6 +104,17 @@ class CadenasController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def cadena_params
-    params.require(:cadena).permit(:name, :total_participants, :installments, :installment_value, :start_date, :end_date, :periodicity, :status, :balance, :saving_goal)
+    params.require(:cadena).permit(
+      :name,
+      :total_participants,
+      :installments,
+      :installment_value,
+      :start_date,
+      :end_date,
+      :periodicity,
+      :status,
+      :balance,
+      :saving_goal
+    )
   end
 end

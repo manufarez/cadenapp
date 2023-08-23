@@ -1,6 +1,6 @@
 class Cadena < ApplicationRecord
-  has_many :participations
-  has_many :invitations
+  has_many :participations, dependent: :nullify
+  has_many :invitations, dependent: :destroy
   has_many :users, through: :participations
   before_save :set_status
   enum status: {

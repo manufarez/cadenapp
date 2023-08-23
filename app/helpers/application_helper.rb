@@ -1,5 +1,5 @@
 module ApplicationHelper
   def global_date
-    session[:global_date] ||= Date.today
+    session[:global_date] ||= Time.zone.today
   end
 end
