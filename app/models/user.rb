@@ -18,15 +18,15 @@ class User < ApplicationRecord
   validates :accepts_terms, acceptance: true, on: :update
 
   def cadenas_count
-    self.cadenas.count
+    cadenas.count
   end
 
   def name
-    return "#{self.first_name} #{self.last_name}"
+    "#{first_name} #{last_name}"
   end
 
   def initials
-    return "#{self.first_name[0]}#{self.last_name[0]}"
+    "#{first_name[0]}#{last_name[0]}"
   end
 
   def belongs_to_cadena?(cadena)

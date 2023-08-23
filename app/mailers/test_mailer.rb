@@ -8,6 +8,7 @@ class TestMailer < ApplicationMailer
       from: 'contacto@cadenapp.com',
       html_body: '<strong>Hello</strong> dear Postmark user.',
       track_opens: 'true',
-      message_stream: 'outbound')
+      message_stream: 'outbound'
+    )
   end
 end

@@ -7,9 +7,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    if resource.is_a?(User)
-      cadenas_path
-    end
+    cadenas_path if resource.is_a?(User)
   end
 
   def after_sign_up_path_for(resource)
@@ -18,14 +16,17 @@ class ApplicationController < ActionController::Base
 
   def set_date
     session[:global_date] = Date.parse(params[:global_date])
-    redirect_back(fallback_location: root_path, alert: "Global date set to #{session[:global_date].strftime('%d/%m/%y')}")
+    redirect_back(
+      fallback_location: root_path,
+      alert: "Global date set to #{session[:global_date].strftime('%d/%m/%y')}"
+    )
   end
 
   private
 
   def authenticate_user!
     unless user_signed_in? || devise_controller? && %w[new create destroy update].include?(action_name)
-      redirect_to new_user_session_path, notice: "Please login to access this page."
+      redirect_to new_user_session_path, notice: 'Please login to access this page.'
     end
   end
 end

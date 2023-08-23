@@ -15,7 +15,7 @@ class CadenasController < ApplicationController
     if current_user.belongs_to_cadena?(@cadena) || current_user.is_admin?
       # Proceed with showing the cadena's details
     else
-      redirect_to root_path, alert: "Ud. no tiene acceso a esta cadena."
+      redirect_to root_path, alert: 'Ud. no tiene acceso a esta cadena.'
     end
   end
 
@@ -34,7 +34,7 @@ class CadenasController < ApplicationController
 
     respond_to do |format|
       if @cadena.save
-        format.html { redirect_to cadena_url(@cadena), notice: "Cadena was successfully created." }
+        format.html { redirect_to cadena_url(@cadena), notice: 'Cadena was successfully created.' }
         format.json { render :show, status: :created, location: @cadena }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class CadenasController < ApplicationController
   def update
     respond_to do |format|
       if @cadena.update(cadena_params)
-        format.html { redirect_to cadena_url(@cadena), notice: "Cadena was successfully updated." }
+        format.html { redirect_to cadena_url(@cadena), notice: 'Cadena was successfully updated.' }
         format.json { render :show, status: :ok, location: @cadena }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,7 +60,7 @@ class CadenasController < ApplicationController
     @cadena = Cadena.find(params[:id])
     @cadena.status = 'approval_requested'
     @cadena.save
-    redirect_back(fallback_location: root_path, alert: "Request for approval has been sent to participants")
+    redirect_back(fallback_location: root_path, alert: 'Request for approval has been sent to participants')
   end
 
   def assign_positions
@@ -94,19 +94,20 @@ class CadenasController < ApplicationController
     @cadena.destroy
 
     respond_to do |format|
-      format.html { redirect_to cadenas_url, notice: "Cadena was successfully destroyed." }
+      format.html { redirect_to cadenas_url, notice: 'Cadena was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_cadena
-      @cadena = Cadena.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def cadena_params
-      params.require(:cadena).permit(:name, :total_participants, :installments, :installment_value, :start_date, :end_date, :periodicity, :status, :balance, :saving_goal)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_cadena
+    @cadena = Cadena.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def cadena_params
+    params.require(:cadena).permit(:name, :total_participants, :installments, :installment_value, :start_date, :end_date, :periodicity, :status, :balance, :saving_goal)
+  end
 end

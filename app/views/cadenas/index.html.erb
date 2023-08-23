@@ -3,7 +3,7 @@
     <div class="flex flex-col space-y-2">
       <h1 class="text-3xl font-bold leading-6 text-white font-nimbus-ext">Cadenas</h1>
       <% if current_user.is_admin %>
-        <p class="p-1 px-2 text-xs font-semibold tracking-wide text-gray-600 uppercase border border-gray-700 border-dashed rounded-lg w-fit">
+        <p class="p-1 px-2 text-xs font-semibold tracking-wide uppercase border border-dashed rounded-lg border-placeholder_gray text-placeholder_gray w-fit">
           Super Admin
         </p>
       <% end %>
@@ -12,17 +12,13 @@
       <%= link_to 'Crear', new_cadena_path, class: "rounded-lg py-2 px-4 hover:bg-blue-700 bg-blue-600 text-white block font-medium" %>
     </div>
   </div>
-
   <div class="relative mb-12 overflow-x-auto border rounded-lg shadow-md border-jaguar_light/50">
     <table class="w-full text-sm text-left text-gray-400 border">
       <thead class="text-xs text-gray-200 uppercase bg-jaguar_light">
         <tr>
           <th scope="col" class="px-6 py-3">Nombre</th>
           <th scope="col" class="flex justify-center px-6 py-3">
-            <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-4">
-              <path clip-rule="evenodd" fill-rule="evenodd" d="M8.25 6.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM15.75 9.75a3 3 0 116 0 3 3 0 01-6 0zM2.25 9.75a3 3 0 116 0 3 3 0 01-6 0zM6.31 15.117A6.745 6.745 0 0112 12a6.745 6.745 0 016.709 7.498.75.75 0 01-.372.568A12.696 12.696 0 0112 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 01-.372-.568 6.787 6.787 0 011.019-4.38z"></path>
-              <path d="M5.082 14.254a8.287 8.287 0 00-1.308 5.135 9.687 9.687 0 01-1.764-.44l-.115-.04a.563.563 0 01-.373-.487l-.01-.121a3.75 3.75 0 013.57-4.047zM20.226 19.389a8.287 8.287 0 00-1.308-5.135 3.75 3.75 0 013.57 4.047l-.01.121a.563.563 0 01-.373.486l-.115.04c-.567.2-1.156.349-1.764.441z"></path>
-            </svg>
+            <%= inline_svg_tag 'svg/users', class:'w-4' %>
           </th>
           <th scope="col" class="px-6 py-3">Estado</th>
         </tr>
@@ -41,5 +37,4 @@
     </table>
   </div>
 </div>
-
 <%=  %>

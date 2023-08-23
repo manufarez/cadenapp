@@ -44,7 +44,7 @@ class InvitationsController < ApplicationController
     respond_to do |format|
       if @invitation.save
         InvitationMailer.invite_email(@invitation).deliver_now
-        format.html { redirect_to cadena_invitations_url, notice: "Invitation was successfully sent" }
+        format.html { redirect_to cadena_invitations_url, notice: 'Invitation was successfully sent' }
         format.json { render :show, status: :created, location: @invitation }
       else
         flash[:error] = 'Invitation failed to send'
@@ -58,7 +58,7 @@ class InvitationsController < ApplicationController
   def update
     respond_to do |format|
       if @invitation.update(invitation_params)
-        format.html { redirect_to invitation_url(@invitation), notice: "Invitation was successfully updated." }
+        format.html { redirect_to invitation_url(@invitation), notice: 'Invitation was successfully updated.' }
         format.json { render :show, status: :ok, location: @invitation }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -72,19 +72,20 @@ class InvitationsController < ApplicationController
     @invitation.destroy
 
     respond_to do |format|
-      format.html { redirect_to invitations_url, notice: "Invitation was successfully destroyed." }
+      format.html { redirect_to invitations_url, notice: 'Invitation was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_invitation
-      @invitation = Invitation.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def invitation_params
-      params.require(:invitation).permit(:phone, :email, :first_name, :last_name, :accepted, :cadena_id, :sender_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_invitation
+    @invitation = Invitation.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def invitation_params
+    params.require(:invitation).permit(:phone, :email, :first_name, :last_name, :accepted, :cadena_id, :sender_id)
+  end
 end
