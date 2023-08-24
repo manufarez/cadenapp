@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
 
   get 'users/:id', to: 'users#show', as: 'user'
+  get 'users/:id/abandon_complete_profile', to: 'users#abandon_complete_profile', as: 'abandon_complete_profile'
 
   get 'users/:id/complete_profile', to: 'users#complete_profile', as: 'complete_profile'
   patch 'users/:id/complete_profile', to: 'users#update', as: 'update_profile'

@@ -4,7 +4,7 @@ class CadenasController < ApplicationController
 
   # GET /cadenas or /cadenas.json
   def index
-    @cadenas = current_user.is_admin ? Cadena.all : current_user.cadenas
+    @cadenas = current_user.is_admin ? Cadena.all : current_user.cadenas || cure
   end
 
   # GET /cadenas/1 or /cadenas/1.json
@@ -99,7 +99,9 @@ class CadenasController < ApplicationController
   private
 
   def ask_profile_completion
-    return if (user_signed_in? && current_user.profile_complete?) || action_name == 'complete_profile'
+    if (user_signed_in? && current_user.profile_complete?) || action_name == 'complete_profile' || current_user.is_admin
+      return
+    end
 
     redirect_to complete_profile_path(current_user), notice: t('notices.user.profile_incomplete')
   end

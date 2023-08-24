@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[complete_profile update]
   before_action :set_user, only: %i[update complete_profile show]
-  before_action :ask_profile_completion, except: %i[update]
+  before_action :ask_profile_completion, except: %i[update abandon_complete_profile]
 
   def index
     if current_user.is_admin?
@@ -23,6 +23,14 @@ class UsersController < ApplicationController
   def complete_profile
   end
 
+  def abandon_complete_profile
+    if current_user.profile_complete?
+      redirect_to current_user
+    else
+      redirect_to root_path
+    end
+  end
+
   def update
     respond_to do |format|
       if @user.update(user_params)
@@ -38,7 +46,7 @@ class UsersController < ApplicationController
   private
 
   def ask_profile_completion
-    return if current_user.profile_complete? || action_name == 'complete_profile'
+    return if current_user.profile_complete? || action_name == 'complete_profile' || current_user.is_admin
 
     redirect_to complete_profile_path(current_user), notice: t('notices.user.profile_incomplete')
   end
