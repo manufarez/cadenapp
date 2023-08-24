@@ -1,5 +1,6 @@
 class CadenasController < ApplicationController
   before_action :set_cadena, only: %i[show edit update destroy]
+  before_action :ask_profile_completion
 
   # GET /cadenas or /cadenas.json
   def index
@@ -96,6 +97,12 @@ class CadenasController < ApplicationController
   end
 
   private
+
+  def ask_profile_completion
+    return if (user_signed_in? && current_user.profile_complete?) || action_name == 'complete_profile'
+
+    redirect_to complete_profile_path(current_user), notice: t('notices.user.profile_incomplete')
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_cadena

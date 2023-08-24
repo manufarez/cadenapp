@@ -54,7 +54,7 @@
   <% elsif cadena.status == 'Complete'  %>
     <%= button_to 'Cadena approved! Generate order', assign_positions_cadena_path(@cadena), method: :patch, class:'p-4 mb-2 text-sm font-medium text-white bg-primary_blue focus:outline-none hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 rounded-xl dark:hover:bg-blue-700 dark:focus:ring-blue-900 w-full' %>
   <% end %>
-  <div class="p-6 rounded-xl bg-night_dark">
+  <div class="p-6 rounded-xl bg-black_rock">
     <div class="flow-root">
       <% if cadena.pending? || cadena.complete? || cadena.approval_requested? %>
         <%= render 'cadena_users', cadena: @cadena %>

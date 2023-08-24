@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'users/:id', to: 'users#show', as: 'user'
+
   get 'users/:id/complete_profile', to: 'users#complete_profile', as: 'complete_profile'
   patch 'users/:id/complete_profile', to: 'users#update', as: 'update_profile'
   patch '/set_date', to: 'application#set_date', as: 'set_date'

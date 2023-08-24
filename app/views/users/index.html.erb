@@ -2,28 +2,34 @@
   <div class="flex flex-col mb-6 space-y-2">
     <h1 class="text-3xl font-bold leading-6 text-white font-nimbus-ext"><%= t('user.users') %></h1>
     <% if current_user.is_admin %>
-      <p class="p-1 px-2 text-xs font-semibold tracking-wide uppercase border border-dashed rounded-lg text-placeholder_gray border-placeholder_gray w-fit">
+      <p class="super_admin">
         Super Admin
       </p>
     <% end %>
   </div>
-  <div class="relative mb-12 overflow-x-auto border rounded-lg shadow-md border-jaguar_light/50">
-    <table class="w-full text-sm text-left text-gray-400 border">
-      <thead class="text-xs text-gray-200 uppercase bg-jaguar_light">
+  <div class="relative mb-12 overflow-x-auto border rounded-lg shadow-md border-steel_gray">
+    <table class="w-full text-sm text-left font-manrope">
+      <thead class="text-xs text-gray-200 uppercase bg-steel_gray">
         <tr>
-          <th scope="col" class="px-6 py-3"><%= t('cadena.name') %></th>
-          <th scope="col" class="px-6 py-3">E-mail</th>
-          <th scope="col" class="px-6 py-3 text-center">Cadenas</th>
-          <th></th>
+          <th scope="col" class="px-6 py-4"><%= t('cadena.name') %></th>
+          <th scope="col" class="px-6 py-4">E-mail</th>
+          <th scope="col" class="px-6 py-4"><%= t('user.age') %></th>
+          <th scope="col" class="px-6 py-4"><%= t('user.city') %></th>
+          <th scope="col" class="px-6 py-4 text-center">Cadenas</th>
+          <th scope="col" class="px-6 py-4"><%= t('user.created_at') %></th>
+          <th scope="col" class="px-6 py-4"></th>
         </tr>
       </thead>
       <tbody>
         <% @users.each do |user| %>
-          <tr class="odd:bg-transparent even:bg-night_dark">
-            <td class="px-6 py-4 font-medium text-white whitespace-nowrap"><%= user.first_name %> <%= user.last_name %></td>
-            <td class="px-6 py-4"><%= user.email %></td>
+          <tr class="text-white odd:bg-transparent even:bg-gray-600/10">
+            <td class="px-6 py-4 font-medium whitespace-nowrap"><a href="<%= user_path(user) %>" class="hover:underline"><%= user.first_name %> <%= user.last_name %></a></td>
+            <td class="px-6 py-4 font-sans"><a href="mailto:<%= user.email %>" target="_blank" class="hover:underline"><%= user.email %></a></td>
+            <td class="px-6 py-4 font-light"><%= user.age %></td>
+            <td class="px-6 py-4 font-light"><%= user.city %></td>
             <td class="px-6 py-4 text-center"><%= user.cadenas.count %></td>
-            <td class="px-6 py-4"><%= button_to t('user.impersonate'), login_as_user_path(user), class: 'font-medium text-blue-500 hover:underline', data: {turbo: false} %></td>
+            <td class="px-6 py-4 font-light"><%= user.created_at.strftime('%d/%m/%y') %></td>
+            <td class="px-6 py-4"><%= button_to t('user.impersonate'), login_as_user_path(user), class: 'font-medium text-primary_blue hover:underline', data: {turbo: false, confirm: 'Are you sure? You will be logged out as an admin'}, onclick: "return confirm('Are you sure? You will be logged out as an admin');" %></td>
           </tr>
         <% end %>
       </tbody>

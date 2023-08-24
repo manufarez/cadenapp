@@ -1,0 +1,7 @@
+<%= @user.first_name %>
+<%= link_to destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?" } do %>
+  <button type="button" class="p-2.5 text-sm font-medium text-gray-400 border border-gray-600 rounded-xl focus:outline-none focus:z-10 focus:ring-4 focus:ring-gray-700 hover:text-white hover:bg-gray-700">
+    <%= inline_svg_tag 'svg/exit', class:'w-5' %>
+  </button>
+<% end %>
+<%= link_to "Edit", update_profile_path(current_user) %>

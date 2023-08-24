@@ -2,7 +2,7 @@ class Cadena < ApplicationRecord
   has_many :participations, dependent: :nullify
   has_many :invitations, dependent: :destroy
   has_many :users, through: :participations
-  before_save :set_status
+  before_save :set_status, :set_saving_goal
   enum status: {
          pending: 'pending',
          complete: 'complete',
@@ -21,6 +21,12 @@ class Cadena < ApplicationRecord
 
   def missing_participants
     installments - participations.count
+  end
+
+  def set_saving_goal
+    return unless installments && installment_value
+
+    self.saving_goal = installments * installment_value
   end
 
   # this is partly wrong because other statuses can  have 0 missing participants

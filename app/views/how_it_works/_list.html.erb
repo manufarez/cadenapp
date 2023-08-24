@@ -1,84 +1,85 @@
-  <div class="flex flex-col items-center px-6 sm:px-0">
-    <div class="max-w-sm ">
-      <div class="px-4 pt-4 pb-3 rounded-lg shadow-md bg-night_dark">
-        <div class="flex items-center mb-4">
-          <div class="mr-3 font-bold text-center border-2 rounded-full text-mayo border-mayo w-7 h-7 shrink-0">2</div>
-          <h5 class="font-bold leading-5 text-white text-md font-manrope"><span class="text-white">Invita participantes</span> y genera el <span class="text-mayo">orden de retiro</span> de tu cadena</h5>
-        </div>
-        <div class="flow-root">
-          <ul role="list" class="divide-y divide-gray-700">
-            <li class="py-3 sm:py-3">
-                <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0">
-                        <img class="w-8 h-8 rounded-full" src="<%= image_url("laura.png") %>" alt="Laura">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="font-medium text-white truncate font-nimbus">Laura Perez</p>
-                        <span class="text-xs text-gray-500 font-manrope"><%= Date.today.strftime("%d/%m/%Y") %></span>
-                    </div>
-                    <div class="inline-flex items-center text-base text-gray-50 font-manrope">
-                        $ 500.000
-                    </div>
-                </div>
-            </li>
-            <li class="py-3 sm:py-3">
-                <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0">
-                        <img class="w-8 h-8 rounded-full" src="<%= image_url("natalia.png") %>" alt="Natalia">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="font-medium text-white truncate font-nimbus">Natalia Alarcon</p>
-                        <span class="text-xs text-gray-500 font-manrope"><%= (Date.today + 1.month).strftime("%d/%m/%Y") %></span>
-                    </div>
-                    <div class="inline-flex items-center text-base text-gray-50 font-manrope">
-                        $ 500.000
-                    </div>
-                </div>
-            </li>
-            <li class="py-3 sm:py-3">
-                <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0">
-                        <img class="w-8 h-8 rounded-full" src="<%= image_url('jose.png') %>" alt="José">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="font-medium text-white truncate font-nimbus">José Sarmiento</p>
-                        <span class="text-xs text-gray-500 font-manrope"><%= (Date.today + 2.month).strftime("%d/%m/%Y") %></span>
-                    </div>
-                    <div class="inline-flex items-center text-base text-gray-50 font-manrope">
-                        $ 500.000
-                    </div>
-                </div>
-            </li>
-            <li class="py-3 sm:py-3">
-                <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0">
-                      <img class="w-8 h-8 rounded-full" src="<%= image_url('lina.png') %>" alt="Lina">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="font-medium text-white truncate font-nimbus">Lina Roca</p>
-                        <span class="text-xs text-gray-500 font-manrope"><%= (Date.today + 3.month).strftime("%d/%m/%Y")%></span>
-                    </div>
-                    <div class="inline-flex items-center text-base text-gray-50 font-manrope">
-                        $ 500.000
-                    </div>
-                </div>
-            </li>
-            <li class="py-3 sm:py-3">
-                <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0">
-                        <img class="w-8 h-8 rounded-full" src="<%= image_url("nacho.png") %>" alt="Nacho">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="font-medium text-white truncate font-nimbus">Nacho Ramirez</p>
-                        <span class="text-xs text-gray-500 font-manrope"><%= (Date.today + 4.month).strftime("%d/%m/%Y")%></span>
-                    </div>
-                    <div class="inline-flex items-center text-base text-gray-50 font-manrope">
-                        $ 500.000
-                    </div>
-                </div>
-            </li>
-          </ul>
-        </div>
+  
+<div class="flex flex-col items-center px-6 sm:px-0">
+  <div class="max-w-sm ">
+    <div class="px-4 pt-4 pb-3 rounded-lg shadow-md bg-black_rock">
+      <div class="flex items-center mb-4">
+        <div class="mr-3 font-bold text-center border-2 rounded-full text-mayo border-mayo w-7 h-7 shrink-0">2</div>
+        <h5 class="font-bold leading-5 text-white text-md font-manrope"><span class="text-white">Invita participantes</span> y genera el <span class="text-mayo">orden de retiro</span> de tu cadena</h5>
+      </div>
+      <div class="flow-root">
+        <ul role="list" class="divide-y divide-gray-700">
+          <li class="py-3 sm:py-3">
+            <div class="flex items-center space-x-4">
+              <div class="flex-shrink-0">
+                <img class="w-8 h-8 rounded-full" src="<%= image_url("laura.png") %>" alt="Laura">
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="font-medium text-white truncate font-nimbus">Laura Perez</p>
+                <span class="text-xs text-gray-500 font-manrope"><%= Date.today.strftime("%d/%m/%Y") %></span>
+              </div>
+              <div class="inline-flex items-center text-base text-gray-50 font-manrope">
+                $ 500.000
+              </div>
+            </div>
+          </li>
+          <li class="py-3 sm:py-3">
+            <div class="flex items-center space-x-4">
+              <div class="flex-shrink-0">
+                <img class="w-8 h-8 rounded-full" src="<%= image_url("natalia.png") %>" alt="Natalia">
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="font-medium text-white truncate font-nimbus">Natalia Alarcon</p>
+                <span class="text-xs text-gray-500 font-manrope"><%= (Date.today + 1.month).strftime("%d/%m/%Y") %></span>
+              </div>
+              <div class="inline-flex items-center text-base text-gray-50 font-manrope">
+                $ 500.000
+              </div>
+            </div>
+          </li>
+          <li class="py-3 sm:py-3">
+            <div class="flex items-center space-x-4">
+              <div class="flex-shrink-0">
+                <img class="w-8 h-8 rounded-full" src="<%= image_url('jose.png') %>" alt="José">
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="font-medium text-white truncate font-nimbus">José Sarmiento</p>
+                <span class="text-xs text-gray-500 font-manrope"><%= (Date.today + 2.month).strftime("%d/%m/%Y") %></span>
+              </div>
+              <div class="inline-flex items-center text-base text-gray-50 font-manrope">
+                $ 500.000
+              </div>
+            </div>
+          </li>
+          <li class="py-3 sm:py-3">
+            <div class="flex items-center space-x-4">
+              <div class="flex-shrink-0">
+                <img class="w-8 h-8 rounded-full" src="<%= image_url('lina.png') %>" alt="Lina">
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="font-medium text-white truncate font-nimbus">Lina Roca</p>
+                <span class="text-xs text-gray-500 font-manrope"><%= (Date.today + 3.month).strftime("%d/%m/%Y")%></span>
+              </div>
+              <div class="inline-flex items-center text-base text-gray-50 font-manrope">
+                $ 500.000
+              </div>
+            </div>
+          </li>
+          <li class="py-3 sm:py-3">
+            <div class="flex items-center space-x-4">
+              <div class="flex-shrink-0">
+                <img class="w-8 h-8 rounded-full" src="<%= image_url("nacho.png") %>" alt="Nacho">
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="font-medium text-white truncate font-nimbus">Nacho Ramirez</p>
+                <span class="text-xs text-gray-500 font-manrope"><%= (Date.today + 4.month).strftime("%d/%m/%Y")%></span>
+              </div>
+              <div class="inline-flex items-center text-base text-gray-50 font-manrope">
+                $ 500.000
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
+</div>

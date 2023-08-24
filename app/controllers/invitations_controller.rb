@@ -16,10 +16,6 @@ class InvitationsController < ApplicationController
     @invitation = Invitation.new
   end
 
-  # GET /invitations/1/edit
-  def edit
-  end
-
   def accept
     @invitation = @cadena.invitations.find_by(token: params[:id])
 

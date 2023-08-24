@@ -3,7 +3,7 @@
     <%= render @cadena %>
     <% if current_user.is_admin? %>
       <div class="p-4 my-6 border border-gray-700 border-dashed rounded-xl">
-        <p class="px-1 mb-2 -mt-6 text-xs font-semibold tracking-wide text-gray-600 uppercase w-fit bg-night">Super Admin</p>
+        <p class="px-1 mb-2 -mt-6 text-xs font-medium tracking-wide text-gray-600 uppercase w-fit bg-mirage font-manrope">Super Admin</p>
         <div class="flex space-x-4">
           <%= link_to 'Edit', edit_cadena_path(@cadena), class: "border w-1/2 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center border-blue-600 text-blue-600 hover:text-white hover:bg-blue-600 focus:ring-blue-800" %>
           <div class="w-1/2"><%= button_to 'Destroy', cadena_path(@cadena), method: :delete, form: {data: {turbo_confirm: 'Are you sure? This action is irreversible'}}, class: "hover:text-white border focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full border-red-500 text-red-500 hover:bg-red-600 focus:ring-red-900" %></div>

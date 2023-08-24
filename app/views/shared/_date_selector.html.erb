@@ -1,5 +1,5 @@
 <%= form_with(url: set_date_path, method: :patch, class:'relative h-fit w-32 ml-auto mr-2.5 hover:cursor-pointer', id:'global-date') do |form| %>
-  <%= form.date_field :global_date, value: global_date, id:'date-input', class:'hover:cursor-pointer border text-sm rounded-xl focus:border-blue-500 block w-full p-2.5 bg-gray-800 border-gray-600 placeholder-gray-400 text-gray-300 focus:ring-blue-500', placeholder:"Select date" %>
+  <%= form.date_field :global_date, value: global_date, id:'date-input', class:'hover:cursor-pointer border text-sm rounded-xl focus:border-blue-500 block w-full p-2.5 bg-mirage border-gray-600 placeholder-gray-400 text-gray-300 focus:ring-blue-500', placeholder:"Select date" %>
 <% end %>
 <script>
   document.addEventListener("DOMContentLoaded", function() {

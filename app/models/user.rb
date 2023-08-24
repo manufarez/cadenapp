@@ -26,7 +26,23 @@ class User < ApplicationRecord
     "#{first_name[0]}#{last_name[0]}"
   end
 
+  def profile_complete?
+    required_attributes = %i[phone dob sex address city zip identification_number identification_type accepts_terms]
+    required_attributes.all? { |attribute| self[attribute].present? } && avatar.attached?
+  end
+
   def belongs_to_cadena?(cadena)
     cadenas.include?(cadena)
+  end
+
+  def age
+    if dob
+      age = Time.zone.today.year - dob.year
+      age -= 1 if Time.zone.today < dob + age.years
+
+      age
+    else
+      'Missing DOB'
+    end
   end
 end
