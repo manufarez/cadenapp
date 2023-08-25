@@ -2,7 +2,7 @@
   <div class="text-white w-80 font-manrope">
     <div class="flex items-center justify-between mb-10">
       <%= link_to abandon_complete_profile_path do %>
-        <%= inline_svg_tag('svg/arrow_left', class:'text-white w-6') %>
+        <%= inline_svg_tag('svg/arrow_left.svg', class:'text-white w-6') %>
       <% end %>
       <h1 class="text-lg font-bold text-white text font-manrope"><%= t('user.complete_profile') %></h1>
       <span class="w-5"></span>
@@ -25,7 +25,7 @@
             <% else %>
               <div class="flex justify-between text-placeholder_gray">
                 <span id="avatar-filename" class="text-sm"><%= t('user.upload_profile_pic') %></span>
-                <%= inline_svg_tag 'svg/clip', class:'w-5' %>
+                <%= inline_svg_tag 'svg/clip.svg', class:'w-5' %>
               </div>
             <% end %>
           </button>
