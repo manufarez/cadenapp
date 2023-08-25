@@ -14,6 +14,7 @@
             <th scope="col" class="px-6 py-3">Name</th>
             <th scope="col" class="px-6 py-3">Phone</th>
             <th scope="col" class="px-6 py-3 text-center">Accepted</th>
+            <th scope="col" class="px-6 py-3 text-center">Date</th>
             <th></th>
           </tr>
         </thead>
@@ -23,6 +24,7 @@
               <td class="px-6 py-4 font-medium text-white whitespace-nowrap"><%= invitation.first_name %> <%= invitation.last_name %></td>
               <td class="px-6 py-4"><%= invitation.phone %></td>
               <td class="px-6 py-4 text-center"><%= invitation.accepted %></td>
+              <td class="px-6 py-4 text-center"><%= invitation.created_at.strftime('%d/%m/%y') %></td>
             </tr>
           <% end %>
         </tbody>
