@@ -26,7 +26,9 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_user!
-    return if user_signed_in? || (devise_controller? && %w[new create destroy update].include?(action_name))
+    if user_signed_in? || (devise_controller? && %w[new create destroy update].include?(action_name)) || params[:token]
+      return
+    end
 
     redirect_to new_user_session_path, notice: t('notices.login_to_access')
   end

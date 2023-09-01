@@ -7,6 +7,7 @@ es:
         error: "Error de envio"
         welcome: "Bienvenido a la cadena!"
         token_error: "El codigo de su invitacion no es valido"
+        expired: "Esta invitacion ya ha sido aceptada"
         destroyed: "La invitacion ha sido eliminada"
       access_forbidden: "Usted no tiene acceso a esta cadena"
       creation_success: "Cadena creada"

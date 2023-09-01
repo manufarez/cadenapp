@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  get '/cadena_preview/:token', to: 'cadena_preview#show', as: 'cadena_preview'
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
   resources :users, only: :index do
     member do
       post 'login_as'

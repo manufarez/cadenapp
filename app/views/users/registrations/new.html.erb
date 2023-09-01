@@ -1,6 +1,6 @@
 <div class="flex justify-center">
   <div class="text-white w-80 font-manrope">
-    <h2 class="mb-6 text-3xl font-bold">Inscripción</h2>
+    <h2 class="mb-6 text-3xl font-bold">Inscripción <span class="text-primary_blue"><%= valid_token_present? ? 'invitado' : ''%></span></h2>
     <div class="mb-10">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= render "users/shared/error_messages", resource: resource %>
@@ -25,6 +25,9 @@
         <div class="actions">
           <%= f.submit "Inscribirse", class:'btn-primary' %>
         </div>
+        <% if valid_token_present? %>
+          <%= hidden_field_tag :invitation_token, params[:token] %>
+        <% end %>
       <% end %>
     </div>
     <div class="flex flex-col items-center space-y-4 text-sm">

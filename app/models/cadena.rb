@@ -31,11 +31,13 @@ class Cadena < ApplicationRecord
 
   # this is partly wrong because other statuses can  have 0 missing participants
   def set_status
-    self.status = if missing_participants.positive?
-                    'pending'
-                  else
-                    'complete'
-                  end
+    if missing_participants.zero? # rubocop:disable Style/ConditionalAssignment
+      self.status = "complete"
+    elsif missing_participants.positive?
+      self.status = "pending"
+    else
+      self.status = "started"
+    end
   end
 
   def status_color

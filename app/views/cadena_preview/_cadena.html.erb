@@ -9,15 +9,6 @@
         <span class="text-2xl font-bold"><%= cadena.participations.count %></span>
         <p class="text-sm text-gray-500 lowercase"><%= t('cadena.participants') %></p>
       </div>
-      <div>
-        <% if cadena.pending? %>
-          <%= link_to "Invitar más", new_cadena_invitation_path(@cadena), class: "text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-800 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
-        <% elsif cadena.complete? %>
-          <%= link_to "Aprobar lista", request_approval_cadena_path(@cadena), class: "text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-800 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
-        <% elsif cadena.approval_requested? %>
-          <%= link_to "Generar orden", cadena_assign_positions_path(@cadena), class: "text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-800 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
-        <% end %>
-      </div>
     </div>
     <div class="my-5 font-manrope">
       <span class="text-2xl font-bold"><%= number_to_currency(cadena.installments * cadena.installment_value, precision: 0  ) %></span>
@@ -33,7 +24,7 @@
         <p class="text-sm text-right text-gray-500 lowercase"><%= t('cadena.installments') %></p>
       </div>
     </div>
-    <div class="flex justify-between font-manrope">
+    <div class="flex justify-between mb-5 font-manrope">
       <div>
         <span class="text-2xl font-bold"><%= cadena.start_date.strftime('%d/%m/%y') %></span>
         <p class="text-sm text-gray-500 lowercase"><%= t('cadena.start_date') %></p>
@@ -42,6 +33,10 @@
         <span class="text-2xl font-bold"><%= cadena.end_date.strftime('%d/%m/%y') %></span>
         <p class="text-sm text-right text-gray-500 lowercase"><%= t('cadena.end_date') %></p>
       </div>
+    </div>
+    <div class="flex flex-col space-y-5">
+      <%= link_to 'Aceptar invitacion', new_user_registration_path(params: { token: params[:token] }), class: 'text-white btn-primary w-full text-center' %>
+      <%= link_to 'Rechazar invitacion', root_url, class: 'btn-danger w-full text-center' %>
     </div>
     <% if action_name != "show" %>
       <%= link_to "Show this cadena", cadena, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
@@ -57,7 +52,7 @@
   <div class="p-6 rounded-xl bg-black_rock">
     <div class="flow-root">
       <% if cadena.pending? || cadena.complete? || cadena.approval_requested? %>
-        <%= render 'cadena_users', cadena: @cadena %>
+        <%= render 'cadenas/cadena_users', cadena: @cadena %>
       <% elsif cadena.started? %>
         <%= render 'cadena_participants', cadena: @cadena %>
       <% end %>
