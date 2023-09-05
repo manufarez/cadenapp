@@ -56,20 +56,26 @@ class CadenasController < ApplicationController
   def request_approval
     @cadena = Cadena.find(params[:id])
     @cadena.status = 'approval_requested'
+    @cadena.approval_requested = true
     @cadena.save
-    redirect_back(fallback_location: root_path, notice: t('notices.cadena.request_for_approval_sent'))
+    respond_to do |format|
+      format.html { redirect_to @cadena, notice: t('notices.cadena.request_for_approval_sent') }
+    end
   end
 
   def assign_positions
     @cadena = Cadena.find(params[:id])
     participations = @cadena.participations
-    participations.shuffle
-    participations.each_with_index do |participation, index|
+    participations.shuffle.each_with_index do |participation, index|
       participation.position = index + 1
       participation.save
     end
     @cadena.status = 'started'
+    @cadena.positions_assigned = true
     @cadena.save
+    respond_to do |format|
+      format.html { redirect_to @cadena, notice: t('notices.cadena.positions_assigned') }
+    end
   end
 
   def remove_user
@@ -116,7 +122,7 @@ class CadenasController < ApplicationController
     params.require(:cadena).permit(
       :name,
       :total_participants,
-      :installments,
+      :desired_installments,
       :installment_value,
       :start_date,
       :end_date,

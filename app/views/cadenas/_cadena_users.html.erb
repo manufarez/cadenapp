@@ -9,8 +9,8 @@
           <p class="text-sm font-medium text-white truncate">
             <%= user.name %>
           </p>
-          <p class="text-sm text-gray-400 truncate blur">
-            <%= user.email %>
+          <p class="text-sm text-gray-400 truncate <%= controller_name == 'cadenas' ? '' : 'blur' %>">
+            <%= controller_name == 'cadenas' ? user.email : '######@#####.com' %>
           </p>
         </div>
         <% if user == cadena.admin %>

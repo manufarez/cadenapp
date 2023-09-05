@@ -3,7 +3,7 @@ class CreateCadenas < ActiveRecord::Migration[7.0]
     create_table :cadenas do |t|
       t.string :name
       t.integer :total_participants
-      t.integer :installments
+      t.integer :desired_installments
       t.decimal :saving_goal
       t.decimal :installment_value
       t.date :start_date
@@ -11,6 +11,8 @@ class CreateCadenas < ActiveRecord::Migration[7.0]
       t.string :periodicity
       t.string :status
       t.decimal :balance
+      t.boolean :approval_requested, default: false
+      t.boolean :positions_assigned, default: false
       t.timestamps
     end
   end

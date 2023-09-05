@@ -1,6 +1,7 @@
 class CreateInstallments < ActiveRecord::Migration[7.0]
   def change
     create_table :installments do |t|
+      t.references :cadena, null: false, foreign_key: true
       t.date :date
       t.integer :transactions_expected
       t.integer :transactions_made

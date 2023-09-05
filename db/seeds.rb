@@ -43,15 +43,23 @@ puts 'Creating 10 fake cadenas...'
 10.times do
   cadena = Cadena.new
   cadena.name = Faker::Restaurant.name
-  cadena.installments = 10
+  cadena.desired_installments = 10
   cadena.installment_value = (200_000..1_000_000).step(100_000).to_a.sample
   cadena.start_date = Date.today
-  cadena.end_date = Date.today + cadena.installments.months
+  cadena.end_date = Date.today + cadena.desired_installments.months
   cadena.periodicity = 'monthly'
   cadena.balance = 0
-  cadena.complete!
   cadena.save
   puts "Cadena #{cadena.id} created!"
+end
+
+puts 'Creating fake cadena installments...'
+Cadena.all.each do |cadena|
+  cadena.desired_installments.times do
+    installment = Installment.new(cadena: cadena)
+    installment.save
+    puts "Installment created!"
+  end
 end
 
 puts 'Creating 10 fake participations for each cadena...'
@@ -63,7 +71,7 @@ users_in_groups_of_10.each_with_index do |group, i|
   group.each do |user|
     participation = Participation.new
     participation.cadena_id = cadenas_ids[i]
-    participation.user_id = user.id
+    participation.user = user
     participation.is_admin = if first_user_in_groups.include?(participation.user_id)
                                true
                              else
@@ -74,12 +82,19 @@ users_in_groups_of_10.each_with_index do |group, i|
   end
 end
 
+puts "Delete and complete random participations to make it more realistic"
+Participation.first.destroy
+Participation.last.destroy
+Cadena.where(status: 'complete').sample(4).each { |cadena| cadena.update(approval_requested: true) }
+Cadena.where(approval_requested: true).sample(2).each { |cadena| cadena.update(positions_assigned: true) }
+Cadena.all.map(&:save)
+
 puts 'Creating invitations for each Cadena'
 Cadena.all.each do |cadena|
-  3..7.times do
+  7.times do
     invitation = Invitation.new
-    invitation.cadena_id = cadena.id
-    invitation.sender_id = cadena.users.sample.id
+    invitation.cadena = cadena
+    invitation.sender = cadena.users.sample
     invitation.email = Faker::Internet.email
     invitation.phone = Faker::PhoneNumber.cell_phone
     invitation.first_name = Faker::Name.first_name
@@ -88,13 +103,17 @@ Cadena.all.each do |cadena|
     invitation.save
     puts "Invitation #{invitation.id} created!"
   end
+  cadena.save
 end
 
 puts "Creating Cadenapp's admins"
 manu = User.new(first_name: 'Manuel', last_name: 'Farez', email: 'manufarez@gmail.com', password: '0$6t^^GCq9x4',
-                is_admin: true)
+                is_admin: true, sex: 'M', dob: '25/06/1990', identification_type: 'C.E', identification_number: '11AK70585', address: 'Cra. 14#13-12', city: 'Bogota', zip: '20212', phone: '2653543095', accepts_terms: true)
+manu.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'zz.jpg')), filename: 'zz.jpg', content_type: 'image/jpeg')
 manu.save
+
 andre = User.new(first_name: 'André', last_name: 'Barreto', email: 'andre_barreto@hotmail.fr', password: 'Ubatexas2023!',
-                 is_admin: true)
+                 is_admin: true, sex: 'M', dob: '25/06/1990', identification_type: 'C.E', identification_number: '11AK70585', address: 'Cra. 14#13-12', city: 'Bogota', zip: '20212', phone: '2653543095', accepts_terms: true)
+andre.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'r9.jpg')), filename: 'r9.jpg', content_type: 'image/jpeg')
 andre.save
 puts "Cadenapp's admins created!"

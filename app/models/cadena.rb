@@ -2,6 +2,7 @@ class Cadena < ApplicationRecord
   has_many :participations, dependent: :nullify
   has_many :invitations, dependent: :destroy
   has_many :users, through: :participations
+  has_many :installments, dependent: :destroy
   before_save :set_status, :set_saving_goal
   enum status: {
          pending: 'pending',
@@ -20,33 +21,36 @@ class Cadena < ApplicationRecord
   end
 
   def missing_participants
-    installments - participations.count
+    return 0 unless installments.any?
+
+    desired_installments - participations.count
   end
 
   def set_saving_goal
-    return unless installments && installment_value
+    return 0 unless installments.any? && installment_value
 
-    self.saving_goal = installments * installment_value
+    self.saving_goal = desired_installments * installment_value
   end
 
-  # this is partly wrong because other statuses can  have 0 missing participants
   def set_status
-    if missing_participants.zero? # rubocop:disable Style/ConditionalAssignment
-      self.status = "complete"
-    elsif missing_participants.positive?
-      self.status = "pending"
-    else
-      self.status = "started"
-    end
+    self.status = if missing_participants.positive?
+                    "pending"
+                  elsif missing_participants.zero? && !approval_requested && !positions_assigned
+                    "complete"
+                  elsif missing_participants.zero? && approval_requested && !positions_assigned
+                    "approval_requested"
+                  elsif missing_participants.zero? && approval_requested && positions_assigned
+                    "started"
+                  end
   end
 
   def status_color
     status_colors = {
-      'complete' => 'text-primary_blue',
-      'pending' => 'text-pinky',
-      'approval_requested' => 'text-mayo',
-      'started' => 'text-ciel',
-      'stopped' => 'text-red-500'
+      'complete' => 'text-primary_blue border-blue-600',
+      'pending' => 'text-pinky border-pinky',
+      'approval_requested' => 'text-mayo border-mayo',
+      'started' => 'text-ciel border-ciel',
+      'stopped' => 'text-red-500 border-red-500'
     }
 
     status_colors[status] || ''

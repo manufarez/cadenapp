@@ -14,6 +14,7 @@ es:
       update_success: "Cadena actualizada"
       request_for_approval_sent: "Solicitud de aprobacion enviada"
       destroyed: "Cadena borrada"
+      positions_assigned: "Orden generado!"
       user:
         update: ""
         removed: "Usuario eliminado de la cadena"
@@ -39,6 +40,11 @@ es:
     create: "Crear"
     participants: "Participantes"
     created_at: "Creada"
+    status:
+      approval_requested: "Solicitud enviada"
+      pending: "Incompleta"
+      complete: "Completa"
+      started: "Empezada"
   user:
     name: "Nombre"
     age: "Edad"

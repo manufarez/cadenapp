@@ -45,7 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_161726) do
   create_table "cadenas", force: :cascade do |t|
     t.string "name"
     t.integer "total_participants"
-    t.integer "installments"
+    t.integer "desired_installments"
     t.decimal "saving_goal"
     t.decimal "installment_value"
     t.date "start_date"
@@ -53,11 +53,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_161726) do
     t.string "periodicity"
     t.string "status"
     t.decimal "balance"
+    t.boolean "approval_requested", default: false
+    t.boolean "positions_assigned", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "installments", force: :cascade do |t|
+    t.bigint "cadena_id", null: false
     t.date "date"
     t.integer "transactions_expected"
     t.integer "transactions_made"
@@ -72,6 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_161726) do
     t.integer "installment_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["cadena_id"], name: "index_installments_on_cadena_id"
   end
 
   create_table "invitations", force: :cascade do |t|
@@ -131,6 +135,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_161726) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "installments", "cadenas"
   add_foreign_key "invitations", "cadenas"
   add_foreign_key "participations", "cadenas"
   add_foreign_key "participations", "users"
