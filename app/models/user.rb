@@ -31,8 +31,17 @@ class User < ApplicationRecord
     required_attributes.all? { |attribute| self[attribute].present? } && avatar.attached?
   end
 
-  def belongs_to_cadena?(cadena)
+  def member_of?(cadena)
     cadenas.include?(cadena)
+  end
+
+  def participation(cadena)
+    participations.find_by(cadena: cadena, user: self)
+  end
+
+  def admin_of?(cadena)
+    participation = participations.find_by(cadena: cadena, is_admin: true)
+    !participation.nil?
   end
 
   def age

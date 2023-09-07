@@ -22,7 +22,7 @@ class CadenasTest < ApplicationSystemTestCase
     fill_in "Periodicity", with: @cadena.periodicity
     fill_in "Start date", with: @cadena.start_date
     fill_in "Status", with: @cadena.status
-    fill_in "Total participants", with: @cadena.total_participants
+    fill_in "Total participants", with: @cadena.desired_participants
     click_on "Create Cadena"
 
     assert_text "Cadena was successfully created"
@@ -41,7 +41,7 @@ class CadenasTest < ApplicationSystemTestCase
     fill_in "Periodicity", with: @cadena.periodicity
     fill_in "Start date", with: @cadena.start_date
     fill_in "Status", with: @cadena.status
-    fill_in "Total participants", with: @cadena.total_participants
+    fill_in "Total participants", with: @cadena.desired_participants
     click_on "Update Cadena"
 
     assert_text "Cadena was successfully updated"

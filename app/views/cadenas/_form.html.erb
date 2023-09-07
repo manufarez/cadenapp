@@ -1,4 +1,4 @@
-<%= form_with(model: cadena, class: "text-white w-80 font-manrope mx-auto", data: { controller: "cadena"}) do |form| %>
+<%= form_with(model: cadena, class: "text-white w-full max-w-md font-manrope mx-auto", data: { controller: "cadena"}) do |form| %>
   <% if cadena.errors.any? %>
     <div id="error_explanation" class="px-3 py-2 mt-3 font-medium text-red-500 rounded-lg bg-red-50">
       <h2><%= pluralize(cadena.errors.count, "error") %> prohibited this cadena from being saved:</h2>
@@ -13,7 +13,7 @@
     <%= form.text_field :name, placeholder: t('cadena.cadena_name'), class: "input w-full" %>
   </div>
   <div class="mb-4">
-    <%= form.number_field :total_participants, placeholder: t('cadena.total_participants'), class: "input w-full", min: 12, data: {cadena_target: "participants", action:"cadena#updateInstallments cadena#updateEndDate"} %>
+    <%= form.number_field :desired_participants, placeholder: t('cadena.desired_participants'), class: "input w-full", min: 12, data: {cadena_target: "participants", action:"cadena#updateInstallments cadena#updateEndDate"} %>
   </div>
   <div class="mb-4">
     <%= form.label :periodicity, t('cadena.periodicity'), class:'text-silver text-sm' %>

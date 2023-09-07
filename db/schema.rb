@@ -44,7 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_161726) do
 
   create_table "cadenas", force: :cascade do |t|
     t.string "name"
-    t.integer "total_participants"
+    t.integer "desired_participants"
     t.integer "desired_installments"
     t.decimal "saving_goal"
     t.decimal "installment_value"

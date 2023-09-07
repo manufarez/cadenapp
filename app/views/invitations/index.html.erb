@@ -1,8 +1,8 @@
-<div class="px-6 mx-auto">
+<div class="max-w-md px-6 mx-auto">
   <div class="flex items-center justify-between mb-6">
     <div>
       <h1 class="text-3xl font-bold leading-6 text-white font-nimbus-ext">Invitaciones</h1>
-      <span class="text-sm font-semibold uppercase text-silver"><%= @invitations.first.cadena.name %></span>
+      <span class="text-sm font-semibold uppercase text-silver hover:underline"><%= link_to @invitations.first.cadena.name, cadena_path(@invitations.first.cadena) %></span>
     </div>
     <%= link_to 'Nueva', new_cadena_invitation_path, class: "rounded-lg py-2 px-4 bg-blue-600 text-white block font-medium" %>
   </div>
@@ -10,19 +10,23 @@
     <table class="w-full text-sm text-left font-manrope">
       <thead class="text-xs text-gray-200 uppercase bg-steel_gray">
         <tr>
-          <th scope="col" class="px-6 py-4">Name</th>
-          <th scope="col" class="px-6 py-4">Phone</th>
-          <th scope="col" class="px-6 py-4">Accepted</th>
-          <th scope="col" class="px-6 py-4">Date</th>
+          <th scope="col" class="py-4 pl-16 pr-6">Name</th>
+          <th scope="col" class="hidden px-6 py-4">Phone</th>
+          <th scope="col" class="py-4 pl-6 pr-10 text-right">Date</th>
         </tr>
       </thead>
       <tbody>
         <% @invitations.each do |invitation| %>
           <tr class="text-white odd:bg-transparent even:bg-gray-600/10">
-            <td class="px-6 py-4 font-medium text-white whitespace-nowrap"><%= invitation.first_name %> <%= invitation.last_name %></td>
-            <td class="px-6 py-4"><%= invitation.phone %></td>
-            <td class="px-6 py-4"><%= invitation.accepted %></td>
-            <td class="px-6 py-4"><%= invitation.created_at.strftime('%d/%m/%y') %></td>
+            <td class="flex px-6 py-4 font-medium text-white whitespace-nowrap">
+              <%= invitation.accepted.nil? ? inline_svg_tag('svg/question.svg', class: 'w-5 text-silver') : (invitation.accepted ? inline_svg_tag('svg/check.svg', class: 'w-5 text-ciel') : inline_svg_tag('svg/cross.svg', class: 'w-5 text-pinky')) %>
+              <div class="flex flex-col ml-6">
+                <span><%= invitation.first_name %> <%= invitation.last_name %></span>
+                <span class="text-xs text-silver"><%= invitation.phone %></span>
+              </div>
+            </td>
+            <td class="hidden px-6 py-4"><%= invitation.phone %></td>
+            <td class="px-6 py-4 text-right"><%= invitation.created_at.strftime('%d/%m/%y') %></td>
           </tr>
         <% end %>
       </tbody>

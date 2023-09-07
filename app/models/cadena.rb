@@ -21,9 +21,11 @@ class Cadena < ApplicationRecord
   end
 
   def missing_participants
-    return 0 unless installments.any?
+    desired_participants - participations.count
+  end
 
-    desired_installments - participations.count
+  def participation_status
+    missing_participants.positive? ? "#{participations.count}/#{desired_participants}" : participations.count
   end
 
   def set_saving_goal
@@ -54,5 +56,23 @@ class Cadena < ApplicationRecord
     }
 
     status_colors[status] || ''
+  end
+
+  def calculate_withdrawal_dates
+    periodicity_multiplier = periodicity == 'monthly' ? 30 : 15
+
+    participations.order(:position).each_with_index(1) do |participation, index|
+      withdrawal_date = start_date + (index * periodicity_multiplier).day
+      participation.update(withdrawal_day: withdrawal_date)
+    end
+  end
+
+  def next_payment_day(current_date)
+    withdrawal_dates = participations.pluck(:withdrawal_day).compact.select { |date| date >= current_date }
+    withdrawal_dates.min.strftime('%d/%m/%y') || nil
+  end
+
+  def participants
+    participations.includes(:user).map { |participation| "#{participation.user.first_name} #{participation.user.last_name}" }
   end
 end

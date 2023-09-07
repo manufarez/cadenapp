@@ -25,6 +25,8 @@ es:
       profile_incomplete: "Completa tu perfil para poder continuar"
     global_date: "Nueva fecha: %{global_date}"
   cadena:
+    withdrawal_day: "Mi dia de recaudo"
+    next_payment_day: "Próximo pago"
     cadena_name: "Nombre de la cadena"
     name: "Nombre"
     state: "Estado"
@@ -47,6 +49,9 @@ es:
       started: "Empezada"
   user:
     name: "Nombre"
+    first_name: "Nombre"
+    last_name: "Apellido"
+    email: "Correo electrónico"
     age: "Edad"
     complete_profile: "Completar perfil"
     profile_pic: "Foto de perfil"
@@ -70,6 +75,8 @@ es:
     users: "Usuarios"
     impersonate: "Controlar"
     created_at: "Inscripción"
+  invitation:
+    new: "Nueva invitación"
   devise:
     confirmations:
       confirmed: Tu cuenta ha sido confirmada satisfactoriamente.

@@ -9,21 +9,21 @@
       </ul>
     </div>
   <% end %>
-  <div class="my-5">
-    <%= form.label :phone, class:'text-white' %>
-    <%= form.text_field :phone, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  <div class="mb-4">
+    <%#= form.label :phone, t('user.phone'), class:'text-sm text-silver' %>
+    <%= form.text_field :phone, class: "w-full input", placeholder: t('user.phone') %>
   </div>
-  <div class="my-5">
-    <%= form.label :email, class:'text-white' %>
-    <%= form.text_field :email, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  <div class="mb-4">
+    <%#= form.label :email, t('user.email'), class:'text-sm text-silver' %>
+    <%= form.text_field :email, class: "w-full input", placeholder: t('user.email') %>
   </div>
-  <div class="my-5">
-    <%= form.label :first_name, class:'text-white' %>
-    <%= form.text_field :first_name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  <div class="mb-4">
+    <%#= form.label :first_name, t('user.first_name'), class:'text-sm text-silver' %>
+    <%= form.text_field :first_name, class: "w-full input", placeholder: t('user.first_name') %>
   </div>
-  <div class="my-5">
-    <%= form.label :last_name, class:'text-white' %>
-    <%= form.text_field :last_name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  <div class="mb-4">
+    <%#= form.label :last_name, t('user.last_name'), class:'text-sm text-silver' %>
+    <%= form.text_field :last_name, class: "w-full input", placeholder: t('user.last_name') %>
   </div>
-  <%= form.submit "Enviar", class: "rounded-xl p-4 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  <%= form.submit "Enviar", class: "btn-primary text-white mb-4" %>
 <% end %>

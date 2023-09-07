@@ -2,7 +2,7 @@ json.extract!(
   cadena,
   :id,
   :name,
-  :total_participants,
+  :desired_participants,
   :installments,
   :installment_value,
   :start_date,

@@ -2,7 +2,7 @@
 
 one:
   name: MyString
-  total_participants: 1
+  desired_participants: 1
   installments: 1
   installment_value: 9.99
   start_date: 2023-05-03
@@ -13,7 +13,7 @@ one:
 
 two:
   name: MyString
-  total_participants: 1
+  desired_participants: 1
   installments: 1
   installment_value: 9.99
   start_date: 2023-05-03

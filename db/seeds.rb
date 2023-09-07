@@ -14,6 +14,8 @@ User.destroy_all
 puts 'Users destroyed!'
 Cadena.destroy_all
 puts 'Cadenas destroyed!'
+Installment.destroy_all
+puts 'Installments destroyed!'
 
 puts 'Creating 100 fake users...'
 100.times do
@@ -44,6 +46,7 @@ puts 'Creating 10 fake cadenas...'
   cadena = Cadena.new
   cadena.name = Faker::Restaurant.name
   cadena.desired_installments = 10
+  cadena.desired_participants = 10
   cadena.installment_value = (200_000..1_000_000).step(100_000).to_a.sample
   cadena.start_date = Date.today
   cadena.end_date = Date.today + cadena.desired_installments.months
@@ -91,7 +94,18 @@ Cadena.all.map(&:save)
 
 puts 'Creating invitations for each Cadena'
 Cadena.all.each do |cadena|
-  7.times do
+  cadena.users.each do |user|
+    invitation = Invitation.new
+    invitation.cadena = cadena
+    invitation.sender = cadena.admin
+    invitation.email = user.email
+    invitation.phone = user.phone
+    invitation.first_name = user.first_name
+    invitation.last_name = user.last_name
+    invitation.accepted = true
+    invitation.save
+  end
+  5.times do
     invitation = Invitation.new
     invitation.cadena = cadena
     invitation.sender = cadena.users.sample
@@ -99,10 +113,10 @@ Cadena.all.each do |cadena|
     invitation.phone = Faker::PhoneNumber.cell_phone
     invitation.first_name = Faker::Name.first_name
     invitation.last_name = Faker::Name.last_name
-    invitation.accepted = false
+    invitation.accepted = [false, nil].sample
     invitation.save
-    puts "Invitation #{invitation.id} created!"
   end
+  puts "Invitations created!"
   cadena.save
 end
 

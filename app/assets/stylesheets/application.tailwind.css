@@ -9,6 +9,9 @@
   .btn-danger {
     @apply tracking-wide focus:ring-4 bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-red-700 w-full font-medium hover:cursor-pointer rounded-xl p-4;
   }
+  .btn-secondary {
+    @apply p-4 font-medium text-gray-400 border border-gray-600 rounded-xl focus:outline-none focus:z-10 focus:ring-4 focus:ring-gray-700 hover:text-white hover:bg-gray-700;
+  }
   .input {
     @apply bg-steel rounded-xl placeholder:text-sm text-white border-none p-4;
   }

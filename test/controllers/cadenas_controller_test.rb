@@ -17,7 +17,7 @@ class CadenasControllerTest < ActionDispatch::IntegrationTest
 
   test "should create cadena" do
     assert_difference("Cadena.count") do
-      post cadenas_url, params: { cadena: { balance: @cadena.balance, end_date: @cadena.end_date, installments: @cadena.installments, installment_value: @cadena.installment_value, name: @cadena.name, periodicity: @cadena.periodicity, start_date: @cadena.start_date, status: @cadena.status, total_participants: @cadena.total_participants } }
+      post cadenas_url, params: { cadena: { balance: @cadena.balance, end_date: @cadena.end_date, installments: @cadena.installments, installment_value: @cadena.installment_value, name: @cadena.name, periodicity: @cadena.periodicity, start_date: @cadena.start_date, status: @cadena.status, desired_participants: @cadena.desired_participants } }
     end
 
     assert_redirected_to cadena_url(Cadena.last)
@@ -34,7 +34,7 @@ class CadenasControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update cadena" do
-    patch cadena_url(@cadena), params: { cadena: { balance: @cadena.balance, end_date: @cadena.end_date, installments: @cadena.installments, installment_value: @cadena.installment_value, name: @cadena.name, periodicity: @cadena.periodicity, start_date: @cadena.start_date, status: @cadena.status, total_participants: @cadena.total_participants } }
+    patch cadena_url(@cadena), params: { cadena: { balance: @cadena.balance, end_date: @cadena.end_date, installments: @cadena.installments, installment_value: @cadena.installment_value, name: @cadena.name, periodicity: @cadena.periodicity, start_date: @cadena.start_date, status: @cadena.status, desired_participants: @cadena.desired_participants } }
     assert_redirected_to cadena_url(@cadena)
   end
 

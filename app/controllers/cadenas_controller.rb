@@ -9,7 +9,7 @@ class CadenasController < ApplicationController
 
   # GET /cadenas/1 or /cadenas/1.json
   def show
-    if current_user.belongs_to_cadena?(@cadena) || current_user.is_admin?
+    if current_user.member_of?(@cadena) || current_user.is_admin?
       # Proceed with showing the cadena's details
     else
       redirect_to root_path, alert: t('notices.cadena.access_forbidden')
@@ -65,14 +65,15 @@ class CadenasController < ApplicationController
 
   def assign_positions
     @cadena = Cadena.find(params[:id])
-    participations = @cadena.participations
-    participations.shuffle.each_with_index do |participation, index|
-      participation.position = index + 1
-      participation.save
+
+    ActiveRecord::Base.transaction do
+      @cadena.participations.shuffle.each.with_index(1) do |participation, index|
+        participation.update(position: index)
+      end
+      @cadena.calculate_withdrawal_dates
+      @cadena.update(status: 'started', positions_assigned: true)
     end
-    @cadena.status = 'started'
-    @cadena.positions_assigned = true
-    @cadena.save
+
     respond_to do |format|
       format.html { redirect_to @cadena, notice: t('notices.cadena.positions_assigned') }
     end
@@ -121,7 +122,7 @@ class CadenasController < ApplicationController
   def cadena_params
     params.require(:cadena).permit(
       :name,
-      :total_participants,
+      :desired_participants,
       :desired_installments,
       :installment_value,
       :start_date,
