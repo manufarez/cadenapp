@@ -1,8 +1,7 @@
 class Cadena < ApplicationRecord
-  has_many :participations, dependent: :nullify
+  has_many :participants, dependent: :nullify
   has_many :invitations, dependent: :destroy
-  has_many :users, through: :participations
-  has_many :installments, dependent: :destroy
+  has_many :users, through: :participants
   before_save :set_status, :set_saving_goal
   enum status: {
          pending: 'pending',
@@ -17,21 +16,34 @@ class Cadena < ApplicationRecord
   enum periodicity: { bimonthly: 'bimonthly', monthly: 'monthly' }, _default: 'monthly'
 
   def admin
-    participations.find_by(is_admin: true)&.user
+    participants.find_by(is_admin: true)&.user
+  end
+
+  def participants_names
+    participants.includes(:user).map { |participant| "#{participant.user.first_name} #{participant.user.last_name}" }
+  end
+
+  def participant_status
+    missing_participants.positive? ? "#{participants.count}/#{desired_participants}" : participants.count
   end
 
   def missing_participants
-    desired_participants - participations.count
-  end
-
-  def participation_status
-    missing_participants.positive? ? "#{participations.count}/#{desired_participants}" : participations.count
+    desired_participants - participants.count
   end
 
   def set_saving_goal
-    return 0 unless installments.any? && installment_value
-
     self.saving_goal = desired_installments * installment_value
+  end
+
+  def status_color
+    status_colors = {
+      'complete' => 'text-primary_blue border-blue-600',
+      'pending' => 'text-pinky border-pinky',
+      'approval_requested' => 'text-mayo border-mayo',
+      'started' => 'text-ciel border-ciel',
+      'stopped' => 'text-red-500 border-red-500'
+    }
+    status_colors[status] || ''
   end
 
   def set_status
@@ -46,33 +58,24 @@ class Cadena < ApplicationRecord
                   end
   end
 
-  def status_color
-    status_colors = {
-      'complete' => 'text-primary_blue border-blue-600',
-      'pending' => 'text-pinky border-pinky',
-      'approval_requested' => 'text-mayo border-mayo',
-      'started' => 'text-ciel border-ciel',
-      'stopped' => 'text-red-500 border-red-500'
-    }
-
-    status_colors[status] || ''
-  end
-
   def calculate_withdrawal_dates
     periodicity_multiplier = periodicity == 'monthly' ? 30 : 15
 
-    participations.order(:position).each_with_index(1) do |participation, index|
-      withdrawal_date = start_date + (index * periodicity_multiplier).day
-      participation.update(withdrawal_day: withdrawal_date)
+    participants.order(:position).each.with_index(1) do |participant, index|
+      participant.update(
+        withdrawal_day: start_date + (index * periodicity_multiplier).day,
+        payments_expected: desired_installments - 1,
+        total_due: saving_goal - installment_value
+      )
     end
   end
 
   def next_payment_day(current_date)
-    withdrawal_dates = participations.pluck(:withdrawal_day).compact.select { |date| date >= current_date }
+    withdrawal_dates = participants.pluck(:withdrawal_day).compact.select { |date| date >= current_date }
     withdrawal_dates.min.strftime('%d/%m/%y') || nil
   end
 
-  def participants
-    participations.includes(:user).map { |participation| "#{participation.user.first_name} #{participation.user.last_name}" }
+  def next_paid_participant(current_date)
+    participants.where('withdrawal_day >= ?', current_date).min_by(&:withdrawal_day)
   end
 end

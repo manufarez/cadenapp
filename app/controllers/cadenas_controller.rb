@@ -67,8 +67,8 @@ class CadenasController < ApplicationController
     @cadena = Cadena.find(params[:id])
 
     ActiveRecord::Base.transaction do
-      @cadena.participations.shuffle.each.with_index(1) do |participation, index|
-        participation.update(position: index)
+      @cadena.participants.shuffle.each.with_index(1) do |participant, index|
+        participant.update(position: index)
       end
       @cadena.calculate_withdrawal_dates
       @cadena.update(status: 'started', positions_assigned: true)
@@ -83,10 +83,10 @@ class CadenasController < ApplicationController
     @cadena = Cadena.find(params[:id])
     user = User.find(params[:user_id])
 
-    participation = @cadena.participations.find_by(user: user)
-    if participation
-      participation.destroy
-      @cadena.set_status
+    participant = @cadena.participants.find_by(user: user)
+    if participant
+      participant.destroy
+      @cadena.save
       redirect_to cadena_path(@cadena), notice: t('notices.cadena.user.removed')
     else
       redirect_to cadena_path(@cadena), notice: t('notices.cadena.user.not_found')

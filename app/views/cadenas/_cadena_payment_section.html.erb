@@ -1,0 +1,1 @@
+<%= button_to "Pay #{@cadena.next_paid_participant(global_date).name}", cadena_payments_path(@cadena, participant_id: @cadena.next_paid_participant(global_date).id, user: current_user), class: 'btn-primary text-white mb-6' %>

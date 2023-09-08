@@ -1,13 +1,15 @@
-class CreateParticipations < ActiveRecord::Migration[7.0]
+class CreateParticipants < ActiveRecord::Migration[7.0]
   def change
-    create_table :participations do |t|
+    create_table :participants do |t|
       t.references :cadena, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
       t.boolean :is_admin
       t.date :withdrawal_day
       t.integer :position
       t.string :status
-      t.text :admin_notes
+      t.integer :payments_expected
+      t.integer :payments_received, default: 0
+      t.decimal :total_due
 
       t.timestamps
     end

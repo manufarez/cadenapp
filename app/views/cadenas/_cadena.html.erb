@@ -1,9 +1,12 @@
 <div id="<%= dom_id cadena %>" class="flex flex-col max-w-lg mx-auto">
-  <%= render 'cadena_dashboard', cadena: @cadena %>
+  <%= render 'cadenas/cadena_dashboard', cadena: @cadena %>
+  <% if @cadena.started? %>
+    <%= render 'cadena_payment_section', cadena: @cadena %>
+  <% end %>
   <div class="p-6 rounded-xl bg-black_rock">
     <div class="flow-root">
       <% if !current_user || cadena.pending? || cadena.complete? || cadena.approval_requested? %>
-        <%= render 'cadena_users', cadena: @cadena %>
+        <%= render 'cadenas/cadena_users', cadena: @cadena %>
       <% elsif cadena.started? %>
         <%= render 'cadena_participants', cadena: @cadena %>
       <% end %>

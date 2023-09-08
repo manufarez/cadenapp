@@ -1,22 +1,28 @@
 <ul role="list" class="divide-y divide-gray-700">
-  <% cadena.participations.order(position: :asc).each do |participation| %>
+  <% cadena.participants.order(position: :asc).each do |participant| %>
     <li class="py-3 sm:py-4 first:pt-0 last:pb-0">
       <div class="flex items-center space-x-4">
-        <span class="text-silver"><%= participation.position %></span>
+        <span class="text-silver"><%= participant.position %></span>
         <div class="flex-shrink-0">
-          <%= image_tag participation.user.avatar, alt: "#{participation.user.name} avatar", class:"w-8 h-8 rounded-full" %>
+          <% if current_user.is_admin %>
+            <%= link_to participant.user do %>
+              <%= image_tag participant.user.avatar, alt: "#{participant.user.name} avatar", class:"w-8 h-8 rounded-full" %>
+            <% end %>
+          <% else %>
+            <%= image_tag participant.user.avatar, alt: "#{participant.user.name} avatar", class:"w-8 h-8 rounded-full" %>
+          <% end %>
         </div>
         <div class="flex-1 min-w-0">
           <p class="text-sm font-medium text-white truncate">
-            <%= participation.user.name %>
+            <%= participant.user.name %>
           </p>
           <p class="text-sm text-gray-400 truncate">
-            <%= participation.user.email %>
+            <%= participant.user.email %>
           </p>
         </div>
-        <% if participation.user == cadena.admin %>
+        <% if participant.user == cadena.admin %>
           <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Admin</p>
-        <% elsif participation.user == current_user %>
+        <% elsif participant.user == current_user %>
           <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Yo</p>
         <% end %>
       </div>

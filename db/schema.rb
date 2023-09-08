@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_21_161726) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_08_022443) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,32 +59,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_161726) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "installments", force: :cascade do |t|
-    t.bigint "cadena_id", null: false
-    t.date "date"
-    t.integer "transactions_expected"
-    t.integer "transactions_made"
-    t.decimal "total_due"
-    t.decimal "total_paid"
-    t.integer "position"
-    t.bigint "account_id"
-    t.string "status"
-    t.string "debitors"
-    t.string "creditors"
-    t.float "installment_fee"
-    t.integer "installment_number"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["cadena_id"], name: "index_installments_on_cadena_id"
-  end
-
   create_table "invitations", force: :cascade do |t|
     t.string "token"
     t.string "email"
     t.string "phone"
     t.string "first_name"
     t.string "last_name"
-    t.boolean "accepted", default: false
+    t.boolean "accepted"
     t.bigint "cadena_id", null: false
     t.integer "sender_id", null: false
     t.datetime "created_at", null: false
@@ -92,18 +73,32 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_161726) do
     t.index ["cadena_id"], name: "index_invitations_on_cadena_id"
   end
 
-  create_table "participations", force: :cascade do |t|
+  create_table "participants", force: :cascade do |t|
     t.bigint "cadena_id", null: false
     t.bigint "user_id", null: false
     t.boolean "is_admin"
     t.date "withdrawal_day"
     t.integer "position"
     t.string "status"
-    t.text "admin_notes"
+    t.integer "payments_expected"
+    t.integer "payments_received", default: 0
+    t.decimal "total_due"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cadena_id"], name: "index_participations_on_cadena_id"
-    t.index ["user_id"], name: "index_participations_on_user_id"
+    t.index ["cadena_id"], name: "index_participants_on_cadena_id"
+    t.index ["user_id"], name: "index_participants_on_user_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.decimal "amount"
+    t.bigint "cadena_id", null: false
+    t.bigint "participant_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cadena_id"], name: "index_payments_on_cadena_id"
+    t.index ["participant_id"], name: "index_payments_on_participant_id"
+    t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -135,8 +130,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_161726) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "installments", "cadenas"
   add_foreign_key "invitations", "cadenas"
-  add_foreign_key "participations", "cadenas"
-  add_foreign_key "participations", "users"
+  add_foreign_key "participants", "cadenas"
+  add_foreign_key "participants", "users"
+  add_foreign_key "payments", "cadenas"
+  add_foreign_key "payments", "participants"
+  add_foreign_key "payments", "users"
 end

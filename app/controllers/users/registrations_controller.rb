@@ -26,7 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         if token.present?
           invitation = Invitation.find_by(token: token)
           invitation.update(accepted: true)
-          Participation.create(cadena: invitation.cadena, user: resource, is_admin: false)
+          Participant.create(cadena: invitation.cadena, user: resource, is_admin: false)
           invitation.cadena.save
         end
         respond_with resource, location: after_sign_up_path_for(resource)

@@ -43,10 +43,11 @@ es:
     participants: "Participantes"
     created_at: "Creada"
     status:
-      approval_requested: "Solicitud enviada"
+      approval_requested: "Validacion admin pendiente"
       pending: "Incompleta"
       complete: "Completa"
       started: "Empezada"
+    payment_success: "Pago exitoso"
   user:
     name: "Nombre"
     first_name: "Nombre"

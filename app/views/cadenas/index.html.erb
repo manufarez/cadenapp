@@ -37,9 +37,9 @@
             <td class="px-6 py-4 font-medium whitespace-nowrap">
               <%= link_to cadena, class:'hover:underline truncate' do %><%= cadena.name.truncate(14) %><% end %>
             </td>
-            <td class="px-6 py-4 font-light text-center"><%= cadena.participations.count %>/<%= cadena.desired_installments %></td>
+            <td class="px-6 py-4 font-light text-center"><%= cadena.participants.count %>/<%= cadena.desired_installments %></td>
             <td class="px-6 py-4 <%= cadena.status_color %>"><%= t("cadena.status.#{cadena.status}") %></td>
-            <td class="px-6 py-4 font-light"><%= cadena.installments.count %></td>
+            <td class="px-6 py-4 font-light"><%= cadena.desired_installments %></td>
             <td class="px-6 py-4 font-light"><%= number_to_currency(cadena.installment_value, precision: 0, unit: '') %></td>
             <td class="px-6 py-4 font-light"><%= number_to_currency(cadena.saving_goal, precision: 0, unit:'') %></td>
             <td class="px-6 py-4 font-light"><%= cadena.start_date.strftime('%d/%m/%y') %></td>

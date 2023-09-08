@@ -5,21 +5,21 @@
   </div>
   <div class="flex items-center justify-between my-5">
     <div class="font-manrope">
-      <div class="flex items-center text-2xl font-bold <%= cadena.missing_participants.positive? ? 'text-pinky' : 'text-gray-300' %>"><%= cadena.participation_status %><%= inline_svg_tag('svg/users.svg', class:'w-4 ml-2 text-placeholder_gray') %></div>
+      <div class="flex items-center text-2xl font-bold <%= cadena.missing_participants.positive? ? 'text-pinky' : 'text-gray-300' %>"><%= cadena.participant_status %><%= inline_svg_tag('svg/users.svg', class:'w-4 ml-2 text-placeholder_gray') %></div>
       <p class="text-sm lowercase text-placeholder_gray"><%= t('cadena.participants') %></p>
     </div>
     <div>
-      <% if cadena.pending? && current_user&.member_of?(@cadena) && !current_user.is_admin %>
-        <%= link_to "Invitar más", cadena_invitations_path(@cadena), class: "text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-700 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
+      <% if cadena.pending? && (current_user.admin_of?(cadena) || current_user.is_admin) %>
+        <%= link_to "Invitar más", cadena_invitations_path(cadena), class: "text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-700 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
       <% elsif cadena.complete? %>
-        <%= link_to "Aprobar lista", request_approval_cadena_path(@cadena), data: { 'turbo-method': :patch }, class: "text-white bg-primary_blue hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
+        <%= link_to "Aprobar lista", request_approval_cadena_path(cadena), data: { 'turbo-method': :patch }, class: "text-white bg-primary_blue hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
       <% elsif cadena.approval_requested? %>
-        <%= link_to "Generar orden", assign_positions_cadena_path(@cadena), data: { 'turbo-method': :patch }, class: "text-mirage bg-gradient-to-r from-mayo to-yellow-300 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-500 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
+        <%= link_to "Generar orden", assign_positions_cadena_path(cadena), data: { 'turbo-method': :patch }, class: "text-mirage bg-gradient-to-r from-mayo to-yellow-300 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-500 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
       <% end %>
     </div>
   </div>
   <div class="my-5 font-manrope">
-    <div class="flex items-center text-2xl font-bold text-gray-300"><%= number_to_currency(cadena.installments.count * cadena.installment_value, precision: 0  ) %><%= inline_svg_tag('svg/target.svg', class:'ml-2 text-placeholder_gray') %></div>
+    <div class="flex items-center text-2xl font-bold text-gray-300"><%= number_to_currency(cadena.desired_installments * cadena.installment_value, precision: 0  ) %><%= inline_svg_tag('svg/target.svg', class:'ml-2 text-placeholder_gray') %></div>
     <p class="text-sm lowercase text-placeholder_gray"><%= t('cadena.saving_goal') %></p>
   </div>
   <div class="flex justify-between my-5 font-manrope">
@@ -28,14 +28,14 @@
       <p class="text-sm text-placeholder_gray"><%= cadena.periodicity == "monthly" ? "por mes" : "por quincena" %></p>
     </div>
     <div class="text-right">
-      <span class="text-2xl font-bold <%= cadena.started? ? 'text-white' : '' %>">0/<%= cadena.installments.count %></span>
+      <span class="text-2xl font-bold <%= cadena.started? ? 'text-white' : '' %>">0/<%= cadena.desired_installments %></span>
       <p class="text-sm text-right lowercase text-placeholder_gray"><%= t('cadena.installments_min') %></p>
     </div>
   </div>
   <div class="flex justify-between font-manrope">
     <% if cadena.started? && current_user.member_of?(cadena) %>
       <div>
-        <div class="flex items-center text-2xl font-bold text-ciel"><%= current_user&.participation(cadena).withdrawal_day.strftime('%d/%m/%y') %><%= inline_svg_tag('svg/flag.svg', class:'w-4 ml-2 text-placeholder_gray') %></div>
+        <div class="flex items-center text-2xl font-bold text-ciel"><%= current_user&.participant(cadena).withdrawal_day.strftime('%d/%m/%y') %><%= inline_svg_tag('svg/flag.svg', class:'w-4 ml-2 text-placeholder_gray') %></div>
         <p class="text-sm lowercase text-placeholder_gray"><%= t('cadena.withdrawal_day') %></p>
       </div>
       <div class="px-2 py-1 rounded-lg bg-steel_gray">
@@ -55,11 +55,11 @@
         <p class="text-sm text-right lowercase text-placeholder_gray"><%= t('cadena.end_date') %></p>
       </div>
     <% end %>
-    <% unless current_user&.member_of?(cadena) || current_user.is_admin %>
-      <div class="flex flex-col mt-5 space-y-5">
-        <%= link_to 'Aceptar invitacion', new_user_registration_path(params: { token: params[:token] }), class: 'text-white btn-primary w-full text-center' %>
-        <%= link_to 'Rechazar invitacion', root_url, class: 'btn-danger w-full text-center' %>
-      </div>
-    <% end %>
   </div>
+  <% unless current_user&.member_of?(cadena) || current_user&.is_admin %>
+    <div class="flex flex-col mt-5 space-y-5">
+      <%= link_to 'Aceptar invitacion', new_user_registration_path(params: { token: params[:token] }), class: 'text-white btn-primary w-full text-center' %>
+      <%= link_to 'Rechazar invitacion', root_url, class: 'btn-danger w-full text-center' %>
+    </div>
+  <% end %>
 </div>

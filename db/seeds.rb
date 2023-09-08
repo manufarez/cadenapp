@@ -6,16 +6,14 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-Participation.destroy_all
-puts 'Participations destroyed!'
+Participant.destroy_all
+puts 'Participants destroyed!'
 Invitation.destroy_all
 puts 'Invitations destroyed!'
 User.destroy_all
 puts 'Users destroyed!'
 Cadena.destroy_all
 puts 'Cadenas destroyed!'
-Installment.destroy_all
-puts 'Installments destroyed!'
 
 puts 'Creating 100 fake users...'
 100.times do
@@ -56,38 +54,29 @@ puts 'Creating 10 fake cadenas...'
   puts "Cadena #{cadena.id} created!"
 end
 
-puts 'Creating fake cadena installments...'
-Cadena.all.each do |cadena|
-  cadena.desired_installments.times do
-    installment = Installment.new(cadena: cadena)
-    installment.save
-    puts "Installment created!"
-  end
-end
-
-puts 'Creating 10 fake participations for each cadena...'
+puts 'Creating 10 fake participants for each cadena...'
 users_in_groups_of_10 = User.all.each_slice(10).to_a
 first_user_in_groups = users_in_groups_of_10.map { |group| group.first.id }
 cadenas_ids = Cadena.all.ids
 
 users_in_groups_of_10.each_with_index do |group, i|
   group.each do |user|
-    participation = Participation.new
-    participation.cadena_id = cadenas_ids[i]
-    participation.user = user
-    participation.is_admin = if first_user_in_groups.include?(participation.user_id)
+    participant = Participant.new
+    participant.cadena_id = cadenas_ids[i]
+    participant.user = user
+    participant.is_admin = if first_user_in_groups.include?(participant.user_id)
                                true
                              else
                                false
                              end
-    participation.save
-    puts "Participation #{participation.id} created!"
+    participant.save
+    puts "Participant #{participant.id} created!"
   end
 end
 
-puts "Delete and complete random participations to make it more realistic"
-Participation.first.destroy
-Participation.last.destroy
+puts "Delete and complete random participants to make it more realistic"
+Participant.first.destroy
+Participant.last.destroy
 Cadena.where(status: 'complete').sample(4).each { |cadena| cadena.update(approval_requested: true) }
 Cadena.where(approval_requested: true).sample(2).each { |cadena| cadena.update(positions_assigned: true) }
 Cadena.all.map(&:save)

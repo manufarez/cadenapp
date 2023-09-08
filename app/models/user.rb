@@ -4,8 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :participations, dependent: :nullify
-  has_many :cadenas, through: :participations
+  has_many :participants, dependent: :nullify
+  has_many :cadenas, through: :participants
+  has_many :made_payments, dependent: :nullify
   has_one_attached :avatar
   validates :sex, presence: true, on: :update
   validates :dob, presence: true, on: :update
@@ -35,13 +36,13 @@ class User < ApplicationRecord
     cadenas.include?(cadena)
   end
 
-  def participation(cadena)
-    participations.find_by(cadena: cadena, user: self)
+  def participant(cadena)
+    participants.find_by(cadena: cadena, user: self)
   end
 
   def admin_of?(cadena)
-    participation = participations.find_by(cadena: cadena, is_admin: true)
-    !participation.nil?
+    participant = participants.find_by(cadena: cadena, is_admin: true)
+    !participant.nil?
   end
 
   def age
@@ -53,5 +54,9 @@ class User < ApplicationRecord
     else
       'Missing DOB'
     end
+  end
+
+  def made_payments
+    Payment.where(user: self)
   end
 end

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       patch :request_approval
       patch :assign_positions
     end
+    resources :payments, only: [:new, :create, :index]
   end
   get 'pages/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

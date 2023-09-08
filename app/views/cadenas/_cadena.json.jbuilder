@@ -3,7 +3,7 @@ json.extract!(
   :id,
   :name,
   :desired_participants,
-  :installments,
+  :desired_installments,
   :installment_value,
   :start_date,
   :end_date,
