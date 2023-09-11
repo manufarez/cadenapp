@@ -35,3 +35,6 @@
 
 # Ignore avatars of seeds
 /public/avatars
+
+# Removes RubyMines additions
+.idea
