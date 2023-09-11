@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+time = Time.now
 Participant.destroy_all
 puts 'Participants destroyed!'
 Invitation.destroy_all
@@ -15,28 +16,48 @@ puts 'Users destroyed!'
 Cadena.destroy_all
 puts 'Cadenas destroyed!'
 
+# Only uncomment this for the first installment, helps playing seeds faster
+# require 'open-uri'
+# 100.times do |i|
+#   url = "https://i.pravatar.cc/256"
+#   begin
+#     file = URI.open(url)
+#     File.open("public/avatars/avatar_#{i + 71}.png", 'wb') do |f|
+#       f.write(file.read)
+#     end
+#     puts "#{url} downloaded"
+#   rescue OpenURI::HTTPError => e
+#     puts "Error downloading #{url}: #{e.message}"
+#   end
+# end
+
 puts 'Creating 100 fake users...'
-100.times do
-  user = User.new
-  user.first_name = Faker::Name.first_name
-  user.last_name = Faker::Name.last_name
-  user.identification_number = Faker::IDNumber.valid
-  user.identification_type = ['C.C.', 'C.I.', 'Passport'].sample
-  user.identification_issued_at = Faker::Date.between(from: 10.years.ago, to: Date.today)
-  user.sex = %w[M F].sample
-  user.dob = Faker::Date.birthday(min_age: 18, max_age: 65)
-  user.email = Faker::Internet.email
-  user.password = user.email
-  user.password_confirmation = user.password
-  user.phone = Faker::PhoneNumber.cell_phone
-  user.city = Faker::Address.city
-  user.zip = Faker::Address.zip_code
-  user.address = Faker::Address.street_address
-  user.accepts_terms = true
-  image = URI.parse('https://i.pravatar.cc/256').open
-  user.avatar.attach(io: image, filename: 'avatar.png', content_type: 'image/png')
-  user.save
-  puts "User #{user.id} created!"
+100.times do |i|
+  email = Faker::Internet.email
+  user = User.new(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    identification_number: Faker::IDNumber.valid,
+    identification_type: ['C.C.', 'C.I.', 'Passport'].sample,
+    identification_issued_at: Faker::Date.between(from: 10.years.ago, to: Date.today),
+    sex: %w[M F].sample,
+    dob: Faker::Date.birthday(min_age: 18, max_age: 65),
+    email: email,
+    password: email,
+    password_confirmation: email,
+    phone: Faker::PhoneNumber.cell_phone,
+    city: Faker::Address.city,
+    zip: Faker::Address.zip_code,
+    address: Faker::Address.street_address,
+    accepts_terms: true)
+    if Rails.env.production?
+      image = URI.parse('https://i.pravatar.cc/256').open
+      user.avatar.attach(io: image, filename: 'avatar.png', content_type: 'image/png')
+    elsif Rails.env.development?
+      user.avatar.attach(io: File.open("public/avatars/avatar_#{i}.png"), filename: 'avatar.png', content_type: 'image/png')
+    end
+  user.save!
+  puts "User #{user.id} created"
 end
 
 puts 'Creating 10 fake cadenas...'
@@ -70,6 +91,7 @@ users_in_groups_of_10.each_with_index do |group, i|
                                false
                              end
     participant.save
+    participant.errors
     puts "Participant #{participant.id} created!"
   end
 end
@@ -120,3 +142,4 @@ andre = User.new(first_name: 'André', last_name: 'Barreto', email: 'andre_barre
 andre.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'r9.jpg')), filename: 'r9.jpg', content_type: 'image/jpeg')
 andre.save
 puts "Cadenapp's admins created!"
+puts "Played seeds in #{Time.now - time} secs."

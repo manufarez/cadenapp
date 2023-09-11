@@ -11,9 +11,9 @@
     <table class="w-full text-sm text-left font-manrope">
       <thead class="text-xs text-gray-200 uppercase bg-steel_gray">
         <tr>
+          <th scope="col" class="px-6 py-4"><%= t('cadena.id') %></th>
           <th scope="col" class="px-6 py-4"><%= t('cadena.name') %></th>
           <th scope="col" class="px-6 py-4">E-mail</th>
-          <th scope="col" class="px-6 py-4"><%= t('user.age') %></th>
           <th scope="col" class="px-6 py-4"><%= t('user.city') %></th>
           <th scope="col" class="px-6 py-4 text-center">Cadenas</th>
           <th scope="col" class="px-6 py-4"><%= t('user.created_at') %></th>
@@ -22,10 +22,10 @@
       </thead>
       <tbody>
         <% @users.each do |user| %>
-          <tr class="text-white odd:bg-transparent even:bg-gray-600/10">
-            <td class="px-6 py-4 font-medium whitespace-nowrap"><a href="<%= user_path(user) %>" class="hover:underline"><%= user.first_name %> <%= user.last_name %></a></td>
-            <td class="px-6 py-4 font-sans"><a href="mailto:<%= user.email %>" target="_blank" class="hover:underline"><%= user.email %></a></td>
-            <td class="px-6 py-4 font-light"><%= user.age %></td>
+          <tr class="text-white odd:bg-transparent even:bg-gray-600/10 hover:bg-jaguar_light/50 hover:cursor-pointer" onclick="location.href='<%= url_for(user) %>'">
+            <td class="px-6 py-4"><%= user.id %></td>
+            <td class="px-6 py-4 font-medium whitespace-nowrap"><%= user.first_name %> <%= user.last_name %></td>
+            <td class="px-6 py-4 font-sans"><%= user.email %></td>
             <td class="px-6 py-4 font-light"><%= user.city %></td>
             <td class="px-6 py-4 text-center"><%= user.cadenas.count %></td>
             <td class="px-6 py-4 font-light"><%= user.created_at.strftime('%d/%m/%y') %></td>

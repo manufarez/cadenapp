@@ -3,7 +3,13 @@
     <li class="py-3 sm:py-4 first:pt-0 last:pb-0">
       <div class="flex items-center space-x-4">
         <div class="flex-shrink-0">
-          <%= image_tag user.avatar, alt: "#{user.name} avatar", class:"w-8 h-8 rounded-full" %>
+          <% if current_user.is_admin %>
+            <%= link_to user do %>
+              <%= image_tag user.avatar, alt: "#{user.name} avatar", class:"w-8 h-8 rounded-full hover:opacity-30" %>
+            <% end %>
+          <% else %>
+            <%= image_tag user.avatar, alt: "#{user.name} avatar", class:"w-8 h-8 rounded-full" %>
+          <% end %>
         </div>
         <div class="flex-1 min-w-0">
           <p class="text-sm font-medium text-white truncate">

@@ -40,14 +40,15 @@ es:
     end_date: "Fecha de fin"
     saving_goal: "Objetivo de ahorro"
     create: "Crear"
+    belongs_to_none: "No perteneces a ninguna cadena"
     participants: "Participantes"
     created_at: "Creada"
     status:
-      approval_requested: "Validacion admin pendiente"
+      approval_requested: "Validacion admin"
       pending: "Incompleta"
       complete: "Completa"
       started: "Empezada"
-    payment_success: "Pago exitoso"
+    payment_success: "Pago exitoso ⚡️"
   user:
     name: "Nombre"
     first_name: "Nombre"

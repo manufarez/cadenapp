@@ -32,11 +32,9 @@
       </thead>
       <tbody>
         <% @cadenas.each do |cadena| %>
-          <tr class="text-white odd:bg-transparent even:bg-gray-600/10">
+          <tr class="text-white odd:bg-transparent even:bg-gray-600/10 hover:bg-jaguar_light/50 hover:cursor-pointer" onclick="location.href='<%= url_for(cadena) %>'">
             <td class="px-6 py-4 font-light"><%= cadena.id %></td>
-            <td class="px-6 py-4 font-medium whitespace-nowrap">
-              <%= link_to cadena, class:'hover:underline truncate' do %><%= cadena.name.truncate(14) %><% end %>
-            </td>
+            <td class="px-6 py-4 font-medium truncate whitespace-nowrap"><%= cadena.name.truncate(14) %></td>
             <td class="px-6 py-4 font-light text-center"><%= cadena.participants.count %>/<%= cadena.desired_installments %></td>
             <td class="px-6 py-4 <%= cadena.status_color %>"><%= t("cadena.status.#{cadena.status}") %></td>
             <td class="px-6 py-4 font-light"><%= cadena.desired_installments %></td>

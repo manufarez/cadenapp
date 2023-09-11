@@ -6,7 +6,7 @@
         <div class="flex-shrink-0">
           <% if current_user.is_admin %>
             <%= link_to participant.user do %>
-              <%= image_tag participant.user.avatar, alt: "#{participant.user.name} avatar", class:"w-8 h-8 rounded-full" %>
+              <%= image_tag participant.user.avatar, alt: "#{participant.user.name} avatar", class:"w-8 h-8 rounded-full hover:opacity-30" %>
             <% end %>
           <% else %>
             <%= image_tag participant.user.avatar, alt: "#{participant.user.name} avatar", class:"w-8 h-8 rounded-full" %>

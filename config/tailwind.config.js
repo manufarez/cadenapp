@@ -19,6 +19,7 @@ module.exports = {
         black_rock: "#2c2c3c",
         steel_gray: "#242533",
         midnight: "#202235",
+        midnight_light: "#3d436b",
         night: "#0f172a",
         night_light: "#111a4a",
         night_dark: "#1B2439",
