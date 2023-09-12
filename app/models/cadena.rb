@@ -70,6 +70,14 @@ class Cadena < ApplicationRecord
     end
   end
 
+  def assign_positions
+    participants.shuffle.each.with_index(1) do |participant, index|
+      participant.update(position: index)
+    end
+    calculate_withdrawal_dates
+    update(status: 'started', positions_assigned: true)
+  end
+
   def next_payment_day(current_date)
     withdrawal_dates = participants.pluck(:withdrawal_day).compact.select { |date| date >= current_date }
     withdrawal_dates.min.strftime('%d/%m/%y') || nil

@@ -102,7 +102,7 @@ Participant.first(10).last.destroy
 Participant.last.destroy
 Cadena.all.map(&:save)
 Cadena.where(status: 'complete').sample(4).each { |cadena| cadena.update(approval_requested: true, status: 'approval_requested') }
-Cadena.where(status: 'approval_requested').sample(2).each { |cadena| cadena.update(positions_assigned: true) }
+positions_assigned = Cadena.where(status: 'approval_requested').sample(2).each{|cadena| cadena.assign_positions}
 
 puts 'Creating invitations for each Cadena'
 Cadena.all.each do |cadena|

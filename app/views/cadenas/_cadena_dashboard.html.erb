@@ -15,8 +15,8 @@
         <%= link_to "Aprobar lista", request_approval_cadena_path(cadena), data: { turbo_method: :patch }, class: "text-white bg-primary_blue hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
       <% elsif cadena.approval_requested? && (current_user.admin_of?(cadena) || current_user.is_admin) %>
         <%= link_to "Generar orden", assign_positions_cadena_path(cadena), data: {turbo_method: :patch }, class: "btn-warning text-sm px-4 py-2"  %>
-      <% elsif @cadena.approval_requested && !current_user.admin_of?(@cadena) && !current_user.is_admin %>
-        <%= button_to "Darme de baja", remove_user_cadena_path(@cadena, current_user, format: :html), form: {data: {turbo_confirm: 'Are you sure? This action is irreversible'}}, method: :delete, class:'btn-warning text-sm px-4 py-2 h-8 flex items-center' %>
+      <% elsif @cadena.approval_requested? && !current_user.admin_of?(@cadena) && !current_user.is_admin %>
+        <%= button_to "Darme de baja", remove_user_cadena_path(@cadena, current_user, format: :html), form: {data: {turbo_confirm: "Are you sure you want to leave #{@cadena.name}? This action is irreversible"}}, method: :delete, class:'btn-warning text-sm px-4 py-2 h-8 flex items-center' %>
       <% end %>
     </div>
   </div>

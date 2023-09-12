@@ -1,5 +1,7 @@
-<% if !current_user.paid_next_participant?(cadena, global_date) %>
-  <%= button_to "Pay #{@cadena.next_paid_participant(global_date).name}", cadena_payments_path(@cadena, participant_id: @cadena.next_paid_participant(global_date).id, user: current_user), class: 'btn-primary text-white mb-6' %>
+<% if !current_user.paid_next_participant?(cadena, global_date) && @next_paid_participant.user != current_user %>
+  <%= button_to "Pay #{@next_paid_participant.name}", cadena_payments_path(cadena, participant_id: @next_paid_participant.id, user: current_user), class: 'btn-primary text-white mb-6' %>
+<% elsif @next_paid_participant.user == current_user %>
+  <button disabled class="flex items-center justify-center mb-6 text-sm font-manrope btn-secondary hover:cursor-not-allowed">Es tu turno, no pagas <%= inline_svg_tag('svg/check.svg', class:'w-4 ml-2 text-ciel') %></button>
 <% else %>
-  <button disabled class="flex items-center justify-center mb-6 btn-secondary hover:cursor-not-allowed">Ya pagaste la cuota de este mes <%= inline_svg_tag('svg/check.svg', class:'w-4 ml-2 text-ciel') %></button>
+  <button disabled class="flex items-center justify-center mb-6 text-sm font-manrope btn-secondary hover:cursor-not-allowed">Ya pagaste tu cuota para <%= @next_paid_participant.user.first_name %> <%= inline_svg_tag('svg/check.svg', class:'w-4 ml-2 text-ciel') %></button>
 <% end %>

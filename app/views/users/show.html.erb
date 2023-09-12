@@ -3,7 +3,13 @@
     <div class="flex items-end justify-between mb-4">
       <div>
         <h1 class="mb-1 text-2xl font-semibold"><%= @user.name %></h1>
-        <div class="flex items-center pl-2 pr-2.5 py-1 mr-2 text-xs text-center text-white bg-blue-600 rounded-full w-fit"><%= inline_svg_tag('svg/id.svg', class:'w-3 text-white mr-1') %><%= @user.id %></div>
+        <% if current_user.is_admin? %>
+          <%= link_to login_as_user_path(@user), data: {turbo_confirm: "Are you sure you want to impersonate #{@user.name}? You will be logged out as an admin", turbo_method: :post} do %>
+            <div class="flex items-center pl-2 pr-2.5 py-1 mr-2 text-xs text-center text-white bg-blue-600 hover:bg-blue-700 rounded-full w-fit"><%= inline_svg_tag('svg/id.svg', class:'w-3 text-white mr-1') %><%= @user.id %></div>
+          <% end %>
+        <% else %>
+          <div class="flex items-center pl-2 pr-2.5 py-1 mr-2 text-xs text-center text-placeholder_gray border-placeholder_gray border rounded-full w-fit"><%= inline_svg_tag('svg/hash.svg', class:'w-3 text-placeholder_gray mr-1') %><%= @user.id %></div>
+        <% end %>
       </div>
       <%= image_tag @user.avatar, class:"rounded-full h-14" %>
     </div>
@@ -53,47 +59,13 @@
         <div class="w-full mb-4 text-center btn-primary">Editar perfil</div>
       <% end %>
       <%= link_to destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?" } do %>
-        <button type="button" class="flex items-center justify-center w-full btn-secondary h-14">
+        <button type="button" class="flex items-center justify-center w-full btn-secondary h-14 text-placeholder_gray">
           <span class="mr-2">Desconectarse</span>
           <%= inline_svg_tag 'svg/exit.svg', class:'w-5' %>
         </button>
       <% end %>
     </div>
-    <h1 class="mt-6 mb-2 text-lg font-semibold"><%= current_user == @user ? 'Mis cadenas' : 'Cadenas' %></h1>
-    <div class="flex flex-col space-y-4">
-      <% if @user.cadenas.any? %>
-        <% @user.cadenas.each do |cadena| %>
-          <%= link_to cadena do %>
-            <div class="flex items-center justify-between p-4 font-sans text-sm font-medium rounded-xl bg-midnight hover:bg-black_rock">
-              <div class="flex items-center">
-                <div class="flex mr-2">
-                  <% if current_user.member_of?(cadena) %>
-                    <%= image_tag current_user&.avatar, class:'w-8 rounded-full border-2 border-midnight' %>
-                    <%= image_tag cadena.users&.second.avatar, class:'w-8 rounded-full -ml-4 border-2 border-midnight' %>
-                    <%= image_tag cadena.users&.third.avatar, class:'w-8 rounded-full -ml-4 border-2 border-midnight' %>
-                  <% else %>
-                    <%= image_tag cadena.users&.first.avatar, class:'w-8 rounded-full border-2 border-midnight' %>
-                    <%= image_tag cadena.users&.third.avatar, class:'w-8 rounded-full  -ml-4 border-2 border-midnight' %>
-                    <%= image_tag cadena.users&.second.avatar, class:'w-8 rounded-full -ml-4 border-2 border-midnight' %>
-                  <% end %>
-                </div>
-                <span class="mr-3"><%= cadena.name %></span>
-                <% if current_user.admin_of?(cadena) || @user.admin_of?(cadena) %>
-                  <span class="px-2 py-1 text-xs uppercase border rounded-lg border-jaguar_light text-jaguar_light">ADMIN</span>
-                <% end %>
-              </div>
-              <span class="font-normal mr-1 <%= cadena.status_color %>">
-                <%= t("cadena.status.#{cadena.status}") %>
-              </span>
-            </div>
-          <% end %>
-        <% end %>
-      <% else %>
-        <div class="flex flex-col items-center p-6 border border-gray-700 border-dashed rounded-xl">
-          <p class="mb-4 text-sm font-medium text-gray-600"><%= t('cadena.belongs_to_none') %></p>
-          <%= link_to t('cadena.create'), new_cadena_path, class:'btn-primary w-fit text-xs font-semibold px-3 rounded-md py-2 mb-1' %>
-        </div>
-      <% end %>
-    </div>
+    <%= render 'my_cadenas' %>
+    <%= render 'my_payments' %>
   </div>
 </div>
