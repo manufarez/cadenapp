@@ -78,6 +78,7 @@ end
 puts 'Creating 10 fake participants for each cadena...'
 users_in_groups_of_10 = User.all.each_slice(10).to_a
 first_user_in_groups = users_in_groups_of_10.map { |group| group.first.id }
+puts "#{first_user_in_groups}"
 cadenas_ids = Cadena.all.ids
 
 users_in_groups_of_10.each_with_index do |group, i|
@@ -97,11 +98,11 @@ users_in_groups_of_10.each_with_index do |group, i|
 end
 
 puts "Delete and complete random participants to make it more realistic"
-Participant.first.destroy
+Participant.first(10).last.destroy
 Participant.last.destroy
-Cadena.where(status: 'complete').sample(4).each { |cadena| cadena.update(approval_requested: true) }
-Cadena.where(approval_requested: true).sample(2).each { |cadena| cadena.update(positions_assigned: true) }
 Cadena.all.map(&:save)
+Cadena.where(status: 'complete').sample(4).each { |cadena| cadena.update(approval_requested: true, status: 'approval_requested') }
+Cadena.where(status: 'approval_requested').sample(2).each { |cadena| cadena.update(positions_assigned: true) }
 
 puts 'Creating invitations for each Cadena'
 Cadena.all.each do |cadena|
