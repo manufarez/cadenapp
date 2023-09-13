@@ -28,8 +28,14 @@ module Cadenapp
         helper_specs: false,
         routing_specs: false
       )
+      g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
-
+    config.lograge.enabled = true
+    #mute active storage log entries
+    config.lograge.ignore_actions = [
+      "ActiveStorage::DiskController#show",
+      "ActiveStorage::RepresentationsController#show"
+    ]
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

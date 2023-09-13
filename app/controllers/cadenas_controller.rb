@@ -4,7 +4,7 @@ class CadenasController < ApplicationController
 
   # GET /cadenas or /cadenas.json
   def index
-    @cadenas = current_user.is_admin ? Cadena.all : current_user.cadenas || cure
+    @cadenas = current_user.is_admin ? Cadena.includes(:participants).all : current_user.cadenas
   end
 
   # GET /cadenas/1 or /cadenas/1.json
