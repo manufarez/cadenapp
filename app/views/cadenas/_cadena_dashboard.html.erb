@@ -37,7 +37,7 @@
   <div class="flex justify-between font-manrope">
     <% if cadena.started? && current_user.member_of?(cadena) %>
       <div>
-        <div class="flex items-center text-2xl font-bold text-ciel"><%= current_user&.participant(cadena).withdrawal_day.strftime('%d/%m/%y') %><%= inline_svg_tag('svg/flag.svg', class:'w-4 ml-2 text-placeholder_gray') %></div>
+        <div class="flex items-center text-2xl font-bold text-lavender"><%= current_user&.participant(cadena).withdrawal_day.strftime('%d/%m/%y') %><%= inline_svg_tag('svg/flag.svg', class:'w-4 ml-2 text-placeholder_gray') %></div>
         <p class="text-sm lowercase text-placeholder_gray"><%= t('cadena.withdrawal_day') %></p>
       </div>
       <div class="px-2 py-1 rounded-lg bg-steel_gray">

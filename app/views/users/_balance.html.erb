@@ -1,5 +1,7 @@
 <div class="flex flex-col items-center mb-6">
-  <p class="mb-2 font-semibold text-pinky font-manrope">Saldo Cadenapp</p>
-  <span class="mb-6 text-4xl font-bold text-white font-manrope"><%= number_to_currency(user.balance, precision: 2) %></span>
-  <%= link_to "Recargar saldo Cadenapp", '#', class:'btn btn-secondary w-full text-center' %>
+  <p class="mb-2 font-semibold text-lavender font-manrope">Saldo Cadenapp</p>
+  <%= link_to quick_deposit_path(user), data:{turbo_method: :patch}, class:'flex justify-center space-x-2 text-white' do %>
+    <%= inline_svg_tag('svg/plus_circle.svg', class:'w-6 text-placeholder_gray hover:text-lavender') %>
+    <span class="text-4xl font-bold tabular-nums font-manrope"><%= number_to_currency(user.balance, precision: 2) %></span>
+  <% end %>
 </div>

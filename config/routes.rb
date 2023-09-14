@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'users/:id/complete_profile', to: 'users#complete_profile', as: 'complete_profile'
   patch 'users/:id/complete_profile', to: 'users#update', as: 'update_profile'
   patch '/set_date', to: 'application#set_date', as: 'set_date'
+  patch 'users/:id/quick_deposit', to: 'users#quick_deposit', as: 'quick_deposit'
 
   resources :cadenas do
     resources :invitations do

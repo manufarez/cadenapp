@@ -6,7 +6,9 @@ class User < ApplicationRecord
 
   has_many :participants, dependent: :nullify
   has_many :cadenas, through: :participants
-  has_many :made_payments, dependent: :nullify
+  has_many :made_payments, class_name: 'Payment', dependent: :nullify
+  has_many :received_payments, through: :participants, source: :received_payments, dependent: :nullify
+
   has_one_attached :avatar
   validates :sex, presence: true, on: :update
   validates :dob, presence: true, on: :update
@@ -36,6 +38,7 @@ class User < ApplicationRecord
     cadenas.include?(cadena)
   end
 
+  # This one is a bit weird, is it used?
   def participant(cadena)
     participants.find_by(cadena: cadena, user: self)
   end
@@ -54,10 +57,6 @@ class User < ApplicationRecord
     else
       'Missing DOB'
     end
-  end
-
-  def made_payments
-    Payment.where(user: self)
   end
 
   def paid_next_participant?(cadena, current_date)

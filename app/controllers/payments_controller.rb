@@ -10,10 +10,7 @@ class PaymentsController < ApplicationController
       paid_at: session[:global_date] || Time.zone.now
     )
     respond_to do |format|
-      if @payment.save
-        current_user.update(balance: current_user.balance - @payment.amount)
-        receiver = Participant.find(params[:participant_id]).user
-        receiver.update(balance: receiver.balance + @payment.amount)
+      if process_payment
         format.html { redirect_to cadena_url(@payment.cadena), notice: t('cadena.payment_success') }
         format.json { render json: @payment.cadena, status: :created, location: @payment.cadena }
       else
@@ -24,6 +21,20 @@ class PaymentsController < ApplicationController
   end
 
   private
+
+  def process_payment
+    return false unless @payment.valid?
+
+    ActiveRecord::Base.transaction do
+      sender = @payment.user
+      receiver = @payment.participant.user
+
+      sender.update(balance: sender.balance - @payment.amount)
+      receiver.update(balance: receiver.balance + @payment.amount)
+
+      @payment.save
+    end
+  end
 
   def find_cadena
     @cadena = Cadena.find(params[:cadena_id])

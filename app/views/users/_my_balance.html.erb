@@ -1,0 +1,7 @@
+<h1 class="mt-6 mb-2 text-lg font-semibold"><%= current_user == @user ? 'Mi saldo' : 'Saldo' %></h1>
+<div class="flex items-center justify-between h-16 p-4 font-sans text-sm font-medium rounded-xl bg-midnight">
+  <%= link_to quick_deposit_path(user), data:{turbo_method: :patch} do %>
+    <%= inline_svg_tag('svg/plus_circle.svg', class:'w-6 text-placeholder_gray hover:text-lavender') %>
+  <% end %>
+  <span class="text-base tabular-nums font-manrope"><%= number_to_currency(user.balance, precision: 2) %></span>
+</div>

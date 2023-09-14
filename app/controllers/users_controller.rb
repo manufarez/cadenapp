@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[complete_profile update]
-  before_action :set_user, only: %i[update complete_profile show]
+  before_action :set_user, only: %i[update complete_profile show quick_deposit]
   before_action :ask_profile_completion, except: %i[update abandon_complete_profile]
 
   def index
@@ -41,6 +41,11 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def quick_deposit
+    @user.update(balance: @user.balance + 100_000)
+    redirect_to user_path(@user), notice: ['🤑 Money baby!', '💸 Make it rain!'].sample
   end
 
   private
