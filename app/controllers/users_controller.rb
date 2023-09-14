@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @payments = (@user.made_payments + @user.received_payments).sort_by(&:created_at)
   end
 
   def login_as

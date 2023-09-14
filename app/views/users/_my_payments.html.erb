@@ -1,7 +1,7 @@
 <h1 class="mt-6 mb-2 text-lg font-semibold"><%= current_user == @user ? 'Mis pagos' : 'Pagos' %></h1>
 <div class="flex flex-col space-y-4">
-  <% if @user.made_payments.any? %>
-    <% @user.made_payments.each do |payment| %>
+  <% if @payments.any? %>
+    <% @payments.each do |payment| %>
       <div class="flex items-center justify-between h-16 p-4 font-sans text-sm font-medium rounded-xl bg-midnight">
         <div class="flex items-center justify-between w-full">
           <div class="flex flex-col">
@@ -12,7 +12,7 @@
             <span class="text-xs text-placeholder_gray"><%= payment.cadena.name %></span>
           </div>
           <div class="flex flex-col text-right">
-            <span class="mb-1"><%= number_to_currency(payment.amount, precision: 0, unit:'$') %></span>
+            <span class="mb-1 tabular-nums"><%= payment.user == @user ? '-' : '+' %> <%= number_to_currency(payment.amount, precision: 0, unit:'$') %></span>
             <span class="text-xs font-light text-placeholder_gray"><%= payment.paid_at.strftime('%d/%m/%Y') %></span>
           </div>
         </div>
