@@ -6,7 +6,8 @@ class PaymentsController < ApplicationController
       cadena: @cadena,
       participant_id: params[:participant_id],
       amount: @cadena.installment_value,
-      user: current_user
+      user: current_user,
+      paid_at: session[:global_date] ? session[:global_date] : Time.zone.now
     )
     respond_to do |format|
       if @payment.save

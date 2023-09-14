@@ -12,40 +12,46 @@
       <%= link_to 'Crear', new_cadena_path, class: "btn-primary text-white py-3 px-4" %>
     </div>
   </div>
-  <div class="relative mb-12 overflow-x-auto border rounded-lg shadow-md border-steel_gray">
-    <table class="w-full text-sm text-left font-manrope">
-      <thead class="text-xs text-gray-200 uppercase bg-steel_gray">
-        <tr>
-          <th scope="col" class="px-6 py-4">ID</th>
-          <th scope="col" class="px-6 py-4"><%= t('cadena.name') %></th>
-          <th scope="col" class="flex justify-center px-6 py-4">
-            <%= inline_svg_tag 'svg/users.svg', class:'w-4' %>
-          </th>
-          <th scope="col" class="px-6 py-4"><%= t('cadena.state') %></th>
-          <th scope="col" class="px-6 py-4"><%= t('cadena.installments_min') %></th>
-          <th scope="col" class="px-6 py-4"><%= t('cadena.installment_value_min') %></th>
-          <th scope="col" class="px-6 py-4"><%= t('cadena.saving_goal') %></th>
-          <th scope="col" class="px-6 py-4"><%= t('cadena.start_date') %></th>
-          <th scope="col" class="px-6 py-4"><%= t('cadena.end_date') %></th>
-          <th scope="col" class="px-6 py-4"><%= t('cadena.created_at') %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @cadenas.each do |cadena| %>
-          <tr class="text-white odd:bg-transparent even:bg-gray-600/10 hover:bg-jaguar_light/50 hover:cursor-pointer" onclick="location.href='<%= url_for(cadena) %>'">
-            <td class="px-6 py-4 font-light"><%= cadena.id %></td>
-            <td class="px-6 py-4 font-medium truncate whitespace-nowrap"><%= cadena.name.truncate(14) %></td>
-            <td class="px-6 py-4 font-light text-center"><%= cadena.participants.size %>/<%= cadena.desired_installments %></td>
-            <td class="px-6 py-4 <%= cadena.status_color %>"><%= t("cadena.status.#{cadena.status}") %></td>
-            <td class="px-6 py-4 font-light"><%= cadena.desired_installments %></td>
-            <td class="px-6 py-4 font-light"><%= number_to_currency(cadena.installment_value, precision: 0, unit: '') %></td>
-            <td class="px-6 py-4 font-light"><%= number_to_currency(cadena.saving_goal, precision: 0, unit:'') %></td>
-            <td class="px-6 py-4 font-light"><%= cadena.start_date.strftime('%d/%m/%y') %></td>
-            <td class="px-6 py-4 font-light"><%= cadena.end_date.strftime('%d/%m/%y') %></td>
-            <td class="px-6 py-4 font-light"><%= cadena.created_at.strftime('%d/%m/%y - %H:%M') %></td>
+  <% if @cadenas.any? %>
+    <div class="relative mb-12 overflow-x-auto border rounded-lg shadow-md border-steel_gray">
+      <table class="w-full text-sm text-left font-manrope">
+        <thead class="text-xs text-gray-200 uppercase bg-steel_gray">
+          <tr>
+            <th scope="col" class="px-6 py-4">ID</th>
+            <th scope="col" class="px-6 py-4"><%= t('cadena.name') %></th>
+            <th scope="col" class="flex justify-center px-6 py-4">
+              <%= inline_svg_tag 'svg/users.svg', class:'w-4' %>
+            </th>
+            <th scope="col" class="px-6 py-4"><%= t('cadena.state') %></th>
+            <th scope="col" class="px-6 py-4"><%= t('cadena.installments_min') %></th>
+            <th scope="col" class="px-6 py-4"><%= t('cadena.installment_value_min') %></th>
+            <th scope="col" class="px-6 py-4"><%= t('cadena.saving_goal') %></th>
+            <th scope="col" class="px-6 py-4"><%= t('cadena.start_date') %></th>
+            <th scope="col" class="px-6 py-4"><%= t('cadena.end_date') %></th>
+            <th scope="col" class="px-6 py-4"><%= t('cadena.created_at') %></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+        </thead>
+        <tbody>
+          <% @cadenas.each do |cadena| %>
+            <tr class="text-white odd:bg-transparent even:bg-gray-600/10 hover:bg-jaguar_light/50 hover:cursor-pointer" onclick="location.href='<%= url_for(cadena) %>'">
+              <td class="px-6 py-4 font-light"><%= cadena.id %></td>
+              <td class="px-6 py-4 font-medium truncate whitespace-nowrap"><%= cadena.name.truncate(14) %></td>
+              <td class="px-6 py-4 font-light text-center"><%= cadena.participants.size %>/<%= cadena.desired_installments %></td>
+              <td class="px-6 py-4 <%= cadena.status_color %>"><%= t("cadena.status.#{cadena.status}") %></td>
+              <td class="px-6 py-4 font-light"><%= cadena.desired_installments %></td>
+              <td class="px-6 py-4 font-light"><%= number_to_currency(cadena.installment_value, precision: 0, unit: '') %></td>
+              <td class="px-6 py-4 font-light"><%= number_to_currency(cadena.saving_goal, precision: 0, unit:'') %></td>
+              <td class="px-6 py-4 font-light"><%= cadena.start_date.strftime('%d/%m/%y') %></td>
+              <td class="px-6 py-4 font-light"><%= cadena.end_date.strftime('%d/%m/%y') %></td>
+              <td class="px-6 py-4 font-light"><%= cadena.created_at.strftime('%d/%m/%y - %H:%M') %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="flex flex-col items-center p-6 border border-gray-700 border-dashed rounded-xl">
+      <p class="my-8 font-medium text-gray-600 font-manrope"><%= t('cadena.belongs_to_none') %></p>
+    </div>
+  <% end %>
 </div>

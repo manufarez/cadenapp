@@ -91,6 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_022443) do
 
   create_table "payments", force: :cascade do |t|
     t.decimal "amount"
+    t.datetime "paid_at"
     t.bigint "cadena_id", null: false
     t.bigint "participant_id", null: false
     t.bigint "user_id", null: false
