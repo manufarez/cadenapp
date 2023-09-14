@@ -113,6 +113,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_022443) do
     t.string "identification_number"
     t.string "identification_type"
     t.string "identification_issued_at"
+    t.decimal "balance", default: "0.0"
     t.string "sex"
     t.date "dob"
     t.string "password"

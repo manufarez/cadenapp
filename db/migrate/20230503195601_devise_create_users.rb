@@ -37,6 +37,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.string :identification_number
       t.string :identification_type
       t.string :identification_issued_at
+      t.decimal :balance, default: 0
       t.string :sex
       t.date :dob
       t.string :password

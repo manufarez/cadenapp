@@ -16,6 +16,7 @@
           <th scope="col" class="px-6 py-4">E-mail</th>
           <th scope="col" class="px-6 py-4"><%= t('user.city') %></th>
           <th scope="col" class="px-6 py-4 text-center">Cadenas</th>
+          <th scope="col" class="px-6 py-4 text-center">Saldo</th>
           <th scope="col" class="px-6 py-4"><%= t('user.created_at') %></th>
           <th scope="col" class="px-6 py-4"></th>
         </tr>
@@ -28,6 +29,7 @@
             <td class="px-6 py-4 font-sans"><%= user.email %></td>
             <td class="px-6 py-4 font-light"><%= user.city %></td>
             <td class="px-6 py-4 text-center"><%= user.cadenas.size %></td>
+            <td class="px-6 py-4 text-center"><%= number_to_currency(user.balance, precision: 0) %></td>
             <td class="px-6 py-4 font-light"><%= user.created_at.strftime('%d/%m/%y') %></td>
             <td class="px-6 py-4"><%= button_to t('user.impersonate'), login_as_user_path(user), class: 'font-medium text-primary_blue hover:underline', data: {turbo: false, confirm: 'Are you sure? You will be logged out as an admin'}, onclick: "return confirm('Are you sure? You will be logged out as an admin');" %></td>
           </tr>

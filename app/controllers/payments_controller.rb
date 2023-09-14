@@ -7,10 +7,13 @@ class PaymentsController < ApplicationController
       participant_id: params[:participant_id],
       amount: @cadena.installment_value,
       user: current_user,
-      paid_at: session[:global_date] ? session[:global_date] : Time.zone.now
+      paid_at: session[:global_date] || Time.zone.now
     )
     respond_to do |format|
       if @payment.save
+        current_user.update(balance: current_user.balance - @payment.amount)
+        receiver = Participant.find(params[:participant_id]).user
+        receiver.update(balance: receiver.balance + @payment.amount)
         format.html { redirect_to cadena_url(@payment.cadena), notice: t('cadena.payment_success') }
         format.json { render json: @payment.cadena, status: :created, location: @payment.cadena }
       else

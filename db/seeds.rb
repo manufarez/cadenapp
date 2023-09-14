@@ -49,7 +49,9 @@ puts 'Creating 100 fake users...'
     city: Faker::Address.city,
     zip: Faker::Address.zip_code,
     address: Faker::Address.street_address,
-    accepts_terms: true)
+    accepts_terms: true,
+    balance: [0, 500000, 1000000, 5000000].sample
+    )
     if Rails.env.production?
       image = URI.parse('https://i.pravatar.cc/256').open
       user.avatar.attach(io: image, filename: 'avatar.png', content_type: 'image/png')
