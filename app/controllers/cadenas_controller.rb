@@ -28,9 +28,9 @@ class CadenasController < ApplicationController
   # POST /cadenas or /cadenas.json
   def create
     @cadena = Cadena.new(cadena_params)
-
     respond_to do |format|
       if @cadena.save
+        Participant.create(cadena: @cadena, user: current_user, is_admin: true) if current_user
         format.html { redirect_to cadena_url(@cadena), notice: t('notices.cadena.creation_success') }
         format.json { render :show, status: :created, location: @cadena }
       else
@@ -71,7 +71,7 @@ class CadenasController < ApplicationController
         participant.update(position: index)
       end
       @cadena.calculate_withdrawal_dates
-      @cadena.update(status: 'started', positions_assigned: true)
+      @cadena.update(status: 'started', positions_assigned: true, )
     end
 
     respond_to do |format|
