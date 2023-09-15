@@ -25,6 +25,10 @@ es:
       profile_incomplete: "Completa tu perfil para poder continuar"
     global_date: "📆 Nueva fecha: %{global_date}"
   cadena:
+    invite_more: "Invitar más"
+    approve_list: "Aprobar participantes"
+    assign_positions: "Generar orden"
+    give_up: "Darme de baja"
     withdrawal_day: "Mi dia de recaudo"
     next_payment_day: "Próximo pago"
     cadena_name: "Nombre de la cadena"
@@ -79,6 +83,8 @@ es:
     created_at: "Inscripción"
   invitation:
     new: "Nueva invitación"
+    accept: "Aceptar invitación"
+    decline: "Rechazar invitación"
   devise:
     confirmations:
       confirmed: Tu cuenta ha sido confirmada satisfactoriamente.
