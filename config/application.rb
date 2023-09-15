@@ -34,7 +34,7 @@ module Cadenapp
     #mute active storage log entries
     config.lograge.ignore_actions = [
       "ActiveStorage::DiskController#show",
-      "ActiveStorage::RepresentationsController#show"
+      "ActiveStorage::RepresentationsController#show",
     ]
     # Configuration for the application, engines, and railties goes here.
     #
