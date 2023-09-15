@@ -6,11 +6,11 @@
         <div class="flex items-center justify-between p-4 font-sans text-sm font-medium rounded-xl bg-midnight hover:bg-black_rock">
           <div class="flex items-center">
             <div class="flex mr-2">
-              <% if current_user.member_of?(cadena) %>
+              <% if current_user.member_of?(cadena) && cadena.participants.count > 2 %>
                 <%= image_tag current_user&.avatar, class:'w-8 rounded-full border-2 border-midnight' %>
                 <%= image_tag cadena.users&.second.avatar, class:'w-8 rounded-full -ml-4 border-2 border-midnight' %>
                 <%= image_tag cadena.users&.third.avatar, class:'w-8 rounded-full -ml-4 border-2 border-midnight' %>
-              <% else %>
+              <% elsif cadena.participants.count > 2 %>
                 <%= image_tag cadena.users&.first.avatar, class:'w-8 rounded-full border-2 border-midnight' %>
                 <%= image_tag cadena.users&.third.avatar, class:'w-8 rounded-full  -ml-4 border-2 border-midnight' %>
                 <%= image_tag cadena.users&.second.avatar, class:'w-8 rounded-full -ml-4 border-2 border-midnight' %>
