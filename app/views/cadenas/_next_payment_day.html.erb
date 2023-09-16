@@ -1,7 +1,8 @@
 <div class="px-2 py-1 rounded-lg bg-steel_gray">
-  <span class="text-2xl font-bold leading-tight text-lavender"><%= cadena.next_payment_day(global_date ? Date.parse(global_date) : Time.zone.today) %></span>
+  <span class="text-2xl font-bold leading-tight text-white"><%= cadena.next_payment_day(global_date ? Date.parse(global_date) : Time.zone.today) %></span>
   <div class="flex items-center justify-center">
-    <p class="mb-0.5 leading-tight text-red-500 text-sm mr-1">●</p>
+    <div class="w-1.5 h-1.5 mr-1.5 bg-pinky rounded-full pulse">
+    </div>
     <p class="text-xs leading-tight text-white"><%= t('cadena.next_payment_day') %></p>
   </div>
 </div>

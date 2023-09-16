@@ -91,3 +91,16 @@
 #date-input::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }
+
+.pulse {
+  animation: pulse-animation 1.2s infinite;
+}
+
+@keyframes pulse-animation {
+  0% {
+    box-shadow: 0 0 0 0px rgba(239, 68, 68, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 5px rgba(239, 68, 68, 0);
+  }
+}

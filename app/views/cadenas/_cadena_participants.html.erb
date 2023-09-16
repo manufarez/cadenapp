@@ -1,6 +1,6 @@
-<ul role="list" class="divide-y divide-gray-700">
+<ul role="list">
   <% cadena.participants.order(position: :asc).each do |participant| %>
-    <li class="py-3 sm:py-4 first:pt-0 last:pb-0">
+    <li class="px-5 py-4 my-3 bg-midnight rounded-2xl first:mt-0">
       <div class="flex items-center space-x-4">
         <span class="text-silver"><%= participant.position %></span>
         <div class="flex-shrink-0">
@@ -16,14 +16,16 @@
           <p class="text-sm font-medium text-white truncate">
             <%= participant.user.name %>
           </p>
-          <p class="text-sm text-gray-400 truncate">
-            <%= participant.user.email %>
-          </p>
         </div>
         <% if participant.user == cadena.admin %>
           <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Admin</p>
         <% elsif participant.user == current_user %>
           <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Yo</p>
+        <% end %>
+        <% if participant.paid_next_participant?(cadena, global_date) %>
+          <%= inline_svg_tag('svg/check.svg', class: 'w-5 text-white rounded-full bg-blue-600 p-1') %>
+        <% else %>
+          <span class="w-5 h-5 border rounded-full border-midnight_light bg-midnight_light/10"></span>
         <% end %>
       </div>
     </li>

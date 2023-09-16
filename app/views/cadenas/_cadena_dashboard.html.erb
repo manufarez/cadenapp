@@ -18,7 +18,7 @@
       <% end %>
     </div>
   </div>
-  <div data-cadena-dashboard-target="details" class="<%= @invitation.present? ? '' : 'hidden' %>">
+  <div data-cadena-dashboard-target="details" class="<%= @invitation.present? ? '' : 'hidden' %>" id="details">
     <div class="my-5 font-manrope">
       <div class="flex items-center text-2xl font-bold text-gray-300"><%= number_to_currency(cadena.desired_installments * cadena.installment_value, precision: 0  ) %>
         <%= inline_svg_tag('svg/target.svg', class:'ml-2 text-placeholder_gray') %></div>
@@ -38,7 +38,7 @@
     <div class="flex justify-between font-manrope">
       <% if cadena.started? && current_user.member_of?(cadena) %>
         <div>
-          <div class="flex items-center text-2xl font-bold text-lavender">
+          <div class="flex items-center text-2xl font-bold text-white">
             <%= current_user&.participant(cadena).withdrawal_day.strftime('%d/%m/%y') %><%= inline_svg_tag('svg/flag.svg', class:'w-4 ml-2 text-placeholder_gray') %>
           </div>
           <p class="text-sm lowercase text-placeholder_gray"><%= t('cadena.withdrawal_day') %></p>
