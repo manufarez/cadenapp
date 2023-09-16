@@ -2,7 +2,7 @@
   <div class="flex items-start justify-between">
     <h2 class="text-2xl font-bold leading-7 text-left text-white font-nimbus-ext"><%= cadena.name %></h2>
     <span data-action="click->cadena-dashboard#toggleDetails" class="status-pill <%= cadena.status_color %>" style="font-size:11px">
-      <%= t("cadena.status.#{cadena.status}") %><%= inline_svg_tag('svg/chevron_down.svg', class: 'w-3 ml-1', data: { cadena_dashboard_target: 'chevron' }) %>
+      <%= t("cadena.status.#{cadena.status}") %><%= inline_svg_tag('svg/chevron_down.svg', class: "w-3 ml-1 #{@invitation.present? ? 'rotate-180' : ''}", data: { cadena_dashboard_target: 'chevron' }) %>
     </span>
   </div>
   <div class="flex items-center justify-between mt-5" data-cadena-dashboard-target="status">
