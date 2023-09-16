@@ -1,33 +1,8 @@
-<ul role="list">
-  <% cadena.participants.order(position: :asc).each do |participant| %>
-    <li class="px-5 py-4 my-3 bg-midnight rounded-2xl first:mt-0">
-      <div class="flex items-center space-x-4">
-        <span class="text-silver"><%= participant.position %></span>
-        <div class="flex-shrink-0">
-          <% if current_user.is_admin %>
-            <%= link_to participant.user do %>
-              <%= image_tag participant.user.avatar, alt: "#{participant.user.name} avatar", class:"w-8 h-8 rounded-full hover:opacity-30" %>
-            <% end %>
-          <% else %>
-            <%= image_tag participant.user.avatar, alt: "#{participant.user.name} avatar", class:"w-8 h-8 rounded-full" %>
-          <% end %>
-        </div>
-        <div class="flex-1 min-w-0">
-          <p class="text-sm font-medium text-white truncate">
-            <%= participant.user.name %>
-          </p>
-        </div>
-        <% if participant.user == cadena.admin %>
-          <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Admin</p>
-        <% elsif participant.user == current_user %>
-          <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Yo</p>
-        <% end %>
-        <% if participant.paid_next_participant?(cadena, global_date) %>
-          <%= inline_svg_tag('svg/check.svg', class: 'w-5 text-white rounded-full bg-blue-600 p-1') %>
-        <% else %>
-          <span class="w-5 h-5 border rounded-full border-midnight_light bg-midnight_light/10"></span>
-        <% end %>
-      </div>
-    </li>
-  <% end %>
-</ul>
+<div data-controller="cadena-period">
+  <div class="flex mb-4 space-x-3">
+    <button class="px-4 py-1.5 text-sm text-white rounded-full bg-primary_blue hover:bg-blue-700" data-cadena-period-target="tab1" data-action="click->cadena-period#showPeriod">Este mes</button>
+    <button class="px-4 py-1.5 text-sm text-white rounded-full hover:bg-midnight" data-cadena-period-target="tab2" data-action="click->cadena-period#showGlobal">Ver todo</button>
+  </div>
+  <%= render 'cadenas/cadena_participants/period', cadena: cadena   %>
+  <%= render 'cadenas/cadena_participants/global', cadena: cadena %>
+</div>

@@ -5,6 +5,9 @@ class Participant < ApplicationRecord
   has_many :made_payments, class_name: 'Payment', dependent: :nullify
 
   delegate :name, to: :user
+  delegate :first_name, to: :user
+  delegate :last_name, to: :user
+  delegate :avatar, to: :user
 
   def paid_next_participant?(cadena, current_date)
     next_participant = cadena.next_paid_participant(current_date)
@@ -13,5 +16,9 @@ class Participant < ApplicationRecord
     else
       Payment.where(user: user, participant: next_participant).present?
     end
+  end
+
+  def paid_by_everyone
+    payments_expected == payments_received && payments_received.positive?
   end
 end

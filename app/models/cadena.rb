@@ -20,7 +20,7 @@ class Cadena < ApplicationRecord
   end
 
   def participants_names
-    participants.includes(:user).map { |participant| "#{participant.user.first_name} #{participant.user.last_name}" }
+    participants.includes(:user).map(&:name)
   end
 
   def participant_status
@@ -85,5 +85,10 @@ class Cadena < ApplicationRecord
 
   def next_paid_participant(current_date)
     participants.where('withdrawal_day >= ?', current_date).min_by(&:withdrawal_day)
+  end
+
+  def participants_except_next_paid(global_date)
+    next_participant = next_paid_participant(global_date)
+    participants.where.not(id: next_participant.id)
   end
 end
