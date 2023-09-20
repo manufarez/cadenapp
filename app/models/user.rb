@@ -8,8 +8,10 @@ class User < ApplicationRecord
   has_many :cadenas, through: :participants
   has_many :made_payments, class_name: 'Payment', dependent: :nullify
   has_many :received_payments, through: :participants, source: :received_payments, dependent: :nullify
+  # has_many :received_payments, class_name: 'Payment', dependent: :nullify
 
   has_one_attached :avatar
+  validates :avatar, presence: { message: "must be attached" }, on: :update
   validates :sex, presence: true, on: :update
   validates :dob, presence: true, on: :update
   validates :phone, presence: true, on: :update

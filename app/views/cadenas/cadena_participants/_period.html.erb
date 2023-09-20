@@ -1,5 +1,10 @@
 <ul role="list" data-cadena-period-target="period">
-  <li class="px-5 py-4 my-3 border border-blue-600 bg-midnight rounded-2xl first:mt-0">
+  <% if cadena.period_progression(global_date).positive? %>
+    <div class="w-full h-4 rounded-full bg-steel_gray">
+      <div class="flex items-center justify-center h-4 text-white transition-all duration-1000 ease-out bg-blue-600 rounded-full" style="font-size:10px;width:0%" data-cadena-period-target="periodProgress" data-period-progress="<%= cadena.period_progression(global_date) %>"><%= cadena.period_progression(global_date).to_i %>%</div>
+    </div>
+  <% end %>
+  <li class="h-16 px-5 py-4 my-4 border border-blue-600 bg-midnight rounded-2xl first:mt-0">
     <div class="flex items-center space-x-4">
       <div class="flex-shrink-0">
         <% if current_user.is_admin %>
@@ -22,7 +27,7 @@
       <% end %>
     </div>
   </li>
-  <p class="text-xs text-center uppercase text-placeholder_gray font-manrope">Pagan:</p>
+  <p class="text-xs text-center uppercase text-placeholder_gray font-manrope">Pagaron (<%= cadena.period_ratio(global_date) %>)</p>
   <% cadena.participants_except_next_paid(global_date).joins(:user).order(first_name: :asc).each do |participant| %>
     <li class="px-5 py-4 my-3 bg-midnight rounded-2xl first:mt-0">
       <div class="flex items-center space-x-4">

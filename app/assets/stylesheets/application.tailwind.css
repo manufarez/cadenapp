@@ -7,7 +7,7 @@
     @apply tracking-wide focus:ring-4 bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-blue-800 w-full font-medium hover:cursor-pointer rounded-xl p-4;
   }
   .btn-danger {
-    @apply tracking-wide focus:ring-4 bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-red-700 w-full font-medium hover:cursor-pointer rounded-xl p-4;
+    @apply tracking-wide focus:ring-4 text-gray-100 hover:border-red-500 border-gray-600 border hover:bg-red-600 focus:outline-none focus:ring-red-700 w-full font-medium hover:cursor-pointer rounded-xl p-4;
   }
   .btn-warning {
     @apply text-mirage bg-gradient-to-r from-mayo via-yellow-300 to-yellow-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-500 font-medium rounded-lg p-4 hover:bg-yellow-500;

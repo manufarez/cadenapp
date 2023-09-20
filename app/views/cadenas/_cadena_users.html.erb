@@ -1,7 +1,7 @@
-<ul role="list" class="divide-y divide-gray-700">
+<ul role="list">
   <% cadena.users.each do |user| %>
-    <li class="py-3 sm:py-4 first:pt-0 last:pb-0">
-      <div class="flex items-center space-x-4">
+    <li class="flex items-center h-16 px-5 my-4 bg-midnight rounded-2xl first:mt-0"">
+      <div class="flex items-center w-full space-x-4">
         <div class="flex-shrink-0">
           <% if current_user&.is_admin %>
             <%= link_to user do %>
@@ -15,8 +15,12 @@
           <p class="text-sm font-medium text-white truncate">
             <%= user.name %>
           </p>
-          <p class="text-sm text-gray-400 truncate <%= controller_name == 'cadenas' ? '' : 'blur' %>">
-            <%= controller_name == 'cadenas' ? user.email : '######@#####.com' %>
+          <p class="text-xs text-gray-400 truncate font-manrope">
+            <% if controller_name == 'cadenas' %>
+              <%= user.email %>
+            <% else %>
+              <%= user.email[0..4] %><span class="blur">###@####</span><%= user.email[-5..-1] %>
+            <% end %>
           </p>
         </div>
         <% if user == cadena.admin %>

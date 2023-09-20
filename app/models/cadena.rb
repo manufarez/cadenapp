@@ -2,7 +2,17 @@ class Cadena < ApplicationRecord
   has_many :participants, dependent: :nullify
   has_many :invitations, dependent: :destroy
   has_many :users, through: :participants
+  has_many :payments, dependent: :nullify
   before_save :set_status, :set_saving_goal
+  validates :desired_participants, presence: true
+  validates :desired_installments, presence: true
+  validates :name, presence: true
+  validates :periodicity, presence: true
+  validates :start_date, presence: true
+  validates :end_date, presence: true
+  validates :saving_goal, presence: true
+  validates :installment_value, presence: true
+  validates :accepts_admin_terms, acceptance: { message: "You must accept the admin terms" }
   enum status: {
          pending: 'pending',
          complete: 'complete',
@@ -90,5 +100,17 @@ class Cadena < ApplicationRecord
   def participants_except_next_paid(global_date)
     next_participant = next_paid_participant(global_date)
     participants.where.not(id: next_participant.id)
+  end
+
+  def period_ratio(global_date)
+    "#{next_paid_participant(global_date).payments_received}/#{next_paid_participant(global_date).payments_expected}"
+  end
+
+  def period_progression(global_date)
+    (next_paid_participant(global_date).payments_received / next_paid_participant(global_date).payments_expected.to_f) * 100
+  end
+
+  def global_progression
+    (participants.where(payments_received: desired_installments - 1).count / participants.count.to_f) * 100
   end
 end

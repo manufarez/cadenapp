@@ -66,12 +66,14 @@
         </div>
         <div class="flex items-center mb-4 space-x-2 text-sm field text-silver">
           <%= f.check_box :accepts_terms, class:'rounded bg-steel focus:ring-0 focus:ring-offset-0 hover:cursor-pointer' %>
-          <label for="user[accepts_terms]" id="user_accepts_terms"><%= t('user.consent') %> <a class="text-primary_blue hover:underline" href="https://www.gov.co/terminos-y-condiciones" target="_blank"><%= t('user.terms&conditions') %></a></label>
+          <label for="user[accepts_terms]" id="user_accepts_terms"><%= t('user.consent') %> <a class="text-primary_blue hover:underline" href="/terms"><%= t('user.terms&conditions') %></a></label>
         </div>
         <div class="actions">
           <%= f.submit t('user.finish_profile'), class:'btn-primary' %>
         </div>
       <% end %>
+      <div class="mt-4 text-sm text-center text-silver font-manrope">No eres <%= @user.name %> ?<br>
+        <%= link_to "Desconectarse",destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?" }, class:'text-blue-600 hover:underline' %></div>
     </div>
   </div>
 </div>

@@ -69,10 +69,12 @@ puts 'Creating 10 fake cadenas...'
   cadena.desired_installments = 10
   cadena.desired_participants = 10
   cadena.installment_value = (200_000..1_000_000).step(100_000).to_a.sample
+  cadena.saving_goal = cadena.desired_installments * cadena.installment_value
   cadena.start_date = Date.today
   cadena.end_date = Date.today + cadena.desired_installments.months
   cadena.periodicity = 'monthly'
   cadena.balance = 0
+  cadena.accepts_admin_terms = true
   cadena.save
   puts "Cadena #{cadena.id} created!"
 end
@@ -94,8 +96,7 @@ users_in_groups_of_10.each_with_index do |group, i|
                                false
                              end
     participant.save
-    participant.errors
-    puts "Participant #{participant.id} created!"
+    puts "#{participant.errors}"
   end
 end
 

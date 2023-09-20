@@ -1,8 +1,8 @@
 class Participant < ApplicationRecord
-  belongs_to :user
-  belongs_to :cadena
+  belongs_to :user, optional: true
+  belongs_to :cadena, optional: true
   has_many :received_payments, class_name: 'Payment', dependent: :nullify
-  has_many :made_payments, class_name: 'Payment', dependent: :nullify
+  has_many :made_payments, through: :users, source: :made_payments, dependent: :nullify
 
   delegate :name, to: :user
   delegate :first_name, to: :user

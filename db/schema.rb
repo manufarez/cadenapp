@@ -55,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_022443) do
     t.decimal "balance"
     t.boolean "approval_requested", default: false
     t.boolean "positions_assigned", default: false
+    t.boolean "accepts_admin_terms"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -75,7 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_022443) do
 
   create_table "participants", force: :cascade do |t|
     t.bigint "cadena_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.boolean "is_admin"
     t.date "withdrawal_day"
     t.integer "position"

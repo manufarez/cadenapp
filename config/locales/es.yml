@@ -25,6 +25,8 @@ es:
       profile_incomplete: "Completa tu perfil para poder continuar"
     global_date: "📆 Nueva fecha: %{global_date}"
   cadena:
+    this_month: "Este mes"
+    this_half_month: "Esta quincena"
     invite_more: "Invitar más"
     approve_list: "Aprobar participantes"
     assign_positions: "Generar orden"
@@ -77,6 +79,7 @@ es:
     passport: "Pasaporte"
     consent: "Acepto"
     terms&conditions: "términos y condiciones"
+    admin_terms&conditions: "términos y condiciones del administrador"
     finish_profile: "Finalizar perfil"
     users: "Usuarios"
     impersonate: "Controlar"

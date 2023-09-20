@@ -27,10 +27,11 @@ class PaymentsController < ApplicationController
 
     ActiveRecord::Base.transaction do
       sender = @payment.user
-      receiver = @payment.participant.user
+      receiver = @payment.participant
 
       sender.update(balance: sender.balance - @payment.amount)
-      receiver.update(balance: receiver.balance + @payment.amount)
+      receiver.user.update(balance: receiver.user.balance + @payment.amount)
+      receiver.update(payments_received: receiver.payments_received + 1)
 
       @payment.save
     end

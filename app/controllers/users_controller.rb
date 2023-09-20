@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   end
 
   def quick_deposit
-    @user.update(balance: @user.balance + 100_000)
+    @user.update(balance: @user.balance + 500_000)
     redirect_to user_path(@user), notice: ['🤑 Money baby!', '💸 Make it rain!'].sample
   end
 

@@ -59,7 +59,7 @@
         <div class="w-full mb-4 text-center btn-primary">Editar perfil</div>
       <% end %>
       <%= link_to destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?" } do %>
-        <button type="button" class="flex items-center justify-center w-full btn-secondary h-14 text-placeholder_gray">
+        <button type="button" class="flex items-center justify-center w-full btn-secondary text-placeholder_gray">
           <span class="mr-2">Desconectarse</span>
           <%= inline_svg_tag 'svg/exit.svg', class:'w-5' %>
         </button>

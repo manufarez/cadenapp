@@ -1,4 +1,4 @@
-<%= form_with(model: cadena, class: "text-white w-full max-w-md font-manrope mx-auto", data: { controller: "cadena"}) do |form| %>
+<%= form_with(model: cadena, class: "text-white w-full max-w-md font-manrope mx-auto", data: { controller: "cadena"}) do |f| %>
   <% if cadena.errors.any? %>
     <div id="error_explanation" class="px-3 py-2 mt-3 font-medium text-red-500 rounded-lg bg-red-50">
       <h2><%= pluralize(cadena.errors.count, "error") %> prohibited this cadena from being saved:</h2>
@@ -10,34 +10,41 @@
     </div>
   <% end %>
   <div class="mb-4">
-    <%= form.text_field :name, placeholder: t('cadena.cadena_name'), class: "input w-full" %>
+    <%= f.label t('cadena.participants'), class:'text-silver text-sm' %>
+    <%= f.text_field :name, placeholder: t('cadena.cadena_name'), class: "input w-full" %>
   </div>
   <div class="mb-4">
-    <%= form.number_field :desired_participants, placeholder: t('cadena.desired_participants'), class: "input w-full", min: 12, data: {cadena_target: "participants", action:"cadena#updateInstallments cadena#updateEndDate"} %>
+    <%= f.number_field :desired_participants, placeholder: t('cadena.desired_participants'), class: "input w-full", min: 12, data: {cadena_target: "participants", action:"cadena#updateInstallments cadena#updateEndDate"} %>
+  </div>
+  <div class="flex items-end mb-4 space-x-3">
+    <div class="w-1/2">
+      <%= f.label :periodicity, t('cadena.periodicity'), class:'text-silver text-sm' %>
+      <%= f.select :periodicity, options_for_select([['Quincenal', 'bimonthly'], ['Mensual', 'monthly']]), {}, class: "block border-none rounded-xl text-white bg-steel outline-none p-4 w-full", data: {cadena_target: "periodicity", action:"cadena#updateInstallments cadena#updateEndDate"} %>
+    </div>
+    <div class="w-1/2">
+      <%= f.number_field :desired_installments, placeholder: t('cadena.installments'), class: 'input w-full', min: 12, data: {cadena_target:"installments"}, readonly: true %>
+    </div>
   </div>
   <div class="mb-4">
-    <%= form.label :periodicity, t('cadena.periodicity'), class:'text-silver text-sm' %>
-    <%= form.select :periodicity, options_for_select([['Quincenal', 'bimonthly'], ['Mensual', 'monthly']]), {}, class: "block border-none rounded-xl text-white bg-steel outline-none p-4 w-full", data: {cadena_target: "periodicity", action:"cadena#updateInstallments cadena#updateEndDate"} %>
+    <%= f.text_field :installment_value, placeholder: t('cadena.installment_value'), class: 'input w-full', min: 100000, data:{cadena_target:"installmentValue", action:"cadena#updateSavingGoal"} %>
   </div>
   <div class="mb-4">
-    <%= form.number_field :desired_installments, placeholder: t('cadena.installments'), class: 'input w-full', min: 12, data: {cadena_target:"installments"}, readonly: true %>
+    <%= f.label :start_date, t('cadena.start_date'), class:'text-silver text-sm' %>
+    <%= f.date_field :start_date, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 w-full", data:{cadena_target:"startDate", action:'cadena#updateEndDate'} %>
   </div>
   <div class="mb-4">
-    <%= form.text_field :installment_value, placeholder: t('cadena.installment_value'), class: 'input w-full', min: 100000, data:{cadena_target:"installmentValue", action:"cadena#updateSavingGoal"} %>
+    <%= f.label :end_date, t('cadena.end_date'), class:'text-silver text-sm' %>
+    <%= f.date_field :end_date, readonly: true, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 w-full hover:cursor-not-allowed", data:{cadena_target:"endDate"} %>
   </div>
   <div class="mb-4">
-    <%= form.label :start_date, t('cadena.start_date'), class:'text-silver text-sm' %>
-    <%= form.date_field :start_date, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 w-full", data:{cadena_target:"startDate", action:'cadena#updateEndDate'} %>
+    <%= f.label :saving_goal, t('cadena.saving_goal'), class:'text-silver text-sm' %>
+    <%= f.number_field :saving_goal, readonly: true, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 w-full hover:cursor-not-allowed", data:{cadena_target:"savingGoal"} %>
   </div>
-  <div class="mb-4">
-    <%= form.label :end_date, t('cadena.end_date'), class:'text-silver text-sm' %>
-    <%= form.date_field :end_date, readonly: true, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 w-full hover:cursor-not-allowed", data:{cadena_target:"endDate"} %>
-  </div>
-  <div class="mb-4">
-    <%= form.label :saving_goal, t('cadena.saving_goal'), class:'text-silver text-sm' %>
-    <%= form.number_field :saving_goal, readonly: true, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 w-full hover:cursor-not-allowed", data:{cadena_target:"savingGoal"} %>
+  <div class="flex items-center mb-4 space-x-2 text-sm field text-silver">
+    <%= f.check_box :accepts_admin_terms, class:'rounded bg-steel focus:ring-0 focus:ring-offset-0 hover:cursor-pointer' %>
+    <label for="user[accepts_admin_terms]" id="user_accepts_terms"><%= t('user.consent') %> <a class="text-primary_blue hover:underline" href="/terms"><%= t('user.admin_terms&conditions') %></a></label>
   </div>
   <div class="inline">
-    <%= form.submit t('cadena.create'), class: "btn-primary" %>
+    <%= f.submit t('cadena.create'), class: "btn-primary" %>
   </div>
 <% end %>

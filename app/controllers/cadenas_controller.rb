@@ -130,7 +130,8 @@ class CadenasController < ApplicationController
       :periodicity,
       :status,
       :balance,
-      :saving_goal
+      :saving_goal,
+      :accepts_admin_terms
     )
   end
 end

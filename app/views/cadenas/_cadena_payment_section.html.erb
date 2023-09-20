@@ -1,5 +1,7 @@
 <% if !current_user.paid_next_participant?(cadena, global_date) && @next_paid_participant.user != current_user %>
-  <%= button_to "Pay #{@next_paid_participant.name}", cadena_payments_path(cadena, participant_id: @next_paid_participant.id, user: current_user), class: 'btn-primary text-white mb-6' %>
+  <%= button_to cadena_payments_path(cadena, participant_id: @next_paid_participant.id, user: current_user), class: 'btn-primary text-white mb-6' do %>
+    Pagar <span class="text-white/60"><%= number_to_currency_with_k(cadena.installment_value, precision: 0) %></span> a <%= @next_paid_participant.name %>
+  <% end %>
 <% elsif @next_paid_participant.user == current_user %>
   <button disabled class="flex items-center justify-center mb-6 btn-disabled">Es tu turno, no pagas <%= inline_svg_tag('svg/check.svg', class:'w-4 ml-2 text-ciel') %></button>
 <% else %>
