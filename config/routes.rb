@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       patch :assign_positions
     end
     resources :payments, only: [:new, :create, :index]
+    get 'make_all_payments', to: 'payments#make_all_payments'
   end
   get 'terms', to: 'pages#terms', as: 'terms'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

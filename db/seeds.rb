@@ -1,12 +1,13 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+# # This file should contain all the record creation needed to seed the database with its default values.
+# # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
+# #
+# # Examples:
+# #
+# #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
+# #   Character.create(name: "Luke", movie: movies.first)
 
 time = Time.now
+
 Participant.destroy_all
 puts 'Participants destroyed!'
 Invitation.destroy_all
@@ -96,7 +97,6 @@ users_in_groups_of_10.each_with_index do |group, i|
                                false
                              end
     participant.save
-    puts "#{participant.errors}"
   end
 end
 
@@ -146,4 +146,27 @@ andre = User.new(first_name: 'André', last_name: 'Barreto', email: 'andre_barre
 andre.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'r9.jpg')), filename: 'r9.jpg', content_type: 'image/jpeg')
 andre.save
 puts "Cadenapp's admins created!"
+
+@cadena = Cadena.where(status: 'started').first
+puts "Advancing the progression of Cadena #{@cadena.id}"
+payments_controller = PaymentsController.new
+
+@cadena.participants_except_next_paid(Time.zone.now).each do |participant|
+  @payment = Payment.new(
+    cadena: @cadena,
+    participant: @cadena.next_paid_participant(Time.zone.now),
+    amount: @cadena.installment_value,
+    user: participant.user,
+    paid_at: Time.zone.now
+  )
+  if @payment.valid?
+    payments_controller.instance_variable_set(:@payment, @payment)
+    payments_controller.process_payment
+    puts "Payment successfully processed."
+  else
+    puts "Payment processing failed."
+  end
+end
+
+puts "There are :\n - #{User.all.count} users\n - #{Participant.all.count} participants \n - #{Invitation.all.count} invitations \n - #{Cadena.all.count} cadenas \n - #{Payment.all.count} payments"
 puts "Played seeds in #{Time.now - time} secs."

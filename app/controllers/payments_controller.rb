@@ -20,22 +20,34 @@ class PaymentsController < ApplicationController
     end
   end
 
-  private
-
   def process_payment
     return false unless @payment.valid?
 
     ActiveRecord::Base.transaction do
       sender = @payment.user
       receiver = @payment.participant
-
       sender.update(balance: sender.balance - @payment.amount)
       receiver.user.update(balance: receiver.user.balance + @payment.amount)
       receiver.update(payments_received: receiver.payments_received + 1)
-
       @payment.save
     end
   end
+
+  def make_all_payments
+    @cadena.unpaid_turn_participants(session[:global_date]).each do |participant|
+      @payment = Payment.new(
+        cadena: @cadena,
+        participant: @cadena.next_paid_participant(session[:global_date]),
+        amount: @cadena.installment_value,
+        user: participant.user,
+        paid_at: Time.zone.now
+      )
+      process_payment if @payment.valid?
+    end
+    redirect_to @cadena, notice: t('cadena.fast_paid')
+  end
+
+  private
 
   def find_cadena
     @cadena = Cadena.find(params[:cadena_id])

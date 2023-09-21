@@ -1,8 +1,8 @@
 class Cadena < ApplicationRecord
-  has_many :participants, dependent: :nullify
+  has_many :participants, dependent: :destroy
   has_many :invitations, dependent: :destroy
   has_many :users, through: :participants
-  has_many :payments, dependent: :nullify
+  has_many :payments, dependent: :destroy
   before_save :set_status, :set_saving_goal
   validates :desired_participants, presence: true
   validates :desired_installments, presence: true
@@ -88,9 +88,17 @@ class Cadena < ApplicationRecord
     update(status: 'started', positions_assigned: true)
   end
 
-  def next_payment_day(current_date)
-    withdrawal_dates = participants.pluck(:withdrawal_day).compact.select { |date| date >= current_date }
-    withdrawal_dates.min.strftime('%d/%m/%y') || nil
+  def next_payment_day(global_date)
+    return unless started?
+
+    withdrawal_dates = participants.pluck(:withdrawal_day).compact.select { |date| date >= global_date }
+    withdrawal_dates.min || nil
+  end
+
+  def days_to_payment(global_date)
+    return unless started?
+
+    (next_payment_day(global_date) - global_date).to_i
   end
 
   def next_paid_participant(current_date)
@@ -102,15 +110,30 @@ class Cadena < ApplicationRecord
     participants.where.not(id: next_participant.id)
   end
 
+  def unpaid_turn_participants(global_date)
+    next_participant = next_paid_participant(global_date)
+    participants
+      .where.not(id: Payment.where(participant_id: next_participant.id).pluck(:user_id))
+      .where.not(id: next_participant.id)
+  end
+
   def period_ratio(global_date)
     "#{next_paid_participant(global_date).payments_received}/#{next_paid_participant(global_date).payments_expected}"
   end
 
   def period_progression(global_date)
-    (next_paid_participant(global_date).payments_received / next_paid_participant(global_date).payments_expected.to_f) * 100
+    return "N/A" unless started?
+
+    received = next_paid_participant(global_date).payments_received
+    expected = next_paid_participant(global_date).payments_expected.to_f
+    received / expected * 100
   end
 
   def global_progression
-    (participants.where(payments_received: desired_installments - 1).count / participants.count.to_f) * 100
+    return "N/A" unless started?
+
+    received = participants.where(payments_received: desired_installments - 1).count
+    expected = participants.count.to_f
+    received / expected * 100
   end
 end

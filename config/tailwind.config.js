@@ -17,7 +17,6 @@ module.exports = {
       colors: {
         mirage: "#191A2B",
         black_rock: "#2c2c3c",
-        steel_gray: "#242533",
         midnight: "#202235",
         midnight_light: "#3d436b",
         night: "#0f172a",
@@ -36,6 +35,7 @@ module.exports = {
         sazerac: "#f5dcc5",
         silver: "#87889a",
         steel: "#242533",
+        steel_light: "#323448",
         primary_blue: "#2563eb",
         black_coral: "#585C6F",
         placeholder_gray: "#6b7280",

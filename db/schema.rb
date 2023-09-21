@@ -76,7 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_022443) do
 
   create_table "participants", force: :cascade do |t|
     t.bigint "cadena_id", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.boolean "is_admin"
     t.date "withdrawal_day"
     t.integer "position"

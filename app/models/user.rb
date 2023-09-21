@@ -4,11 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :participants, dependent: :nullify
+  has_many :participants, dependent: :destroy
   has_many :cadenas, through: :participants
-  has_many :made_payments, class_name: 'Payment', dependent: :nullify
-  has_many :received_payments, through: :participants, source: :received_payments, dependent: :nullify
-  # has_many :received_payments, class_name: 'Payment', dependent: :nullify
+  has_many :made_payments, class_name: 'Payment', dependent: :destroy
+  has_many :received_payments, through: :participants, source: :received_payments, dependent: :destroy
 
   has_one_attached :avatar
   validates :avatar, presence: { message: "must be attached" }, on: :update

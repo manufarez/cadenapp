@@ -1,9 +1,6 @@
 <div id="<%= dom_id cadena %>" class="flex flex-col w-full max-w-md mx-auto">
   <%= render 'cadenas/cadena_dashboard', cadena: cadena %>
   <% if cadena.started? && current_user.member_of?(cadena) %>
-    <%= render 'cadena_payment_section', cadena: cadena %>
-  <% end %>
-  <% if cadena.started? && current_user.member_of?(cadena) %>
     <%= render 'users/balance', user: current_user %>
   <% end %>
   <%# <div class="p-6 rounded-xl bg-black_rock"> %>

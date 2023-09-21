@@ -1,13 +1,17 @@
 class Participant < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :cadena, optional: true
-  has_many :received_payments, class_name: 'Payment', dependent: :nullify
-  has_many :made_payments, through: :users, source: :made_payments, dependent: :nullify
+  has_many :received_payments, class_name: 'Payment', dependent: :destroy
 
   delegate :name, to: :user
   delegate :first_name, to: :user
   delegate :last_name, to: :user
   delegate :avatar, to: :user
+
+  def self.find_by_name(name)
+    first_name, last_name = name.split(' ', 2)
+    joins(:user).find_by(users: { first_name: first_name, last_name: last_name })
+  end
 
   def paid_next_participant?(cadena, current_date)
     next_participant = cadena.next_paid_participant(current_date)

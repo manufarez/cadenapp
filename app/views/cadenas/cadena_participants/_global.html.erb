@@ -1,7 +1,7 @@
-<ul role="list" class="hidden" data-cadena-period-target="global">
+<ul role="list" class="hidden" data-cadena-participants-target="global">
   <% if cadena.global_progression.positive? %>
-    <div class="w-full h-4 rounded-full bg-steel_gray">
-      <div class="flex items-center justify-center h-4 text-white transition-all duration-1000 ease-out bg-blue-600 rounded-full" style="font-size:10px;width:0%" data-cadena-period-target="globalProgress" data-global-progress="<%= cadena.global_progression %>"><%= cadena.global_progression.to_i %>%</div>
+    <div class="w-full h-4 rounded-full bg-steel">
+      <div class="flex items-center justify-center h-4 text-white transition-all duration-1000 ease-out bg-blue-600 rounded-full" style="font-size:10px;width:0%" data-cadena-participants-target="globalProgress" data-global-progress="<%= cadena.global_progression %>"><%= cadena.global_progression.to_i %>%</div>
     </div>
   <% end %>
   <% cadena.participants.order(position: :asc).each do |participant| %>

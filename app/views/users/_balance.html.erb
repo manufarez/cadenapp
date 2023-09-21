@@ -1,7 +1,15 @@
-<div class="flex flex-col items-center mb-6">
+<div class="flex flex-col items-center px-4 pt-4 mb-6 shadow-inner bg-midnight rounded-2xl">
   <p class="mb-2 font-semibold text-lavender font-manrope">Saldo Cadenapp</p>
-  <%= link_to quick_deposit_path(user), data:{turbo_method: :patch}, class:'flex justify-center space-x-2 text-white' do %>
-    <%= inline_svg_tag('svg/plus_circle.svg', class:'w-6 text-placeholder_gray hover:text-lavender') %>
-    <span class="text-4xl font-bold tabular-nums font-manrope"><%= number_to_currency(user.balance, precision: 2) %></span>
+  <%= link_to quick_deposit_path(user), data:{turbo_method: :patch}, class:'flex justify-center items-center space-x-2 text-white mb-6' do %>
+    <%= inline_svg_tag('svg/plus_circle.svg', class:'w-6 text-placeholder_gray hover:text-lavender h-fit') %>
+    <span class="text-4xl font-bold tabular-nums font-manrope"
+      data-controller="balance"
+      data-balance-target="element"
+      data-balance-start-value="0"
+      data-balance-end-value="<%= user.balance %>"
+      data-balance-duration-value="800">
+    </span>
+    <span class="w-6"></span>
   <% end %>
+  <%= render 'cadenas/cadena_payment_section', cadena: @cadena %>
 </div>

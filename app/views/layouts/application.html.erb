@@ -36,6 +36,8 @@
     <main class="mb-auto">
       <%= yield %>
     </main>
-    <%= render 'shared/footer' %>
+    <% if controller_name == "pages" && action_name != "terms" %>
+      <%= render 'shared/footer' %>
+    <% end %>
   </body>
 </html>
