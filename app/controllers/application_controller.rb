@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  helper_method :global_date
+
+  def global_date
+    session[:global_date]&.to_date || Time.zone.today
+  end
 
   def login_as(user)
     sign_out(current_user) if current_user

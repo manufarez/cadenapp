@@ -29,13 +29,13 @@
           <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Yo</p>
         <% end %>
         <% if current_user&.admin_of?(cadena) && user != cadena.admin || current_user&.is_admin && user != cadena.admin %>
-          <button id="dropdownUser<%= user.id %>" data-dropdown-toggle="dropdownDotsUser<%= user.id %>" type="button" class="inline-flex items-center text-base font-semibold rounded-full bg-jaguar_light font-manrope text-silver hover:bg-gray-700 focus:ring-gray-500 focus:ring-2 focus:outline-none">
+          <button id="dropdownUser<%= user.id %>" data-dropdown-toggle="dropdownDotsUser<%= user.id %>" type="button" class="inline-flex items-center text-base font-semibold rounded-full text-midnight bg-jaguar_light font-manrope hover:bg-black_coral focus:outline-none">
             <%= inline_svg_tag "svg/dot_dropdown.svg", class: "w-5" %>
           </button>
-          <div id="dropdownDotsUser<%= user.id %>" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-fit dark:bg-gray-700 dark:divide-gray-600">
-            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
+          <div id="dropdownDotsUser<%= user.id %>" class="z-10 hidden divide-y divide-gray-600 rounded-lg shadow bg-steel_light w-fit">
+            <ul class="text-sm text-gray-200 " aria-labelledby="dropdownMenuIconHorizontalButton">
               <li>
-                <%= button_to "Eliminar", remove_user_cadena_path(cadena, user, format: :html), method: :delete, class:'block px-4 py-2 hover:bg-gray-100 mr-0 text-left w-full dark:hover:bg-gray-600 dark:hover:text-white' %>
+                <%= button_to "Eliminar", remove_user_cadena_path(cadena, user, format: :html), method: :delete, class:'block rounded-lg px-4 py-2 mr-0 text-left w-full hover:bg-jaguar_light' %>
               </li>
             </ul>
           </div>

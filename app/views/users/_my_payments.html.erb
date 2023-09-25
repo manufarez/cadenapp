@@ -3,10 +3,11 @@
   <% if @payments.any? %>
     <% @payments.each do |payment| %>
       <div class="flex items-center justify-between h-16 p-4 font-sans text-sm font-medium rounded-xl bg-midnight">
+        <%= image_tag payment.user == @user ? payment.participant.avatar : payment.user.avatar, class:'w-8 h-8 rounded-full hover:opacity-30 mr-2' %>
         <div class="flex items-center justify-between w-full">
           <div class="flex flex-col">
             <div class="flex">
-              <%= inline_svg_tag('svg/arrow_right.svg', class:'w-4') %>
+              <%= inline_svg_tag('svg/arrow_right.svg', class:"w-4 #{ payment.user == @user ? 'rotate-180 text-pinky' : 'text-primary_blue'}") %>
               <span><%= payment.user == @user ? payment.participant.name : payment.user.name %></span>
             </div>
             <span class="text-xs text-placeholder_gray"><%= payment.cadena.name %></span>

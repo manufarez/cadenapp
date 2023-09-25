@@ -7,7 +7,7 @@ class PaymentsController < ApplicationController
       participant_id: params[:participant_id],
       amount: @cadena.installment_value,
       user: current_user,
-      paid_at: session[:global_date] || Time.zone.now
+      paid_at: global_date
     )
     respond_to do |format|
       if process_payment
@@ -26,21 +26,21 @@ class PaymentsController < ApplicationController
     ActiveRecord::Base.transaction do
       sender = @payment.user
       receiver = @payment.participant
-      sender.update(balance: sender.balance - @payment.amount)
-      receiver.user.update(balance: receiver.user.balance + @payment.amount)
-      receiver.update(payments_received: receiver.payments_received + 1)
-      @payment.save
+      sender.balance -= @payment.amount
+      receiver.user.balance += @payment.amount
+      receiver.payments_received += 1
+      @payment.save && sender.save && receiver.save
     end
   end
 
   def make_all_payments
-    @cadena.unpaid_turn_participants(session[:global_date]).each do |participant|
+    @cadena.unpaid_turn_participants(global_date).each do |participant|
       @payment = Payment.new(
         cadena: @cadena,
-        participant: @cadena.next_paid_participant(session[:global_date]),
+        participant: @cadena.next_paid_participant(global_date),
         amount: @cadena.installment_value,
         user: participant.user,
-        paid_at: Time.zone.now
+        paid_at: global_date
       )
       process_payment if @payment.valid?
     end

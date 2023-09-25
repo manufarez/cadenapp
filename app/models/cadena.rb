@@ -101,8 +101,8 @@ class Cadena < ApplicationRecord
     (next_payment_day(global_date) - global_date).to_i
   end
 
-  def next_paid_participant(current_date)
-    participants.where('withdrawal_day >= ?', current_date).min_by(&:withdrawal_day)
+  def next_paid_participant(global_date)
+    participants.where('withdrawal_day >= ?', global_date).min_by(&:withdrawal_day)
   end
 
   def participants_except_next_paid(global_date)
@@ -112,9 +112,11 @@ class Cadena < ApplicationRecord
 
   def unpaid_turn_participants(global_date)
     next_participant = next_paid_participant(global_date)
-    participants
-      .where.not(id: Payment.where(participant_id: next_participant.id).pluck(:user_id))
-      .where.not(id: next_participant.id)
+    return unless next_participant
+
+    participants.reject do |user|
+      user.paid_next_participant?(self, global_date)
+    end
   end
 
   def period_ratio(global_date)

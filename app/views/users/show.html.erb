@@ -11,7 +11,7 @@
           <div class="flex items-center pl-2 pr-2.5 py-1 mr-2 text-xs text-center text-placeholder_gray border-placeholder_gray border rounded-full w-fit"><%= inline_svg_tag('svg/hash.svg', class:'w-3 text-placeholder_gray mr-1') %><%= @user.id %></div>
         <% end %>
       </div>
-      <%= image_tag @user.avatar, class:"rounded-full h-14" %>
+      <%= image_tag @user.avatar, class:"rounded-full h-14 w-14 object-cover" %>
     </div>
     <div>
       <h2 class="mb-2 text-lg font-semibold">Informaciones personales</h2>

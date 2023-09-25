@@ -60,8 +60,8 @@ class User < ApplicationRecord
     end
   end
 
-  def paid_next_participant?(cadena, current_date)
-    next_participant = cadena.next_paid_participant(current_date)
+  def paid_next_participant?(cadena, global_date)
+    next_participant = cadena.next_paid_participant(global_date)
     return false unless next_participant
 
     Payment.where(user: self, participant: next_participant).present?
