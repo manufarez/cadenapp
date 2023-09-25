@@ -1,4 +1,9 @@
 es:
+  activerecord:
+    errors:
+      models:
+        payment:
+          insufficient_funds: "⛔ Fondos insuficientes!"
   notices:
     login_to_access: "✋ Conectate para acceder a esta pagina"
     cadena:
