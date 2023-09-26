@@ -128,7 +128,7 @@ class Cadena < ApplicationRecord
 
     received = next_paid_participant(global_date).payments_received
     expected = next_paid_participant(global_date).payments_expected.to_f
-    received / expected * 100
+    (received / expected * 100).round(0)
   end
 
   def global_progression
@@ -136,6 +136,6 @@ class Cadena < ApplicationRecord
 
     received = participants.where(payments_received: desired_installments - 1).count
     expected = participants.count.to_f
-    received / expected * 100
+    (received / expected * 100).round(0)
   end
 end
