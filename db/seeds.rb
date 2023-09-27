@@ -1,3 +1,4 @@
+Rails.application.config.seeding = true
 # # This file should contain all the record creation needed to seed the database with its default values.
 # # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 # #
@@ -104,8 +105,8 @@ puts "Delete and complete random participants to make it more realistic"
 Participant.first(10).last.destroy
 Participant.last.destroy
 Cadena.all.map(&:save)
-Cadena.where(status: 'complete').sample(4).each { |cadena| cadena.update(approval_requested: true, status: 'approval_requested') }
-positions_assigned = Cadena.where(status: 'approval_requested').sample(2).each{|cadena| cadena.assign_positions}
+Cadena.where(status: 'complete').sample(4).each { |cadena| cadena.update(participants_approved: true, status: 'participants_approved') }
+positions_assigned = Cadena.where(status: 'participants_approved').sample(2).each{|cadena| cadena.assign_positions}
 
 puts 'Creating invitations for each Cadena'
 Cadena.all.each do |cadena|

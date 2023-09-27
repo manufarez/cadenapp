@@ -2,7 +2,7 @@
   <div class="flex items-center justify-between mb-6">
     <div>
       <h1 class="text-3xl font-bold leading-6 text-white font-nimbus-ext">Invitaciones</h1>
-      <span class="text-sm font-semibold uppercase text-silver hover:underline"><%= link_to @invitations.first.cadena.name, cadena_path(@invitations.first.cadena) %></span>
+      <span class="text-sm font-semibold uppercase text-silver hover:underline"><%= link_to @cadena.name, cadena_path(@cadena) %></span>
     </div>
     <%= link_to 'Nueva', new_cadena_invitation_path, class: "rounded-lg py-2 px-4 bg-blue-600 text-white block font-medium" %>
   </div>

@@ -17,7 +17,7 @@ es:
       access_forbidden: "⛔️ Usted no tiene acceso a esta cadena"
       creation_success: "✨ Cadena creada"
       update_success: "👌 Cadena actualizada"
-      request_for_approval_sent: "⚡️ Solicitud de aprobacion enviada"
+      approval_sent: "⚡️ Solicitud de aprobacion enviada"
       destroyed: "Cadena borrada"
       positions_assigned: "🪄 Orden generado!"
       user:
@@ -57,7 +57,7 @@ es:
     participants: "Participantes"
     created_at: "Creada"
     status:
-      approval_requested: "Validacion admin"
+      participants_approved: "Aprobado p/ admin"
       pending: "Incompleta"
       complete: "Completa"
       started: "Empezada"

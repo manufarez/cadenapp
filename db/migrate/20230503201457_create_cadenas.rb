@@ -11,7 +11,7 @@ class CreateCadenas < ActiveRecord::Migration[7.0]
       t.string :periodicity
       t.string :status
       t.decimal :balance
-      t.boolean :approval_requested, default: false
+      t.boolean :participants_approved, default: false
       t.boolean :positions_assigned, default: false
       t.boolean :accepts_admin_terms
       t.timestamps

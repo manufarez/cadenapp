@@ -1,5 +1,5 @@
 class CadenasController < ApplicationController
-  before_action :set_cadena, only: %i[show edit update destroy]
+  before_action :set_cadena, only: %i[show edit update destroy assign_positions]
   before_action :ask_profile_completion
 
   # GET /cadenas or /cadenas.json
@@ -30,6 +30,7 @@ class CadenasController < ApplicationController
     @cadena = Cadena.new(cadena_params)
     respond_to do |format|
       if @cadena.save
+        CadenaMailer.new_cadena_email(@cadena, current_user).deliver_now
         Participant.create(cadena: @cadena, user: current_user, is_admin: true) if current_user
         format.html { redirect_to cadena_url(@cadena), notice: t('notices.cadena.creation_success') }
         format.json { render :show, status: :created, location: @cadena }
@@ -53,25 +54,33 @@ class CadenasController < ApplicationController
     end
   end
 
-  def request_approval
+  def approve_participants
     @cadena = Cadena.find(params[:id])
-    @cadena.status = 'approval_requested'
-    @cadena.approval_requested = true
+    @cadena.status = 'participants_approved'
+    @cadena.participants_approved = true
     @cadena.save
     respond_to do |format|
-      format.html { redirect_to @cadena, notice: t('notices.cadena.request_for_approval_sent') }
+      format.html { redirect_to @cadena, notice: t('notices.cadena.approval_sent') }
+    end
+    return if Rails.application.config.seeding
+
+    @cadena.participants.reject(&:is_admin).each do |participant|
+      CadenaMailer.participants_approved_email(@cadena, participant).deliver_now
     end
   end
 
   def assign_positions
-    @cadena = Cadena.find(params[:id])
-
     ActiveRecord::Base.transaction do
       @cadena.participants.shuffle.each.with_index(1) do |participant, index|
         participant.update(position: index)
       end
       @cadena.calculate_withdrawal_dates
-      @cadena.update(status: 'started', positions_assigned: true, )
+      @cadena.update(status: 'started', positions_assigned: true)
+      unless Rails.application.config.seeding
+        @cadena.participants.reject(&:is_admin).each do |participant|
+          CadenaMailer.positions_assigned_email(@cadena, participant).deliver_now
+        end
+      end
     end
 
     respond_to do |format|

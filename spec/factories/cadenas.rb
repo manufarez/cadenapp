@@ -7,10 +7,11 @@ FactoryBot.define do
     installment_value { "9.99" }
     start_date { "2023-09-12" }
     end_date { "2023-09-12" }
-    periodicity { "MyString" }
-    status { "MyString" }
+    periodicity { "monthly" }
+    status { "pending" }
     balance { "9.99" }
-    approval_requested { false }
+    participants_approved { false }
     positions_assigned { false }
+    association :admin, factory: :user
   end
 end

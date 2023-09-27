@@ -1,6 +1,6 @@
 class InvitationsController < ApplicationController
-  before_action :set_invitation, only: %i[show edit destroy]
-  before_action :set_cadena, only: %i[new accept create]
+  before_action :set_invitation, only: %i[show destroy]
+  before_action :set_cadena, only: %i[index new accept create]
 
   # GET /invitations or /invitations.json
   def index
@@ -34,7 +34,6 @@ class InvitationsController < ApplicationController
     @invitation = Invitation.new(invitation_params.merge(cadena_id: @cadena.id, sender: current_user))
     respond_to do |format|
       if @invitation.save
-        InvitationMailer.invite_email(@invitation).deliver_now
         format.html { redirect_to cadena_invitations_url, notice: t('notices.cadena.invitation.sent') }
         format.json { render :show, status: :created, location: @invitation }
       else

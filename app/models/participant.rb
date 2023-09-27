@@ -8,6 +8,8 @@ class Participant < ApplicationRecord
   delegate :last_name, to: :user
   delegate :avatar, to: :user
 
+  after_create :send_participant_email, unless: -> { Rails.application.config.seeding }
+
   def self.find_by_name(name)
     first_name, last_name = name.split(' ', 2)
     joins(:user).find_by(users: { first_name: first_name, last_name: last_name })
@@ -24,5 +26,12 @@ class Participant < ApplicationRecord
 
   def paid_by_everyone
     payments_expected == payments_received && payments_received.positive?
+  end
+
+  private
+
+  def send_participant_email
+    CadenaMailer.new_participant_email(cadena, self).deliver_now
+    CadenaMailer.welcome_email(cadena, self).deliver_now
   end
 end

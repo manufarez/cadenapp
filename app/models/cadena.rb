@@ -16,7 +16,7 @@ class Cadena < ApplicationRecord
   enum status: {
          pending: 'pending',
          complete: 'complete',
-         approval_requested: 'approval_requested',
+         participants_approved: 'participants_approved',
          started: 'started',
          stopped: 'stopped',
          over: 'over',
@@ -49,7 +49,7 @@ class Cadena < ApplicationRecord
     status_colors = {
       'complete' => 'text-primary_blue border-blue-600',
       'pending' => 'text-pinky border-pinky',
-      'approval_requested' => 'text-mayo border-mayo',
+      'participants_approved' => 'text-mayo border-mayo',
       'started' => 'text-ciel border-ciel',
       'stopped' => 'text-red-500 border-red-500'
     }
@@ -59,11 +59,11 @@ class Cadena < ApplicationRecord
   def set_status
     self.status = if missing_participants.positive?
                     "pending"
-                  elsif missing_participants.zero? && !approval_requested && !positions_assigned
+                  elsif missing_participants.zero? && !participants_approved && !positions_assigned
                     "complete"
-                  elsif missing_participants.zero? && approval_requested && !positions_assigned
-                    "approval_requested"
-                  elsif missing_participants.zero? && approval_requested && positions_assigned
+                  elsif missing_participants.zero? && participants_approved && !positions_assigned
+                    "participants_approved"
+                  elsif missing_participants.zero? && participants_approved && positions_assigned
                     "started"
                   end
   end
