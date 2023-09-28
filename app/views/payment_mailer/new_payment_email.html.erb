@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Hello, <%= @payment.participant.name %>!</h1>
+    <p>You have received a new payment of <%= number_to_currency(@payment.amount, precision: 2) %> from <%= @payment.user.name %> in the cadena <%= @payment.cadena.name %>.</p>
+  </body>
+</html>

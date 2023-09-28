@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <p>Hello, <%= @participant.name %>!</p>
+    <p>Everyone has paid in <%= @participant.cadena.name %> for the current installment.</p>
+    <p><%= t("participant.withdrawal_day") %> : <%= @participant.withdrawal_day.strftime('%d/%m/%Y') %></p>
+    <p>Thank you for your participation, next payment is on <%= @participant.cadena.next_payment_day(@global_date) %></p>
+  </body>
+</html>
