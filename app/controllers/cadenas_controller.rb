@@ -54,18 +54,18 @@ class CadenasController < ApplicationController
     end
   end
 
-  def approve_participants
+  def start_participants_approval
     @cadena = Cadena.find(params[:id])
-    @cadena.status = 'participants_approved'
-    @cadena.participants_approved = true
+    @cadena.status = 'participants_approval'
+    @cadena.participants_approval = true
     @cadena.save
     respond_to do |format|
-      format.html { redirect_to @cadena, notice: t('notices.cadena.approval_sent') }
+      format.html { redirect_to @cadena, notice: t('notices.cadena.start_participants_approval') }
     end
     return if Rails.application.config.seeding
 
     @cadena.participants.reject(&:is_admin).each do |participant|
-      CadenaMailer.participants_approved_email(@cadena, participant).deliver_now
+      CadenaMailer.participants_approval_email(@cadena, participant).deliver_now
     end
   end
 

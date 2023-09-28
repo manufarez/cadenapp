@@ -8,7 +8,7 @@ class Payment < ApplicationRecord
 
   after_create :send_payment_email, unless: -> { Rails.application.config.seeding }
   before_destroy :decrement_payments_expected
-  after_commit :send_period_complete_email, if: :period_complete?
+  after_commit :send_period_complete_email, if: :period_complete?, unless: -> { Rails.application.config.seeding }
 
   private
 

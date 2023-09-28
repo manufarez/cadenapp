@@ -47,12 +47,12 @@ class CadenaMailer < ApplicationMailer
     )
   end
 
-  def participants_approved_email(cadena, participant)
+  def participants_approval_email(cadena, participant)
     @cadena = cadena
     @participant = participant
     mail(
       to: @participant.user.email,
-      subject: "The participants for #{@cadena.name} have been approved!",
+      subject: "The cadena #{@cadena.name} has gathered all its participants!",
       from: 'contacto@cadenapp.com',
       track_opens: true,
       message_stream: 'outbound'

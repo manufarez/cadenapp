@@ -5,7 +5,7 @@
   </head>
   <body>
     <h1>Hello, <%= @participant.name %>!</h1>
-    <p>The list of participants for <%= @cadena.name %> has been approved by <%= @cadena.admin.name %> (the admin of the cadena your in)!</p>
+    <p>The list of participants for <%= @cadena.name %> is now complete! <%= @cadena.admin.name %> (the admin of the cadena your in) will generate the order very soon.</p>
     <p>If you no longer wish to participate in the cadena, you have until <%= (Time.zone.now + 24.hours).strftime('%d/%m/%Y at %l:%M %p') %> to abandon by clicking <%= link_to "here", @cadena %></p>
   </body>
 </html>

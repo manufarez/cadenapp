@@ -10,7 +10,7 @@ FactoryBot.define do
     periodicity { "monthly" }
     status { "pending" }
     balance { "9.99" }
-    participants_approved { false }
+    participants_approval { false }
     positions_assigned { false }
     association :admin, factory: :user
   end

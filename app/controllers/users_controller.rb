@@ -12,7 +12,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @payments = (@user.made_payments + @user.received_payments).sort_by(&:created_at)
+    if @user == current_user || current_user.is_admin?
+      @payments = (@user.made_payments + @user.received_payments).sort_by(&:created_at)
+    else
+      redirect_to(current_user, notice: t('notices.user.access_forbidden'))
+    end
   end
 
   def login_as

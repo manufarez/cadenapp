@@ -3,12 +3,12 @@
     <li class="flex items-center h-16 px-5 my-4 bg-midnight rounded-2xl first:mt-0"">
       <div class="flex items-center w-full space-x-4">
         <div class="flex-shrink-0">
-          <% if current_user&.is_admin %>
-            <%= link_to user do %>
-              <%= image_tag user.avatar, alt: "#{user.name} avatar", class:"w-8 h-8 rounded-full hover:opacity-30" %>
+          <%= link_to_cond(current_user&.is_admin?, user) do %>
+            <% if user.avatar.attached? %>
+              <%= image_tag user.avatar, class: "w-8 h-8 rounded-full #{current_user&.is_admin ? 'hover:opacity-30' : ''}" %>
+            <% else %>
+              <%= image_tag 'default_avatar.png', class: "w-8 h-8 rounded-full #{current_user&.is_admin ? 'hover:opacity-30' : ''}" %>
             <% end %>
-          <% else %>
-            <%= image_tag user.avatar, alt: "#{user.name} avatar", class:"w-8 h-8 rounded-full" %>
           <% end %>
         </div>
         <div class="flex-1 min-w-0">

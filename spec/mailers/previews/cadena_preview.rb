@@ -18,15 +18,15 @@ class CadenaPreview < ActionMailer::Preview
     CadenaMailer.welcome_email(cadena, participant)
   end
 
-  def positions_assigned_preview
+  def positions_assignal_preview
     cadena = Cadena.last
     participant = cadena.participants.last
-    CadenaMailer.positions_assigned_email(cadena, participant)
+    CadenaMailer.positions_assignal_email(cadena, participant)
   end
 
-  def participants_approved_preview
+  def participants_approval_preview
     cadena = Cadena.last
     participant = cadena.participants.last
-    CadenaMailer.participants_approved_email(cadena, participant)
+    CadenaMailer.participants_approval_email(cadena, participant)
   end
 end

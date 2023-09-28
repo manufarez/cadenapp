@@ -6,15 +6,9 @@
         <div class="flex items-center justify-between p-4 font-sans text-sm font-medium rounded-xl bg-midnight hover:bg-black_rock">
           <div class="flex items-center">
             <div class="flex mr-2">
-              <% if current_user.member_of?(cadena) && cadena.participants.count > 2 %>
-                <%= image_tag current_user&.avatar, class:'w-8 rounded-full border-2 border-midnight' %>
-                <%= image_tag cadena.users&.second.avatar, class:'w-8 rounded-full -ml-4 border-2 border-midnight' %>
-                <%= image_tag cadena.users&.third.avatar, class:'w-8 rounded-full -ml-4 border-2 border-midnight' %>
-              <% elsif cadena.participants.count > 2 %>
-                <%= image_tag cadena.users&.first.avatar, class:'w-8 rounded-full border-2 border-midnight' %>
-                <%= image_tag cadena.users&.third.avatar, class:'w-8 rounded-full  -ml-4 border-2 border-midnight' %>
-                <%= image_tag cadena.users&.second.avatar, class:'w-8 rounded-full -ml-4 border-2 border-midnight' %>
-              <% end %>
+              <%= image_tag 'default_avatar.png', class:'w-8 rounded-full border-2 border-midnight' %>
+              <%= image_tag 'default_avatar.png', class:'w-8 rounded-full -ml-4 border-2 border-midnight' %>
+              <%= image_tag @user&.avatar&.attached? ? @user.avatar : 'default_avatar.png', class: 'w-8 rounded-full -ml-4 border-2 border-midnight' %>
             </div>
             <span class="mr-3"><%= cadena.name %></span>
             <% if current_user.admin_of?(cadena) || @user.admin_of?(cadena) %>

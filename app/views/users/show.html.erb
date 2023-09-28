@@ -11,7 +11,11 @@
           <div class="flex items-center pl-2 pr-2.5 py-1 mr-2 text-xs text-center text-placeholder_gray border-placeholder_gray border rounded-full w-fit"><%= inline_svg_tag('svg/hash.svg', class:'w-3 text-placeholder_gray mr-1') %><%= @user.id %></div>
         <% end %>
       </div>
-      <%= image_tag @user.avatar, class:"rounded-full h-14 w-14 object-cover" %>
+      <% if @user.avatar.attached? %>
+        <%= image_tag @user.avatar, class:"rounded-full h-14 w-14 object-cover" %>
+      <% else %>
+        <%= image_tag 'default_avatar.png', class:'rounded-full h-14 w-14 object-cover' %>
+      <% end %>
     </div>
     <div>
       <h2 class="mb-2 text-lg font-semibold">Informaciones personales</h2>
@@ -46,7 +50,7 @@
         </div>
         <div class="flex justify-between mb-4 text-sm">
           <span class="text-silver"><%= t('user.dob') %></span>
-          <span class="text-right text-primary_blue"><%= @user.dob.strftime('%d/%m/%Y') %></span>
+          <span class="text-right text-primary_blue"><%= @user&.dob&.strftime('%d/%m/%Y') %></span>
         </div>
         <div class="flex justify-between text-sm">
           <span class="text-silver"><%= t('user.age') %></span>

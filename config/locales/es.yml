@@ -17,7 +17,7 @@ es:
       access_forbidden: "⛔️ Usted no tiene acceso a esta cadena"
       creation_success: "✨ Cadena creada"
       update_success: "👌 Cadena actualizada"
-      approval_sent: "⚡️ Solicitud de aprobacion enviada"
+      start_participants_approval: "⚡️ Solicitud de aprobacion enviada"
       destroyed: "Cadena borrada"
       positions_assigned: "🪄 Orden generado!"
       user:
@@ -25,6 +25,7 @@ es:
         removed: "Usuario eliminado de la cadena"
         not_found: "Usuario no encontrado"
     user:
+      access_forbidden: "⛔️ Usted no tiene acceso a esta cuenta"
       update: "✌️ Informaciones actualizadas"
       not_admin: "Estás conectado como %{user_email}"
       profile_incomplete: "Completa tu perfil para poder continuar"
@@ -35,7 +36,7 @@ es:
     this_month: "Este mes"
     this_half_month: "Esta quincena"
     invite_more: "Invitar más"
-    approve_list: "Aprobar participantes"
+    approve_list: "Enviar confirmacion lista"
     assign_positions: "Generar orden"
     give_up: "Darme de baja"
     withdrawal_day: "Mi dia de recaudo"
@@ -57,10 +58,10 @@ es:
     participants: "Participantes"
     created_at: "Creada"
     status:
-      participants_approved: "Aprobado p/ admin"
+      participants_approval: "Verif. participantes"
       pending: "Incompleta"
       complete: "Completa"
-      started: "Empezada"
+      started: "En curso"
     payment_success: "👏 Pago exitoso!"
     fast_paid: "⚡️ Pagaste las cuotas restantes"
   user:

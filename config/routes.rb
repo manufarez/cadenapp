@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     end
     member do
       delete 'remove_user/:user_id', to: 'cadenas#remove_user', as: 'remove_user'
-      patch :approve_participants
+      patch :start_participants_approval
       patch :assign_positions
     end
     resources :payments, only: [:new, :create, :index]

@@ -6,7 +6,7 @@
   <%# <div class="p-6 rounded-xl bg-black_rock"> %>
   <div>
     <div class="flow-root">
-      <% if !current_user || cadena.pending? || cadena.complete? || cadena.participants_approved? %>
+      <% if !current_user || cadena.pending? || cadena.complete? || cadena.participants_approval? %>
         <%= render 'cadenas/cadena_users', cadena: cadena %>
       <% elsif cadena.started? %>
         <%= render 'cadenas/cadena_participants', cadena: cadena %>
