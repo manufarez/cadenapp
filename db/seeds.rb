@@ -155,7 +155,7 @@ payments_controller = PaymentsController.new
 @cadena.participants_except_next_paid(Time.zone.now).each do |participant|
   @payment = Payment.new(
     cadena: @cadena,
-    participant: @cadena.next_paid_participant(Time.zone.now),
+    participant: @cadena.next_paid_participant,
     amount: @cadena.installment_value,
     user: participant.user,
     paid_at: Time.zone.now

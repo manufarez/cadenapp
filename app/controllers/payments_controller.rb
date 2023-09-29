@@ -2,8 +2,7 @@ class PaymentsController < ApplicationController
   before_action :find_cadena
 
   def create
-    @payment = Payment.new(cadena: @cadena, participant_id: params[:participant_id], amount: @cadena.installment_value, user: current_user, paid_at: global_date)
-    @next_paid_participant = @cadena.next_paid_participant(global_date) if @cadena.started?
+    @payment = Payment.new(cadena: @cadena, participant_id: params[:participant_id], amount: @cadena.installment_value, user: current_user, paid_at: Time.zone.now)
     respond_to do |format|
       if @payment.valid?
         process_payment
@@ -28,13 +27,13 @@ class PaymentsController < ApplicationController
   end
 
   def make_all_payments
-    @cadena.unpaid_turn_participants(global_date).each do |participant|
+    @cadena.unpaid_turn_participants.each do |participant|
       @payment = Payment.new(
         cadena: @cadena,
-        participant: @cadena.next_paid_participant(global_date),
+        participant: @cadena.next_paid_participant,
         amount: @cadena.installment_value,
         user: participant.user,
-        paid_at: global_date
+        paid_at: Time.zone.now
       )
       process_payment if @payment.valid?
     end

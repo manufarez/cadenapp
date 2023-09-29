@@ -29,4 +29,14 @@ class CadenaPreview < ActionMailer::Preview
     participant = cadena.participants.last
     CadenaMailer.participants_approval_email(cadena, participant)
   end
+
+  def period_complete_email_preview
+    participant = Participant.find { |p| p.withdrawal_day && p.position }
+    CadenaMailer.period_complete_email(participant)
+  end
+
+  def cadena_over_email_preview
+    participant = Participant.find { |p| p.withdrawal_day && p.position }
+    CadenaMailer.cadena_over_email(participant)
+  end
 end

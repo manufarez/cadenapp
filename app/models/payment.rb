@@ -33,10 +33,13 @@ class Payment < ApplicationRecord
   end
 
   def period_complete?
-    cadena.started? && cadena.period_progression(Time.zone.now) >= 100
+    cadena.started? && cadena.period_progression
   end
 
   def send_period_complete_email
-    cadena.participants.each { |participant| ProgressionMailer.period_complete_email(participant).deliver_now }
+    cadena.participants.each do |participant|
+      CadenaMailer.period_complete_email(participant).deliver_now if cadena.period_progression >= 100
+      CadenaMailer.cadena_over_email(participant).deliver_now if cadena.global_progression >= 100
+    end
   end
 end

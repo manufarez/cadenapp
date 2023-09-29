@@ -1,11 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
-  helper_method :global_date
-
-  def global_date
-    session[:global_date]&.to_date || Time.zone.today
-  end
 
   def login_as(user)
     sign_out(current_user) if current_user
@@ -21,11 +16,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_date
-    session[:global_date] = Date.parse(params[:global_date])
-    redirect_back(
-      fallback_location: root_path,
-      notice: t('notices.global_date', global_date: session[:global_date].strftime('%d/%m/%y'))
-    )
+    Timecop.travel(params[:global_date])
+    redirect_back(fallback_location: root_path, notice: t("notices.global_date", global_date: Time.zone.now))
   end
 
   private

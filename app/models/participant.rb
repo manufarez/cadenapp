@@ -15,8 +15,8 @@ class Participant < ApplicationRecord
     joins(:user).find_by(users: { first_name: first_name, last_name: last_name })
   end
 
-  def paid_next_participant?(cadena, current_date)
-    next_participant = cadena.next_paid_participant(current_date)
+  def paid_next_participant?(cadena)
+    next_participant = cadena.next_paid_participant
     if next_participant == self
       true
     else

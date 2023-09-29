@@ -5,7 +5,7 @@
     </div>
   <% end %>
   <% cadena.participants.order(position: :asc).each do |participant| %>
-    <li class="h-16	px-5 flex items-center my-3 bg-midnight rounded-2xl first:mt-0 <%= cadena.next_paid_participant(global_date) == participant ? 'border border-blue-600' : '' %>">
+    <li class="h-16	px-5 flex items-center my-3 bg-midnight rounded-2xl first:mt-0 <%= cadena.next_paid_participant == participant ? 'border border-blue-600' : '' %>">
       <div class="flex items-center justify-between w-full space-x-4">
         <span class="text-silver"><%= participant.position %></span>
         <div class="flex-shrink-0">

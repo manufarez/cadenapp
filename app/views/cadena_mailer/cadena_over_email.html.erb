@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <p>Hello, <%= @participant.name %>!</p>
+    <p>The cadena <%= @participant.cadena.name %> is now over!</p>
+    <p>Through the power of peer collaboration, you have saved <%= number_to_currency(@participant.cadena.saving_goal) %>, congratulations for this success!</p>
+    <p>A big thanks to <%= @participant.cadena.participants_names.reject{|participant|participant == @participant.name}.join(", ") %> for making this work!</p>
+    <p>Thanks for flying with us, we hope to see you again very soon.</p>
+  </body>
+</html>

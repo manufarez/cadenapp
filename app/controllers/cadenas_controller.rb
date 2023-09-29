@@ -9,11 +9,9 @@ class CadenasController < ApplicationController
 
   # GET /cadenas/1 or /cadenas/1.json
   def show
-    if current_user.member_of?(@cadena) || current_user.is_admin?
-      @next_paid_participant = @cadena.next_paid_participant(global_date) if @cadena.started?
-    else
-      redirect_to root_path, alert: t('notices.cadena.access_forbidden')
-    end
+    return if current_user.member_of?(@cadena) || current_user.is_admin?
+
+    redirect_to root_path, alert: t('notices.cadena.access_forbidden')
   end
 
   # GET /cadenas/new

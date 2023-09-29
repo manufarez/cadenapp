@@ -88,46 +88,46 @@ class Cadena < ApplicationRecord
     update(status: 'started', positions_assigned: true)
   end
 
-  def next_payment_day(global_date)
+  def next_payment_date
     return unless started?
 
-    withdrawal_dates = participants.pluck(:withdrawal_day).compact.select { |date| date >= global_date }
+    withdrawal_dates = participants.pluck(:withdrawal_day).compact.select { |date| date >= Time.zone.now }
     withdrawal_dates.min || nil
   end
 
-  def days_to_payment(global_date)
+  # def subsequent_payment_date
+  #   next_payment_date + 1.day
+  # end
+
+  def days_to_payment
     return unless started?
 
-    (next_payment_day(global_date) - global_date).to_i
+    (next_payment_date - Time.zone.now.to_date).to_i
   end
 
-  def next_paid_participant(global_date)
-    participants.where('withdrawal_day >= ?', global_date).min_by(&:withdrawal_day)
+  def next_paid_participant
+    participants.where('withdrawal_day >= ?', Time.zone.now).min_by(&:withdrawal_day)
   end
 
-  def participants_except_next_paid(global_date)
-    next_participant = next_paid_participant(global_date)
-    participants.where.not(id: next_participant.id)
+  def participants_except_next_paid
+    participants.where.not(id: next_paid_participant.id)
   end
 
-  def unpaid_turn_participants(global_date)
-    next_participant = next_paid_participant(global_date)
-    return unless next_participant
+  def unpaid_turn_participants
+    return unless next_paid_participant
 
-    participants.reject do |user|
-      user.paid_next_participant?(self, global_date)
-    end
+    participants.reject { |user| user.paid_next_participant?(self) }
   end
 
-  def period_ratio(global_date)
-    "#{next_paid_participant(global_date).payments_received}/#{next_paid_participant(global_date).payments_expected}"
+  def period_ratio
+    "#{next_paid_participant.payments_received}/#{next_paid_participant.payments_expected}"
   end
 
-  def period_progression(global_date)
+  def period_progression
     return "N/A" unless started?
 
-    received = next_paid_participant(global_date).payments_received
-    expected = next_paid_participant(global_date).payments_expected.to_f
+    received = next_paid_participant.payments_received
+    expected = next_paid_participant.payments_expected.to_f
     (received / expected * 100).round(0)
   end
 

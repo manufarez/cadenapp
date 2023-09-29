@@ -58,4 +58,26 @@ class CadenaMailer < ApplicationMailer
       message_stream: 'outbound'
     )
   end
+
+  def period_complete_email(participant)
+    @participant = participant
+    mail(
+      to: @participant.user.email,
+      subject: "Everyone in #{@participant.cadena.name} has paid for this period!",
+      from: 'contacto@cadenapp.com',
+      track_opens: true,
+      message_stream: 'outbound'
+    )
+  end
+
+  def cadena_over_email(participant)
+    @participant = participant
+    mail(
+      to: @participant.user.email,
+      subject: "Everyone in #{@participant.cadena.name} has paid for this period!",
+      from: 'contacto@cadenapp.com',
+      track_opens: true,
+      message_stream: 'outbound'
+    )
+  end
 end
