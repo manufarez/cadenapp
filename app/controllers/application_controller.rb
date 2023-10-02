@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 
   def set_date
     Timecop.travel(params[:global_date])
-    redirect_back(fallback_location: root_path, notice: t("notices.global_date", global_date: Time.zone.now))
+    redirect_back(fallback_location: root_path, notice: t("notices.global_date", global_date: Time.zone.now.strftime('%d/%m/%Y')))
   end
 
   private
