@@ -94,6 +94,7 @@ class CadenasController < ApplicationController
     if participant
       participant.destroy
       @cadena.save
+      CadenaMailer.participant_removed_email(participant).deliver_now
       redirect_to cadena_path(@cadena), notice: t('notices.cadena.user.removed')
     else
       redirect_to cadena_path(@cadena), notice: t('notices.cadena.user.not_found')

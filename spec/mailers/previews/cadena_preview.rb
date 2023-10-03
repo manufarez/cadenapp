@@ -39,4 +39,9 @@ class CadenaPreview < ActionMailer::Preview
     participant = Participant.find { |p| p.withdrawal_day && p.position }
     CadenaMailer.cadena_over_email(participant)
   end
+
+  def participant_removed_email_preview
+    participant = Participant.find { |p| p.withdrawal_day && p.position }
+    CadenaMailer.participant_removed_email(participant)
+  end
 end

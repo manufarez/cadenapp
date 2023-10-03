@@ -80,4 +80,15 @@ class CadenaMailer < ApplicationMailer
       message_stream: 'outbound'
     )
   end
+
+  def participant_removed_email(participant)
+    @participant = participant
+    mail(
+      to: @participant.user.email,
+      subject: "You have been removed from the cadena #{@participant.cadena.name}",
+      from: 'contacto@cadenapp.com',
+      track_opens: true,
+      message_stream: 'outbound'
+    )
+  end
 end
