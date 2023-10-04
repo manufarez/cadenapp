@@ -91,4 +91,16 @@ class CadenaMailer < ApplicationMailer
       message_stream: 'outbound'
     )
   end
+
+  def payment_reminder_email(participant, next_paid_participant)
+    @participant = participant
+    @next_paid_participant = next_paid_participant
+    mail(
+      to: @participant.user.email,
+      subject: "It's today! Reminder to pay #{@next_paid_participant}",
+      from: 'contacto@cadenapp.com',
+      track_opens: true,
+      message_stream: 'outbound'
+    )
+  end
 end

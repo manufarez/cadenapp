@@ -1,4 +1,8 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
+  authenticate :user, ->(u) { u.is_admin? } do
+    mount Sidekiq::Web => "/sidekiq"
+  end
   get '/cadena_preview/:token', to: 'cadena_preview#show', as: 'cadena_preview'
   devise_for :users, controllers: {
     registrations: 'users/registrations'
