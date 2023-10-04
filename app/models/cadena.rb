@@ -73,7 +73,7 @@ class Cadena < ApplicationRecord
 
     participants.order(:position).each.with_index(1) do |participant, index|
       participant.update(
-        withdrawal_day: start_date + (index * periodicity_multiplier).day,
+        withdrawal_date: start_date + (index * periodicity_multiplier).day,
         payments_expected: desired_installments - 1,
         total_due: saving_goal - installment_value
       )
@@ -91,7 +91,7 @@ class Cadena < ApplicationRecord
   def next_payment_date
     return unless started?
 
-    withdrawal_dates = participants.pluck(:withdrawal_day).compact.select { |date| date >= Time.zone.now }
+    withdrawal_dates = participants.pluck(:withdrawal_date).compact.select { |date| date >= Time.zone.now }
     withdrawal_dates.min || nil
   end
 
@@ -106,7 +106,7 @@ class Cadena < ApplicationRecord
   end
 
   def next_paid_participant
-    participants.where('withdrawal_day >= ?', Time.zone.now).min_by(&:withdrawal_day)
+    participants.where('withdrawal_date >= ?', Time.zone.now).min_by(&:withdrawal_date)
   end
 
   def participants_except_next_paid

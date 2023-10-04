@@ -597,6 +597,7 @@ span.flatpickr-weekday {
   box-shadow: none;
   color: #fff;
   border-color: #2563eb;
+  border-radius: 10px;
 }
 .flatpickr-day.selected.startRange,
 .flatpickr-day.startRange.startRange,

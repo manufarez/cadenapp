@@ -6,6 +6,7 @@ export default class extends Controller {
   connect() {
     flatpickr(".global_date", {
       dateFormat: "d/m/Y",
+      defaultDate: document.getElementById("date-input").placeholder,
       locale: {
         firstDayOfWeek: 1,
         weekdays: {

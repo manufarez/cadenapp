@@ -78,7 +78,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_022443) do
     t.bigint "cadena_id", null: false
     t.bigint "user_id", null: false
     t.boolean "is_admin"
-    t.date "withdrawal_day"
+    t.date "withdrawal_date"
     t.integer "position"
     t.string "status"
     t.integer "payments_expected"

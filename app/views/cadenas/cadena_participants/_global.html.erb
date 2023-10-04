@@ -22,7 +22,7 @@
             <%= participant.name %>
           </div>
           <div class="text-xs text-placeholder_gray font-manrope <%= participant.paid_by_everyone ? 'line-through' : '' %>">
-            <%= participant.withdrawal_day.strftime('%d/%m/%Y') %>
+            <%= participant.withdrawal_date.strftime('%d/%m/%Y') %>
           </div>
         </div>
         <% if participant.user == cadena.admin %>

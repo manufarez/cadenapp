@@ -31,22 +31,22 @@ class CadenaPreview < ActionMailer::Preview
   end
 
   def period_complete_email_preview
-    participant = Participant.find { |p| p.withdrawal_day && p.position }
+    participant = Participant.find { |p| p.withdrawal_date && p.position }
     CadenaMailer.period_complete_email(participant)
   end
 
   def cadena_over_email_preview
-    participant = Participant.find { |p| p.withdrawal_day && p.position }
+    participant = Participant.find { |p| p.withdrawal_date && p.position }
     CadenaMailer.cadena_over_email(participant)
   end
 
   def participant_removed_email_preview
-    participant = Participant.find { |p| p.withdrawal_day && p.position }
+    participant = Participant.find { |p| p.withdrawal_date && p.position }
     CadenaMailer.participant_removed_email(participant)
   end
 
   def payment_reminder_email_preview
-    participant = Participant.find { |p| p.withdrawal_day && p.position }
+    participant = Participant.find { |p| p.withdrawal_date && p.position }
     next_paid_participant = participant.cadena.next_paid_participant
     CadenaMailer.payment_reminder_email(participant, next_paid_participant)
   end

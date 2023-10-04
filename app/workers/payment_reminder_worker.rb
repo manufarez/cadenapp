@@ -4,7 +4,7 @@ class PaymentReminderWorker
   include Sidekiq::Worker
 
   def perform
-    cadenas = Cadena.joins(:participants).where(participants: { withdrawal_day: Time.zone.now.to_date }).distinct
+    cadenas = Cadena.joins(:participants).where(participants: { withdrawal_date: Time.zone.now.to_date }).distinct
     return if cadenas.empty?
 
     cadenas.each do |cadena|

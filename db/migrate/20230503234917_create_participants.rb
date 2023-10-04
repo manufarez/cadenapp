@@ -4,7 +4,7 @@ class CreateParticipants < ActiveRecord::Migration[7.0]
       t.references :cadena, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
       t.boolean :is_admin
-      t.date :withdrawal_day
+      t.date :withdrawal_date
       t.integer :position
       t.string :status
       t.integer :payments_expected

@@ -152,7 +152,7 @@ puts "Cadenapp's admins created!"
 puts "Advancing the progression of Cadena #{@cadena.id}"
 payments_controller = PaymentsController.new
 
-@cadena.participants_except_next_paid(Time.zone.now).each do |participant|
+@cadena.participants_except_next_paid.each do |participant|
   @payment = Payment.new(
     cadena: @cadena,
     participant: @cadena.next_paid_participant,
