@@ -29,7 +29,7 @@
     </div>
   </li>
   <p class="text-xs text-center uppercase text-placeholder_gray font-manrope">Pagaron (<%= cadena.period_ratio %>)</p>
-  <% cadena.participants_except_next_paid.joins(:user).order(first_name: :asc).each do |participant| %>
+  <% cadena.participants_except_next_paid.sort_by { |participant| participant.paid_next_participant? ? 0 : 1 }.each do |participant| %>
     <li class="px-5 py-4 my-3 bg-midnight rounded-2xl first:mt-0">
       <div class="flex items-center space-x-4">
         <div class="flex-shrink-0">
@@ -51,7 +51,7 @@
         <% elsif participant.user == current_user %>
           <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Yo</p>
         <% end %>
-        <% if participant.paid_next_participant?(cadena) %>
+        <% if participant.paid_next_participant? %>
           <%= inline_svg_tag('svg/check.svg', class: 'w-5 text-white rounded-full bg-blue-600 p-1') %>
         <% else %>
           <span class="w-5 h-5 border rounded-full border-midnight_light bg-midnight_light/10"></span>
