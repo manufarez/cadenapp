@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def index
     if current_user.is_admin?
-      @users = User.includes(:cadenas).all
+      @users = User.includes(:made_payments, :received_payments).all
     else
       redirect_to cadenas_path, notice: t('notices.user.not_admin', user_email: current_user.email)
     end

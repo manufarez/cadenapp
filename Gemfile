@@ -97,6 +97,10 @@ group :development do
   gem 'rubocop-performance', require: false
 
   gem "letter_opener"
+
+  gem 'bullet'
+
+  gem 'rack-mini-profiler'
 end
 
 group :test do

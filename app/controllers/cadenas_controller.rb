@@ -8,7 +8,14 @@ class CadenasController < ApplicationController
   end
 
   # GET /cadenas/1 or /cadenas/1.json
+  # there's probably a problem here 'SELECT "participants".* FROM "participants" WHERE "participants"."cadena_id" = $1; ' when visiting cadena 3
   def show
+    if @cadena.started?
+      @next_paid_participant = @cadena.next_paid_participant
+      participants_except_next_paid = @cadena.participants_except_next_paid.includes(user: { avatar_attachment: :blob })
+      @except_next_paid = participants_except_next_paid.sort_by { |participant| participant.paid_next_participant? ? 0 : 1 }
+    end
+
     return if current_user.member_of?(@cadena) || current_user.is_admin?
 
     redirect_to root_path, alert: t('notices.cadena.access_forbidden')
@@ -123,7 +130,7 @@ class CadenasController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_cadena
-    @cadena = Cadena.find(params[:id])
+    @cadena = Cadena.eager_load(users: { avatar_attachment: :blob }).find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

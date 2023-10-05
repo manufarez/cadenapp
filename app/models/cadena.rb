@@ -106,7 +106,7 @@ class Cadena < ApplicationRecord
   end
 
   def next_paid_participant
-    participants.where('withdrawal_date >= ?', Time.zone.now).min_by(&:withdrawal_date)
+    participants.where('withdrawal_date >= ?', Time.zone.now).order(:withdrawal_date).first
   end
 
   def participants_except_next_paid

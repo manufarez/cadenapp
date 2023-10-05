@@ -8,28 +8,28 @@
     <div class="flex items-center justify-between w-full space-x-4">
       <div class="flex-shrink-0">
         <% if current_user.is_admin %>
-          <%= link_to cadena.next_paid_participant.user do %>
-            <%= image_tag cadena.next_paid_participant.avatar, class:"w-8 h-8 rounded-full hover:opacity-30" %>
+          <%= link_to @next_paid_participant.user do %>
+            <%= image_tag @next_paid_participant.avatar, class:"w-8 h-8 rounded-full hover:opacity-30" %>
           <% end %>
         <% else %>
-          <%= image_tag cadena.next_paid_participant.avatar, class:"w-8 h-8 rounded-full" %>
+          <%= image_tag @next_paid_participant.avatar, class:"w-8 h-8 rounded-full" %>
         <% end %>
       </div>
       <div class="flex-1 min-w-0">
         <div class="text-sm font-medium text-white truncate">
-          <%= cadena.next_paid_participant.name %>
+          <%= @next_paid_participant.name %>
         </div>
-        <div class="text-xs text-placeholder_gray"><%= cadena.next_paid_participant.withdrawal_date.strftime('%d/%m/%Y') %></div>
+        <div class="text-xs text-placeholder_gray"><%= @next_paid_participant.withdrawal_date.strftime('%d/%m/%Y') %></div>
       </div>
-      <% if cadena.next_paid_participant.user == cadena.admin %>
+      <% if @next_paid_participant.user == cadena.admin %>
         <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Admin</p>
-      <% elsif cadena.next_paid_participant.user == current_user %>
+      <% elsif @next_paid_participant.user == current_user %>
         <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Yo</p>
       <% end %>
     </div>
   </li>
   <p class="text-xs text-center uppercase text-placeholder_gray font-manrope">Pagaron (<%= cadena.period_ratio %>)</p>
-  <% cadena.participants_except_next_paid.sort_by { |participant| participant.paid_next_participant? ? 0 : 1 }.each do |participant| %>
+  <% @except_next_paid.each do |participant| %>
     <li class="px-5 py-4 my-3 bg-midnight rounded-2xl first:mt-0">
       <div class="flex items-center space-x-4">
         <div class="flex-shrink-0">
