@@ -8,13 +8,11 @@ class CadenasController < ApplicationController
   end
 
   # GET /cadenas/1 or /cadenas/1.json
-  # there's probably a problem here 'SELECT "participants".* FROM "participants" WHERE "participants"."cadena_id" = $1; ' when visiting cadena 3
   def show
-    if @cadena.started?
-      @next_paid_participant = @cadena.next_paid_participant
-      participants_except_next_paid = @cadena.participants_except_next_paid.includes(user: { avatar_attachment: :blob })
-      @except_next_paid = participants_except_next_paid.sort_by { |participant| participant.paid_next_participant? ? 0 : 1 }
-    end
+    @except_next_paid = @cadena
+                        .participants_except_next_paid
+                        .includes(user: { avatar_attachment: :blob })
+                        .sort_by { |participant| participant.paid_next_participant? ? 0 : 1 }
 
     return if current_user.member_of?(@cadena) || current_user.is_admin?
 
