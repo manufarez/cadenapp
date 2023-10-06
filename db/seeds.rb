@@ -171,3 +171,4 @@ end
 
 puts "There are :\n - #{User.all.count} users\n - #{Participant.all.count} participants \n - #{Invitation.all.count} invitations \n - #{Cadena.all.count} cadenas \n - #{Payment.all.count} payments"
 puts "Played seeds in #{Time.now - time} secs."
+Rails.application.config.seeding = false
