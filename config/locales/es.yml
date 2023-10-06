@@ -5,6 +5,9 @@ es:
         payment:
           insufficient_funds: "⛔ Fondos insuficientes!"
   notices:
+    newsletter:
+      subscribed: "💌 Gracias por inscribirte! Te tendremos informado"
+      subscription_error: "Error de inscripción"
     login_to_access: "✋ Conectate para acceder a esta pagina"
     cadena:
       invitation:

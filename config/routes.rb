@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :newsletter_subscribers
+
   get 'users/:id', to: 'users#show', as: 'user'
   get 'users/:id/abandon_complete_profile', to: 'users#abandon_complete_profile', as: 'abandon_complete_profile'
 

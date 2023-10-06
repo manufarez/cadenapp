@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
+    @lead = NewsletterSubscriber.new
   end
 
   def terms
