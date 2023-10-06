@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     get 'make_all_payments', to: 'payments#make_all_payments'
   end
   get 'terms', to: 'pages#terms', as: 'terms'
+  get 'prueba_cerrada', to: 'pages#closed_test'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

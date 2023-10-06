@@ -8,4 +8,7 @@ class PagesController < ApplicationController
 
   def terms
   end
+
+  def closed_test
+  end
 end
