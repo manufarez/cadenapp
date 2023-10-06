@@ -53,7 +53,7 @@ To run the Cadenapp locally, follow these steps:
 
 ## Custom helpers
 
-To help refactoring in some situations, we implemented an improvement on Rails' `link_to_if`method :
+To help refactoring in some situations, we implemented an improvement on Rails' `link_to_if` method :
 
 ```ruby
 def link_to_cond(condition, name, options = {}, html_options = {}, &block)
@@ -71,13 +71,14 @@ end
 
 ### Impersonating users
 
-A simple way to allow SuperAdmins to impersonate other users and have their POV. This makes `link_to login_as_user_path(@user)`handy.
+A simple way to allow SuperAdmins to impersonate other users and have their POV. This makes `link_to login_as_user_path(@user)` handy.
 
 ```ruby
-# ApplicationController
-def login_as(user)
-  sign_out(current_user) if current_user
-  sign_in(user)
+# UsersController
+def login_as
+  user = User.find(params[:id])
+  sign_in(user, scope: :user)
+  redirect_to users_path
 end
 ```
 
