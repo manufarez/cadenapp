@@ -51,7 +51,7 @@ To run the Cadenapp locally, follow these steps:
 
 ## Database design
 
-![DB schema visualization](https://drive.google.com/file/d/15AGpl4jyM7KorbV6ahPteB6XGMA_8xtV/view)
+![DB schema visualization](https://cadenapp.s3.sa-east-1.amazonaws.com/db_model.png)
 
 ## Custom helpers
 
