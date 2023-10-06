@@ -51,6 +51,8 @@ To run the Cadenapp locally, follow these steps:
 
 ## Database design
 
+-> : belongs_to
+
 ![DB schema visualization](https://cadenapp.s3.sa-east-1.amazonaws.com/db_model.png)
 
 ## Custom helpers
