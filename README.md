@@ -51,7 +51,7 @@ To run the Cadenapp locally, follow these steps:
 
 ## Database design
 
-![Alt Text](assets/images/db_model.png)
+![Alt Text](readme_images/db_model.png)
 
 ## Custom helpers
 
