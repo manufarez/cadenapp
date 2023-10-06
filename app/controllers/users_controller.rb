@@ -19,6 +19,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def login_as
+    user = User.find(params[:id])
+    sign_in(user, scope: :user)
+    redirect_to users_path
+  end
+
   def complete_profile
   end
 

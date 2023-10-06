@@ -74,8 +74,8 @@ A simple way to allow SuperAdmins to impersonate other users and have their POV.
 ```ruby
 # ApplicationController
 def login_as(user)
-	sign_out(current_user) if current_user
-	sign_in(user)
+  sign_out(current_user) if current_user
+  sign_in(user)
 end
 ```
 
@@ -105,10 +105,10 @@ Because a Cadena evolves over time (different states, amounts, roles, etc.), we 
 1. On the backend, a set_date method on the ApplicationController allow us to 'travel time' thanks to the [Timecop gem](https://github.com/travisjeffery/timecop)
 
    ```ruby
-   def set_date
-   	Timecop.travel(params[:global_date])
-   	redirect_back(fallback_location: root_path, notice: t("notices.global_date", global_date: Time.zone.now.strftime('%d/%m/%Y')))
-   end
+    def set_date
+      Timecop.travel(params[:global_date])
+      redirect_back(fallback_location: root_path, notice: t("notices.global_date", global_date: Time.zone.now.strftime('%d/%m/%Y')))
+    end
    ```
 
 2. On the frontend, a simple date selector built with [Flatpickr](https://flatpickr.js.org/) allows the SuperAdmins to change the global_date by selecting dates on a datepicker

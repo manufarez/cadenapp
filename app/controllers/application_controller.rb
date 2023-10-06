@@ -2,11 +2,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def login_as(user)
-    sign_out(current_user) if current_user
-    sign_in(user)
-  end
-
   def after_sign_in_path_for(user)
     if user.profile_complete?
       cadenas_path
