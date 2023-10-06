@@ -51,6 +51,8 @@ To run the Cadenapp locally, follow these steps:
 
 ## Database design
 
+![Alt Text](assets/images/db_model.png)
+
 ## Custom helpers
 
 To help refactoring in some situations, we implemented an improvement on Rails' `link_to_if` method :
