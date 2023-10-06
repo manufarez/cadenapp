@@ -49,20 +49,22 @@ To run the Cadenapp locally, follow these steps:
 - **SuperAdmins :** Users that have a role of `is_admin` are able to access and CRUD all the User's informations, all the Cadena's informations and their Invitations.
 - **Testing features** : see below.
 
+## Database design
+
 ## Custom helpers
 
 To help refactoring in some situations, we implemented an improvement on Rails' `link_to_if`method :
 
 ```ruby
 def link_to_cond(condition, name, options = {}, html_options = {}, &block)
-    if condition
-      link_to(name, options, html_options, &block)
-    elsif block
-      block.arity <= 1 ? capture(name, &block) : capture(name, options, html_options, &block)
-    else
-      ERB::Util.html_escape(name)
-    end
+  if condition
+    link_to(name, options, html_options, &block)
+  elsif block
+    block.arity <= 1 ? capture(name, &block) : capture(name, options, html_options, &block)
+  else
+    ERB::Util.html_escape(name)
   end
+end
 ```
 
 ## Testing features
@@ -104,20 +106,20 @@ Because a Cadena evolves over time (different states, amounts, roles, etc.), we 
 
 1. On the backend, a set_date method on the ApplicationController allow us to 'travel time' thanks to the [Timecop gem](https://github.com/travisjeffery/timecop)
 
-   ```ruby
-    def set_date
-      Timecop.travel(params[:global_date])
-      redirect_back(fallback_location: root_path, notice: t("notices.global_date", global_date: Time.zone.now.strftime('%d/%m/%Y')))
-    end
-   ```
+```ruby
+def set_date
+  Timecop.travel(params[:global_date])
+  redirect_back(fallback_location: root_path, notice: t("notices.global_date", global_date: Time.zone.now.strftime('%d/%m/%Y')))
+end
+```
 
 2. On the frontend, a simple date selector built with [Flatpickr](https://flatpickr.js.org/) allows the SuperAdmins to change the global_date by selecting dates on a datepicker
 
-   ```erb
-   <%= form_with(url: set_date_path, method: :patch, data:{controller:'flatpickr'}, id:'global-date') do |form| %>
-     <%= form.date_field :global_date, id:'date-input', class:'global_date', placeholder: Time.zone.now.strftime('%d/%m/%Y') %>
-   <% end %>
-   ```
+```erb
+<%= form_with(url: set_date_path, method: :patch, data:{controller:'flatpickr'}, id:'global-date') do |form| %>
+  <%= form.date_field :global_date, id:'date-input', class:'global_date', placeholder: Time.zone.now.strftime('%d/%m/%Y') %>
+<% end %>
+```
 
 3. We use a small Stimulus controller to set `dateFormat`, `defaultDate` and `locale` as per Flatpickr's requirements.
 
