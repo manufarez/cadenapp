@@ -9,6 +9,8 @@ export default class extends Controller {
   toggleDetails() {
     this.detailsTarget.classList.toggle("hidden");
     this.chevronTarget.classList.toggle("rotate-180");
-    this.nextpaymentTarget.classList.toggle("invisible");
+    if (this.hasNextpaymentTarget) {
+      this.nextpaymentTarget.classList.toggle("invisible");
+    }
   }
 }
