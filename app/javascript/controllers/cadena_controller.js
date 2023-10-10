@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
+import flatpickr from "flatpickr";
 
 // Connects to data-controller="cadena"
 export default class extends Controller {
@@ -16,11 +17,61 @@ export default class extends Controller {
     this.updateEndDate();
     this.updateInstallments();
     this.updateSavingGoal();
+    flatpickr(".start_date", {
+      dateFormat: "d/m/Y",
+      defaultDate: document.getElementById("date-input").placeholder,
+      locale: {
+        firstDayOfWeek: 1,
+        weekdays: {
+          shorthand: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+          longhand: [
+            "Domingo",
+            "Lunes",
+            "Martes",
+            "Miércoles",
+            "Jueves",
+            "Viernes",
+            "Sábado",
+          ],
+        },
+        months: {
+          shorthand: [
+            "Ene",
+            "Feb",
+            "Mar",
+            "Abr",
+            "May",
+            "Jun",
+            "Jul",
+            "Ago",
+            "Sep",
+            "Оct",
+            "Nov",
+            "Dic",
+          ],
+          longhand: [
+            "Enero",
+            "Febrero",
+            "Мarzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre",
+          ],
+        },
+      },
+    });
   }
 
   updateEndDate() {
     const installments = parseInt(this.installmentsTarget.value, 10);
-    const startDate = this.startDateTarget.value;
+    const startDate = this.startDateTarget.value.split("/").reverse().join("-");
+    console.log(startDate);
     const periodicity = this.periodicityTarget.value;
 
     if (installments && startDate) {

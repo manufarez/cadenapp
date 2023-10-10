@@ -30,7 +30,7 @@
   </div>
   <div class="mb-4">
     <%= f.label :start_date, t('cadena.start_date'), class:'text-silver text-sm' %>
-    <%= f.date_field :start_date, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 w-full", data:{cadena_target:"startDate", action:'cadena#updateEndDate'} %>
+    <%= f.date_field :start_date, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 w-full start_date", data:{cadena_target:"startDate", action:'cadena#updateEndDate'} %>
   </div>
   <div class="mb-4">
     <%= f.label :end_date, t('cadena.end_date'), class:'text-silver text-sm' %>

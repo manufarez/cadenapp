@@ -110,6 +110,8 @@ class Cadena < ApplicationRecord
   end
 
   def participants_except_next_paid
+    return nil unless started?
+
     participants.where.not(id: next_paid_participant.id)
   end
 
@@ -124,7 +126,7 @@ class Cadena < ApplicationRecord
   end
 
   def period_progression
-    return "N/A" unless started?
+    return 0 unless started?
 
     received = next_paid_participant.payments_received
     expected = next_paid_participant.payments_expected.to_f
@@ -132,7 +134,7 @@ class Cadena < ApplicationRecord
   end
 
   def global_progression
-    return "N/A" unless started?
+    return 0 unless started?
 
     received = participants.where(payments_received: desired_installments - 1).count
     expected = participants.count.to_f
