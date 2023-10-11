@@ -65,9 +65,7 @@ gem 'lograge'
 
 gem 'timecop'
 
-gem "sidekiq", "~> 6.5"
-
-gem "sidekiq-scheduler", "~> 5.0"
+gem 'good_job'
 
 gem 'actionview-encoded_mail_to'
 

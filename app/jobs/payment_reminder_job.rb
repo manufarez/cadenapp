@@ -1,7 +1,5 @@
-require 'sidekiq-scheduler'
-
-class PaymentReminderWorker
-  include Sidekiq::Worker
+class PaymentReminderJob < ApplicationJob
+  queue_as :default
 
   def perform
     cadenas = Cadena.joins(:participants).where(participants: { withdrawal_date: Time.zone.now.to_date }).distinct

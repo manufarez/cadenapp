@@ -1,5 +1,0 @@
-:scheduler:
-  :schedule:
-    payment_reminder_worker:
-      cron: "0 8 * * *" # Runs once everyday at 8am
-      class: PaymentReminderWorker
