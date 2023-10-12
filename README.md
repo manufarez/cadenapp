@@ -128,8 +128,6 @@ end
 
 3. We use a small Stimulus controller to set `dateFormat`, `defaultDate` and `locale` as per Flatpickr's requirements.
 
-**Caution :** some background jobs rely on `Time.zone.now`. You will not be able to future test them using our `global_date` selector because Sidekiq knows nothing about the Timecop's travel function, as it works with Redis commands, instead of the ruby environment.
-
 ## License
 
 This project is licensed under the MIT License.
