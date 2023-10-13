@@ -12,7 +12,7 @@
         <%= render "users/shared/error_messages", resource: @user %>
         <div class="flex mb-4 space-x-3">
           <% if @user.avatar.attached? %>
-            <%= image_tag @user.avatar, class:'rounded-full w-24 h-24 object-fit mx-auto' %>
+            <%= image_tag @user.avatar, class:'rounded-full w-24 h-24 object-fit mx-auto', alt:'User avatar' %>
           <% end %>
         </div>
         <div class="flex flex-col mb-4" data-controller="avatar">

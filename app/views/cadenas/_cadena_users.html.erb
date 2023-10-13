@@ -5,9 +5,9 @@
         <div class="flex-shrink-0">
           <%= link_to_cond(current_user&.is_admin?, user) do %>
             <% if user.avatar.attached? %>
-              <%= image_tag 'default_avatar.png', data:{src: url_for(user.avatar)}, class: "lazy w-8 h-8 rounded-full #{current_user&.is_admin ? 'hover:opacity-30' : ''}" %>
+              <%= image_tag 'default_avatar.png', data:{src: url_for(user.avatar)}, class: "lazy w-8 h-8 rounded-full #{current_user&.is_admin ? 'hover:opacity-30' : ''}", alt:'User avatar' %>
             <% else %>
-              <%= image_tag 'default_avatar.png', class: "w-8 h-8 rounded-full #{current_user&.is_admin ? 'hover:opacity-30' : ''}" %>
+              <%= image_tag 'default_avatar.png', class: "w-8 h-8 rounded-full #{current_user&.is_admin ? 'hover:opacity-30' : ''}", alt:'User avatar' %>
             <% end %>
           <% end %>
         </div>
@@ -29,7 +29,7 @@
           <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Yo</p>
         <% end %>
         <% if current_user&.admin_of?(cadena) && user != cadena.admin || current_user&.is_admin && user != cadena.admin %>
-          <button id="dropdownUser<%= user.id %>" data-dropdown-toggle="dropdownDotsUser<%= user.id %>" type="button" class="inline-flex items-center text-base font-semibold rounded-full text-midnight bg-jaguar_light font-manrope hover:bg-black_coral focus:outline-none">
+          <button id="dropdownUser<%= user.id %>" aria-label="dropdown" data-dropdown-toggle="dropdownDotsUser<%= user.id %>" type="button" class="inline-flex items-center text-base font-semibold rounded-full text-midnight bg-jaguar_light font-manrope hover:bg-black_coral focus:outline-none">
             <%= inline_svg_tag "svg/dot_dropdown.svg", class: "w-5" %>
           </button>
           <div id="dropdownDotsUser<%= user.id %>" class="z-10 hidden divide-y divide-gray-600 rounded-lg shadow bg-steel_light w-fit">

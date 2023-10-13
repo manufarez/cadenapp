@@ -11,9 +11,9 @@
         <div class="flex-shrink-0">
           <%= link_to_cond(current_user&.is_admin?, participant.user) do %>
             <% if participant.avatar.attached? %>
-              <%= image_tag participant.avatar,class: "w-8 h-8 rounded-full #{current_user&.is_admin ? 'hover:opacity-30' : ''}" %>
+              <%= image_tag participant.avatar, class: "w-8 h-8 rounded-full #{current_user&.is_admin ? 'hover:opacity-30' : ''}", alt:'Participant avatar' %>
             <% else %>
-              <%= image_tag 'default_avatar.png', class: "w-8 h-8 rounded-full #{current_user&.is_admin ? 'hover:opacity-30' : ''}" %>
+              <%= image_tag 'default_avatar.png', class: "w-8 h-8 rounded-full #{current_user&.is_admin ? 'hover:opacity-30' : ''}", alt:'Participant avatar' %>
             <% end %>
           <% end %>
         </div>

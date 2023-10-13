@@ -12,9 +12,9 @@
         <% end %>
       </div>
       <% if @user.avatar.attached? %>
-        <%= image_tag @user.avatar, class:"rounded-full h-14 w-14 object-cover" %>
+        <%= image_tag @user.avatar, class:"rounded-full h-14 w-14 object-cover", alt:'User avatar' %>
       <% else %>
-        <%= image_tag 'default_avatar.png', class:'rounded-full h-14 w-14 object-cover' %>
+        <%= image_tag 'default_avatar.png', class:'rounded-full h-14 w-14 object-cover', alt:'User avatar' %>
       <% end %>
     </div>
     <div>
