@@ -10,10 +10,10 @@
         <h2 class="mb-6 text-sm font-semibold text-white uppercase">Recursos</h2>
         <ul class="text-gray-400">
           <li class="mb-4">
-            <a href="https://cadenapp.com" class="hover:underline">Que es una cadena?</a>
+            <%= link_to 'FAQ', faq_path, class:'hover:underline' %>
           </li>
           <li>
-            <a href="https://cadenapp.com" class="hover:underline">Cadenapp vs. Bancos</a>
+            <%= link_to 'Asistencia', faq_path(anchor: 'help'), class:'hover:underline' %>
           </li>
         </ul>
       </div>

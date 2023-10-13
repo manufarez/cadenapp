@@ -1,0 +1,51 @@
+- question: ¿Qué es una cadena en Cadenapp?
+  answer: Es un método de financiación colaborativa en el cual un grupo de personas de confianza lanzan un fondo de ahorro rotativo en vista de cumplir un proyecto personal.
+
+- question: ¿Cuánto cuesta utilizar Cadenapp?
+  answer: El uso de Cadenapp es gratis.
+
+- question: ¿Cuál es el rol del administrador en una cadena?
+  answer: El administrador de una cadena invita a gente de confianza a participar y define los parámetros principales de la cadena como el valor total del ahorro, la duración y el número de cuotas.
+
+- question: ¿Cómo funciona el proceso de sorteo en Cadenapp?
+  answer: Es un proceso totalmente aleatorio ejecutado por un programa informático.
+
+- question: "No conozco uno de los participantes : ¿ es confiable ?"
+  answer: El éxito de una cadena está en la confianza entre los participantes. Si no conoces a un participante puedes pedirle detalles al administrador a cerca de él. Si definitivamente no te sientes seguro, es mejor no participar y retirarse.
+
+- question: ¿Qué se entiende por "objetivo de ahorro" en la aplicación?
+  answer: Es el monto total propuesto por el administrador que cada miembro de la cadena podrá recibir en su día de recaudo.
+
+- question: ¿Qué es una cuota en el contexto de Cadenapp?
+  answer: La cuota corresponde al monto total de ahorro dividido por el número de participantes. Si el monto total de ahorro es de 2.000.000 de pesos y hay 10 participantes, la cuota será de 200.000 pesos por participante en cada turno. En otras palabras es la fracción de la meta global que cada participante tiene que entregarle al participante sorteado en la fecha de pago estipulada.
+
+- question: ¿Qué significan los estados "Incompleta", "Completa" y "Verificacion participantes" en mi cadena?
+  answer: “Incompleta” significa que la cadena no cuenta con el número de miembros requeridos para poder iniciar. "Completa” significa que la cadena cuenta con el número de miembros requeridos para poder pasar a la etapa de validación. "Verificación participantes” significa que los participantes invitados en una cadena tienen que estar seguros de conocer a cada miembro invitado de la cadena. La confianza entre los miembros es un elemento fundamental para el desarrollo exitoso de las cadenas. Si un miembro genera desconfianza es mejor retirarse de la cadena.
+
+- question: ¿Cuánto tiempo dura una cadena típicamente?
+  answer: Usualmente las cadenas pueden durar entre 3 y 6 meses según los montos totales de ahorro y el número de participantes propuestos.
+
+- question: ¿Qué sucede en el día de recaudo en una cadena?
+  answer: El participante de turno recibe por parte de los otros participantes la cuota correspondiente del recaudo. Todas las cuotas suman el monto total de ahorro.
+
+- question: ¿Qué ocurre cuando una cadena llega a su fin?
+  answer: La cadena se termina. Si el administrador lo desea y el grupo de invitados lo acepta, se puede lanzar nuevamente la cadena con los mismos parámetros.
+
+- question: ¿Cuáles son mis responsabilidades como participante en una cadena?
+  answer: Tienes dos principales responsabilidades. La primera es la revisión de la composición de la cadena una vez que todos los miembros han aceptado la invitación. Es de vital importancia conocer a todos los miembros de la cadena para estar seguro de su buen desarrollo. La segunda es pagar a tiempo la cuota que le corresponde al participante de turno.
+
+- question: ¿Cómo puedo agregar fondos a mi cuenta en Cadenapp?
+  answer: Puedes agregar fondos a tu cuenta en Cadenapp con tu cuenta de ahorros a través de PSE o utilizando dinero en efectivo desde cualquier sucursal aliada.
+
+- question: ¿Cómo puedo eliminar mi cuenta si ya no deseo utilizar Cadenapp?
+  answer: Para eliminar totalmente tu cuenta y todos tus datos asociados a ella, mandanos un mensaje desde el correo que utilizas para conectarte a <a class="underline" href="mailto:%63%6f%6e%74%61%63%74%6f@%63%61%64%65%6e%61%70%70.%63%6f%6d">contacto[@]cadenapp.com.</a> Recuerda que si por cualquier motivo deseas regresar a Cadenapp tendrás que crear nuevamente una cuenta.
+
+- question: ¿Cómo puedo contactar al administrador de una de mis cadenas?
+  answer: Tienes un chat interno en la aplicación para poder escribirle directamente al administrador.
+
+- question: ¿Cómo puedo contactar a otro participante de una de mis cadenas?
+  answer: Tienes un chat interno en la aplicación para poder escribirle directamente a cualquier participante que esté en la misma cadena que tú.
+
+- question: Estoy experimentando problemas para conectarme o cambiar mis datos en mi cuenta, ¿qué debo hacer para resolverlos?
+  id: help
+  answer: Para comunicarte con el área de soporte de Cadenapp, mandanos un correo a  <a class="underline" href="mailto:%63%6f%6e%74%61%63%74%6f@%63%61%64%65%6e%61%70%70.%63%6f%6d">contacto[@]cadenapp.com.</a> Se te brindará ayuda en la mayor brevedad.

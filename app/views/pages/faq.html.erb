@@ -1,0 +1,21 @@
+<div class="max-w-4xl p-6 mx-auto mb-12 text-white">
+  <h1 class="mb-12 text-3xl font-bold tracking-tight text-center md:text-4xl font-nimbus-ext">Preguntas frecuentes</h1>
+  <div class="-my-8 divide-y divide-gray-800">
+    <% @faqs.each_with_index do |faq, index| %>
+      <details id="<%= faq['id'] %>" class="group py-8 [&_summary::-webkit-details-marker]:hidden" <%= index.positive? ? '' : 'open' %>>
+        <summary class="flex items-start justify-between text-white cursor-pointer">
+          <h2 class="mr-8 text-lg font-semibold tracking-tight font-nimbus-ext">
+            <%= faq['question'] %>
+          </h2>
+          <div class="relative -mt-1">
+            <span class="absolute font-sans text-3xl opacity-100 font-extralight group-open:opacity-0">+</span>
+            <span class="font-sans text-3xl opacity-0 font-extralight group-open:opacity-100">−</span>
+          </div>
+        </summary>
+        <p class="mt-4 mr-8 text-gray-200">
+          <%= faq['answer'].html_safe %>
+        </p>
+      </details>
+    <% end %>
+  </div>
+</div>

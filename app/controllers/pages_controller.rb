@@ -11,4 +11,8 @@ class PagesController < ApplicationController
 
   def closed_test
   end
+
+  def faq
+    @faqs = YAML.load_file(Rails.root.join("app/views/pages/faq.yml").to_s)
+  end
 end
