@@ -3,6 +3,10 @@
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = "1.0"
 
+Rails.application.config.public_file_server.headers = {
+  'Cache-Control' => "public, max-age=#{7.days.to_i}"
+}
+
 # Add additional assets to the asset load path.
 # Rails.application.config.assets.paths << Emoji.images_path
 
