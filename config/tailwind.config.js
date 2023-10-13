@@ -27,6 +27,7 @@ module.exports = {
         mayo: "#fdfe7d",
         concrete: "#f3f3f0",
         ciel: "#91dbbe",
+        lavender_light: "#e679f9",
         lavender: "#f0abfc",
         lavender_dark: "#9F65FA",
         pinky: "#f472b6",
