@@ -8,7 +8,7 @@
       Abrir cuenta
     </div>
   </div>
-  <%= image_tag 'mockup.png', class:'w-64 animate__animated animate__fadeIn', alt: "text", loading:"lazy" %>
+  <%= image_tag "mockup.png", class:'invisible w-64', onload:"this.classList.remove('invisible')" %>
 </div>
 <%= render 'shared/benefits' %>
 <%= render 'shared/newsletter' %>
