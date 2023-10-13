@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
+import LazyLoad from "vanilla-lazyload";
 
 // Connects to data-controller="cadena-participants"
 export default class extends Controller {
@@ -12,6 +13,7 @@ export default class extends Controller {
   ];
 
   connect() {
+    new LazyLoad();
     if (this.hasPeriodProgressTarget) {
       this.periodProgressTarget.style.width =
         this.periodProgressTarget.dataset.periodProgress + "%";
