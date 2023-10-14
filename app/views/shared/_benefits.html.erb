@@ -1,73 +1,41 @@
 <div class="bg-white">
   <div class="max-w-4xl pb-4 mx-auto">
-    <div class="px-8 pt-10 pb-6 space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
-      <div class="flex animate__animated animate__fadeIn animate__slow">
-        <div class="flex-shrink-0">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-night_light" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
-          </svg>
+    <div class="px-8 pt-10 pb-6 space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10 font-manrope text-night_light">
+      <div class="flex flex-col animate__animated animate__fadeIn animate__slow">
+        <div class="p-3 mb-4 text-indigo-900 rounded-lg bg-indigo-50 w-fit h-fit">
+          <%= inline_svg_tag('svg/participants.svg', class:'w-6') %>
         </div>
-        <div class="ml-4 bg-white">
-          <div class="text-2xl font-black font-manrope text-night_light">
-            Monta o únete a una cadena existente
-          </div>
-          <div class="mt-2 text-base text-jaguar">
-            <div class="trix-content">
-              <div class="text-sm text-night_light font-manrope">Inscribete gratuitamente como administrador o participante de una cadena que te permitirá ahorrar más rápidamente con tus amigos y familiares. En solo unos clicks, administra tus ahorros de manera 100% segura y transparente.</div>
-            </div>
-          </div>
+        <div class="mb-2 text-2xl font-bold leading-7 tracking-tight">
+          Monta o únete a una cadena existente
         </div>
+        <div class="font-medium">Inscribete gratuitamente como administrador o participante de una cadena que te permitirá ahorrar más rápidamente con tus amigos y familiares. En solo unos clicks, administra tus ahorros de manera segura y transparente.</div>
       </div>
-      <div class="flex animate__animated animate__fadeIn animate__slow">
-        <div class="flex-shrink-0">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-night_light" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-          </svg>
+      <div class="flex flex-col animate__animated animate__fadeIn animate__slow">
+        <div class="p-3 mb-4 text-indigo-900 rounded-lg bg-indigo-50 w-fit h-fit">
+          <%= inline_svg_tag('svg/order.svg', class:'w-6') %>
         </div>
-        <div class="ml-4 bg-white">
-          <div class="text-2xl font-black font-manrope text-night_light">
-            Participa en el sorteo de tu cadena
-          </div>
-          <div class="mt-2 text-base text-jaguar">
-            <div class="trix-content">
-              <div class="text-sm text-night_light font-manrope">El sorteo establece en tiempo real el orden en el cual cada participante podrá retirar el total de las cuotas. Cadenapp utiliza un algoritmo generador de números aleatorios llamado “justo” para que ningún participante sea favorecido en el orden de retiro.</div>
-            </div>
-          </div>
+        <div class="mb-2 text-2xl font-bold leading-7 tracking-tight">
+          Participa en el sorteo de tu cadena
         </div>
+        <div class="font-medium">El sorteo establece en tiempo real el orden en el cual cada participante podrá retirar el total de las cuotas. El orden se establece de manera aleatoria para que ningún participante sea favorecido en el orden de retiro.</div>
       </div>
-      <div class="flex animate__animated animate__fadeIn animate__slow">
-        <div class="flex-shrink-0">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-night_light" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+      <div class="flex flex-col animate__animated animate__fadeIn animate__slow">
+        <div class="p-3 mb-4 text-indigo-900 rounded-lg bg-indigo-50 w-fit h-fit">
+          <%= inline_svg_tag('svg/money.svg', class:'w-6') %>
         </div>
-        <div class="ml-4 bg-white">
-          <div class="text-2xl font-black font-manrope text-night_light">
-            Cotiza y retira hasta 10.000.000 pesos asegurados
-          </div>
-          <div class="mt-2 text-base text-jaguar">
-            <div class="trix-content">
-              <div class="text-sm text-night_light font-manrope">Cadenapp no requiere meta de inversión, ni cuenta bancaria, ni fondos mínimos! Puedes cotizar a través de PSE o directamente en efectivo. Nuestro seguro y nuestras funcionalidades de control te permiten ahorrar tranquilamente con los demás participantes.</div>
-            </div>
-          </div>
+        <div class="mb-2 text-2xl font-bold leading-7 tracking-tight">
+          Cotiza y retira hasta 10.000.000 pesos asegurados
         </div>
+        <div class="font-medium">Cadenapp no requiere meta de inversión, ni cuenta bancaria, ni fondos mínimos! Puedes cotizar a través de PSE o directamente en efectivo. Nuestro seguro y nuestras funcionalidades de control te permiten ahorrar tranquilamente con los demás participantes.</div>
       </div>
-      <div class="flex animate__animated animate__fadeIn animate__slow">
-        <div class="flex-shrink-0">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-night_light" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-          </svg>
+      <div class="flex flex-col animate__animated animate__fadeIn animate__slow">
+        <div class="p-3 mb-4 text-indigo-900 rounded-lg bg-indigo-50 w-fit h-fit">
+          <%= inline_svg_tag('svg/magic.svg', class:'w-6') %>
         </div>
-        <div class="ml-4 bg-white">
-          <div class="text-2xl font-black font-manrope text-night_light">
-            Acumula puntos y descuentos para tus futuras cadenas
-          </div>
-          <div class="mt-2 text-base text-jaguar">
-            <div class="trix-content">
-              <div class="text-sm text-night_light font-manrope">Terminaste de ahorrar con Cadenapp? Te ofrecemos un descuento para tu próxima cadena.</div>
-            </div>
-          </div>
+        <div class="mb-2 text-2xl font-bold leading-7 tracking-tight">
+          Acumula puntos y descuentos para tus futuras cadenas
         </div>
+        <div class="font-medium t">Terminaste de ahorrar con Cadenapp? Te ofrecemos un descuento para tu próxima cadena.</div>
       </div>
     </div>
   </div>

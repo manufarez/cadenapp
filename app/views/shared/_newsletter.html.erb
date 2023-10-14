@@ -1,16 +1,16 @@
-<aside class="flex flex-col items-center px-8 py-8 bg-concrete sm:p-6 lg:p-8">
+<aside class="flex flex-col items-center px-8 py-8 bg-gradient-to-t from-black/50 via-gray-900/25 to-mirage sm:p-6 lg:p-16">
   <div class="max-w-lg">
-    <h3 class="mb-3 text-xl font-black text-center font-manrope text-night_light">Inscribete en nuestra lista de espera</h3>
-    <p class="mb-5 font-medium text-md text-jaguar font-nimbus">¿Quieres recibir una notificación cuando lancemos nuestro servicio? Inscríbete y serás uno de los primeros en enterarse de las novedades sobre Cadenapp.</p>
+    <h3 class="mb-3 text-3xl font-bold tracking-tight text-center text-white font-nimbus-ext">Inscribete en la lista de espera</h3>
+    <p class="mb-5 font-medium text-white text-md font-manrope">¿Quieres recibir una notificación cuando lancemos nuestro servicio? Inscríbete y serás uno de los primeros en enterarse de las novedades sobre Cadenapp.</p>
     <%= form_for(@lead) do |f| %>
       <div class="flex mb-3">
         <div class="relative w-full mr-3">
-          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"><%= inline_svg_tag('svg/mail.svg', class:'w-5 h-5 text-gray-500') %></div>
-          <%= f.email_field :email, class:'placeholder:font-nimbus bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-night_light focus:border-night_light block w-full pl-10 p-2.5', placeholder: 'Tu correo electronico...' %>
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"><%= inline_svg_tag('svg/mail.svg', class:'w-5 h-5 text-gray-300') %></div>
+          <%= f.email_field :email, class:'placeholder:font-nimbus bg-silver/10 border border-silver/20 text-white text-sm rounded-lg focus:ring-0 focus:border-white block w-full pl-10 p-2.5', placeholder: 'Tu correo electronico...' %>
         </div>
-        <%= f.submit 'Inscribirse', class: 'font-manrope font-semibold cursor-pointer text-white bg-night_light hover:bg-night_light focus:ring-4 focus:ring-indigo-300 rounded-lg text-sm px-5 py-2.5 text-center' %>
+        <%= f.submit 'Inscribirse', class: 'font-manrope font-semibold cursor-pointer text-white bg-gradient-to-br border border-indigo-900/25 from-purple-500/20 to-lavender_dark/50 hover:cursor-pointer hover:bg-gradient-to-bl rounded-lg text-sm px-5 py-2.5 text-center' %>
       </div>
-      <div class="text-sm font-medium text-gray-500 font-nimbus">Al inscribirte, aceptas los Términos de servicio y la Política de privacidad de Cadenapp.</div>
+      <div class="text-sm font-medium text-gray-300 font-nimbus">Al inscribirte, aceptas los Términos de servicio y la Política de privacidad de Cadenapp.</div>
     <% end %>
   </div>
 </aside>

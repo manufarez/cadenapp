@@ -30,6 +30,7 @@ module.exports = {
         lavender_light: "#e679f9",
         lavender: "#f0abfc",
         lavender_dark: "#9F65FA",
+        shigo: "#583b8b",
         pinky: "#f472b6",
         apricot: "#f19288",
         ocra: "#e8d1da",
