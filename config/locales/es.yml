@@ -34,6 +34,7 @@ es:
       profile_incomplete: "Completa tu perfil para poder continuar"
     global_date: "📆 Nueva fecha: %{global_date}"
   cadena:
+    admin_terms_acceptance: "You must accept the admin terms"
     period_progress: "% periodo"
     global_progress: "% global"
     this_month: "Este mes"

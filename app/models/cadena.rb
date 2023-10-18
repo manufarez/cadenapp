@@ -12,16 +12,11 @@ class Cadena < ApplicationRecord
   validates :end_date, presence: true
   validates :saving_goal, presence: true
   validates :installment_value, presence: true
-  validates :accepts_admin_terms, acceptance: { message: "You must accept the admin terms" }
-  enum status: {
-         pending: 'pending',
-         complete: 'complete',
-         participants_approval: 'participants_approval',
-         started: 'started',
-         stopped: 'stopped',
-         over: 'over',
-         archived: 'archived'
-       },
+  validates :accepts_admin_terms, acceptance: { message: 'You must accept the admin terms' }
+  enum status: { pending: 'pending', complete: 'complete',
+                 participants_approval: 'participants_approval',
+                 started: 'started', stopped: 'stopped', over: 'over',
+                 archived: 'archived' },
        _default: 'pending'
   enum periodicity: { bimonthly: 'bimonthly', monthly: 'monthly' }, _default: 'monthly'
 
@@ -43,17 +38,6 @@ class Cadena < ApplicationRecord
 
   def set_saving_goal
     self.saving_goal = desired_installments * installment_value
-  end
-
-  def status_color
-    status_colors = {
-      'complete' => 'text-ciel border-ciel',
-      'pending' => 'text-pinky border-pinky',
-      'participants_approval' => 'text-mayo border-mayo',
-      'started' => 'text-primary_blue border-blue-600',
-      'stopped' => 'text-red-500 border-red-500'
-    }
-    status_colors[status] || ''
   end
 
   def set_status

@@ -3,13 +3,11 @@ module ApplicationHelper
     "#{number_to_currency(number / 1000.0, options)}k"
   end
 
-  def link_to_cond(condition, name, options = {}, html_options = {}, &block)
-    if condition
-      link_to(name, options, html_options, &block)
-    elsif block
-      block.arity <= 1 ? capture(name, &block) : capture(name, options, html_options, &block)
+  def link_to_cond(cond, *args, &block)
+    if cond
+      link_to(*args, &block)
     else
-      ERB::Util.html_escape(name)
+      capture(&block)
     end
   end
 end
