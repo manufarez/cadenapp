@@ -153,6 +153,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_162435) do
 
   create_table "newsletter_subscribers", force: :cascade do |t|
     t.string "email", null: false
+    t.datetime "unsubscribed_at"
     t.string "ip_address"
     t.string "user_agent"
     t.bigint "user_id"
