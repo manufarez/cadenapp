@@ -1,107 +1,46 @@
+---
 es:
   activerecord:
     errors:
       models:
         payment:
-          insufficient_funds: "⛔ Fondos insuficientes!"
-  notices:
-    newsletter:
-      subscribed: "💌 Gracias por inscribirte! Te tendremos informado"
-      subscription_error: "Error de inscripción"
-    login_to_access: "✋ Conectate para acceder a esta pagina"
-    cadena:
-      invitation:
-        sent: "🚀 Invitacion enviada!"
-        error: "Error de envio"
-        welcome: "🪩 Bienvenido a la cadena!"
-        token_error: "👾 El codigo de su invitacion no es valido"
-        expired: "Esta invitacion ya ha sido aceptada"
-        destroyed: "La invitacion ha sido eliminada"
-      access_forbidden: "⛔️ Usted no tiene acceso a esta cadena"
-      creation_success: "✨ Cadena creada"
-      update_success: "👌 Cadena actualizada"
-      start_participants_approval: "⚡️ Solicitud de aprobacion enviada"
-      destroyed: "Cadena borrada"
-      positions_assigned: "🪄 Orden generado!"
-      user:
-        update: ""
-        removed: "Usuario eliminado de la cadena"
-        not_found: "Usuario no encontrado"
-    user:
-      access_forbidden: "⛔️ Usted no tiene acceso a esta cuenta"
-      update: "✌️ Informaciones actualizadas"
-      not_admin: "Estás conectado como %{user_email}"
-      profile_incomplete: "Completa tu perfil para poder continuar"
-    global_date: "📆 Nueva fecha: %{global_date}"
+          insufficient_funds: ⛔ Fondos insuficientes!
   cadena:
-    admin_terms_acceptance: "You must accept the admin terms"
-    period_progress: "% periodo"
+    admin_terms_acceptance: You must accept the admin terms
+    approve_list: Enviar confirmacion lista
+    assign_positions: Generar orden
+    belongs_to_none: No perteneces a ninguna cadena
+    cadena_name: Nombre de la cadena
+    create: Crear
+    created_at: Creada
+    desired_participants: Numero de participantes
+    end_date: Fecha de fin
+    fast_paid: ⚡️ Pagaste las cuotas restantes
+    give_up: Darme de baja
     global_progress: "% global"
-    this_month: "Este mes"
-    this_half_month: "Esta quincena"
-    invite_more: "Invitar más"
-    approve_list: "Enviar confirmacion lista"
-    assign_positions: "Generar orden"
-    give_up: "Darme de baja"
-    my_withdrawal_date: "Mi dia de recaudo"
-    withdrawal_date: "Dia de recaudo"
-    next_payment_date: "Próximo pago"
-    cadena_name: "Nombre de la cadena"
-    name: "Nombre"
-    state: "Estado"
-    desired_participants: "Numero de participantes"
-    periodicity: "Frecuencia"
-    installments_min: "Cuotas"
-    installments: "Numero de cuotas"
-    installment_value: "Valor de cada cuota"
-    installment_value_min: "Valor cuota"
-    start_date: "Fecha de inicio"
-    end_date: "Fecha de fin"
-    saving_goal: "Objetivo de ahorro"
-    create: "Crear"
-    belongs_to_none: "No perteneces a ninguna cadena"
-    participants: "Participantes"
-    created_at: "Creada"
+    installment_value: Valor de cada cuota
+    installment_value_min: Valor cuota
+    installments: Numero de cuotas
+    installments_min: Cuotas
+    invite_more: Invitar más
+    my_withdrawal_date: Mi dia de recaudo
+    name: Nombre
+    next_payment_date: Próximo pago
+    participants: Participantes
+    payment_success: 👏 Pago exitoso!
+    period_progress: "% periodo"
+    periodicity: Frecuencia
+    saving_goal: Objetivo de ahorro
+    start_date: Fecha de inicio
+    state: Estado
     status:
-      participants_approval: "Verif. participantes"
-      pending: "Incompleta"
-      complete: "Completa"
-      started: "En curso"
-    payment_success: "👏 Pago exitoso!"
-    fast_paid: "⚡️ Pagaste las cuotas restantes"
-  user:
-    name: "Nombre"
-    first_name: "Nombre"
-    last_name: "Apellido"
-    email: "Correo electrónico"
-    age: "Edad"
-    complete_profile: "Completar perfil"
-    profile_pic: "Foto de perfil"
-    sex: "Sexo"
-    dob: "Fecha de nacimiento"
-    phone: "N° de teléfono"
-    identification_type: "Identificacíon"
-    id_number: "N° de dentificacíon"
-    residence: "Domicilio"
-    address: "Dirección"
-    zip: "Código postal/ZIP"
-    city: "Ciudad"
-    other: "Otro"
-    upload_profile_pic: "Subir foto de perfil"
-    citizenship_card: "Cédula de ciudadanía"
-    foreigner_card: "Cédula de extranjería"
-    passport: "Pasaporte"
-    consent: "Acepto"
-    terms&conditions: "términos y condiciones"
-    admin_terms&conditions: "términos y condiciones del administrador"
-    finish_profile: "Finalizar perfil"
-    users: "Usuarios"
-    impersonate: "Controlar"
-    created_at: "Inscripción"
-  invitation:
-    new: "Nueva invitación"
-    accept: "Aceptar invitación"
-    decline: "Rechazar invitación"
+      complete: Completa
+      participants_approval: Verif. participantes
+      pending: Incompleta
+      started: En curso
+    this_half_month: Esta quincena
+    this_month: Este mes
+    withdrawal_date: Dia de recaudo
   devise:
     confirmations:
       confirmed: Tu cuenta ha sido confirmada satisfactoriamente.
@@ -122,7 +61,7 @@ es:
     mailer:
       confirmation_instructions:
         action: Confirmar mi cuenta
-        greeting: "¡Bienvenido %{recipient}!"
+        greeting: ¡Bienvenido %{recipient}!
         instruction: "Usted puede confirmar el correo electrónico de su cuenta a través de este enlace:"
         subject: Instrucciones de confirmación
       email_changed:
@@ -131,19 +70,19 @@ es:
         message_unconfirmed: Nos estamos contactando contigo para notificarte que tu correo se está cambiando a %{email}.
         subject: Email cambiado
       password_change:
-        greeting: "¡Hola %{recipient}!"
+        greeting: ¡Hola %{recipient}!
         message: Lo estamos contactando para notificarle que su contraseña ha sido cambiada.
         subject: Contraseña cambiada
       reset_password_instructions:
         action: Cambiar mi contraseña
-        greeting: "¡Hola %{recipient}!"
+        greeting: ¡Hola %{recipient}!
         instruction: Alguien ha solicitado un enlace para cambiar su contraseña, lo que se puede realizar a través del siguiente enlace.
         instruction_2: Si usted no lo ha solicitado, por favor ignore este correo electrónico.
         instruction_3: Su contraseña no será cambiada hasta que usted acceda al enlace y cree una nueva.
         subject: Instrucciones de recuperación de contraseña
       unlock_instructions:
         action: Desbloquear mi cuenta
-        greeting: "¡Hola %{recipient}!"
+        greeting: ¡Hola %{recipient}!
         instruction: "Haga click en el siguiente enlace para desbloquear su cuenta:"
         message: Su cuenta ha sido bloqueada debido a una cantidad excesiva de intentos infructuosos para ingresar.
         subject: Instrucciones para desbloquear
@@ -157,7 +96,7 @@ es:
         confirm_new_password: Confirme la nueva contraseña
         new_password: Nueva contraseña
       new:
-        forgot_your_password: "¿Ha olvidado su contraseña?"
+        forgot_your_password: ¿Ha olvidado su contraseña?
         send_me_reset_password_instructions: Envíeme las instrucciones para resetear mi contraseña
       no_token: No puedes acceder a esta página si no es a través de un enlace para resetear tu contraseña. Si has llegado hasta aquí desde el email para resetear tu contraseña, por favor asegúrate de que la URL introducida está completa.
       send_instructions: Recibirás un correo con instrucciones sobre cómo resetear tu contraseña en unos pocos minutos.
@@ -165,14 +104,14 @@ es:
       updated: Se ha cambiado tu contraseña. Ya iniciaste sesión.
       updated_not_active: Tu contraseña fue cambiada.
     registrations:
-      destroyed: "¡Adiós! Tu cuenta ha sido cancelada correctamente. Esperamos verte pronto."
+      destroyed: ¡Adiós! Tu cuenta ha sido cancelada correctamente. Esperamos verte pronto.
       edit:
-        are_you_sure: "¿Está usted seguro?"
+        are_you_sure: ¿Está usted seguro?
         cancel_my_account: Anular mi cuenta
         currently_waiting_confirmation_for_email: "Actualmente esperando la confirmacion de: %{email} "
         leave_blank_if_you_don_t_want_to_change_it: dejar en blanco si no desea cambiarla
         title: Editar %{resource}
-        unhappy: "¿Disconforme?"
+        unhappy: ¿Disconforme?
         update: Actualizar
         we_need_your_current_password_to_confirm_your_changes: necesitamos su contraseña actual para confirmar los cambios
       new:
@@ -193,18 +132,80 @@ es:
     shared:
       links:
         back: Atrás
-        didn_t_receive_confirmation_instructions: "¿No ha recibido las instrucciones de confirmación?"
-        didn_t_receive_unlock_instructions: "¿No ha recibido instrucciones para desbloquear?"
-        forgot_your_password: "¿Ha olvidado su contraseña?"
+        didn_t_receive_confirmation_instructions: ¿No ha recibido las instrucciones de confirmación?
+        didn_t_receive_unlock_instructions: ¿No ha recibido instrucciones para desbloquear?
+        forgot_your_password: ¿Ha olvidado su contraseña?
         sign_in: Iniciar sesión
         sign_in_with_provider: Iniciar sesión con %{provider}
         sign_up: Registrarse
       minimum_password_length:
-        one: "(%{count} caracter como mínimo)"
-        other: "(%{count} caracteres como mínimo)"
+        one: (%{count} caracter como mínimo)
+        other: (%{count} caracteres como mínimo)
     unlocks:
       new:
         resend_unlock_instructions: Reenviar instrucciones para desbloquear
       send_instructions: Vas a recibir instrucciones para desbloquear tu cuenta en unos pocos minutos.
       send_paranoid_instructions: Si tu cuenta existe, vas a recibir instrucciones para desbloquear tu cuenta en unos pocos minutos.
       unlocked: Tu cuenta ha sido desbloqueada. Ya puedes iniciar sesión.
+  invitation:
+    accept: Aceptar invitación
+    decline: Rechazar invitación
+    new: Nueva invitación
+  notices:
+    cadena:
+      access_forbidden: ⛔️ Usted no tiene acceso a esta cadena
+      creation_success: ✨ Cadena creada
+      destroyed: Cadena borrada
+      invitation:
+        destroyed: La invitacion ha sido eliminada
+        error: Error de envio
+        expired: Esta invitacion ya ha sido aceptada
+        sent: 🚀 Invitacion enviada!
+        token_error: 👾 El codigo de su invitacion no es valido
+        welcome: 🪩 Bienvenido a la cadena!
+      positions_assigned: 🪄 Orden generado!
+      start_participants_approval: ⚡️ Solicitud de aprobacion enviada
+      update_success: 👌 Cadena actualizada
+      user:
+        not_found: Usuario no encontrado
+        removed: Usuario eliminado de la cadena
+        update: ""
+    global_date: "📆 Nueva fecha: %{global_date}"
+    login_to_access: ✋ Conectate para acceder a esta pagina
+    newsletter:
+      subscribed: 💌 Gracias por inscribirte! Te tendremos informado
+      subscription_error: Error de inscripción
+    user:
+      access_forbidden: ⛔️ Usted no tiene acceso a esta cuenta
+      not_admin: Estás conectado como %{user_email}
+      profile_incomplete: Completa tu perfil para poder continuar
+      update: ✌️ Informaciones actualizadas
+  user:
+    address: Dirección
+    admin_terms&conditions: términos y condiciones del administrador
+    age: Edad
+    citizenship_card: Cédula de ciudadanía
+    city: Ciudad
+    complete_profile: Completar perfil
+    consent: Acepto
+    created_at: Inscripción
+    dob: Fecha de nacimiento
+    email: Correo electrónico
+    finish_profile: Finalizar perfil
+    first_name: Nombre
+    foreigner_card: Cédula de extranjería
+    id_number: N° de dentificacíon
+    identification_type: Identificacíon
+    impersonate: Controlar
+    last_name: Apellido
+    name: Nombre
+    other: Otro
+    passport: Pasaporte
+    phone: N° de teléfono
+    profile_pic: Foto de perfil
+    residence: Domicilio
+    sex: Sexo
+    terms&conditions: términos y condiciones
+    upload_profile_pic: Subir foto de perfil
+    users: Usuarios
+    zip: Código postal/ZIP

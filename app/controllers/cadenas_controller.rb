@@ -25,8 +25,7 @@ class CadenasController < ApplicationController
   end
 
   # GET /cadenas/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /cadenas or /cadenas.json
   def create

@@ -101,6 +101,8 @@ group :development do
   gem 'bullet'
 
   gem 'rack-mini-profiler'
+
+  gem 'guard-rspec', require: false
 end
 
 group :test do

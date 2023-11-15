@@ -18,7 +18,7 @@ FactoryBot.define do
     address { "MyString" }
     zip { "MyString" }
     city { "MyString" }
-    is_admin { false }
+    is_admin { true }
     accepts_terms { false }
   end
 end

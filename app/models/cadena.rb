@@ -10,9 +10,13 @@ class Cadena < ApplicationRecord
   validates :periodicity, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
-  validates :saving_goal, presence: true
+  validates :saving_goal, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :installment_value, presence: true
   validates :accepts_admin_terms, acceptance: { message: 'You must accept the admin terms' }
+  validate :start_date_is_future
+  validate :end_date_matches_installments
+  validate :installments_match_participants
+  #validate :must_have_admin
   enum status: { pending: 'pending', complete: 'complete',
                  participants_approval: 'participants_approval',
                  started: 'started', stopped: 'stopped', over: 'over',
@@ -22,6 +26,34 @@ class Cadena < ApplicationRecord
 
   def admin
     participants.find_by(is_admin: true)&.user
+  end
+
+  def must_have_admin
+    errors.add(:base, "Cadena must have an admin participant") unless participants.exists?(is_admin: true)
+  end
+
+  def start_date_is_future
+    if start_date.present? && start_date <= Time.zone.today
+      errors.add(:start_date, "should be in the future")
+    end
+  end
+
+  def end_date_matches_installments
+    if periodicity == 'monthly' && end_date != start_date + desired_installments.months
+      errors.add(:end_date, "does not match number of remaining months")
+    elsif periodicity == 'bimonthly' && end_date != start_date + (desired_installments / 2).months
+      errors.add(:end_date, "does not match half the number of reamining months")
+    end
+  end
+
+  def installments_match_participants
+    unless desired_installments == desired_participants
+      errors.add(:desired_installments, 'do not match the number of participants')
+    end
+  end
+
+  def monthly?
+    periodicity == 'monthly'
   end
 
   def participants_names
