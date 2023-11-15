@@ -10,5 +10,6 @@ FactoryBot.define do
     end_date { Time.zone.tomorrow + (periodicity == 'monthly' ? desired_installments : desired_installments / 2).months }
     participants_approval { false }
     positions_assigned { false }
+    admin { association :participant, cadena: instance }
   end
 end

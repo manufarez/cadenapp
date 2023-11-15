@@ -45,7 +45,7 @@ class User < ApplicationRecord
   end
 
   def admin_of?(cadena)
-    participant = participants.find_by(cadena: cadena, is_admin: true)
+    participant = cadena.admin
     !participant.nil?
   end
 

@@ -6,7 +6,6 @@ FactoryBot.define do
     payments_expected { 1 }
     payments_received { 1 }
     total_due { "9.99" }
-    association :cadena
-    is_admin { false }
+    cadena { association :cadena, participant: instance }
   end
 end

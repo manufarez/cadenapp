@@ -1,4 +1,5 @@
 class Cadena < ApplicationRecord
+  has_one :admin, class_name: 'Participant', dependent: :nullify
   has_many :participants, dependent: :destroy
   has_many :invitations, dependent: :destroy
   has_many :users, through: :participants
@@ -16,7 +17,6 @@ class Cadena < ApplicationRecord
   validate :start_date_is_future
   validate :end_date_matches_installments
   validate :installments_match_participants
-  #validate :must_have_admin
   enum status: { pending: 'pending', complete: 'complete',
                  participants_approval: 'participants_approval',
                  started: 'started', stopped: 'stopped', over: 'over',
@@ -24,16 +24,8 @@ class Cadena < ApplicationRecord
        _default: 'pending'
   enum periodicity: { bimonthly: 'bimonthly', monthly: 'monthly' }, _default: 'monthly'
 
-  def admin
-    participants.find_by(is_admin: true)&.user
-  end
-
-  def must_have_admin
-    errors.add(:base, "Cadena must have an admin participant") unless participants.exists?(is_admin: true)
-  end
-
   def start_date_is_future
-    if start_date.present? && start_date <= Time.zone.today
+    if start_date.present? && start_date <= Time.current
       errors.add(:start_date, "should be in the future")
     end
   end

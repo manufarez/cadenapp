@@ -10,12 +10,16 @@ Rails.application.config.seeding = true
 time = Time.now
 
 Participant.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!(Participant.table_name)
 puts 'Participants destroyed!'
 Invitation.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!(Invitation.table_name)
 puts 'Invitations destroyed!'
 User.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!(User.table_name)
 puts 'Users destroyed!'
 Cadena.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!(Cadena.table_name)
 puts 'Cadenas destroyed!'
 
 # Only uncomment this for the first installment, helps playing seeds faster
@@ -64,16 +68,16 @@ puts 'Creating 100 fake users...'
   puts "User #{user.id} created"
 end
 
-puts 'Creating 10 fake cadenas...'
-10.times do
+puts 'Creating 10 fake cadenas with 10 participants...'
+10.times do |i|
   cadena = Cadena.new
   cadena.name = Faker::Restaurant.name
   cadena.desired_installments = 10
   cadena.desired_participants = 10
   cadena.installment_value = (200_000..1_000_000).step(100_000).to_a.sample
   cadena.saving_goal = cadena.desired_installments * cadena.installment_value
-  cadena.start_date = Date.today
-  cadena.end_date = Date.today + cadena.desired_installments.months
+  cadena.start_date = Date.today + 1
+  cadena.end_date = cadena.start_date + cadena.desired_installments.months
   cadena.periodicity = 'monthly'
   cadena.balance = 0
   cadena.accepts_admin_terms = true
@@ -81,23 +85,15 @@ puts 'Creating 10 fake cadenas...'
   puts "Cadena #{cadena.id} created!"
 end
 
-puts 'Creating 10 fake participants for each cadena...'
-users_in_groups_of_10 = User.all.each_slice(10).to_a
-first_user_in_groups = users_in_groups_of_10.map { |group| group.first.id }
-puts "#{first_user_in_groups}"
-cadenas_ids = Cadena.all.ids
-
-users_in_groups_of_10.each_with_index do |group, i|
-  group.each do |user|
-    participant = Participant.new
-    participant.cadena_id = cadenas_ids[i]
-    participant.user = user
-    participant.is_admin = if first_user_in_groups.include?(participant.user_id)
-                               true
-                             else
-                               false
-                             end
-    participant.save
+puts "Creating 10 participants for each cadena..."
+counter = 0
+Cadena.all.each do |cadena|
+  counter += 1
+  cadena.admin = Participant.create(user: User.find(counter), cadena: cadena)
+  cadena.save
+  9.times do
+    counter += 1
+    Participant.create(user: User.find(counter), cadena: cadena)
   end
 end
 
@@ -113,7 +109,7 @@ Cadena.all.each do |cadena|
   cadena.users.each do |user|
     invitation = Invitation.new
     invitation.cadena = cadena
-    invitation.sender = cadena.admin
+    invitation.sender = cadena.admin.user
     invitation.email = user.email
     invitation.phone = user.phone
     invitation.first_name = user.first_name

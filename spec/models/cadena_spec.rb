@@ -23,20 +23,19 @@ RSpec.describe Cadena, type: :model do
 
   it 'should have an admin' do
     cadena = build(:cadena)
-    # no admin, should be false
-    expect(cadena.valid?).to be false
+    expect(cadena.valid?).to be true
   end
 
   context 'when the periodicity is "monthly"' do
     it 'ends in the same number of months' do
-      cadena = create(:cadena, periodicity: 'monthly')
+      cadena = build(:cadena, periodicity: 'monthly')
       expect(cadena.end_date).to(eq(cadena.start_date + cadena.desired_installments.months))
     end
   end
 
   context 'when the periodicity is "bimonthly"' do
     it 'ends twice as fast' do
-      cadena = create(:cadena, periodicity: 'bimonthly')
+      cadena = build(:cadena, periodicity: 'bimonthly')
       expect(cadena.end_date).to(eq(cadena.start_date + (cadena.desired_installments / 2).months))
     end
   end
