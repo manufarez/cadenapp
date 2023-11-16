@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :received_payments, through: :participants, source: :received_payments, dependent: :destroy
 
   has_one_attached :avatar
+  validates :first_name, presence: true
+  validates :last_name, presence: true
   validates :avatar, presence: { message: "must be attached" }, on: :update
   validates :sex, presence: true, on: :update
   validates :dob, presence: true, on: :update

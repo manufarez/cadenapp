@@ -44,6 +44,7 @@ class Cadena < ApplicationRecord
     end
   end
 
+  # this method is unused
   def monthly?
     periodicity == 'monthly'
   end

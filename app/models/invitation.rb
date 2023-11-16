@@ -3,6 +3,10 @@ class Invitation < ApplicationRecord
   belongs_to :sender, class_name: 'User'
   before_create :generate_token
   after_create :send_invitation_email, unless: -> { Rails.application.config.seeding }
+  validates :phone, presence: true
+  validates :email, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
   def older_than_1h
     Time.zone.today - 1.hour == created_at
