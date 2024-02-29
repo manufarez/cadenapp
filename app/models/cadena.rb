@@ -1,5 +1,5 @@
 class Cadena < ApplicationRecord
-  has_one :admin, class_name: 'Participant', dependent: :nullify
+  has_one :admin, class_name: 'Participant', dependent: :destroy
   has_many :participants, dependent: :destroy
   has_many :invitations, dependent: :destroy
   has_many :users, through: :participants
@@ -83,8 +83,7 @@ class Cadena < ApplicationRecord
     participants.order(:position).each.with_index(1) do |participant, index|
       participant.update(
         withdrawal_date: start_date + (index * periodicity_multiplier).day,
-        payments_expected: desired_installments - 1,
-        total_due: saving_goal - installment_value
+        payments_expected: desired_installments - 1
       )
     end
   end
@@ -127,7 +126,7 @@ class Cadena < ApplicationRecord
   def unpaid_turn_participants
     return unless next_paid_participant
 
-    participants.reject { |user| user.paid_next_participant?(self) }
+    participants.where.not(id: next_paid_participant.id).reject(&:paid_next_participant?)
   end
 
   def period_ratio

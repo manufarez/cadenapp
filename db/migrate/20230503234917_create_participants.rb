@@ -8,7 +8,6 @@ class CreateParticipants < ActiveRecord::Migration[7.0]
       t.string :status
       t.integer :payments_expected
       t.integer :payments_received, default: 0
-      t.decimal :total_due
 
       t.timestamps
     end

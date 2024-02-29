@@ -16,12 +16,9 @@ class Participant < ApplicationRecord
   end
 
   def paid_next_participant?
-    next_participant = cadena.next_paid_participant
-    if next_participant == self
-      true
-    else
-      Payment.where(user: user, participant: next_participant).present?
-    end
+    return false unless cadena.next_paid_participant
+
+    Payment.where(user: user, participant: cadena.next_paid_participant).present?
   end
 
   def paid_by_everyone

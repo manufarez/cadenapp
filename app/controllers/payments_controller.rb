@@ -27,6 +27,7 @@ class PaymentsController < ApplicationController
   end
 
   def make_all_payments
+    error_messages = []
     @cadena.unpaid_turn_participants.each do |participant|
       @payment = Payment.new(
         cadena: @cadena,
@@ -35,9 +36,18 @@ class PaymentsController < ApplicationController
         user: participant.user,
         paid_at: Time.zone.now
       )
-      process_payment if @payment.valid?
+      if @payment.valid?
+        process_payment
+      else
+        error_messages << participant.user.name.to_s
+      end
     end
-    redirect_to @cadena, notice: t('cadena.fast_paid')
+    if @cadena.unpaid_turn_participants.count.positive?
+      redirect_to @cadena
+      flash[:notice] = "#{@payment.errors.full_messages.join(', ')} - #{error_messages.first}"
+    else
+      redirect_to @cadena, notice: t('cadena.fast_paid')
+    end
   end
 
   private

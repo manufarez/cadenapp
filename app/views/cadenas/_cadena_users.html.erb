@@ -23,7 +23,9 @@
             <% end %>
           </p>
         </div>
-        <% if user == cadena.admin %>
+        <% if user == cadena.admin.user && user == current_user %>
+          <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Yo/Admin</p>
+        <% elsif user == cadena.admin.user %>
           <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Admin</p>
         <% elsif user == current_user %>
           <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Yo</p>

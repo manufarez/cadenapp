@@ -172,7 +172,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_15_161951) do
     t.string "status"
     t.integer "payments_expected"
     t.integer "payments_received", default: 0
-    t.decimal "total_due"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cadena_id"], name: "index_participants_on_cadena_id"

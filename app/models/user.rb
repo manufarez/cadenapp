@@ -41,7 +41,6 @@ class User < ApplicationRecord
     cadenas.include?(cadena)
   end
 
-  # This one is a bit weird, is it used?
   def participant(cadena)
     participants.find_by(cadena: cadena, user: self)
   end
@@ -60,11 +59,5 @@ class User < ApplicationRecord
     else
       'Missing DOB'
     end
-  end
-
-  def paid_next_participant?(cadena)
-    return false unless cadena.next_paid_participant
-
-    Payment.where(user: self, participant: cadena.next_paid_participant).present?
   end
 end

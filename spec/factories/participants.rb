@@ -5,7 +5,6 @@ FactoryBot.define do
     status { "MyString" }
     payments_expected { 1 }
     payments_received { 1 }
-    total_due { "9.99" }
     cadena { association :cadena, participant: instance }
   end
 end

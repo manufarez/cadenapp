@@ -4,7 +4,9 @@
       <h1 class="text-3xl font-bold leading-6 text-white font-nimbus-ext">Invitaciones</h1>
       <span class="text-sm font-semibold uppercase text-silver hover:underline"><%= link_to @cadena.name, cadena_path(@cadena) %></span>
     </div>
-    <%= link_to 'Nueva', new_cadena_invitation_path, class: "rounded-lg py-2 px-4 bg-blue-600 text-white block font-medium" %>
+    <% if @cadena.pending? %>
+      <%= link_to 'Nueva', new_cadena_invitation_path, class: "rounded-lg py-2 px-4 bg-blue-600 text-white block font-medium" %>
+    <% end %>
   </div>
   <div class="relative mb-12 overflow-x-auto border rounded-lg shadow-md border-steel">
     <table class="w-full text-sm text-left font-manrope">
@@ -19,7 +21,7 @@
         <% @invitations.each do |invitation| %>
           <tr class="text-white odd:bg-transparent even:bg-gray-600/10">
             <td class="flex px-6 py-4 font-medium text-white whitespace-nowrap">
-              <%= invitation.accepted.nil? ? inline_svg_tag('svg/question.svg', class: 'w-5 text-silver') : (invitation.accepted ? inline_svg_tag('svg/check.svg', class: 'w-5 text-ciel') : inline_svg_tag('svg/cross.svg', class: 'w-5 text-pinky')) %>
+              <%= invitation_status_icon(invitation, @cadena) %>
               <div class="flex flex-col ml-6">
                 <span><%= invitation.first_name %> <%= invitation.last_name %></span>
                 <span class="text-xs text-silver"><%= invitation.phone %></span>
@@ -33,3 +35,4 @@
     </table>
   </div>
 </div>
+<%= console %>

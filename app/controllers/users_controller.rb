@@ -53,6 +53,9 @@ class UsersController < ApplicationController
     redirect_to user_path(@user), notice: ['🤑 Money baby!', '💸 Make it rain!'].sample
   end
 
+  def deposit
+  end
+
   private
 
   def ask_profile_completion

@@ -15,7 +15,7 @@ class CadenaMailer < ApplicationMailer
     @cadena = cadena
     @participant = invitation
     mail(
-      to: @cadena.admin.email,
+      to: @cadena.admin.user.email,
       subject: "#{@participant.name} has joined #{@cadena.name}",
       from: 'contacto@cadenapp.com',
       track_opens: true,

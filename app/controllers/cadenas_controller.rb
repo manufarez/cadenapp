@@ -141,7 +141,6 @@ class CadenasController < ApplicationController
       :end_date,
       :periodicity,
       :status,
-      :balance,
       :saving_goal,
       :accepts_admin_terms
     )

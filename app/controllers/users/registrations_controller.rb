@@ -25,9 +25,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
         token = params[:invitation_token]
         if token.present?
           invitation = Invitation.find_by(token: token)
-          invitation.update(accepted: true)
-          Participant.create(cadena: invitation.cadena, user: resource, is_admin: false)
-          invitation.cadena.save
+          @participation = Participant.new(cadena: invitation.cadena, user: resource)
+          if @participation.valid?
+            @participation.save
+            invitation.update(accepted: true)
+            invitation.cadena.save
+          else
+            raise "Invalid participation: #{@participation.errors.full_messages.join(', ')}"
+          end
         end
         respond_with resource, location: after_sign_up_path_for(resource)
       else

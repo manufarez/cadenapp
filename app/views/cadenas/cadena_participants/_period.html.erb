@@ -21,7 +21,9 @@
         </div>
         <div class="text-xs text-placeholder_gray"><%= @cadena.next_paid_participant.withdrawal_date.strftime('%d/%m/%Y') %></div>
       </div>
-      <% if @cadena.next_paid_participant.user == cadena.admin %>
+      <% if @cadena.next_paid_participant.user == cadena.admin && current_user.admin_of?(@cadena) %>
+        <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Yo/Admin</p>
+      <% elsif @cadena.next_paid_participant.user == cadena.admin%>
         <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Admin</p>
       <% elsif @cadena.next_paid_participant.user == current_user %>
         <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Yo</p>
@@ -46,7 +48,9 @@
             <%= participant.name %>
           </p>
         </div>
-        <% if participant.user == cadena.admin %>
+        <% if participant.user == cadena.admin.user && participant.user == current_user %>
+          <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Yo/Admin</p>
+        <% elsif participant.user == cadena.admin.user %>
           <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Admin</p>
         <% elsif participant.user == current_user %>
           <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Yo</p>
