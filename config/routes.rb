@@ -17,13 +17,17 @@ Rails.application.routes.draw do
   get 'users/:id', to: 'users#show', as: 'user'
   get 'users/:id/abandon_complete_profile', to: 'users#abandon_complete_profile', as: 'abandon_complete_profile'
 
-  get 'users/:id/complete_profile', to: 'users#complete_profile', as: 'complete_profile'
-  patch 'users/:id/complete_profile', to: 'users#update', as: 'update_profile'
   patch '/set_date', to: 'application#set_date', as: 'set_date'
-  patch 'users/:id/quick_deposit', to: 'users#quick_deposit', as: 'quick_deposit'
-  get 'users/:id/deposit', to: 'users#deposit', as: 'deposit'
-  get 'users/:id/deposit/payment_methods', to: 'users#payment_methods', as: 'payment_methods'
-  get 'users/:id/deposit/payment_form', to: 'users#payment_form', as: 'payment_form'
+
+  resources :users do
+    get 'complete_profile', to: 'users#complete_profile', as: 'complete_profile'
+    patch 'update_profile', to: 'users#update', as: 'update_profile'
+    get 'deposit', to: 'users#deposit', as: 'deposit'
+    post 'deposit/payment_methods', to: 'users#payment_methods', as: 'payment_methods'
+    get 'deposit/payment_form', to: 'users#deposit'
+    post 'deposit/payment_form', to: 'users#payment_form', as: 'payment_form'
+    patch 'quick_deposit', to: 'users#quick_deposit', as: 'quick_deposit'
+  end
 
   resources :cadenas do
     resources :invitations do
@@ -32,7 +36,7 @@ Rails.application.routes.draw do
       end
     end
     member do
-      delete 'remove_user/:user_id', to: 'cadenas#remove_user', as: 'remove_user'
+      delete 'remove_participant/:participant_id', to: 'cadenas#remove_participant', as: 'remove_participant'
       patch :start_participants_approval
       patch :assign_positions
     end

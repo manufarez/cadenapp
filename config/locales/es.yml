@@ -8,6 +8,7 @@ es:
   cadena:
     admin_terms_acceptance: You must accept the admin terms
     approve_list: Enviar confirmacion lista
+    incomplete_profile_found: Para proseguir %{participant} tiene que completar su perfil
     assign_positions: Generar orden
     belongs_to_none: No perteneces a ninguna cadena
     cadena_name: Nombre de la cadena
@@ -157,6 +158,7 @@ es:
       access_forbidden: ⛔️ Usted no tiene acceso a esta cadena
       creation_success: ✨ Cadena creada
       destroyed: Cadena borrada
+      too_late: ⛔️ La cadena empezó/está por empezar, acción inválida
       invitation:
         destroyed: La invitacion ha sido eliminada
         error: Error de envio

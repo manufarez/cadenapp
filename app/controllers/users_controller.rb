@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
+  include ActionView::Helpers::NumberHelper
   skip_before_action :authenticate_user!, only: %i[complete_profile update]
-  before_action :set_user, only: %i[update complete_profile show quick_deposit deposit authorize_deposit_access payment_form]
+  before_action :set_user, except: %i[index]
   before_action :authenticate_user!, only: [:deposit]
   before_action :authorize_deposit_access, only: [:deposit]
   before_action :ask_profile_completion, except: %i[update abandon_complete_profile]
@@ -22,8 +23,7 @@ class UsersController < ApplicationController
   end
 
   def login_as
-    user = User.find(params[:id])
-    sign_in(user, scope: :user)
+    sign_in(@user, scope: :user)
     redirect_to users_path
   end
 
@@ -50,12 +50,22 @@ class UsersController < ApplicationController
     end
   end
 
-  def quick_deposit
-    @user.update(balance: @user.balance + 500_000)
-    redirect_to user_path(@user), status: :see_other, notice: ['🤑 Money baby!', '💸 Make it rain!'].sample
+  def payment_methods
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.replace(
+          "choose_payment_method_btn",
+          partial: "payment_methods",
+          locals: {deposit_amount: params[:deposit_amount]}
+        )
+      }
+    end
   end
 
-  def deposit
+  def quick_deposit
+    amount = params[:deposit_amount].to_i
+    @user.update(balance: @user.balance + amount)
+    redirect_to user_path(@user), status: :see_other, notice: "💸 Saldo aumentado de #{number_to_currency(amount, precision: 0)}"
   end
 
   private
@@ -63,7 +73,7 @@ class UsersController < ApplicationController
   def ask_profile_completion
     return if current_user.profile_complete? || action_name == 'complete_profile' || current_user.is_admin
 
-    redirect_to complete_profile_path(current_user), notice: t('notices.user.profile_incomplete')
+    redirect_to user_complete_profile_path(current_user), notice: t('notices.user.profile_incomplete')
   end
 
   def authorize_deposit_access
@@ -73,7 +83,11 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:id])
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+    else
+      @user = User.find(params[:id])
+    end
   end
 
   def user_params

@@ -5,6 +5,11 @@ class CadenasController < ApplicationController
   # GET /cadenas or /cadenas.json
   def index
     @cadenas = current_user.is_admin ? Cadena.includes(:participants).all : current_user.cadenas
+    if current_user.is_admin
+      render template: 'cadenas/admin_index'
+    else
+      render template: 'cadenas/user_index'
+    end
   end
 
   # GET /cadenas/1 or /cadenas/1.json
@@ -58,6 +63,11 @@ class CadenasController < ApplicationController
 
   def start_participants_approval
     @cadena = Cadena.find(params[:id])
+    incomplete_users = @cadena.users.reject(&:profile_complete?)
+    unless incomplete_users.empty?
+      return redirect_to @cadena, notice: t('cadena.incomplete_profile_found', participant: incomplete_users.first.name)
+    end
+
     @cadena.status = 'participants_approval'
     @cadena.participants_approval = true
     @cadena.save
@@ -90,19 +100,15 @@ class CadenasController < ApplicationController
     end
   end
 
-  def remove_user
+  def remove_participant
     @cadena = Cadena.find(params[:id])
-    user = User.find(params[:user_id])
+    return redirect_to cadena_path(@cadena), alert: t('notices.cadena.too_late') unless @cadena.start_date_is_future
 
-    participant = @cadena.participants.find_by(user: user)
-    if participant
-      participant.destroy
-      @cadena.save
-      CadenaMailer.participant_removed_email(participant).deliver_now
-      redirect_to cadena_path(@cadena), notice: t('notices.cadena.user.removed')
-    else
-      redirect_to cadena_path(@cadena), notice: t('notices.cadena.user.not_found')
-    end
+    @participant = Participant.find(params[:participant_id])
+    CadenaMailer.participant_removed_email(@participant).deliver_later
+    @participant.destroy
+    @cadena.save
+    redirect_to cadena_path(@cadena), notice: t('notices.cadena.user.removed')
   end
 
   # DELETE /cadenas/1 or /cadenas/1.json
@@ -122,7 +128,7 @@ class CadenasController < ApplicationController
       return
     end
 
-    redirect_to complete_profile_path(current_user), notice: t('notices.user.profile_incomplete')
+    redirect_to user_complete_profile_path(current_user), notice: t('notices.user.profile_incomplete')
   end
 
   # Use callbacks to share common setup or constraints between actions.

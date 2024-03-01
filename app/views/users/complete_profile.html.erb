@@ -1,14 +1,14 @@
 <div class="flex justify-center max-w-md mx-auto">
   <div class="w-full px-6 text-white font-manrope">
     <div class="flex items-center justify-between mb-10">
-      <%= link_to abandon_complete_profile_path do %>
+      <%= link_to abandon_complete_profile_path(@user) do %>
         <%= inline_svg_tag('svg/arrow_left.svg', class:'text-white w-6') %>
       <% end %>
       <h1 class="text-lg font-bold text-white text font-manrope"><%= t('user.complete_profile') %></h1>
       <span class="w-5"></span>
     </div>
     <div class="mb-10">
-      <%= form_for(@user, url: update_profile_path(@user)) do |f| %>
+      <%= form_for(@user, url: user_update_profile_path(@user)) do |f| %>
         <%= render "users/shared/error_messages", resource: @user %>
         <div class="flex mb-4 space-x-3">
           <% if @user.avatar.attached? %>

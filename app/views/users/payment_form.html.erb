@@ -1,8 +1,8 @@
 <%= turbo_frame_tag "payment_form" do %>
   <div class="flex justify-center bg-[#EBEBF5]">
-    <div class="w-full max-w-md px-6 mb-10 text-white font-manrope">
+    <div class="w-full max-w-md px-6 my-10 text-white font-manrope">
       <div class="flex items-center justify-between mb-10 text-[#4F1665]">
-        <%= link_to abandon_complete_profile_path do %>
+        <%= link_to :back, data: {turbo_frame: :_top} do %>
           <%= inline_svg_tag('svg/arrow_left.svg', class:'w-6') %>
         <% end %>
         <h1 class="text-lg font-bold text font-manrope">Portal / interfaz aliado</h1>
@@ -24,27 +24,31 @@
           </div>
           <div class="mb-4">
             <label class="text-sm text-silver" for="deposit_amount">Monto a depositar</label>
-            <input disabled type="text" id="deposit_amount" name="deposit_amount" placeholder="0" value="100000" autofocus class="w-full bg-white/50 input focus:ring-[#4F1665] text-[#6E7089]" min="100000">
+            <input disabled type="text" id="deposit_amount" name="deposit_amount" placeholder="0" value="<%= params[:deposit_amount] %>" autofocus class="w-full bg-white/50 input focus:ring-[#4F1665] text-[#6E7089]" min="100000">
           </div>
           <div class="mb-4">
             <label class="text-sm text-silver" for="payment_method">Método de pago</label>
-            <input disabled type="text" id="payment_method" name="payment_method" value="Tarjeta de crédito" autofocus class="w-full bg-white/50 input focus:ring-[#4F1665] text-[#6E7089]">
+            <input disabled type="text" id="payment_method" name="payment_method" value="<%= params[:type] %>" autofocus class="w-full bg-white/50 input focus:ring-[#4F1665] text-[#6E7089]">
           </div>
           <div class="mb-4">
             <label class="text-sm text-silver" for="cc_holder">Nombre en la tarjeta</label>
             <input type="text" id="cc_holder" name="cc_holder" placeholder="Juan Gabriel" value="<%= @user.first_name %> <%= @user.last_name %>" autofocus class="w-full bg-white input focus:ring-[#4F1665] text-mirage">
           </div>
+          <div class="mb-4">
+            <label class="text-sm text-silver" for="cc_number">Numero de la tarjeta</label>
+            <input type="text" id="cc_number" name="cc_number" placeholder="1234 1234 1234 1234" value="<%= Faker::Finance.credit_card(:mastercard, :visa) %>" autofocus class="w-full bg-white input focus:ring-[#4F1665] text-mirage">
+          </div>
           <div class="flex mb-4 space-x-4">
             <div>
               <label class="text-sm text-silver" for="validity_date">Fecha de vencimiento</label>
-              <input type="text" id="validity_date" name="validity_date" placeholder="MM/YY" autofocus class="w-full bg-white input focus:ring-[#4F1665] text-mirage">
+              <input type="text" id="validity_date" name="validity_date" placeholder="MM/YY" value="<%= (Date.today + 1.year).strftime("%m/%y") %>" autofocus class="w-full bg-white input focus:ring-[#4F1665] text-mirage">
             </div>
             <div>
               <label class="text-sm text-silver" for="ccv">Código de seguridad</label>
-              <input type="text" id="ccv" name="ccv" placeholder="123" autofocus class="w-full bg-white input focus:ring-[#4F1665] text-mirage">
+              <input type="text" id="ccv" name="ccv" placeholder="123" value="123" autofocus class="w-full bg-white input focus:ring-[#4F1665] text-mirage">
             </div>
           </div>
-          <%= link_to quick_deposit_path, data:{turbo_method: :patch, turbo_frame: :_top} do %>
+          <%= link_to user_quick_deposit_path(deposit_amount: params[:deposit_amount]), data:{turbo_method: :patch, turbo_frame: :_top} do %>
             <div class="w-full text-center tracking-wide focus:ring-4 focus:outline-none focus:ring-purple-800 font-medium hover:cursor-pointer rounded-xl p-4 bg-[#642A7B] hover:bg-[#4F1665]">
               Pagar
             </div>

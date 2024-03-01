@@ -4,7 +4,7 @@
   <% else %>
     <p class="mb-2 font-semibold text-lavender font-manrope">Saldo Cadenapp</p>
   <% end %>
-  <%= link_to deposit_path(user), class:'flex justify-center items-center space-x-2 text-white mb-6' do %>
+  <%= link_to user_deposit_path(user), class:'flex justify-center items-center space-x-2 text-white mb-6' do %>
     <%= inline_svg_tag('svg/plus_circle.svg', class:'w-6  hover:text-lavender h-fit') %>
     <span class="text-4xl font-bold tabular-nums font-manrope <%= user.balance < @cadena.installment_value ? 'text-red-500' : '' %>"
       data-controller="balance"

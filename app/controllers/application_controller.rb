@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     if user.profile_complete?
       cadenas_path
     else
-      update_profile_path(user)
+      user_update_profile_path(user)
     end
   end
 

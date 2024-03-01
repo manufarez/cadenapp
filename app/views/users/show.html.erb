@@ -59,7 +59,7 @@
       </div>
     </div>
     <div class="grid grid-cols-2 gap-3.5">
-      <%= link_to update_profile_path(@user) do  %>
+      <%= link_to user_complete_profile_path(@user) do  %>
         <div class="w-full mb-4 text-center btn-primary">Editar perfil</div>
       <% end %>
       <%= link_to destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?" } do %>
@@ -70,7 +70,6 @@
       <% end %>
     </div>
     <%= render 'my_balance', user: @user %>
-    <%= render 'my_cadenas' %>
     <%= render 'my_payments' %>
   </div>
 </div>

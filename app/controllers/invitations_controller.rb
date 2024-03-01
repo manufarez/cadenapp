@@ -13,28 +13,30 @@ class InvitationsController < ApplicationController
 
   # GET /invitations/new
   def new
-    @invitation = Invitation.new
+    if @cadena.start_date_is_future
+      redirect_to cadena_invitations_path, notice: t('notices.cadena.too_late')
+    else
+      @invitation = Invitation.new
+    end
   end
 
   def accept
     @invitation = @cadena.invitations.find_by(token: params[:token])
 
-    if @invitation
-      flash[:notice] = t('notices.cadena.invitation.welcome')
-      if current_user
-        @participation = Participant.new(cadena: @cadena, user: current_user)
-        raise "Invalid participation: #{@participation.errors.full_messages.join(', ')}" unless @participation.valid?
+    return redirect_to root_path, notice: t('notices.cadena.invitation.token_error') unless @invitation
+    return redirect_to root_path, notice: t('notices.cadena.too_late') if @cadena.start_date_is_future
 
-        @participation.save
-        @invitation.update(accepted: true)
-        @cadena.save
-        redirect_to @cadena
-      else
-        redirect_to new_user_registration_path(params: { token: params[:token] })
-      end
+    if current_user
+      @participation = Participant.new(cadena: @cadena, user: current_user)
+      return redirect_to root_path, notice: @participation.errors.full_messages.join(', ') unless @participation.valid?
+
+      flash[:notice] = t('notices.cadena.invitation.welcome')
+      @participation.save
+      @invitation.update(accepted: true)
+      @cadena.save
+      redirect_to @cadena
     else
-      flash[:error] = t('notices.cadena.invitation.token_error')
-      redirect_to root_path
+      redirect_to new_user_registration_path(params: { token: params[:token] })
     end
   end
 

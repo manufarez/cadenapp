@@ -1,44 +1,38 @@
-<%= turbo_frame_tag "payment_form" do %>
-  <div class="flex justify-center">
-    <div class="w-full max-w-md px-6 mb-10 text-white font-manrope">
-      <div class="flex items-center justify-between mb-10">
-        <%= link_to abandon_complete_profile_path do %>
-          <%= inline_svg_tag('svg/arrow_left.svg', class:'text-white w-6') %>
+<div class="flex justify-center">
+  <div class="w-full max-w-md px-6 mb-10 text-white font-manrope" id="deposit">
+    <div class="flex items-center justify-between mb-10">
+      <%= link_to @user do %>
+        <%= inline_svg_tag('svg/arrow_left.svg', class:'text-white w-6') %>
+      <% end %>
+      <h1 class="text-lg font-bold text-white text font-manrope"><%= t('user.deposit') %></h1>
+      <span class="w-5"></span>
+    </div>
+    <div class="mb-10">
+      <form action="<%= user_payment_methods_path(@user) %>" accept-charset="UTF-8" method="post" class="flex flex-col max-w-sm mx-auto">
+        <div class="mb-4">
+          <label class="text-sm text-silver" for="first_name">Nombre</label>
+          <input type="text" name="first_name" value="<%= @user.first_name %>" id="first_name" autofocus class="w-full input" placeholder="Nombre">
+        </div>
+        <div class="mb-4">
+          <input type="text" name="last_name" id="last_name" value="<%= @user.last_name %>" autofocus class="w-full input" placeholder="Apellido">
+        </div>
+        <div class="mb-4">
+          <label class="text-sm text-silver" for="identification_type">Identificacíon</label>
+          <%= select_tag 'identification_type', options_for_select([[t('user.citizenship_card'), 'CC'], [t('user.foreigner_card'), 'CE'], [t('user.passport'), 'PP']], @user.identification_type), class: 'w-full mb-4 input' %>
+          <input type="text" id="ccnum" name="ccnum" placeholder="N° de identificación" value="<%= @user.identification_number %>" autofocus class="w-full input">
+        </div>
+        <div class="mb-4">
+          <label class="text-sm text-silver" for="email">E-mail</label>
+          <input type="email" id="email" name="email" placeholder="hola@ejemplo.com" value="<%= @user.email %>" autofocus class="w-full input">
+        </div>
+        <div class="mb-4">
+          <label class="text-sm text-silver" for="deposit_amount">Monto a depositar</label>
+          <input type="text" id="deposit_amount" name="deposit_amount" placeholder="0" autofocus class="w-full input" min="100000" value="1000000">
+        </div>
+        <%= button_to user_payment_methods_path(@user), id: "choose_payment_method_btn", class: "w-full text-center btn-primary" do %>
+          Escoger método de pago
         <% end %>
-        <h1 class="text-lg font-bold text-white text font-manrope"><%= t('user.deposit') %></h1>
-        <span class="w-5"></span>
-      </div>
-      <div class="mb-10">
-        <form action="/process_form" accept-charset="UTF-8" method="post" class="flex flex-col max-w-sm mx-auto">
-          <div class="mb-4">
-            <label class="text-sm text-silver" for="first_name">Nombre</label>
-            <input type="text" name="first_name" value="<%= @user.first_name %>" id="first_name" autofocus class="w-full input" placeholder="Nombre">
-          </div>
-          <div class="mb-4">
-            <input type="text" name="last_name" id="last_name" value="<%= @user.last_name %>" autofocus class="w-full input" placeholder="Apellido">
-          </div>
-          <div class="mb-4">
-            <label class="text-sm text-silver" for="identification_type">Identificacíon</label>
-            <%= select_tag 'identification_type', options_for_select([[t('user.citizenship_card'), 'CC'], [t('user.foreigner_card'), 'CE'], [t('user.passport'), 'PP']], @user.identification_type), class: 'w-full mb-4 input' %>
-            <input type="text" id="ccnum" name="ccnum" placeholder="N° de identificación" value="<%= @user.identification_number %>" autofocus class="w-full input">
-          </div>
-          <div class="mb-4">
-            <label class="text-sm text-silver" for="email">E-mail</label>
-            <input type="email" id="email" name="email" placeholder="hola@ejemplo.com" value="<%= @user.email %>" autofocus class="w-full input">
-          </div>
-          <div class="mb-4">
-            <label class="text-sm text-silver" for="deposit_amount">Monto a depositar</label>
-            <input type="text" id="deposit_amount" name="deposit_amount" placeholder="0" autofocus class="w-full input" min="100000">
-          </div>
-          <%= turbo_frame_tag "payment_methods" do %>
-            <%= link_to payment_methods_path do %>
-              <div class="w-full text-center btn-primary">
-                Escoger método de pago
-              </div>
-            <% end %>
-          <% end %>
-        </form>
-      </div>
+      </form>
     </div>
   </div>
-<% end %>
+</div>

@@ -1,0 +1,16 @@
+<%= button_to user_payment_form_path(@user), params: {deposit_amount: params[:deposit_amount], type: 'Tarjeta de débito'}, data: {turbo_frame: "payment_form"}, class:'w-full' do  %>
+  <div class="flex items-center justify-between p-4 mb-4 text-sm btn-silver">
+    <%= image_tag "cards.png", alt: "Payment method logo", class:'h-8' %>
+    <span>Tarjeta de crédito</span>
+  </div>
+<% end %>
+<%= button_to user_payment_form_path(@user), params: {deposit_amount: params[:deposit_amount], type: 'Tarjeta de débito'}, data: {turbo_frame: "payment_form"}, class:'w-full' do  %>
+  <div class="flex items-center justify-between p-4 mb-4 text-sm btn-silver">
+    <%= image_tag "cards.png", alt: "Payment method logo", class:'h-8' %>
+    <span>Tarjeta de débito</span>
+  </div>
+<% end %>
+<div class="flex items-center justify-between p-4 mb-4 text-sm bg-opacity-50 btn-silver hover:bg-silver/50 hover:cursor-not-allowed">
+  <%= image_tag "pse.png", alt: "Payment method logo", class:'h-8' %>
+  <span>Transferencia (Indisponible)</span>
+</div>

@@ -8,6 +8,7 @@ class Invitation < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validate :cadena_must_be_pending
+  validate :cadena_start_must_be_future
 
   def older_than_1h
     Time.zone.today - 1.hour == created_at
@@ -28,8 +29,14 @@ class Invitation < ApplicationRecord
   end
 
   def cadena_must_be_pending
-    unless cadena.pending?
-      errors.add(:cadena, 'is at maximum capacity')
-    end
+    return if cadena.pending?
+
+    errors.add(:cadena, 'is at maximum capacity')
+  end
+
+  def cadena_start_must_be_future
+    return if cadena.start_date < Time.zone.now.to_date
+
+    errors.add(:cadena, 'start day is today or has already passed')
   end
 end

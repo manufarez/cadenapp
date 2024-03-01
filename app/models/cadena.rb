@@ -25,9 +25,10 @@ class Cadena < ApplicationRecord
   enum periodicity: { daily: 'daily', bimonthly: 'bimonthly', monthly: 'monthly' }, _default: 'monthly'
 
   def start_date_is_future
-    if start_date.present? && start_date <= Time.current
-      errors.add(:start_date, "(#{start_date}) should be in the future")
+    if start_date.present? && start_date <= Time.zone.now
+      errors.add(:start_date, "(#{start_date.strftime('%d/%m/%Y')}) should be in the future")
     end
+    errors.empty?
   end
 
   def end_date_matches_installments
