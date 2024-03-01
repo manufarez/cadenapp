@@ -70,8 +70,12 @@ class Cadena < ApplicationRecord
                     "complete"
                   elsif missing_participants.zero? && participants_approval && !positions_assigned
                     "participants_approval"
-                  elsif missing_participants.zero? && participants_approval && positions_assigned
+                  elsif missing_participants.zero? && participants_approval && positions_assigned && global_progression < 100
                     "started"
+                  elsif days_to_payment.zero? && unpaid_turn_participants.positive?
+                    "stopped"
+                  elsif global_progression == 100
+                    "over"
                   end
   end
 
@@ -112,7 +116,7 @@ class Cadena < ApplicationRecord
   # end
 
   def days_to_payment
-    return unless started?
+    return unless started? && next_payment_date
 
     (next_payment_date - Time.zone.now.to_date).to_i
   end

@@ -18,11 +18,15 @@ class PaymentsController < ApplicationController
   def process_payment
     ActiveRecord::Base.transaction do
       sender = @payment.user
-      receiver = @payment.participant
+      receiver = @payment.participant.user
+      logger.info "Processing the payment..."
+      logger.debug "Before sending -> sender: #{sender.balance.to_i} receiver: #{receiver.balance.to_i}"
       sender.balance -= @payment.amount
-      receiver.user.balance += @payment.amount
-      receiver.payments_received += 1
+      receiver.balance += @payment.amount
+      logger.debug "After sending -> sender: #{sender.balance.to_i} receiver: #{receiver.balance.to_i}"
+      @payment.participant.payments_received += 1
       @payment.save(validate: false) && sender.save && receiver.save
+      CadenaMailer.payment_confirmation_email(sender, receiver).deliver_later
     end
   end
 

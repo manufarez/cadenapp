@@ -7,7 +7,7 @@ class PaymentReminderJob < ApplicationJob
 
     cadenas.each do |cadena|
       cadena.participants_except_next_paid.each do |participant|
-        CadenaMailer.payment_reminder_email(participant, cadena.next_paid_participant).deliver_now
+        CadenaMailer.payment_reminder_email(participant, cadena.next_paid_participant).deliver_later
       end
     end
   end

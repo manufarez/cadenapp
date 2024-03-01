@@ -13,7 +13,7 @@ class Payment < ApplicationRecord
   private
 
   def send_payment_email
-    PaymentMailer.new_payment_email(self).deliver_now
+    PaymentMailer.new_payment_email(self).deliver_later
   end
 
   def sufficient_balance
@@ -38,8 +38,8 @@ class Payment < ApplicationRecord
 
   def send_period_complete_email
     cadena.participants.each do |participant|
-      CadenaMailer.period_complete_email(participant).deliver_now if cadena.period_progression >= 100
-      CadenaMailer.cadena_over_email(participant).deliver_now if cadena.global_progression >= 100
+      CadenaMailer.period_complete_email(participant).deliver_later if cadena.period_progression >= 100
+      CadenaMailer.cadena_over_email(participant).deliver_later if cadena.global_progression >= 100
     end
   end
 end

@@ -37,7 +37,7 @@ class CadenasController < ApplicationController
     @cadena = Cadena.new(cadena_params)
     respond_to do |format|
       if @cadena.save
-        CadenaMailer.new_cadena_email(@cadena, current_user).deliver_now
+        CadenaMailer.new_cadena_email(@cadena, current_user).deliver_later
         Participant.create(cadena: @cadena, user: current_user) if current_user
         format.html { redirect_to cadena_url(@cadena), notice: t('notices.cadena.creation_success') }
         format.json { render :show, status: :created, location: @cadena }
@@ -77,7 +77,7 @@ class CadenasController < ApplicationController
     return if Rails.application.config.seeding
 
     @cadena.participants.reject { |participant| participant == @cadena.admin }.each do |participant|
-      CadenaMailer.participants_approval_email(@cadena, participant).deliver_now
+      CadenaMailer.participants_approval_email(@cadena, participant).deliver_later
     end
   end
 
@@ -90,7 +90,7 @@ class CadenasController < ApplicationController
       @cadena.update(status: 'started', positions_assigned: true)
       unless Rails.application.config.seeding
         @cadena.participants.reject { |participant| participant == @cadena.admin }.each do |participant|
-          CadenaMailer.positions_assigned_email(@cadena, participant).deliver_now
+          CadenaMailer.positions_assigned_email(@cadena, participant).deliver_later
         end
       end
     end

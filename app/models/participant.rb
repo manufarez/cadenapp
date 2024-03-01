@@ -28,7 +28,7 @@ class Participant < ApplicationRecord
   private
 
   def send_participant_email
-    CadenaMailer.new_participant_email(cadena, self).deliver_now
-    CadenaMailer.welcome_email(cadena, self).deliver_now
+    CadenaMailer.new_participant_email(cadena, self).deliver_later
+    CadenaMailer.welcome_email(cadena, self).deliver_later
   end
 end

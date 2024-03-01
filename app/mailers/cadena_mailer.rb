@@ -92,6 +92,18 @@ class CadenaMailer < ApplicationMailer
     )
   end
 
+  def payment_confirmation_email(sender_user, receiver_participant)
+    @sender_user = sender_user
+    @receiver_participant = receiver_participant
+    mail(
+      to: @sender_user.email,
+      subject: "Thank you for paying #{@receiver_participant.name}",
+      from: 'contacto@cadenapp.com',
+      track_opens: true,
+      message_stream: 'outbound'
+    )
+  end
+
   def payment_reminder_email(participant, next_paid_participant)
     @participant = participant
     @next_paid_participant = next_paid_participant

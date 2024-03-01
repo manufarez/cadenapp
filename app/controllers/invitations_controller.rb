@@ -14,9 +14,9 @@ class InvitationsController < ApplicationController
   # GET /invitations/new
   def new
     if @cadena.start_date_is_future
-      redirect_to cadena_invitations_path, notice: t('notices.cadena.too_late')
-    else
       @invitation = Invitation.new
+    else
+      redirect_to cadena_invitations_path, notice: t('notices.cadena.too_late', start_date: @cadena.start_date.strftime('%d/%m/%Y'))
     end
   end
 
@@ -24,7 +24,7 @@ class InvitationsController < ApplicationController
     @invitation = @cadena.invitations.find_by(token: params[:token])
 
     return redirect_to root_path, notice: t('notices.cadena.invitation.token_error') unless @invitation
-    return redirect_to root_path, notice: t('notices.cadena.too_late') if @cadena.start_date_is_future
+    return redirect_to root_path, notice: t('notices.cadena.too_late') unless @cadena.start_date_is_future
 
     if current_user
       @participation = Participant.new(cadena: @cadena, user: current_user)

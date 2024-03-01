@@ -21,7 +21,7 @@ class Invitation < ApplicationRecord
   private
 
   def send_invitation_email
-    InvitationMailer.invite_email(self).deliver_now
+    InvitationMailer.invite_email(self).deliver_later
   end
 
   def generate_token
@@ -35,7 +35,7 @@ class Invitation < ApplicationRecord
   end
 
   def cadena_start_must_be_future
-    return if cadena.start_date < Time.zone.now.to_date
+    return if cadena.start_date_is_future
 
     errors.add(:cadena, 'start day is today or has already passed')
   end
