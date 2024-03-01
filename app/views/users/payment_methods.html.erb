@@ -1,0 +1,20 @@
+<%= turbo_frame_tag "payment_methods" do %>
+  <%= link_to payment_form_path, data: {turbo_frame: "payment_form"} do  %>
+    <div class="flex items-center justify-between p-4 mb-4 text-sm btn-silver">
+      <%= image_tag "cards.png", alt: "Payment method logo", class:'h-8' %>
+      <span>Tarjeta de crédito</span>
+    </div>
+  <% end %>
+  <%= link_to payment_form_path, data: {turbo_frame: "payment_form"} do  %>
+    <div class="flex items-center justify-between p-4 mb-4 text-sm btn-silver">
+      <%= image_tag "cards.png", alt: "Payment method logo", class:'h-8' %>
+      <span>Tarjeta de débito</span>
+    </div>
+  <% end %>
+  <%= link_to payment_form_path, data: {turbo_frame: "payment_form"} do  %>
+    <div class="flex items-center justify-between p-4 mb-4 text-sm btn-silver">
+      <%= image_tag "pse.png", alt: "Payment method logo", class:'h-8' %>
+      <span>Transferencia</span>
+    </div>
+  <% end %>
+<% end %>

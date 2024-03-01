@@ -79,7 +79,6 @@ puts 'Creating 10 fake cadenas with 10 participants...'
   cadena.start_date = Date.today + 1
   cadena.end_date = cadena.start_date + cadena.desired_installments.months
   cadena.periodicity = 'monthly'
-  cadena.balance = 0
   cadena.accepts_admin_terms = true
   cadena.save
   puts "Cadena #{cadena.id} created!"

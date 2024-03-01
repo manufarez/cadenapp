@@ -1,0 +1,56 @@
+<%= turbo_frame_tag "payment_form" do %>
+  <div class="flex justify-center bg-[#EBEBF5]">
+    <div class="w-full max-w-md px-6 mb-10 text-white font-manrope">
+      <div class="flex items-center justify-between mb-10 text-[#4F1665]">
+        <%= link_to abandon_complete_profile_path do %>
+          <%= inline_svg_tag('svg/arrow_left.svg', class:'w-6') %>
+        <% end %>
+        <h1 class="text-lg font-bold text font-manrope">Portal / interfaz aliado</h1>
+        <span class="w-5"></span>
+      </div>
+      <div class="mb-10">
+        <form action="/process_form" accept-charset="UTF-8" method="post" class="flex flex-col max-w-sm mx-auto">
+          <div class="mb-4">
+            <label class="text-sm text-silver" for="first_name">Usuario</label>
+            <input disabled type="text" name="first_name" value="<%= @user.first_name %> <%= @user.last_name %>" id="first_name" autofocus class="w-full bg-white/50 input focus:ring-[#4F1665] text-[#6E7089]" placeholder="Nombre">
+          </div>
+          <div class="mb-4">
+            <label class="text-sm text-silver" for="identification_type"><%= @user.identification_type %></label>
+            <input disabled type="text" id="ccnum" name="ccnum" placeholder="N° de identificación" value="<%= @user.identification_number %>" autofocus class="w-full bg-white/50 input focus:ring-[#4F1665] text-[#6E7089]">
+          </div>
+          <div class="mb-4">
+            <label class="text-sm text-silver" for="email">E-mail</label>
+            <input disabled type="email" id="email" name="email" placeholder="hola@ejemplo.com" value="<%= @user.email %>" autofocus class="w-full bg-white/50 input focus:ring-[#4F1665] text-[#6E7089]">
+          </div>
+          <div class="mb-4">
+            <label class="text-sm text-silver" for="deposit_amount">Monto a depositar</label>
+            <input disabled type="text" id="deposit_amount" name="deposit_amount" placeholder="0" value="100000" autofocus class="w-full bg-white/50 input focus:ring-[#4F1665] text-[#6E7089]" min="100000">
+          </div>
+          <div class="mb-4">
+            <label class="text-sm text-silver" for="payment_method">Método de pago</label>
+            <input disabled type="text" id="payment_method" name="payment_method" value="Tarjeta de crédito" autofocus class="w-full bg-white/50 input focus:ring-[#4F1665] text-[#6E7089]">
+          </div>
+          <div class="mb-4">
+            <label class="text-sm text-silver" for="cc_holder">Nombre en la tarjeta</label>
+            <input type="text" id="cc_holder" name="cc_holder" placeholder="Juan Gabriel" value="<%= @user.first_name %> <%= @user.last_name %>" autofocus class="w-full bg-white input focus:ring-[#4F1665] text-mirage">
+          </div>
+          <div class="flex mb-4 space-x-4">
+            <div>
+              <label class="text-sm text-silver" for="validity_date">Fecha de vencimiento</label>
+              <input type="text" id="validity_date" name="validity_date" placeholder="MM/YY" autofocus class="w-full bg-white input focus:ring-[#4F1665] text-mirage">
+            </div>
+            <div>
+              <label class="text-sm text-silver" for="ccv">Código de seguridad</label>
+              <input type="text" id="ccv" name="ccv" placeholder="123" autofocus class="w-full bg-white input focus:ring-[#4F1665] text-mirage">
+            </div>
+          </div>
+          <%= link_to quick_deposit_path, data:{turbo_method: :patch, turbo_frame: :_top} do %>
+            <div class="w-full text-center tracking-wide focus:ring-4 focus:outline-none focus:ring-purple-800 font-medium hover:cursor-pointer rounded-xl p-4 bg-[#642A7B] hover:bg-[#4F1665]">
+              Pagar
+            </div>
+          <% end %>
+        </form>
+      </div>
+    </div>
+  </div>
+<% end %>

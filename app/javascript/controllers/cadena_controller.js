@@ -19,7 +19,7 @@ export default class extends Controller {
     this.updateSavingGoal();
     flatpickr(".start_date", {
       dateFormat: "d/m/Y",
-      defaultDate: document.getElementById("date-input").placeholder,
+      defaultDate: this.startDateTarget.placeholder,
       locale: {
         firstDayOfWeek: 1,
         weekdays: {
@@ -71,12 +71,13 @@ export default class extends Controller {
   updateEndDate() {
     const installments = parseInt(this.installmentsTarget.value, 10);
     const startDate = this.startDateTarget.value.split("/").reverse().join("-");
-    console.log(startDate);
     const periodicity = this.periodicityTarget.value;
 
     if (installments && startDate) {
       const endDate = new Date(startDate);
-      if (periodicity === "monthly") {
+      if (periodicity === "daily") {
+        endDate.setDate(endDate.getDate() + installments);
+      } else if (periodicity === "monthly") {
         endDate.setMonth(endDate.getMonth() + installments);
       } else if (periodicity === "bimonthly") {
         endDate.setDate(endDate.getDate() + installments * 15);

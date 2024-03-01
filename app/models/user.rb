@@ -46,8 +46,7 @@ class User < ApplicationRecord
   end
 
   def admin_of?(cadena)
-    participant = cadena.admin
-    !participant.nil?
+    self == cadena.admin.user
   end
 
   def age

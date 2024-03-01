@@ -1,4 +1,9 @@
-<h1 class="mt-6 mb-2 text-lg font-semibold"><%= current_user == @user ? 'Mis cadenas' : 'Cadenas' %></h1>
+<div class="flex items-end justify-between mt-2">
+  <h1 class="mt-6 mb-2 text-lg font-semibold"><%= current_user == @user ? 'Mis cadenas' : 'Cadenas' %></h1>
+  <% if @user.cadenas.any? %>
+    <%= link_to t('cadena.create_new'), new_cadena_path, class:'btn-primary w-fit text-xs font-semibold px-3 mb-4 rounded-lg py-2' %>
+  <% end %>
+</div>
 <div class="flex flex-col space-y-4">
   <% if @user.cadenas.any? %>
     <% @user.cadenas.each do |cadena| %>

@@ -12,6 +12,7 @@ es:
     belongs_to_none: No perteneces a ninguna cadena
     cadena_name: Nombre de la cadena
     create: Crear
+    create_new: Crear otra
     created_at: Creada
     desired_participants: Numero de participantes
     end_date: Fecha de fin
@@ -159,7 +160,7 @@ es:
       invitation:
         destroyed: La invitacion ha sido eliminada
         error: Error de envio
-        expired: Esta invitacion ya ha sido aceptada
+        expired: Esta invitacion ya ha sido usada
         sent: 🚀 Invitacion enviada!
         token_error: 👾 El codigo de su invitacion no es valido
         welcome: 🪩 Bienvenido a la cadena!

@@ -1,6 +1,6 @@
 class InvitationsController < ApplicationController
   before_action :set_invitation, only: %i[show destroy]
-  before_action :set_cadena, only: %i[index new accept create]
+  before_action :set_cadena, only: %i[index new create accept]
 
   # GET /invitations or /invitations.json
   def index
@@ -17,12 +17,21 @@ class InvitationsController < ApplicationController
   end
 
   def accept
-    @invitation = @cadena.invitations.find_by(token: params[:id])
+    @invitation = @cadena.invitations.find_by(token: params[:token])
 
     if @invitation
-      # Handle invitation acceptance logic
       flash[:notice] = t('notices.cadena.invitation.welcome')
-      redirect_to @cadena
+      if current_user
+        @participation = Participant.new(cadena: @cadena, user: current_user)
+        raise "Invalid participation: #{@participation.errors.full_messages.join(', ')}" unless @participation.valid?
+
+        @participation.save
+        @invitation.update(accepted: true)
+        @cadena.save
+        redirect_to @cadena
+      else
+        redirect_to new_user_registration_path(params: { token: params[:token] })
+      end
     else
       flash[:error] = t('notices.cadena.invitation.token_error')
       redirect_to root_path

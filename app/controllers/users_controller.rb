@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[complete_profile update]
-  before_action :set_user, only: %i[update complete_profile show quick_deposit]
+  before_action :set_user, only: %i[update complete_profile show quick_deposit deposit authorize_deposit_access payment_form]
+  before_action :authenticate_user!, only: [:deposit]
+  before_action :authorize_deposit_access, only: [:deposit]
   before_action :ask_profile_completion, except: %i[update abandon_complete_profile]
 
   def index
@@ -50,7 +52,7 @@ class UsersController < ApplicationController
 
   def quick_deposit
     @user.update(balance: @user.balance + 500_000)
-    redirect_to user_path(@user), notice: ['🤑 Money baby!', '💸 Make it rain!'].sample
+    redirect_to user_path(@user), status: :see_other, notice: ['🤑 Money baby!', '💸 Make it rain!'].sample
   end
 
   def deposit
@@ -62,6 +64,12 @@ class UsersController < ApplicationController
     return if current_user.profile_complete? || action_name == 'complete_profile' || current_user.is_admin
 
     redirect_to complete_profile_path(current_user), notice: t('notices.user.profile_incomplete')
+  end
+
+  def authorize_deposit_access
+    return if current_user == @user || current_user.is_admin?
+
+    redirect_to root_path, alert: t('notices.user.access_forbidden')
   end
 
   def set_user

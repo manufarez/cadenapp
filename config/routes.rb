@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   patch '/set_date', to: 'application#set_date', as: 'set_date'
   patch 'users/:id/quick_deposit', to: 'users#quick_deposit', as: 'quick_deposit'
   get 'users/:id/deposit', to: 'users#deposit', as: 'deposit'
+  get 'users/:id/deposit/payment_methods', to: 'users#payment_methods', as: 'payment_methods'
+  get 'users/:id/deposit/payment_form', to: 'users#payment_form', as: 'payment_form'
 
   resources :cadenas do
     resources :invitations do

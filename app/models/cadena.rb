@@ -22,19 +22,21 @@ class Cadena < ApplicationRecord
                  started: 'started', stopped: 'stopped', over: 'over',
                  archived: 'archived' },
        _default: 'pending'
-  enum periodicity: { bimonthly: 'bimonthly', monthly: 'monthly' }, _default: 'monthly'
+  enum periodicity: { daily: 'daily', bimonthly: 'bimonthly', monthly: 'monthly' }, _default: 'monthly'
 
   def start_date_is_future
     if start_date.present? && start_date <= Time.current
-      errors.add(:start_date, "should be in the future")
+      errors.add(:start_date, "(#{start_date}) should be in the future")
     end
   end
 
   def end_date_matches_installments
-    if periodicity == 'monthly' && end_date != start_date + desired_installments.months
+    if periodicity == 'daily' && end_date != start_date + desired_installments.days
+      errors.add(:end_date, "does not match number of remaining days")
+    elsif periodicity == 'monthly' && end_date != start_date + desired_installments.months
       errors.add(:end_date, "does not match number of remaining months")
-    elsif periodicity == 'bimonthly' && end_date != start_date + (desired_installments / 2).months
-      errors.add(:end_date, "does not match half the number of reamining months")
+    elsif periodicity == 'bimonthly' && end_date != start_date + (desired_installments * 15.days)
+      errors.add(:end_date, "does not match number of remaining quincenas")
     end
   end
 
@@ -42,11 +44,6 @@ class Cadena < ApplicationRecord
     unless desired_installments == desired_participants
       errors.add(:desired_installments, 'do not match the number of participants')
     end
-  end
-
-  # this method is unused
-  def monthly?
-    periodicity == 'monthly'
   end
 
   def participants_names
@@ -78,11 +75,17 @@ class Cadena < ApplicationRecord
   end
 
   def calculate_withdrawal_dates
-    periodicity_multiplier = periodicity == 'monthly' ? 30 : 15
+    periodicity_multiplier = case periodicity
+                             when 'monthly' then 1.month
+                             when 'bimonthly' then 15.days
+                             when 'daily' then 1.day
+                             else
+                               raise ArgumentError, "Unsupported periodicity: #{periodicity}"
+                             end
 
     participants.order(:position).each.with_index(1) do |participant, index|
       participant.update(
-        withdrawal_date: start_date + (index * periodicity_multiplier).day,
+        withdrawal_date: start_date + (index * periodicity_multiplier),
         payments_expected: desired_installments - 1
       )
     end
