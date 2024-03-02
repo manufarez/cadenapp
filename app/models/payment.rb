@@ -7,7 +7,7 @@ class Payment < ApplicationRecord
   validate :max_payments
 
   after_create :send_payment_email, unless: -> { Rails.application.config.seeding }
-  before_destroy :decrement_payments_expected
+  before_destroy :decrement_payments
   after_commit :send_period_complete_email, if: :period_complete?, unless: -> { Rails.application.config.seeding }
 
   private
@@ -28,8 +28,10 @@ class Payment < ApplicationRecord
     errors.add(:amount, "can't exceed payments_expected")
   end
 
-  def decrement_payments_expected
-    participant.update(payments_received: participant.payments_received - 1)
+  def decrement_payments
+    raise 'No participant associated with this payment!' unless participant
+    participant.payments_received -= 1
+    participant.save!
   end
 
   def period_complete?

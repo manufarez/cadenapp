@@ -3,6 +3,10 @@
     <div class="w-full h-4 rounded-full bg-steel">
       <div class="flex items-center justify-center h-4 text-white transition-all duration-1000 ease-out bg-blue-600 rounded-full" style="font-size:10px;width:0%" data-cadena-participants-target="periodProgress" data-period-progress="<%= cadena.period_progression %>"><%= cadena.period_progression.to_i %>%</div>
     </div>
+  <% else %>
+    <div class="w-full h-4 mb-4 rounded-full bg-steel">
+      <span class="flex items-center h-4 pl-2 text-white" style="font-size:10px">O%</span>
+    </div>
   <% end %>
   <li class="flex items-center h-16 px-5 my-4 border border-blue-600 bg-midnight rounded-2xl first:mt-0">
     <div class="flex items-center justify-between w-full space-x-4">
