@@ -3,11 +3,14 @@ class CadenasController < ApplicationController
   before_action :ask_profile_completion
 
   # GET /cadenas or /cadenas.json
+
   def index
     @cadenas = current_user.is_admin ? Cadena.includes(:participants).all : current_user.cadenas
     if current_user.is_admin
       render template: 'cadenas/admin_index'
     else
+      @user = current_user
+      @payments = (@user.made_payments + @user.received_payments).sort_by(&:created_at)
       render template: 'cadenas/user_index'
     end
   end

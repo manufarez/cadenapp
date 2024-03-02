@@ -69,7 +69,9 @@
         </button>
       <% end %>
     </div>
-    <%= render 'my_balance', user: @user %>
-    <%= render 'my_payments' %>
+    <% if current_user.is_admin? %>
+      <%= render 'my_balance', user: @user %>
+      <%= render 'my_payments' %>
+    <% end %>
   </div>
 </div>
