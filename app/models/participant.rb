@@ -21,6 +21,12 @@ class Participant < ApplicationRecord
     Payment.where(user: user, participant: cadena.next_paid_participant).present?
   end
 
+  def paid_previous_participant?
+    return false unless cadena.previous_paid_participant
+
+    Payment.where(user: user, participant: cadena.previous_paid_participant).present?
+  end
+
   def paid_by_everyone
     payments_expected == payments_received && payments_received.positive?
   end

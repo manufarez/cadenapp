@@ -76,11 +76,16 @@ puts 'Creating 10 fake cadenas with 10 participants...'
   cadena.desired_participants = 10
   cadena.installment_value = (200_000..1_000_000).step(100_000).to_a.sample
   cadena.saving_goal = cadena.desired_installments * cadena.installment_value
-  cadena.start_date = Date.today + 1
+  cadena.start_date = Date.today + 2.days
   cadena.end_date = cadena.start_date + cadena.desired_installments.months
   cadena.periodicity = 'monthly'
   cadena.accepts_admin_terms = true
-  cadena.save
+  if cadena.valid?
+    cadena.save
+  else
+    puts cadena.errors.full_messages.join(', ')
+    return
+  end
   puts "Cadena #{cadena.id} created!"
 end
 

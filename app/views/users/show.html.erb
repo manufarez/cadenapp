@@ -70,6 +70,7 @@
       <% end %>
     </div>
     <% if current_user.is_admin? %>
+      <%= render 'my_cadenas' %>
       <%= render 'my_balance', user: @user %>
       <%= render 'my_payments' %>
     <% end %>

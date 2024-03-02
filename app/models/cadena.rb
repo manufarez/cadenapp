@@ -25,7 +25,9 @@ class Cadena < ApplicationRecord
   enum periodicity: { daily: 'daily', bimonthly: 'bimonthly', monthly: 'monthly' }, _default: 'monthly'
 
   def start_date_is_future
-    if start_date.present? && start_date <= Time.zone.now
+    return false unless start_date.present? && %w[started stopped archived].exclude?(status)
+
+    if start_date <= Time.zone.today
       errors.add(:start_date, "(#{start_date.strftime('%d/%m/%Y')}) should be in the future")
     end
     errors.empty?
@@ -72,7 +74,7 @@ class Cadena < ApplicationRecord
                     "participants_approval"
                   elsif missing_participants.zero? && participants_approval && positions_assigned && global_progression < 100
                     "started"
-                  elsif days_to_payment.zero? && unpaid_turn_participants.positive?
+                  elsif unpaid_previous_participants
                     "stopped"
                   elsif global_progression == 100
                     "over"
@@ -107,13 +109,9 @@ class Cadena < ApplicationRecord
   def next_payment_date
     return unless started?
 
-    withdrawal_dates = participants.pluck(:withdrawal_date).compact.select { |date| date >= Time.zone.now }
+    withdrawal_dates = participants.pluck(:withdrawal_date).compact.select { |date| date >= Time.zone.now.to_date }
     withdrawal_dates.min || nil
   end
-
-  # def subsequent_payment_date
-  #   next_payment_date + 1.day
-  # end
 
   def days_to_payment
     return unless started? && next_payment_date
@@ -122,7 +120,11 @@ class Cadena < ApplicationRecord
   end
 
   def next_paid_participant
-    participants.where('withdrawal_date >= ?', Time.zone.now).order(:withdrawal_date).first
+    participants.where('withdrawal_date >= ?', Time.zone.now.to_date).order(:withdrawal_date).first
+  end
+
+  def previous_paid_participant
+    participants.where('withdrawal_date < ?', Time.zone.now.to_date).order(:withdrawal_date).last
   end
 
   def participants_except_next_paid
@@ -135,6 +137,12 @@ class Cadena < ApplicationRecord
     return unless next_paid_participant
 
     participants.where.not(id: next_paid_participant.id).reject(&:paid_next_participant?)
+  end
+
+  def unpaid_previous_participants
+    return unless previous_paid_participant
+
+    participants.where.not(id: previous_paid_participant.id).reject(&:paid_previous_participant?)
   end
 
   def period_ratio
