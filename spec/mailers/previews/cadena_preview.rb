@@ -44,16 +44,4 @@ class CadenaPreview < ActionMailer::Preview
     participant = Participant.find { |p| p.withdrawal_date && p.position }
     CadenaMailer.participant_removed_email(participant)
   end
-
-  def payment_confirmation_email_preview
-    participant = Participant.find { |p| p.withdrawal_date && p.position }
-    next_paid_participant = participant.cadena.next_paid_participant
-    CadenaMailer.payment_confirmation_email(participant, next_paid_participant)
-  end
-
-  def payment_reminder_email_preview
-    participant = Participant.find { |p| p.withdrawal_date && p.position }
-    next_paid_participant = participant.cadena.next_paid_participant
-    CadenaMailer.payment_reminder_email(participant, next_paid_participant)
-  end
 end

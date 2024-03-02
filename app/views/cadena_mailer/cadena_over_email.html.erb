@@ -4,10 +4,11 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <p>Hello, <%= @participant.name %>!</p>
-    <p>The cadena <%= @participant.cadena.name %> is now over!</p>
-    <p>Through the power of peer collaboration, you have saved <%= number_to_currency(@participant.cadena.saving_goal) %>, congratulations for this success!</p>
-    <p>A big thanks to <%= @participant.cadena.participants_names.reject{|participant|participant == @participant.name}.join(", ") %> for making this work!</p>
-    <p>Thanks for flying with us, we hope to see you again very soon.</p>
+    <p>Hola, <%= @participant.name %>!</p>
+    <p>Te informamos que la cadena <%= @participant.cadena.name %> ha terminado de manera exitosa!</p>
+    <p>Felicitaciones! Gracias a la colaboración de todos, cada miembro ha obtenido un ahorro de <%= number_to_currency(@participant.cadena.saving_goal) %>!</p>
+    <p>Un agradecimiento especial a los demas miembros por su compromiso :  <%= @participant.cadena.participants_names.reject{|participant|participant == @participant.name}.join(", ") %>!</p>
+    <p>Gracias por utilizar y confiar en Cadenapp. Esperamos verlos muy pronto para lograr nuevas metas de ahorro!</p>
+    <p>Saludos, Cadenapp</p>
   </body>
 </html>

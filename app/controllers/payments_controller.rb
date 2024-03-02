@@ -27,7 +27,7 @@ class PaymentsController < ApplicationController
       logger.debug "After sending -> sender: #{sender.balance.to_i} receiver: #{receiver.balance.to_i}"
       receiver_counter.payments_received += 1
       @payment.save(validate: false) && sender.save && receiver.save && receiver_counter.save
-      CadenaMailer.payment_confirmation_email(sender, receiver).deliver_later
+      PaymentMailer.payment_confirmation_email(sender, receiver).deliver_later
     end
   end
 

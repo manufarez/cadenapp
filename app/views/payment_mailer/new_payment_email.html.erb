@@ -4,7 +4,8 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Hello, <%= @payment.participant.name %>!</h1>
-    <p>You have received a new payment of <%= number_to_currency(@payment.amount, precision: 2) %> from <%= @payment.user.name %> in the cadena <%= @payment.cadena.name %>.</p>
+    <p>Hola, <%= @payment.participant.name %>!</p>
+    <p>Te informamos que has recibido un pago de <%= number_to_currency(@payment.amount, precision: 2) %> por parte de <%= @payment.user.name %> en el marco de la cadena <%= @payment.cadena.name %>.</p>
+    <p>Saludos, Cadenapp</p>
   </body>
 </html>

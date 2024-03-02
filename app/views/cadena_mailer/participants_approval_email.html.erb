@@ -4,13 +4,15 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Hello, <%= @participant.name %>!</h1>
-    <p>The list of participants for <%= @cadena.name %> is now complete! <%= @cadena.admin.name %> (the admin of the cadena your in) will generate the order very soon.</p>
-    <p>The list is the following (not in order!):</p>
+    <p>Hello, <%= @participant.name %>!</p>
+    <p>Te confirmamos que la lista de participantes de la cadena <%= @cadena.name %> está completa! Se va a generar el orden de manera aleatoria muy pronto.</p>
+    <p>Recuerda que es muy importante que verifiques quienes son los otros miembros de la cadena. Conocer a cada miembro y tenerle confianza es clave para que la cadena sea un éxito.</p>
+    <p>Actualmente, los miembros de la cadena son <b>(en desorden)</b>:</p>
     <% @cadena.participants.each do |participant| %>
-      <li><%= participant.name %></li>
+      <li>- <%= participant.name %></li>
     <% end %>
     <br>
-    <p>If you no longer wish to participate in the cadena, you have until <%= (Time.zone.now + 24.hours).strftime('%d/%m/%Y at %l:%M %p') %> to abandon by clicking <%= link_to "here", @cadena %></p>
+    <p>Si por cualquier motivo, ya no quieres hacer parte de la cadena tienes hasta el <%= (Time.zone.now + 24.hours).strftime('%d/%m/%Y at %l:%M %p') %> para retirarte haciendo click <%= link_to "aqui", @cadena %>.</p>
+    <p>Saludos, Cadenapp</p>
   </body>
 </html>

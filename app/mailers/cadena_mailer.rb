@@ -16,7 +16,7 @@ class CadenaMailer < ApplicationMailer
     @participant = invitation
     mail(
       to: @cadena.admin.user.email,
-      subject: "#{@participant.name} has joined #{@cadena.name}",
+      subject: "#{@participant.name} se ha unido a la cadena #{@cadena.name}",
       from: 'contacto@cadenapp.com',
       track_opens: true,
       message_stream: 'outbound'
@@ -28,7 +28,7 @@ class CadenaMailer < ApplicationMailer
     @participant = participant
     mail(
       to: @participant.user.email,
-      subject: "Welcome to #{@cadena.name}",
+      subject: "Bienvenido a la cadena #{@cadena.name}",
       from: 'contacto@cadenapp.com',
       track_opens: true,
       message_stream: 'outbound'
@@ -40,7 +40,7 @@ class CadenaMailer < ApplicationMailer
     @participant = participant
     mail(
       to: @participant.user.email,
-      subject: "The order for #{@cadena.name} has been set!",
+      subject: "El orden de la cadena #{@cadena.name} ha sido definido",
       from: 'contacto@cadenapp.com',
       track_opens: true,
       message_stream: 'outbound'
@@ -52,7 +52,7 @@ class CadenaMailer < ApplicationMailer
     @participant = participant
     mail(
       to: @participant.user.email,
-      subject: "The cadena #{@cadena.name} has gathered all its participants!",
+      subject: "La lista de participantes de la cadena #{@cadena.name} está completa",
       from: 'contacto@cadenapp.com',
       track_opens: true,
       message_stream: 'outbound'
@@ -63,7 +63,7 @@ class CadenaMailer < ApplicationMailer
     @participant = participant
     mail(
       to: @participant.user.email,
-      subject: "Everyone in #{@participant.cadena.name} has paid for this period!",
+      subject: "Todos los participantes de #{@participant.cadena.name} han pagado su cuota para el periodo",
       from: 'contacto@cadenapp.com',
       track_opens: true,
       message_stream: 'outbound'
@@ -74,7 +74,7 @@ class CadenaMailer < ApplicationMailer
     @participant = participant
     mail(
       to: @participant.user.email,
-      subject: "Everyone in #{@participant.cadena.name} has paid for this period!",
+      subject: "La cadena #{@participant.cadena.name} ha terminado",
       from: 'contacto@cadenapp.com',
       track_opens: true,
       message_stream: 'outbound'
@@ -85,31 +85,7 @@ class CadenaMailer < ApplicationMailer
     @participant = participant
     mail(
       to: @participant.user.email,
-      subject: "You have been removed from the cadena #{@participant.cadena.name}",
-      from: 'contacto@cadenapp.com',
-      track_opens: true,
-      message_stream: 'outbound'
-    )
-  end
-
-  def payment_confirmation_email(sender_user, receiver_participant)
-    @sender_user = sender_user
-    @receiver_participant = receiver_participant
-    mail(
-      to: @sender_user.email,
-      subject: "Thank you for paying #{@receiver_participant.name}",
-      from: 'contacto@cadenapp.com',
-      track_opens: true,
-      message_stream: 'outbound'
-    )
-  end
-
-  def payment_reminder_email(participant, next_paid_participant)
-    @participant = participant
-    @next_paid_participant = next_paid_participant
-    mail(
-      to: @participant.user.email,
-      subject: "It's today! Reminder to pay #{@next_paid_participant}",
+      subject: "Has sido retirado de la cadena #{@participant.cadena.name}",
       from: 'contacto@cadenapp.com',
       track_opens: true,
       message_stream: 'outbound'

@@ -4,9 +4,10 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <p>Hello, <%= @participant.name %>!</p>
-    <p>Everyone has paid in <%= @participant.cadena.name %> for the current installment.</p>
-    <p><%= t("cadena.withdrawal_date") %> : <%= @participant.cadena.next_payment_date.strftime('%d/%m/%Y') %></p>
-    <p>Thank you for your participation, keep up the good efforts.</p>
+    <p>Hola, <%= @participant.name %>!</p>
+    <p>Te informamos que todos los participantes de la cadena <%= @participant.cadena.name %> han pagado la cuota de este periodo. Que chévere! Eso es un grupo de confianza juicioso!</p>
+    <p>Te recordamos que el próximo día de recaudo es el <%= @participant.cadena.next_payment_date.strftime('%d/%m/%Y') %>.</p>
+    <p>Gracias nuevamente por tu participación!</p>
+    <p>Saludos, Cadenapp</p>
   </body>
 </html>

@@ -4,9 +4,10 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Hello, <%= @cadena.admin.name %>!</h1>
-    <p><%= @participant.name %> has joined one of your cadenas : <%= @cadena.name %>.</p>
-    <p>Congratulations!</p>
-    <p>You can remove the participant from <%= link_to "your cadena", @cadena %> before it starts.</p>
+    <p>Hola, <%= @cadena.admin.name %>!</p>
+    <p>Te informamos que <%= @participant.name %> ha aceptado tu invitación para hacer parte de la cadena que administras, <%= link_to @cadena.name, @cadena %>.</p>
+    <p>Felicidades!</p>
+    <p>Recuerda que si por cualquier motivo te equivocaste o cambiaste de opinión, puedes retirar a un participante antes del inicio de la cadena.</p>
+    <p>Saludos, Cadenapp</p>
   </body>
 </html>

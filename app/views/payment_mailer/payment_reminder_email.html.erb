@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <p>Hola, <%= @participant.name %>!</p>
+    <p>Recuerda que hoy es el último día para enviarle a <%= @next_paid_participant.name %> los <%= number_to_currency(@participant.cadena.installment_value, precision: 2) %> que corresponden a la cuota de la cadena.</p>
+    <p>Puedes pagar haciendo click  <%= link_to "aqui", @participant.cadena  %>.</p>
+    <p>Saludos, Cadenapp</p>
+  </body>
+</html>
