@@ -2,10 +2,20 @@
 <html>
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <%= stylesheet_link_tag 'mailers' %>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
   <body>
-    <p>Hola, <%= @payment.participant.name %>!</p>
-    <p>Te informamos que has recibido un pago de <%= number_to_currency(@payment.amount, precision: 2) %> por parte de <%= @payment.user.name %> en el marco de la cadena <%= @payment.cadena.name %>.</p>
-    <p>Saludos, Cadenapp</p>
+    <p>Hola <%= @payment.participant.name %>,</p>
+    <br>
+    <p>Te informamos que has recibido un pago de <b><%= number_to_currency(@payment.amount, precision: 2) %></b> por parte de <b><%= @payment.user.name %></b> en el marco de la cadena <b><%= @payment.cadena.name %></b>.</p>
+    <p>Puedes seguir el avance de los pagos que te tocan haciendo click  <b><%= link_to "aqui", @payment.cadena  %></b>.</p>
+    <br>
+    <p>Saludos, equipo Cadenapp</p>
+    <br>
+    <br>
+    <%= link_to root_url do  %>
+      <%= image_tag 'logo_mail.png', alt: "Cadenapp", class:'logo_mail' %>
+    <% end %>
   </body>
 </html>

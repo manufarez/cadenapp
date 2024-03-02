@@ -1,0 +1,15 @@
+body {
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  color: #111a4a;
+  font-weight: 500;
+  padding: 2.5rem;
+}
+
+a {
+  color: #111a4a;
+}
+
+.logo_mail {
+  height: 2rem;
+}

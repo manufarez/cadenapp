@@ -103,6 +103,8 @@ group :development do
   gem 'rack-mini-profiler'
 
   gem 'guard-rspec', require: false
+
+  gem "premailer-rails", "~> 1.12"
 end
 
 group :test do

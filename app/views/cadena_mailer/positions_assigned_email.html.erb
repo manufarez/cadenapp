@@ -2,11 +2,20 @@
 <html>
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <%= stylesheet_link_tag 'mailers' %>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
   <body>
-    <p>Hola, <%= @participant.name %>!</p>
-    <p>El orden de la cadena <%= @cadena.name %> ha sido sorteado.</p>
-    <p>Puedes ver haciendo click  <%= link_to "aqui", @cadena %> cual es tu posición en la cadena</p>
-    <p>Saludos, Cadenapp</p>
+    <p>Hola <%= @participant.name %>,</p>
+    <br>
+    <p>El orden de la cadena <b><%= link_to @cadena.name, @cadena %></b> ha sido sorteado.</p>
+    <p>Puedes ver cual es tu posición en la cadena haciendo click <b><%= link_to "aqui", @cadena %></b></p>
+    <br>
+    <p>Saludos, equipo Cadenapp</p>
+    <br>
+    <br>
+    <%= link_to root_url do  %>
+      <%= image_tag 'logo_mail.png', alt: "Cadenapp", class:'logo_mail' %>
+    <% end %>
   </body>
 </html>

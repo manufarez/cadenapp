@@ -2,11 +2,21 @@
 <html>
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <%= stylesheet_link_tag 'mailers' %>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
   <body>
-    <p>Hola, <%= @participant.name %>!</p>
-    <p>Recuerda que hoy es el último día para enviarle a <%= @next_paid_participant.name %> los <%= number_to_currency(@participant.cadena.installment_value, precision: 2) %> que corresponden a la cuota de la cadena.</p>
-    <p>Puedes pagar haciendo click  <%= link_to "aqui", @participant.cadena  %>.</p>
-    <p>Saludos, Cadenapp</p>
+    <p>Hola <%= @participant.name %>,</p>
+    <br>
+    <p>Recuerda que hoy es el último día para enviarle a <b><%= @next_paid_participant.name %></b> el monto de <b><%= number_to_currency(@participant.cadena.installment_value, precision: 2) %></b>.</p>
+    <p>Este monto corresponde a la cuota que lo deben todos los participantes de la cadena <b><%= @participant.cadena.name %></b>.</p>
+    <p>Puedes pagar haciendo click <b><%= link_to "aqui", @participant.cadena  %></b>.</p>
+    <br>
+    <p>Saludos, equipo Cadenapp</p>
+    <br>
+    <br>
+    <%= link_to root_url do  %>
+      <%= image_tag 'logo_mail.png', alt: "Cadenapp", class:'logo_mail' %>
+    <% end %>
   </body>
 </html>

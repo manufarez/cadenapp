@@ -2,11 +2,21 @@
 <html>
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <%= stylesheet_link_tag 'mailers' %>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
   <body>
-    <p>Hola, <%= @sender_user.name %>!</p>
-    <p>Te confirmamos que hiciste un pago para <%= @receiver_participant.name %> de <%= number_to_currency(@receiver_participant.cadena.installment_value, precision: 2) %> en el marco de la cadena <%= @receiver_participant.cadena.name %>.</p>
-    <p>La proxima fecha de pagos es el <%= @receiver_participant.cadena.next_payment_date.strftime('%d/%m/%Y') %>.</p>
-    <p>Saludos, Cadenapp</p>
+    <p>Hola <%= @sender_user.name %>,</p>
+    <br>
+    <p>Te confirmamos que hiciste un pago de <b><%= number_to_currency(@receiver_participant.cadena.installment_value, precision: 2) %></b> para <b><%= @receiver_participant.name %></b> en el marco de la cadena <b><%= @receiver_participant.cadena.name %></b>.</p>
+    <p>La proxima fecha de pagos es el <b><%= @receiver_participant.cadena.next_payment_date.strftime('%d/%m/%Y') %></b>.</p>
+    <p>Puedes seguir el calendario de pagos haciendo click  <b><%= link_to "aqui", @receiver_participant.cadena  %></b>.</p>
+    <br>
+    <p>Saludos, equipo Cadenapp</p>
+    <br>
+    <br>
+    <%= link_to root_url do  %>
+      <%= image_tag 'logo_mail.png', alt: "Cadenapp", class:'logo_mail' %>
+    <% end %>
   </body>
 </html>
