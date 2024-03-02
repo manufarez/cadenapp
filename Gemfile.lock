@@ -424,7 +424,7 @@ DEPENDENCIES
   lograge
   pg (~> 1.1)
   postmark-rails
-  premailer-rails (~> 1.12)
+  premailer-rails
   puma (~> 5.0)
   rack-mini-profiler
   rails (~> 7.0.3)

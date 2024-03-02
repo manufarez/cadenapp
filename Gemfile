@@ -69,6 +69,8 @@ gem 'good_job'
 
 gem 'actionview-encoded_mail_to'
 
+gem 'premailer-rails'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
@@ -103,8 +105,6 @@ group :development do
   gem 'rack-mini-profiler'
 
   gem 'guard-rspec', require: false
-
-  gem "premailer-rails", "~> 1.12"
 end
 
 group :test do
