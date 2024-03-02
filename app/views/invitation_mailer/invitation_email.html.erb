@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <%= stylesheet_link_tag 'mailers' %>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <p>Hola <%= @invitation.first_name %> <%= @invitation.last_name %>,</p>
+    <p>Has sido invitado por <%= @invitation.sender.first_name + ' ' + @invitation.sender.last_name %> para hacer parte de la cadena de ahorro <b><%= @invitation.cadena.name %></b>.</p>
+    <p>Puedes hacer click en el siguiente enlace para ver la invitación:</p>
+    <b><%= link_to 'Ingresar Cadena', cadena_preview_url(@invitation.token) %></b>
+    <p>Si no esperabas esta invitación, simplemente puedes ignorar este correo electrónico.</p>
+    <p>Saludos, equipo Cadenapp</p>
+    <br>
+    <br>
+    <%= link_to root_url do  %>
+      <img src="<%= image_url('logo_mail.png') %>" alt="Cadenapp" class="logo_mail">
+    <% end %>
+  </body>
+</html>

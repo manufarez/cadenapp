@@ -1,7 +1,7 @@
 class InvitationMailer < ApplicationMailer
   default from: 'contacto@cadenapp.com'
 
-  def invite_email(invitation)
+  def invitation_email(invitation)
     @invitation = invitation
     mail(
       to: @invitation.email,

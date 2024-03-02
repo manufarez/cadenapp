@@ -21,7 +21,7 @@ class Invitation < ApplicationRecord
   private
 
   def send_invitation_email
-    InvitationMailer.invite_email(self).deliver_later
+    InvitationMailer.invitation_email(self).deliver_later
   end
 
   def generate_token

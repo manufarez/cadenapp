@@ -100,7 +100,7 @@ This is very useful because it allows us to disable notifications on some action
 class Invitation < ApplicationRecord
   after_create :send_invitation_email, unless: -> { Rails.application.config.seeding }
   def send_invitation_email
-    InvitationMailer.invite_email(self).deliver_later
+    InvitationMailer.invitation_email(self).deliver_later
   end
 end
 ```
