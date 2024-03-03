@@ -1,17 +1,11 @@
 class InvitationsController < ApplicationController
-  before_action :set_invitation, only: %i[show destroy]
-  before_action :set_cadena, only: %i[index new create accept]
+  before_action :set_invitation, only: %i[destroy]
+  before_action :set_cadena, only: %i[index new create accept decline]
 
-  # GET /invitations or /invitations.json
   def index
     @invitations = Invitation.where(cadena_id: params[:cadena_id])
   end
 
-  # GET /invitations/1 or /invitations/1.json
-  def show
-  end
-
-  # GET /invitations/new
   def new
     if @cadena.start_date_is_future
       @invitation = Invitation.new
@@ -40,22 +34,29 @@ class InvitationsController < ApplicationController
     end
   end
 
-  # POST /invitations or /invitations.json
+  def decline
+    @invitation = @cadena.invitations.find_by(token: params[:token])
+    respond_to do |format|
+      if @invitation.update(accepted: false)
+        format.html { redirect_to root_path, notice: "Invitation declined" }
+      else
+        format.html { redirect_to cadena_preview_path(token: @invitation.token), notice: @invitation.errors.full_messages.join(', '), status: :unprocessable_entity }
+      end
+    end
+  end
+
   def create # rubocop:disable Metrics/AbcSize
     @invitation = Invitation.new(invitation_params.merge(cadena_id: @cadena.id, sender: current_user))
     respond_to do |format|
       if @invitation.save
         format.html { redirect_to cadena_invitations_url, notice: t('notices.cadena.invitation.sent') }
-        format.json { render :show, status: :created, location: @invitation }
       else
         flash[:error] = t('notices.cadena.invitation.error')
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @invitation.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /invitations/1 or /invitations/1.json
   def destroy
     @invitation.destroy
 
@@ -67,7 +68,6 @@ class InvitationsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_invitation
     @invitation = Invitation.find(params[:id])
   end
@@ -76,7 +76,6 @@ class InvitationsController < ApplicationController
     @cadena = Cadena.find(params[:cadena_id])
   end
 
-  # Only allow a list of trusted parameters through.
   def invitation_params
     params.require(:invitation).permit(:phone, :email, :first_name, :last_name, :accepted, :cadena_id, :sender_id)
   end

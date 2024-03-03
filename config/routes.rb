@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   resources :cadenas do
     resources :invitations do
       member do
+        get :decline
         get :accept
       end
     end

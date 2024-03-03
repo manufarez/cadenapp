@@ -2,6 +2,7 @@ class Participant < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :cadena, optional: true
   has_many :received_payments, class_name: 'Payment', dependent: :destroy
+  validate :cadena_start_must_be_future, on: :create
 
   delegate :name, to: :user
   delegate :first_name, to: :user
@@ -36,5 +37,11 @@ class Participant < ApplicationRecord
   def send_participant_email
     CadenaMailer.new_participant_email(cadena, self).deliver_later
     CadenaMailer.welcome_email(cadena, self).deliver_later
+  end
+
+  def cadena_start_must_be_future
+    return if cadena.start_date_is_future
+
+    errors.add(:cadena, 'start day is today or has already passed')
   end
 end
