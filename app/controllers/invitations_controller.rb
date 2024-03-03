@@ -38,7 +38,7 @@ class InvitationsController < ApplicationController
     @invitation = @cadena.invitations.find_by(token: params[:token])
     respond_to do |format|
       if @invitation.update(accepted: false)
-        format.html { redirect_to root_path, notice: "Invitation declined" }
+        format.html { redirect_to root_path, notice: t('notices.cadena.invitation.declined') }
       else
         format.html { redirect_to cadena_preview_path(token: @invitation.token), notice: @invitation.errors.full_messages.join(', '), status: :unprocessable_entity }
       end

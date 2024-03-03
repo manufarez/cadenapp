@@ -7,7 +7,7 @@ class CadenaPreviewController < ApplicationController
       flash[:error] = t('notices.cadena.invitation.expired')
       redirect_to root_path
     elsif @invitation.accepted == false
-      flash[:error] = t('notices.cadena.invitation.declined')
+      flash[:error] = t('notices.cadena.invitation.already_declined')
       redirect_to root_path
     else
       flash[:error] = t('notices.cadena.invitation.token_error')

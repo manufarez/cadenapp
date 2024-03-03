@@ -164,7 +164,8 @@ es:
         destroyed: La invitacion ha sido eliminada
         error: Error de envio
         expired: Esta invitacion ya ha sido usada
-        declined: Esta invitacion ya ha sido rechazada
+        declined: Invitacion rechazada
+        already_declined: Esta invitacion ya ha sido rechazada
         sent: 🚀 Invitacion enviada!
         token_error: 👾 El codigo de su invitacion no es valido
         welcome: 🪩 Bienvenido a la cadena!
