@@ -70,6 +70,9 @@
       <% end %>
     </div>
     <% if current_user.is_admin? %>
+      <div class="flex super_admin">Super Admin
+        <p style="font-size:9px; transform: rotate(-90deg);">⮐</p>
+      </div>
       <%= render 'my_cadenas' %>
       <%= render 'my_balance', user: @user %>
       <%= render 'my_payments' %>
