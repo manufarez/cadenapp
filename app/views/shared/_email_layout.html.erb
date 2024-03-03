@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <%= stylesheet_link_tag 'mailers' %>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <%= yield %>
+    <section class="signature">
+      <p>Saludos, equipo Cadenapp</p>
+      <%= link_to root_url do %>
+        <%= image_tag '/images/logo_mail.png', alt: "Cadenapp", class: "logo_mail" %>
+      <% end %>
+    </section>
+  </body>
+</html>

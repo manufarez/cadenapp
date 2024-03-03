@@ -1,23 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-    <%= stylesheet_link_tag 'mailers' %>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <p>Hola <%= @participant.name %>,</p>
-    <br>
-    <p>Lo sentimos, has sido retirado de la cadena <b><%= @participant.cadena.name %></b> por el administrador. </p>
-    <p>Recuerda que el administrador tiene la autoridad para cambiar los miembros antes del inicio de la cadena.</p>
-    <p>Cadenapp no interviene en este proceso.</p>
-    <p>Esperamos verte en otra cadena próximamente.</p>
-    <br>
-    <p>Saludos, equipo Cadenapp</p>
-    <br>
-    <br>
-    <%= link_to root_url do  %>
-      <%= image_tag '/images/logo_mail.png', alt: "Cadenapp", class:"logo_mail" %>
-    <% end %>
-  </body>
-</html>
+<%= render layout: 'shared/email_layout' do %>
+  <p class="intro">Hola <%= @participant.name %>,</p>
+  <p>Lo sentimos, has sido retirado de la cadena <b><%= @participant.cadena.name %></b> por el administrador. </p>
+  <p>Recuerda que el administrador tiene la autoridad para cambiar los miembros antes del inicio de la cadena.</p>
+  <p>Cadenapp no interviene en este proceso.</p>
+  <p>Esperamos verte en otra cadena próximamente.</p>
+<% end %>

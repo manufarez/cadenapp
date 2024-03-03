@@ -1,25 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-    <%= stylesheet_link_tag 'mailers' %>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <p>Hola <%= @admin.name %>,</p>
-    <br>
-    <p>Te felicitamos por haber creado una  cadena cuyo nombre es <b><%= link_to @cadena.name, @cadena %></b>.</p>
-    <p>Puedes gestionarla haciendo click <b><%= link_to "aqui", @cadena %></b>.</p>
-    <p>Te recordamos que como administrador de esta cadena, tienes una gran responsabilidad en su desarrollo exitoso.</p>
-    <p>De la confianza que tienes en los amigos o familiares que invitaste depende que todo funcione de maravilla.</p>
-    <p>Tienes que estar pendiente de la satisfacción de todos los miembros de la cadena y de su pago juicioso en cada turno.</p>
-    <p>¡Muchos éxitos!</p>
-    <br>
-    <p>Gracias por utilizar Cadenapp</p>
-    <br>
-    <br>
-    <%= link_to root_url do  %>
-      <%= image_tag '/images/logo_mail.png', alt: "Cadenapp", class:"logo_mail" %>
-    <% end %>
-  </body>
-</html>
+<%= render layout: 'shared/email_layout' do %>
+  <p class="intro">Hola <%= @admin.name %>,</p>
+  <p>Te felicitamos por haber creado una  cadena cuyo nombre es <b><%= link_to @cadena.name, @cadena %></b>.</p>
+  <p>Puedes gestionarla haciendo click <b><%= link_to "aqui", @cadena %></b>.</p>
+  <p>Te recordamos que como administrador de esta cadena, tienes una gran responsabilidad en su desarrollo exitoso.</p>
+  <p>De la confianza que tienes en los amigos o familiares que invitaste depende que todo funcione de maravilla.</p>
+  <p>Tienes que estar pendiente de la satisfacción de todos los miembros de la cadena y de su pago juicioso en cada turno.</p>
+  <p>¡Muchos éxitos!</p>
+<% end %>

@@ -1,23 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-    <%= stylesheet_link_tag 'mailers' %>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <p>Hola <%= @cadena.admin.name %>,</p>
-    <br>
-    <p>Te informamos que <%= @participant.name %> ha aceptado tu invitación para hacer parte de la cadena que administras, <b><%= link_to @cadena.name, @cadena %></b>.</p>
-    <p>¡Felicidades!</p>
-    <p>Recuerda que si por cualquier motivo te equivocaste o cambiaste de opinión, puedes retirar a un participante antes del inicio de la cadena.</p>
-    <p>Puedes gestionar participantes haciendo click <b><%= link_to "aqui", @cadena %></b>.</p>
-    <br>
-    <p>Saludos, equipo Cadenapp</p>
-    <br>
-    <br>
-    <%= link_to root_url do  %>
-      <%= image_tag '/images/logo_mail.png', alt: "Cadenapp", class:"logo_mail" %>
-    <% end %>
-  </body>
-</html>
+<%= render layout: 'shared/email_layout' do %>
+  <p class="intro">Hola <%= @cadena.admin.name %>,</p>
+  <p>Te informamos que <%= @participant.name %> ha aceptado tu invitación para hacer parte de la cadena que administras, <b><%= link_to @cadena.name, @cadena %></b>.</p>
+  <p>¡Felicidades!</p>
+  <p>Recuerda que si por cualquier motivo te equivocaste o cambiaste de opinión, puedes retirar a un participante antes del inicio de la cadena.</p>
+  <p>Puedes gestionar participantes haciendo click <b><%= link_to "aqui", @cadena %></b>.</p>
+<% end %>

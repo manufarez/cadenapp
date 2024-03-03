@@ -1,30 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-    <%= stylesheet_link_tag 'mailers' %>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <p>Hola <%= @participant.name %>,</p>
-    <br>
-    <p>¡Te confirmamos que la lista de participantes de la cadena <b><%= link_to @cadena.name, @cadena  %></b> está completa!</p>
-    <p>Se va a generar el orden de manera aleatoria muy pronto.</p>
-    <p>Recuerda que es muy importante que verifiques quienes son los otros miembros de la cadena. <br>
-      Conocer a cada miembro y tenerle confianza es clave para que la cadena sea un éxito.</p>
-    <p>Actualmente, los miembros de la cadena son <b>(en desorden)</b>:</p>
-    <ul>
-      <% @cadena.participants.each do |participant| %>
-        <li><%= participant.name %></li>
-      <% end %>
-    </ul>
-    <p>Si por cualquier motivo, ya no quieres hacer parte de la cadena tienes hasta el <b><%= (Time.zone.now + 24.hours).strftime('%d/%m/%Y') %></b> para retirarte haciendo click <b><%= link_to "aqui", @cadena %></b>.</p>
-    <br>
-    <p>Saludos, equipo Cadenapp</p>
-    <br>
-    <br>
-    <%= link_to root_url do  %>
-      <%= image_tag '/images/logo_mail.png', alt: "Cadenapp", class:"logo_mail" %>
+<%= render layout: 'shared/email_layout' do %>
+  <p class="intro">Hola <%= @participant.name %>,</p>
+  <p>¡Te confirmamos que la lista de participantes de la cadena <b><%= link_to @cadena.name, @cadena  %></b> está completa!</p>
+  <p>Se va a generar el orden de manera aleatoria muy pronto.</p>
+  <p>Recuerda que es muy importante que verifiques quienes son los otros miembros de la cadena. <br>
+    Conocer a cada miembro y tenerle confianza es clave para que la cadena sea un éxito.</p>
+  <p>Actualmente, los miembros de la cadena son <b>(en desorden)</b>:</p>
+  <ul>
+    <% @cadena.participants.each do |participant| %>
+      <li><%= participant.name %></li>
     <% end %>
-  </body>
-</html>
+  </ul>
+  <p>Si por cualquier motivo, ya no quieres hacer parte de la cadena tienes hasta el <b><%= (Time.zone.now + 24.hours).strftime('%d/%m/%Y') %></b> para retirarte haciendo click <b><%= link_to "aqui", @cadena %></b>.</p>
+<% end %>
