@@ -1,5 +1,5 @@
 class CadenasController < ApplicationController
-  before_action :set_cadena, only: %i[show edit update destroy assign_positions]
+  before_action :set_cadena, only: %i[show edit update destroy assign_positions change_status]
   before_action :ask_profile_completion
 
   # GET /cadenas or /cadenas.json
@@ -62,6 +62,13 @@ class CadenasController < ApplicationController
         format.json { render json: @cadena.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def change_status
+    if params[:status].present? && Cadena.statuses.include?(params[:status].to_sym)
+      @cadena.update(status: params[:status], admin_status_change: true)
+    end
+    redirect_to @cadena, notice: "Status updated to #{@cadena.status}"
   end
 
   def start_participants_approval

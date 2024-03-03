@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       delete 'remove_participant/:participant_id', to: 'cadenas#remove_participant', as: 'remove_participant'
       patch :start_participants_approval
       patch :assign_positions
+      patch :change_status
     end
     resources :payments, only: [:new, :create, :index]
     get 'make_all_payments', to: 'payments#make_all_payments'

@@ -1,10 +1,13 @@
 class Cadena < ApplicationRecord
+  attr_accessor :admin_status_change
+
   has_one :admin, class_name: 'Participant', dependent: :destroy
   has_many :participants, dependent: :destroy
   has_many :invitations, dependent: :destroy
   has_many :users, through: :participants
   has_many :payments, dependent: :destroy
-  before_save :set_status, :set_saving_goal
+  before_save :set_status, unless: :admin_status_change
+  before_create :set_saving_goal
   validates :desired_participants, presence: true
   validates :desired_installments, presence: true
   validates :name, presence: true
@@ -66,19 +69,19 @@ class Cadena < ApplicationRecord
   end
 
   def set_status
-    self.status = if missing_participants.positive?
-                    "pending"
-                  elsif missing_participants.zero? && !participants_approval && !positions_assigned
-                    "complete"
-                  elsif missing_participants.zero? && participants_approval && !positions_assigned
-                    "participants_approval"
-                  elsif missing_participants.zero? && participants_approval && positions_assigned && global_progression < 100
-                    "started"
-                  elsif unpaid_previous_participants
-                    "stopped"
-                  elsif global_progression == 100
-                    "over"
-                  end
+    if missing_participants.positive?
+      "pending"
+    elsif missing_participants.zero? && !participants_approval && !positions_assigned
+      "complete"
+    elsif missing_participants.zero? && participants_approval && !positions_assigned
+      "participants_approval"
+    elsif missing_participants.zero? && participants_approval && positions_assigned && global_progression < 100
+      "started"
+    elsif unpaid_previous_participants
+      "stopped"
+    elsif global_progression == 100
+      "over"
+    end
   end
 
   def calculate_withdrawal_dates
