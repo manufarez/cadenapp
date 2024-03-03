@@ -5,6 +5,7 @@ class Payment < ApplicationRecord
 
   validate :sufficient_balance
   validate :max_payments
+  validate :cadena_started?
 
   after_create :send_payment_email, unless: -> { Rails.application.config.seeding }
   before_destroy :decrement_payments
@@ -26,6 +27,12 @@ class Payment < ApplicationRecord
     return unless participant.present? && participant.payments_received > participant.payments_expected
 
     errors.add(:amount, "can't exceed payments_expected")
+  end
+
+  def cadena_started?
+    return true if cadena.started?
+
+    errors.add(:cadena, "hasn't started or has been stopped")
   end
 
   def decrement_payments
