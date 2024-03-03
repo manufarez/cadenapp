@@ -35,6 +35,7 @@
 
 # Ignore avatars of seeds
 /public/avatars
+/public/images/.DS_Store
 
 # Removes RubyMines additions
 .idea
