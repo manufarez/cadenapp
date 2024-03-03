@@ -1,7 +1,9 @@
 <ul role="list" class="hidden" data-cadena-participants-target="global">
   <% if cadena.global_progression.positive? %>
     <div class="w-full h-4 rounded-full bg-steel">
-      <div class="flex items-center justify-center h-4 text-white transition-all duration-1000 ease-out bg-blue-600 rounded-full" style="font-size:10px;width:0%" data-cadena-participants-target="globalProgress" data-global-progress="<%= cadena.global_progression %>"><%= cadena.global_progression.to_i %>%</div>
+      <div class="progress-bar" style="font-size:10px;width:0%" data-cadena-participants-target="globalProgress" data-global-progress="<%= cadena.global_progression %>">
+        <%= cadena.global_progression.to_i %>%
+      </div>
     </div>
   <% else %>
     <div class="w-full h-4 mb-4 rounded-full bg-steel">
@@ -30,11 +32,11 @@
           </div>
         </div>
         <% if participant.user == cadena.admin.user && participant.user == current_user %>
-          <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Yo/Admin</p>
+          <p class="user-type-pill">Yo/Admin</p>
         <% elsif participant.user == cadena.admin.user %>
-          <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Admin</p>
+          <p class="user-type-pill">Admin</p>
         <% elsif participant.user == current_user %>
-          <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Yo</p>
+          <p class="user-type-pill">Yo</p>
         <% end %>
         <% if participant.paid_by_everyone %>
           <%= inline_svg_tag('svg/check.svg', class: 'w-5 text-white rounded-full bg-blue-600 p-1') %>

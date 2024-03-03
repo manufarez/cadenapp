@@ -36,4 +36,19 @@
   .status-pill {
     @apply flex pl-3 pr-2 py-1 ml-2 font-light uppercase border rounded-full selection:bg-transparent hover:cursor-pointer h-fit whitespace-nowrap;
   }
+  .user-type-pill {
+    @apply px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg;
+  }
+  .btn-outline-primary {
+    @apply border focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center border-blue-600 text-blue-600 hover:text-white hover:bg-blue-600 focus:ring-blue-800 w-full;
+  }
+  .btn-outline-danger {
+    @apply hover:text-white border focus:ring-4 w-full focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center border-red-500 text-red-500 hover:bg-red-600 focus:ring-red-900;
+  }
+  .dropdown-button {
+    @apply inline-flex items-center text-base font-semibold rounded-full text-midnight bg-jaguar_light font-manrope hover:bg-black_coral focus:outline-none;
+  }
+  .progress-bar {
+    @apply flex items-center justify-center h-4 text-white transition-all duration-1000 ease-out bg-blue-600 rounded-full;
+  }
 }

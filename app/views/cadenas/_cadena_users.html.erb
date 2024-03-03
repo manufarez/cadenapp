@@ -24,14 +24,14 @@
           </p>
         </div>
         <% if user == cadena.admin.user && user == current_user %>
-          <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Yo/Admin</p>
+          <p class="user-type-pill">Yo/Admin</p>
         <% elsif user == cadena.admin.user %>
-          <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Admin</p>
+          <p class="user-type-pill">Admin</p>
         <% elsif user == current_user %>
-          <p class="px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg">Yo</p>
+          <p class="user-type-pill">Yo</p>
         <% end %>
         <% if current_user&.admin_of?(cadena) && user != cadena.admin.user || current_user&.is_admin && user != cadena.admin.user %>
-          <button id="dropdownUser<%= user.id %>" aria-label="dropdown" data-dropdown-toggle="dropdownDotsUser<%= user.id %>" type="button" class="inline-flex items-center text-base font-semibold rounded-full text-midnight bg-jaguar_light font-manrope hover:bg-black_coral focus:outline-none">
+          <button id="dropdownUser<%= user.id %>" aria-label="dropdown" data-dropdown-toggle="dropdownDotsUser<%= user.id %>" type="button" class="dropdown-button">
             <%= inline_svg_tag "svg/dot_dropdown.svg", class: "w-5" %>
           </button>
           <div id="dropdownDotsUser<%= user.id %>" class="z-10 hidden divide-y divide-gray-600 rounded-lg shadow bg-steel_light w-fit">
