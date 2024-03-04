@@ -1,7 +1,7 @@
 <div id="flash" class="flex justify-center">
   <div class="fixed z-50 flex flex-col gap-3 mt-6 w-fit flash-messages">
     <% flash.each do |type, message| %>
-      <div id="alert-5" role="alert" x-init="() => { flashShown = true; setTimeout(() => { flashShown = false }, 4000) };" class="flash_notice flash-message"
+      <div id="alert-5" role="alert" x-init="() => { flashShown = true; setTimeout(() => { flashShown = false }, 7000) };" class="flash_notice flash-message"
         x-data="{ flashShown: false }"
         x-show="flashShown"
         x-cloak
