@@ -65,7 +65,7 @@ class UsersController < ApplicationController
   def quick_deposit
     amount = params[:deposit_amount].to_i
     @user.update(balance: @user.balance + amount)
-    redirect_to user_path(@user), status: :see_other, notice: "💸 Saldo aumentado de #{number_to_currency(amount, precision: 0)}"
+    redirect_to cadenas_path, status: :see_other, notice: "💸 Saldo aumentado de #{number_to_currency(amount, precision: 0)}"
   end
 
   private
