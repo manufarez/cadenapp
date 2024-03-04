@@ -1,4 +1,5 @@
 class PaymentsController < ApplicationController
+  include ActionView::Helpers::NumberHelper
   before_action :find_cadena
 
   def create
@@ -18,18 +19,18 @@ class PaymentsController < ApplicationController
   def process_payment
     ActiveRecord::Base.transaction do
       sender = @payment.user
-      receiver = @payment.participant.user
-      receiver_counter = @payment.participant
+      receiver = @payment.participant
       logger.info "Processing the payment..."
-      logger.debug "Before sending -> sender: #{sender.balance.to_i} receiver: #{receiver.balance.to_i}"
+      logger.debug "Before sending -> sender: #{number_to_currency(sender.balance)} | receiver: #{number_to_currency(receiver.user.balance)} & payments_received: #{receiver.payments_received}"
       sender.balance -= @payment.amount
-      receiver.balance += @payment.amount
-      logger.debug "After sending -> sender: #{sender.balance.to_i} receiver: #{receiver.balance.to_i}"
-      receiver_counter.payments_received += 1
-      @payment.save(validate: false) && sender.save && receiver.save && receiver_counter.save
+      receiver.user.balance += @payment.amount
+      receiver.payments_received += 1
+      @payment.save && sender.save && receiver.save && receiver.user.save
+      logger.debug "After sending -> sender: #{number_to_currency(sender.balance)} | receiver: #{number_to_currency(receiver.user.balance)} & payments_received: #{receiver.payments_received}"
       PaymentMailer.payment_confirmation_email(sender, receiver).deliver_later
     end
   end
+
 
   def make_all_payments
     error_messages = []
