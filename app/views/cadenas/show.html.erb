@@ -4,13 +4,14 @@
     <% if current_user.is_admin? %>
       <div class="p-4 my-6 border border-gray-700 border-dashed rounded-xl">
         <p class="px-1 mb-2 -mt-6 text-xs font-medium tracking-wide text-gray-600 uppercase w-fit bg-mirage font-manrope">Super Admin</p>
-        <div class="grid gap-3 <%= @cadena.started? ? 'grid-cols-3' : 'grid-cols-2' %>">
+        <div class="grid gap-3 <%= @cadena.started? || @cadena.stopped? ? 'grid-cols-3' : 'grid-cols-2' %>">
           <%= link_to 'Edit', edit_cadena_path(@cadena), class: "btn-outline-primary" %>
           <% if @cadena.started? %>
             <%= link_to 'Pay ⚡️', cadena_make_all_payments_path(@cadena), class:'btn-secondary text-sm text-center py-2.5 rounded-lg font-medium' %>
             <%= button_to "Stop", change_status_cadena_path(@cadena, status: 'stopped'), method: :patch,form: { data: { turbo_confirm: 'Are you sure you want to stop the cadena?' } }, class: "btn-outline-danger" %>
           <% elsif @cadena.stopped? %>
             <%= button_to "Resume", change_status_cadena_path(@cadena, status: 'started'), method: :patch,form: { data: { turbo_confirm: 'Are you sure you want to resume the cadena?' } }, class: "btn-secondary text-sm text-center py-2.5 rounded-lg font-medium w-full" %>
+            <%= button_to 'Destroy', cadena_path(@cadena), method: :delete, form: {data: {turbo_confirm: 'Are you sure you want to delete the cadena? This action is irreversible'}}, class: "btn-outline-danger" %>
           <% else %>
             <%= button_to 'Destroy', cadena_path(@cadena), method: :delete, form: {data: {turbo_confirm: 'Are you sure you want to delete the cadena? This action is irreversible'}}, class: "btn-outline-danger" %>
           <% end %>
