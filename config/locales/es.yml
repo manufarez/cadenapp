@@ -15,6 +15,7 @@ es:
     create: Crear
     create_new: Crear otra
     created_at: Creada
+    days_to_payment: "Deadline"
     desired_participants: Numero de participantes
     end_date: Fecha de fin
     fast_paid: ⚡️ Pagaste las cuotas restantes
@@ -27,7 +28,7 @@ es:
     invite_more: Invitar más
     my_withdrawal_date: Mi dia de recaudo
     name: Nombre
-    next_payment_date: Próximo pago
+    next_payment_date: Próximo día de pago
     participants: Participantes
     payment_success: 👏 Pago exitoso!
     period_progress: "% periodo"
@@ -41,8 +42,9 @@ es:
       pending: Incompleta
       started: En curso
       over: Terminada
-    this_half_month: Esta quincena
-    this_month: Este mes
+    half_month: quincena
+    month: mes
+    day: día
     withdrawal_date: Dia de recaudo
   devise:
     confirmations:

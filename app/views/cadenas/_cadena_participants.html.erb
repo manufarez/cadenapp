@@ -1,7 +1,15 @@
 <div data-controller="cadena-participants">
   <div class="flex mb-4 space-x-3">
     <button class="px-4 py-1.5 text-sm text-white rounded-full bg-primary_blue hover:bg-blue-700" data-cadena-participants-target="tab1" data-action="click->cadena-participants#showPeriod">
-      <%= cadena.periodicity == 'monthly' ? t('cadena.this_month') : t('cadena.this_half_month') %>
+      Este periodo
+      (<%= case cadena.periodicity
+        when 'monthly'
+          t('cadena.month')
+        when 'daily'
+          t('cadena.day')
+        when 'bimonthly'
+          t('cadena.half_month')
+      end %>)
     </button>
     <button class="px-4 py-1.5 text-sm text-white rounded-full hover:bg-midnight" data-cadena-participants-target="tab2" data-action="click->cadena-participants#showGlobal">Global</button>
   </div>
