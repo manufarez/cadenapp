@@ -19,7 +19,7 @@ class User < ApplicationRecord
   validates :identification_type, presence: true, on: :update
   validates :identification_number, presence: true, on: :update
   validates :address, presence: true, on: :update
-  validates :zip, presence: true, on: :update
+  # validates :zip, presence: true, on: :update
   validates :city, presence: true, on: :update
   validates :accepts_terms, acceptance: true, on: :update
   delegate :count, to: :cadenas, prefix: true
@@ -33,7 +33,8 @@ class User < ApplicationRecord
   end
 
   def profile_complete?
-    required_attributes = %i[phone dob sex address city zip identification_number identification_type accepts_terms]
+    # don't forget to add #zip
+    required_attributes = %i[phone dob sex address city identification_number identification_type accepts_terms]
     required_attributes.all? { |attribute| self[attribute].present? } && avatar.attached?
   end
 
