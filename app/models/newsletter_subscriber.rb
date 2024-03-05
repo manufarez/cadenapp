@@ -3,13 +3,13 @@ class NewsletterSubscriber < ApplicationRecord
 
   scope :active, -> { where(unsubscribed_at: nil) }
 
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true
 
   def self.link_to_user(user)
-    if existing = find_by(email: user.email)
-      existing.update!(user: user)
+    if (existing = User.find_by(email: user.email))
+      user.update!(user_id: existing.id)
     else
-      create!(email: user.email, user: user)
+      create!(email: user.email)
     end
   end
 

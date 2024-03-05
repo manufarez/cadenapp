@@ -93,10 +93,6 @@ class CadenasController < ApplicationController
 
   def assign_positions
     ActiveRecord::Base.transaction do
-      # @cadena.participants.shuffle.each.with_index(1) do |participant, index|
-      #   participant.update(position: index)
-      # end
-      # @cadena.calculate_withdrawal_dates
       @cadena.assign_positions
       @cadena.start
       unless Rails.application.config.seeding

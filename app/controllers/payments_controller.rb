@@ -31,7 +31,6 @@ class PaymentsController < ApplicationController
     end
   end
 
-
   def make_all_payments
     error_messages = []
     @cadena.unpaid_turn_participants.each do |participant|

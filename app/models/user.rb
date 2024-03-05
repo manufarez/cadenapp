@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :avatar, presence: { message: "must be attached" }, on: :update
+  validates :avatar, presence: { message: 'must be attached' }, on: :update
   validates :sex, presence: true, on: :update
   validates :dob, presence: true, on: :update
   validates :phone, presence: true, on: :update

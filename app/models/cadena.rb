@@ -19,7 +19,7 @@ class Cadena < ApplicationRecord
   enum periodicity: { daily: 'daily', bimonthly: 'bimonthly', monthly: 'monthly' }, _default: 'monthly'
 
   state_machine :state, initial: :pending do
-    before_transition on: :start, do: :assign_positions
+    after_transition on: :start, do: :assign_positions
 
     event :back_to_pending do
       transition [:complete, :participants_approval] => :pending
@@ -43,10 +43,6 @@ class Cadena < ApplicationRecord
 
     event :resume do
       transition stopped: :started
-    end
-
-    state :started, :stopped do
-      validate :enough_participants
     end
 
     state :pending, :complete, :participants_approval do
@@ -83,7 +79,7 @@ class Cadena < ApplicationRecord
     participants.includes(:user).map(&:name)
   end
 
-  def participant_state
+  def participant_count
     missing_participants.positive? ? "#{participants.count}/#{desired_participants}" : participants.count
   end
 
@@ -100,7 +96,6 @@ class Cadena < ApplicationRecord
       participant.update(position: index)
     end
     calculate_withdrawal_dates
-    update(state: 'started', positions_assigned: true)
   end
 
   def next_payment_date

@@ -10,8 +10,6 @@ class CreateCadenas < ActiveRecord::Migration[7.0]
       t.date :end_date
       t.string :periodicity
       t.string :state
-      t.boolean :participants_approval, default: false
-      t.boolean :positions_assigned, default: false
       t.boolean :accepts_admin_terms
       t.timestamps
     end

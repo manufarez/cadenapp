@@ -53,11 +53,7 @@ class UsersController < ApplicationController
   def payment_methods
     respond_to do |format|
       format.turbo_stream {
-        render turbo_stream: turbo_stream.replace(
-          "choose_payment_method_btn",
-          partial: "payment_methods",
-          locals: {deposit_amount: params[:deposit_amount]}
-        )
+        render turbo_stream: turbo_stream.replace("choose_payment_method_btn", partial: "payment_methods", locals: { deposit_amount: params[:deposit_amount] })
       }
     end
   end
@@ -83,11 +79,7 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    if params[:user_id]
-      @user = User.find(params[:user_id])
-    else
-      @user = User.find(params[:id])
-    end
+    @user = User.find(params[:user_id] || params[:id])
   end
 
   def user_params

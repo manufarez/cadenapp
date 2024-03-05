@@ -3,6 +3,7 @@ class Participant < ApplicationRecord
   belongs_to :cadena, optional: true
   has_many :received_payments, class_name: 'Payment', dependent: :destroy
   validate :cadena_start_must_be_future, on: :create
+  validate :cadena_must_have_capacity, on: :create
 
   delegate :name, to: :user
   delegate :first_name, to: :user
@@ -43,5 +44,11 @@ class Participant < ApplicationRecord
     return if cadena.start_date_is_future
 
     errors.add(:cadena, 'start day is today or has already passed')
+  end
+
+  def cadena_must_have_capacity
+    return if cadena.missing_participants.positive?
+
+    errors.add(:cadena, 'is full')
   end
 end

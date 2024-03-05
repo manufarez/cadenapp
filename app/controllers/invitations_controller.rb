@@ -21,7 +21,7 @@ class InvitationsController < ApplicationController
     return redirect_to root_path, notice: t('notices.cadena.too_late') unless @cadena.start_date_is_future
     return redirect_to root_path, notice: t('notices.cadena.full') unless @cadena.missing_participants.positive?
 
-    if current_user
+    if current_user # Allow users who have an account to join
       @participation = Participant.new(cadena: @cadena, user: current_user)
       return redirect_to root_path, notice: @participation.errors.full_messages.join(', ') unless @participation.valid?
 

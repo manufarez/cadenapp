@@ -15,9 +15,9 @@ puts 'Participants destroyed!'
 Invitation.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!(Invitation.table_name)
 puts 'Invitations destroyed!'
-User.destroy_all
-ActiveRecord::Base.connection.reset_pk_sequence!(User.table_name)
-puts 'Users destroyed!'
+# User.destroy_all
+# ActiveRecord::Base.connection.reset_pk_sequence!(User.table_name)
+# puts 'Users destroyed!'
 Cadena.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!(Cadena.table_name)
 puts 'Cadenas destroyed!'
@@ -37,36 +37,36 @@ puts 'Cadenas destroyed!'
 #   end
 # end
 
-puts 'Creating 100 fake users...'
-100.times do |i|
-  email = Faker::Internet.email
-  user = User.new(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    identification_number: Faker::IDNumber.valid,
-    identification_type: ['C.C.', 'C.I.', 'Passport'].sample,
-    identification_issued_at: Faker::Date.between(from: 10.years.ago, to: Date.today),
-    sex: %w[M F].sample,
-    dob: Faker::Date.birthday(min_age: 18, max_age: 65),
-    email: email,
-    password: email,
-    password_confirmation: email,
-    phone: Faker::PhoneNumber.cell_phone,
-    city: Faker::Address.city,
-    zip: Faker::Address.zip_code,
-    address: Faker::Address.street_address,
-    accepts_terms: true,
-    balance: [0, 500000, 1000000, 5000000].sample
-    )
-    if Rails.env.production?
-      image = URI.parse('https://i.pravatar.cc/256').open
-      user.avatar.attach(io: image, filename: 'avatar.png', content_type: 'image/png')
-    elsif Rails.env.development?
-      user.avatar.attach(io: File.open("public/avatars/avatar_#{i}.png"), filename: 'avatar.png', content_type: 'image/png')
-    end
-  user.save!
-  puts "User #{user.id} created"
-end
+# puts 'Creating 100 fake users...'
+# 100.times do |i|
+#   email = Faker::Internet.email
+#   user = User.new(
+#     first_name: Faker::Name.first_name,
+#     last_name: Faker::Name.last_name,
+#     identification_number: Faker::IDNumber.valid,
+#     identification_type: ['C.C.', 'C.I.', 'Passport'].sample,
+#     identification_issued_at: Faker::Date.between(from: 10.years.ago, to: Date.today),
+#     sex: %w[M F].sample,
+#     dob: Faker::Date.birthday(min_age: 18, max_age: 65),
+#     email: email,
+#     password: email,
+#     password_confirmation: email,
+#     phone: Faker::PhoneNumber.cell_phone,
+#     city: Faker::Address.city,
+#     zip: Faker::Address.zip_code,
+#     address: Faker::Address.street_address,
+#     accepts_terms: true,
+#     balance: [0, 500000, 1000000, 5000000].sample
+#     )
+#     if Rails.env.production?
+#       image = URI.parse('https://i.pravatar.cc/256').open
+#       user.avatar.attach(io: image, filename: 'avatar.png', content_type: 'image/png')
+#     elsif Rails.env.development?
+#       user.avatar.attach(io: File.open("public/avatars/avatar_#{i}.png"), filename: 'avatar.png', content_type: 'image/png')
+#     end
+#   user.save!
+#   puts "User #{user.id} created"
+# end
 
 puts 'Creating 10 fake cadenas with 10 participants...'
 10.times do |i|
@@ -101,18 +101,16 @@ Cadena.all.each do |cadena|
   end
 end
 
-puts "Delete and complete random participants to make it more realistic"
-Participant.first(10).last.destroy
-Participant.last.destroy
+puts "Change cadena's states to make it more realitic"
 
 # Make 7 of the cadenas complete
 complete_cadenas = Cadena.all.sample(7).each { |cadena| cadena.complete }
-
 # Make 4 of them be participants_approval
 participants_approval = complete_cadenas.sample(5).each { |cadena| cadena.approve_participants }
-
 # Start 3 of them
 participants_approval.sample(3).each{|cadena| cadena.start}
+# The rest is pending so we delete users
+Cadena.where(state:'pending').each{ |cadena| cadena.participants.last.destroy }
 
 puts 'Creating invitations for each Cadena'
 Cadena.all.each do |cadena|
@@ -158,6 +156,7 @@ puts "Cadenapp's admins created!"
 puts "Advancing the progression of Cadena #{@cadena.id}"
 payments_controller = PaymentsController.new
 
+# Makes some fake payments
 @cadena.participants_except_next_paid.each do |participant|
   @payment = Payment.new(
     cadena: @cadena,
