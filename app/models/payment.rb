@@ -9,7 +9,7 @@ class Payment < ApplicationRecord
 
   after_create :send_payment_email, unless: -> { Rails.application.config.seeding }
   before_destroy :decrement_payments
-  after_commit :send_period_complete_email, if: :period_complete?, unless: -> { Rails.application.config.seeding }
+  after_save_commit :send_period_complete_email, if: :period_complete?, unless: -> { Rails.application.config.seeding }
 
   private
 
@@ -42,7 +42,7 @@ class Payment < ApplicationRecord
   end
 
   def period_complete?
-    cadena.started? && cadena.period_progression
+    cadena.started? && cadena.period_progression == 100
   end
 
   def send_period_complete_email

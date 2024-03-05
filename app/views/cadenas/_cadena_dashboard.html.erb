@@ -1,14 +1,14 @@
 <div class="p-6 mb-6 text-white border border-gray-700 rounded-2xl" data-controller="cadena-dashboard">
   <div class="flex items-start justify-between">
     <h2 class="text-2xl font-bold leading-7 text-left text-white font-nimbus-ext"><%= cadena.name %></h2>
-    <span data-action="click->cadena-dashboard#toggleDetails" class="status-pill <%= status_color(cadena.status) %>" style="font-size:11px">
-      <%= t("cadena.status.#{cadena.status}") %><%= inline_svg_tag('svg/chevron_down.svg', class: "w-3 ml-1 #{@invitation.present? ? 'rotate-180' : ''}", data: { cadena_dashboard_target: 'chevron' }) %>
+    <span data-action="click->cadena-dashboard#toggleDetails" class="state-pill <%= state_color(cadena.state) %>" style="font-size:11px">
+      <%= t("cadena.state.#{cadena.state}") %><%= inline_svg_tag('svg/chevron_down.svg', class: "w-3 ml-1 #{@invitation.present? ? 'rotate-180' : ''}", data: { cadena_dashboard_target: 'chevron' }) %>
     </span>
   </div>
-  <div class="flex items-center justify-between mt-5" data-cadena-dashboard-target="status">
+  <div class="flex items-center justify-between mt-5" data-cadena-dashboard-target="state">
     <div class="font-manrope">
       <div class="flex items-center text-2xl font-bold <%= cadena.missing_participants.positive? ? 'text-pinky' : 'text-gray-300' %>">
-        <%= cadena.participant_status %><%= inline_svg_tag('svg/users.svg', class:'w-4 ml-2 text-placeholder_gray') %>
+        <%= cadena.participant_state %><%= inline_svg_tag('svg/users.svg', class:'w-4 ml-2 text-placeholder_gray') %>
       </div>
       <p class="text-sm lowercase text-placeholder_gray"><%= t('cadena.participants') %></p>
     </div>

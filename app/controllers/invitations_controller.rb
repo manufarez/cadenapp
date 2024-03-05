@@ -19,6 +19,7 @@ class InvitationsController < ApplicationController
 
     return redirect_to root_path, notice: t('notices.cadena.invitation.token_error') unless @invitation
     return redirect_to root_path, notice: t('notices.cadena.too_late') unless @cadena.start_date_is_future
+    return redirect_to root_path, notice: t('notices.cadena.full') unless @cadena.missing_participants.positive?
 
     if current_user
       @participation = Participant.new(cadena: @cadena, user: current_user)
@@ -27,7 +28,7 @@ class InvitationsController < ApplicationController
       flash[:notice] = t('notices.cadena.invitation.welcome')
       @participation.save
       @invitation.update(accepted: true)
-      @cadena.save
+      @cadena.complete if @cadena.missing_participants.zero?
       redirect_to @cadena
     else
       redirect_to new_user_registration_path(params: { token: params[:token] })

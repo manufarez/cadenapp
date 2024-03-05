@@ -86,7 +86,7 @@ puts 'Creating 10 fake cadenas with 10 participants...'
     puts cadena.errors.full_messages.join(', ')
     return
   end
-  puts "Cadena #{cadena.id} created!"
+  puts "Cadena #{cadena.id} created with status #{cadena.state}"
 end
 
 puts "Creating 10 participants for each cadena..."
@@ -104,9 +104,15 @@ end
 puts "Delete and complete random participants to make it more realistic"
 Participant.first(10).last.destroy
 Participant.last.destroy
-Cadena.all.map(&:save)
-Cadena.where(status: 'complete').sample(4).each { |cadena| cadena.update(participants_approval: true, status: 'participants_approval') }
-positions_assigned = Cadena.where(status: 'participants_approval').sample(2).each{|cadena| cadena.assign_positions}
+
+# Make 7 of the cadenas complete
+complete_cadenas = Cadena.all.sample(7).each { |cadena| cadena.complete }
+
+# Make 4 of them be participants_approval
+participants_approval = complete_cadenas.sample(5).each { |cadena| cadena.approve_participants }
+
+# Start 3 of them
+participants_approval.sample(3).each{|cadena| cadena.start}
 
 puts 'Creating invitations for each Cadena'
 Cadena.all.each do |cadena|
@@ -148,7 +154,7 @@ andre.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'r9
 andre.save
 puts "Cadenapp's admins created!"
 
-@cadena = Cadena.where(status: 'started').first
+@cadena = Cadena.where(state: 'started').first
 puts "Advancing the progression of Cadena #{@cadena.id}"
 payments_controller = PaymentsController.new
 

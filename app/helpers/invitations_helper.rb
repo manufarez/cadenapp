@@ -1,5 +1,5 @@
 module InvitationsHelper
-  def invitation_status_icon(invitation, cadena)
+  def invitation_state_icon(invitation, cadena)
     if cadena.users.include?(User.find_by(email: invitation.email))
       if invitation.accepted?
         inline_svg_tag('svg/check.svg', class: 'w-5 text-ciel')

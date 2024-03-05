@@ -1,12 +1,9 @@
 class Cadena < ApplicationRecord
-  attr_accessor :admin_status_change
-
   has_one :admin, class_name: 'Participant', dependent: :destroy
   has_many :participants, dependent: :destroy
   has_many :invitations, dependent: :destroy
   has_many :users, through: :participants
   has_many :payments, dependent: :destroy
-  before_save :set_status, unless: :admin_status_change
   before_create :set_saving_goal
   validates :desired_participants, presence: true
   validates :desired_installments, presence: true
@@ -17,18 +14,48 @@ class Cadena < ApplicationRecord
   validates :saving_goal, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :installment_value, presence: true
   validates :accepts_admin_terms, acceptance: { message: 'You must accept the admin terms' }
-  validate :start_date_is_future
   validate :end_date_matches_installments
-  validate :installments_match_participants
-  enum status: { pending: 'pending', complete: 'complete',
-                 participants_approval: 'participants_approval',
-                 started: 'started', stopped: 'stopped', over: 'over',
-                 archived: 'archived' },
-       _default: 'pending'
+  validate :installments_match_participants, on: :create
   enum periodicity: { daily: 'daily', bimonthly: 'bimonthly', monthly: 'monthly' }, _default: 'monthly'
 
+  state_machine :state, initial: :pending do
+    before_transition on: :start, do: :assign_positions
+
+    event :back_to_pending do
+      transition [:complete, :participants_approval] => :pending
+    end
+
+    event :complete do
+      transition pending: :complete
+    end
+
+    event :approve_participants do
+      transition complete: :participants_approval
+    end
+
+    event :start do
+      transition participants_approval: :started
+    end
+
+    event :stop do
+      transition started: :stopped
+    end
+
+    event :resume do
+      transition stopped: :started
+    end
+
+    state :started, :stopped do
+      validate :enough_participants
+    end
+
+    state :pending, :complete, :participants_approval do
+      validate :start_date_is_future
+    end
+  end
+
   def start_date_is_future
-    return false unless start_date.present? && %w[started stopped archived].exclude?(status)
+    return false unless start_date.present? && %w[started stopped archived].exclude?(state)
 
     if start_date <= Time.zone.today
       errors.add(:start_date, "(#{start_date.strftime('%d/%m/%Y')}) should be in the future")
@@ -47,16 +74,16 @@ class Cadena < ApplicationRecord
   end
 
   def installments_match_participants
-    unless desired_installments == desired_participants
-      errors.add(:desired_installments, 'do not match the number of participants')
-    end
+    return if desired_installments == desired_participants
+
+    errors.add(:desired_installments, 'do not match the number of participants')
   end
 
   def participants_names
     participants.includes(:user).map(&:name)
   end
 
-  def participant_status
+  def participant_state
     missing_participants.positive? ? "#{participants.count}/#{desired_participants}" : participants.count
   end
 
@@ -68,45 +95,12 @@ class Cadena < ApplicationRecord
     self.saving_goal = desired_installments * installment_value
   end
 
-  def set_status
-    if missing_participants.positive?
-      "pending"
-    elsif missing_participants.zero? && !participants_approval && !positions_assigned
-      "complete"
-    elsif missing_participants.zero? && participants_approval && !positions_assigned
-      "participants_approval"
-    elsif missing_participants.zero? && participants_approval && positions_assigned && global_progression < 100
-      "started"
-    elsif unpaid_previous_participants
-      "stopped"
-    elsif global_progression == 100
-      "over"
-    end
-  end
-
-  def calculate_withdrawal_dates
-    periodicity_multiplier = case periodicity
-                             when 'monthly' then 1.month
-                             when 'bimonthly' then 15.days
-                             when 'daily' then 1.day
-                             else
-                               raise ArgumentError, "Unsupported periodicity: #{periodicity}"
-                             end
-
-    participants.order(:position).each.with_index(1) do |participant, index|
-      participant.update(
-        withdrawal_date: start_date + (index * periodicity_multiplier),
-        payments_expected: desired_installments - 1
-      )
-    end
-  end
-
   def assign_positions
     participants.shuffle.each.with_index(1) do |participant, index|
       participant.update(position: index)
     end
     calculate_withdrawal_dates
-    update(status: 'started', positions_assigned: true)
+    update(state: 'started', positions_assigned: true)
   end
 
   def next_payment_date
@@ -166,5 +160,24 @@ class Cadena < ApplicationRecord
     received = participants.where(payments_received: desired_installments - 1).count
     expected = participants.count.to_f
     (received / expected * 100).round(0)
+  end
+
+  private
+
+  def calculate_withdrawal_dates
+    periodicity_multiplier = case periodicity
+                             when 'monthly' then 1.month
+                             when 'bimonthly' then 15.days
+                             when 'daily' then 1.day
+                             else
+                               raise ArgumentError, "Unsupported periodicity: #{periodicity}"
+                             end
+
+    participants.order(:position).each.with_index(1) do |participant, index|
+      participant.update(
+        withdrawal_date: start_date + (index * periodicity_multiplier),
+        payments_expected: desired_installments - 1
+      )
+    end
   end
 end

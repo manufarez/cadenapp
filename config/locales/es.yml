@@ -19,6 +19,7 @@ es:
     desired_participants: Numero de participantes
     end_date: Fecha de fin
     fast_paid: ⚡️ Pagaste las cuotas restantes
+    full: La cadena esta completa
     give_up: Darme de baja
     global_progress: "% global"
     installment_value: Valor de cada cuota
@@ -42,7 +43,7 @@ es:
       pending: Incompleta
       started: En curso
       over: Terminada
-    half_month: quincena
+    this_half_month: quincena
     month: mes
     day: día
     withdrawal_date: Dia de recaudo

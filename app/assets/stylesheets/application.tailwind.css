@@ -33,7 +33,7 @@
   .super_admin {
     @apply p-1 px-2 text-xs font-medium tracking-wide uppercase border border-dashed rounded-lg text-zinc-600 border-zinc-600 w-fit font-manrope;
   }
-  .status-pill {
+  .state-pill {
     @apply flex pl-3 pr-2 py-1 ml-2 font-light uppercase border rounded-full selection:bg-transparent hover:cursor-pointer h-fit whitespace-nowrap;
   }
   .user-type-pill {

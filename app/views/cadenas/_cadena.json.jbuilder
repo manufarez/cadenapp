@@ -8,7 +8,7 @@ json.extract!(
   :start_date,
   :end_date,
   :periodicity,
-  :status,
+  :state,
   :balance,
   :created_at,
   :updated_at

@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="cadena-dashboard"
 export default class extends Controller {
-  static targets = ["details", "status", "chevron", "nextpayment"];
+  static targets = ["details", "state", "chevron", "nextpayment"];
 
   connect() {}
 

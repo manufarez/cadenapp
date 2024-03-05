@@ -1,5 +1,5 @@
 class CadenasController < ApplicationController
-  before_action :set_cadena, only: %i[show edit update destroy assign_positions change_status]
+  before_action :set_cadena, only: %i[show edit update destroy assign_positions change_state]
   before_action :ask_profile_completion
 
   # GET /cadenas or /cadenas.json
@@ -43,7 +43,7 @@ class CadenasController < ApplicationController
         CadenaMailer.new_cadena_email(@cadena, current_user).deliver_later
         Participant.create(cadena: @cadena, user: current_user) if current_user
         format.html { redirect_to cadena_url(@cadena), notice: t('notices.cadena.creation_success') }
-        format.json { render :show, status: :created, location: @cadena }
+        format.json { render :show, state: :created, location: @cadena }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @cadena.errors, status: :unprocessable_entity }
@@ -64,11 +64,13 @@ class CadenasController < ApplicationController
     end
   end
 
-  def change_status
-    if params[:status].present? && Cadena.statuses.include?(params[:status].to_sym)
-      @cadena.update(status: params[:status], admin_status_change: true)
+  def change_state
+    if params[:state].present? && params[:state] == 'started'
+      @cadena.resume
+    elsif params[:state].present? && params[:state] == 'stopped'
+      @cadena.stop
     end
-    redirect_to @cadena, notice: "Status updated to #{@cadena.status}"
+    redirect_to @cadena, notice: "State updated to #{@cadena.state}"
   end
 
   def start_participants_approval
@@ -78,9 +80,7 @@ class CadenasController < ApplicationController
       return redirect_to @cadena, notice: t('cadena.incomplete_profile_found', participant: incomplete_users.first.name)
     end
 
-    @cadena.status = 'participants_approval'
-    @cadena.participants_approval = true
-    @cadena.save
+    @cadena.approve_participants
     respond_to do |format|
       format.html { redirect_to @cadena, notice: t('notices.cadena.start_participants_approval') }
     end
@@ -93,11 +93,12 @@ class CadenasController < ApplicationController
 
   def assign_positions
     ActiveRecord::Base.transaction do
-      @cadena.participants.shuffle.each.with_index(1) do |participant, index|
-        participant.update(position: index)
-      end
-      @cadena.calculate_withdrawal_dates
-      @cadena.update(status: 'started', positions_assigned: true)
+      # @cadena.participants.shuffle.each.with_index(1) do |participant, index|
+      #   participant.update(position: index)
+      # end
+      # @cadena.calculate_withdrawal_dates
+      @cadena.assign_positions
+      @cadena.start
       unless Rails.application.config.seeding
         @cadena.participants.reject { |participant| participant == @cadena.admin }.each do |participant|
           CadenaMailer.positions_assigned_email(@cadena, participant).deliver_later
@@ -117,7 +118,7 @@ class CadenasController < ApplicationController
     @participant = Participant.find(params[:participant_id])
     CadenaMailer.participant_removed_email(@participant).deliver_later
     @participant.destroy
-    @cadena.save
+    @cadena.back_to_pending
     redirect_to cadena_path(@cadena), notice: t('notices.cadena.user.removed')
   end
 
@@ -156,7 +157,7 @@ class CadenasController < ApplicationController
       :start_date,
       :end_date,
       :periodicity,
-      :status,
+      :state,
       :saving_goal,
       :accepts_admin_terms
     )
