@@ -37,6 +37,7 @@ class Payment < ApplicationRecord
 
   def decrement_payments
     raise 'No participant associated with this payment!' unless participant
+
     participant.payments_received -= 1
     participant.save!
   end
