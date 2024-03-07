@@ -160,13 +160,19 @@ puts "Advancing the progression of Cadena #{@cadena.id}"
 
 # Makes some fake payments
 @cadena.participants_except_next_paid.each do |participant|
-  @payment = Payment.create(
+  @payment = Payment.new(
     cadena: @cadena,
     participant: @cadena.next_paid_participant,
     amount: @cadena.installment_value,
     user: participant.user,
     paid_at: Time.zone.now
   )
+  if @payment.valid?
+    @payment.save
+  else
+    puts @payment.errors.full_messages.join(', ')
+    # return
+  end
 end
 
 puts "There are :\n - #{User.all.count} users\n - #{Participant.all.count} participants \n - #{Invitation.all.count} invitations \n - #{Cadena.all.count} cadenas \n - #{Payment.all.count} payments"

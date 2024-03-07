@@ -7,7 +7,7 @@ class Payment < ApplicationRecord
 
   validate :sufficient_balance
   validate :max_payments
-  validate :cadena_started?
+  validate :cadena_started?, unless: -> { Rails.application.config.seeding }
 
   before_destroy :decrement_payments
   after_save_commit :send_period_complete_email, if: :period_complete?, unless: -> { Rails.application.config.seeding }
