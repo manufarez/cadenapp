@@ -1,4 +1,5 @@
 class CadenaPreviewController < ApplicationController
+  include ActiveStorage::SetCurrent
   def show
     @invitation = Invitation.find_by(token: params[:token])
     if @invitation && @invitation.accepted.nil?
