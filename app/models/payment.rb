@@ -28,10 +28,6 @@ class Payment < ApplicationRecord
         puts e.errors.full_messages.join(', ')
         raise ActiveRecord::Rollback
       end
-      unless Rails.application.config.seeding
-        PaymentMailer.payment_confirmation_email(sender, receiver).deliver_later
-        PaymentMailer.new_payment_email(self).deliver_later
-      end
     end
   end
 
