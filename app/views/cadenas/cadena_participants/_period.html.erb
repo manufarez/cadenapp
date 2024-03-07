@@ -15,10 +15,10 @@
       <div class="flex-shrink-0">
         <% if current_user.is_admin %>
           <%= link_to @cadena.next_paid_participant.user do %>
-            <%= image_tag 'default_avatar.png', data:{src:url_for(@cadena.next_paid_participant.avatar)}, class:"lazy w-8 h-8 rounded-full hover:opacity-30", alt: 'Participant avatar' %>
+            <%= image_tag 'default_avatar.png', data:{src: @cadena.next_paid_participant.avatar.url}, class:"lazy w-8 h-8 rounded-full hover:opacity-30", alt: 'Participant avatar' %>
           <% end %>
         <% else %>
-          <%= image_tag 'default_avatar.png', data:{src:url_for(@cadena.next_paid_participant.avatar)}, class:"lazy w-8 h-8 rounded-full", alt: 'Participant avatar' %>
+          <%= image_tag 'default_avatar.png', data:{src: @cadena.next_paid_participant.avatar.url}, class:"lazy w-8 h-8 rounded-full", alt: 'Participant avatar' %>
         <% end %>
       </div>
       <div class="flex-1 min-w-0">
@@ -43,7 +43,7 @@
         <div class="flex-shrink-0">
           <%= link_to_cond(current_user&.is_admin?, participant.user) do %>
             <% if participant.avatar.attached? %>
-              <%= image_tag 'default_avatar.png', data:{src: url_for(participant.avatar)}, class: "lazy w-8 h-8 rounded-full #{current_user&.is_admin ? 'hover:opacity-30' : ''}", alt:"Participant avatar" %>
+              <%= image_tag 'default_avatar.png', data:{src: participant.avatar.url}, class: "lazy w-8 h-8 rounded-full #{current_user&.is_admin ? 'hover:opacity-30' : ''}", alt:"Participant avatar" %>
             <% else %>
               <%= image_tag 'default_avatar.png', class: "w-8 h-8 rounded-full #{current_user&.is_admin ? 'hover:opacity-30' : ''}", alt:"Participant avatar" %>
             <% end %>

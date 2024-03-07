@@ -14,7 +14,6 @@ export default class extends Controller {
 
   connect() {
     new LazyLoad();
-    console.log("hey");
     if (this.hasPeriodProgressTarget) {
       this.periodProgressTarget.style.width =
         this.periodProgressTarget.dataset.periodProgress + "%";

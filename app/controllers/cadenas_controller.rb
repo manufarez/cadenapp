@@ -1,4 +1,5 @@
 class CadenasController < ApplicationController
+  include ActiveStorage::SetCurrent
   before_action :set_cadena, only: %i[show edit update destroy assign_positions change_state]
   before_action :ask_profile_completion
 

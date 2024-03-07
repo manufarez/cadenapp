@@ -5,7 +5,7 @@
         <div class="flex-shrink-0">
           <%= link_to_cond(current_user&.is_admin?, user) do %>
             <% if user.avatar.attached? %>
-              <%= image_tag 'default_avatar.png', data:{src: url_for(user.avatar)}, class: "lazy w-8 h-8 rounded-full #{current_user&.is_admin ? 'hover:opacity-30' : ''}", alt:'User avatar' %>
+              <%= image_tag 'default_avatar.png', data:{src: user.avatar.url}, class: "lazy w-8 h-8 rounded-full #{current_user&.is_admin ? 'hover:opacity-30' : ''}", alt:'User avatar' %>
             <% else %>
               <%= image_tag 'default_avatar.png', class: "w-8 h-8 rounded-full #{current_user&.is_admin ? 'hover:opacity-30' : ''}", alt:'User avatar' %>
             <% end %>
