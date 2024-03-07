@@ -4,11 +4,11 @@
     <h1 class="hidden px-2 py-1 text-2xl italic font-bold tracking-tighter text-white rounded-md font-nimbus w-fit sm:block">Cadenapp</h1>
   <% end %>
   <% if current_user %>
-    <%= render 'shared/date_selector' %>
-    <%= render 'shared/cadenas_shortcut' %>
-    <% if current_user.is_admin %>
-      <%= render 'shared/users_shortcut' %>
-    <% end %>
-    <%= render 'shared/user' %>
+    <div class="flex">
+      <%= render 'shared/date_selector' if current_user.is_admin %>
+      <%= render 'shared/cadenas_shortcut' %>
+      <%= render 'shared/users_shortcut' if current_user.is_admin %>
+      <%= render 'shared/user' %>
+    </div>
   <% end %>
 </div>
