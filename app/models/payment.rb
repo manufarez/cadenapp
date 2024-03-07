@@ -46,9 +46,9 @@ class Payment < ApplicationRecord
   end
 
   def cadena_started?
-    return true if cadena.started?
+    return true if cadena.started? && Time.zone.now.to_date > cadena.start_date
 
-    errors.add(:cadena, "hasn't started or has been stopped")
+    errors.add(:cadena, "hasn't started (#{cadena.start_date.strftime('%d/%m/%y')}) or has been stopped")
   end
 
   def decrement_payments
