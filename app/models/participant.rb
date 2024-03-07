@@ -36,6 +36,8 @@ class Participant < ApplicationRecord
   private
 
   def send_participant_email
+    return if self == cadena.admin
+
     CadenaMailer.new_participant_email(cadena, self).deliver_later
     CadenaMailer.welcome_email(cadena, self).deliver_later
   end
