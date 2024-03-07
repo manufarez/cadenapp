@@ -152,9 +152,12 @@ class Cadena < ApplicationRecord
   def global_progression
     return 0 unless payments.any?
 
-    received = participants.where(payments_received: desired_installments - 1).count
     expected = participants.count.to_f
-    (received / expected * 100).round(0)
+    (received_installments / expected * 100).round(0)
+  end
+
+  def received_installments
+    participants.where(payments_received: desired_installments - 1).count
   end
 
   private
