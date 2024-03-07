@@ -52,8 +52,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_15_161951) do
     t.date "end_date"
     t.string "periodicity"
     t.string "state"
-    t.boolean "participants_approval", default: false
-    t.boolean "positions_assigned", default: false
     t.boolean "accepts_admin_terms"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

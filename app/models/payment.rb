@@ -1,4 +1,6 @@
 class Payment < ApplicationRecord
+  include ActionView::Helpers::NumberHelper
+
   belongs_to :cadena
   belongs_to :participant
   belongs_to :user
@@ -7,15 +9,33 @@ class Payment < ApplicationRecord
   validate :max_payments
   validate :cadena_started?
 
-  after_create :send_payment_email, unless: -> { Rails.application.config.seeding }
   before_destroy :decrement_payments
   after_save_commit :send_period_complete_email, if: :period_complete?, unless: -> { Rails.application.config.seeding }
 
-  private
-
-  def send_payment_email
-    PaymentMailer.new_payment_email(self).deliver_later
+  def process_payment
+    ActiveRecord::Base.transaction do
+      sender = user
+      receiver = participant
+      begin
+        save!
+        sender.balance -= amount
+        receiver.user.balance += amount
+        receiver.payments_received += 1
+        sender.save!
+        receiver.save!
+        receiver.user.save!
+      rescue ActiveRecord::RecordInvalid => e
+        puts e.errors.full_messages.join(', ')
+        raise ActiveRecord::Rollback
+      end
+      unless Rails.application.config.seeding
+        PaymentMailer.payment_confirmation_email(sender, receiver).deliver_later
+        PaymentMailer.new_payment_email(self).deliver_later
+      end
+    end
   end
+
+  private
 
   def sufficient_balance
     return unless amount > user.balance

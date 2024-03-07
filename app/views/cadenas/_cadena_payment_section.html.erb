@@ -1,6 +1,6 @@
 <%# if !current_user.paid_next_participant? && cadena.next_paid_participant.user != current_user %>
 <% if cadena.next_paid_participant.user != current_user && !current_user.participant(cadena).paid_next_participant? %>
-  <%= button_to cadena_payments_path(cadena, participant_id: cadena.next_paid_participant.id, user: current_user), class: 'btn-primary text-white/75 mb-4 text-sm shadow-xl', form_class: 'w-full' do %>
+  <%= button_to cadena_payments_path(cadena, payment: {participant_id: cadena.next_paid_participant, user_id: current_user, amount: cadena.installment_value, paid_at: Time.zone.now, cadena_id: cadena.id}), class: 'btn-primary text-white/75 mb-4 text-sm shadow-xl', form_class: 'w-full' do %>
     Pagar <span class="text-white"><%= number_to_currency_with_k(cadena.installment_value, precision: 0) %></span> a <%= cadena.next_paid_participant.name %>
   <% end %>
 <% elsif cadena.next_paid_participant.user == current_user %>

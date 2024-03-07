@@ -21,6 +21,9 @@ puts 'Invitations destroyed!'
 Cadena.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!(Cadena.table_name)
 puts 'Cadenas destroyed!'
+Payment.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!(Payment.table_name)
+puts 'Payments destroyed!'
 
 # Only uncomment this for the first installment, helps playing seeds faster
 # require 'open-uri'
@@ -154,24 +157,16 @@ puts "Cadenapp's admins created!"
 
 @cadena = Cadena.where(state: 'started').first
 puts "Advancing the progression of Cadena #{@cadena.id}"
-payments_controller = PaymentsController.new
 
 # Makes some fake payments
 @cadena.participants_except_next_paid.each do |participant|
-  @payment = Payment.new(
+  @payment = Payment.create(
     cadena: @cadena,
     participant: @cadena.next_paid_participant,
     amount: @cadena.installment_value,
     user: participant.user,
     paid_at: Time.zone.now
   )
-  if @payment.valid?
-    payments_controller.instance_variable_set(:@payment, @payment)
-    payments_controller.process_payment
-    puts "Payment successfully processed."
-  else
-    puts "Payment processing failed."
-  end
 end
 
 puts "There are :\n - #{User.all.count} users\n - #{Participant.all.count} participants \n - #{Invitation.all.count} invitations \n - #{Cadena.all.count} cadenas \n - #{Payment.all.count} payments"
