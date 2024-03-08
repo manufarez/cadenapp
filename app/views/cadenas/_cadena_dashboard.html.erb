@@ -58,7 +58,7 @@
       <% end %>
     </div>
   </div>
-  <% unless current_user&.member_of?(cadena) %>
+  <% unless current_user&.member_of?(cadena) || current_user&.is_admin %>
     <%= render 'cadenas/invitations_buttons', cadena: cadena %>
   <% end %>
 </div>
