@@ -10,5 +10,5 @@
       <li><%= participant.name %></li>
     <% end %>
   </ul>
-  <p>Si por cualquier motivo, ya no quieres hacer parte de la cadena tienes hasta el <b><%= (Time.zone.now + 24.hours).strftime('%d/%m/%Y') %></b> para retirarte haciendo click <b><%= link_to "aqui", @cadena %></b>.</p>
+  <p>Si por cualquier motivo, ya no quieres hacer parte de la cadena puedes retirartes antes del <b><%= (Time.zone.now + 24.hours).strftime('%d/%m/%Y') %></b> haciendo click <b><%= link_to "aqui", @cadena %></b>.</p>
 <% end %>

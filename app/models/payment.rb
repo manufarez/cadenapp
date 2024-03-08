@@ -9,6 +9,7 @@ class Payment < ApplicationRecord
   validate :max_payments
   validate :cadena_started?, unless: -> { Rails.application.config.seeding }
 
+  after_create :global_complete?
   before_destroy :decrement_payments
   after_save_commit :send_period_complete_email, if: :period_complete?, unless: -> { Rails.application.config.seeding }
 
@@ -46,7 +47,7 @@ class Payment < ApplicationRecord
   end
 
   def cadena_started?
-    return true if cadena.started? && Time.zone.now.to_date > cadena.start_date
+    return true if cadena.started? && Time.zone.now.to_date >= cadena.start_date
 
     errors.add(:cadena, "hasn't started (#{cadena.start_date.strftime('%d/%m/%y')}) or has been stopped")
   end
@@ -56,10 +57,22 @@ class Payment < ApplicationRecord
 
     participant.payments_received -= 1
     participant.save!
+    cadena.resume if cadena.finished?
   end
 
   def period_complete?
     cadena.started? && cadena.period_progression == 100
+  end
+
+  def global_complete?
+    return true if cadena.finished?
+
+    if cadena.started? && cadena.global_progression == 100
+      cadena.finish
+      true
+    end
+
+    false
   end
 
   def send_period_complete_email

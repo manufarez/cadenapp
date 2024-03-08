@@ -36,13 +36,13 @@ es:
     periodicity: Frecuencia
     saving_goal: Objetivo de ahorro
     start_date: Fecha de inicio
-    state: Estado
-    status:
+    cadena_state: Estado
+    state:
       complete: Completa
       participants_approval: Verif. participantes
       pending: Incompleta
       started: En curso
-      over: Terminada
+      finished: Terminada
     this_half_month: quincena
     month: mes
     day: día

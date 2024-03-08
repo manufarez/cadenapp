@@ -37,12 +37,16 @@ class Cadena < ApplicationRecord
       transition participants_approval: :started
     end
 
+    event :finish do
+      transition started: :finished
+    end
+
     event :stop do
       transition started: :stopped
     end
 
     event :resume do
-      transition stopped: :started
+      transition [:stopped, :finished] => :started
     end
 
     state :pending, :complete, :participants_approval do
@@ -112,7 +116,7 @@ class Cadena < ApplicationRecord
   end
 
   def next_paid_participant
-    participants.where('withdrawal_date >= ?', Time.zone.now.to_date).order(:withdrawal_date).first
+    participants.where('withdrawal_date >= ?', Time.zone.now.to_date).order(:withdrawal_date).first || participants.order(position: :desc).first
   end
 
   def previous_paid_participant
