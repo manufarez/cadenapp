@@ -3,7 +3,6 @@
   <% if cadena.started? && current_user.member_of?(cadena) %>
     <%= render 'users/balance', user: current_user %>
   <% end %>
-  <%# <div class="p-6 rounded-xl bg-black_rock"> %>
   <div>
     <div class="flow-root">
       <% if !current_user || cadena.pending? || cadena.complete? || cadena.participants_approval? %>
