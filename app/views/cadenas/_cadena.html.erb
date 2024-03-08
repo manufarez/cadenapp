@@ -9,6 +9,8 @@
         <%= render 'cadenas/cadena_users', cadena: cadena %>
       <% elsif cadena.started? %>
         <%= render 'cadenas/cadena_participants', cadena: cadena %>
+      <% elsif cadena.finished? %>
+        <%= render 'cadenas/cadena_finished', cadena: cadena %>
       <% end %>
     </div>
   </div>

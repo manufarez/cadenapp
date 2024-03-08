@@ -1,0 +1,52 @@
+<script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+<script>
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.3 },
+  });
+</script>
+<div class="mb-4">
+  <button class="px-4 py-1.5 text-sm text-white rounded-full bg-primary_blue hover:bg-blue-700" onclick="confetti()">
+    🎉 Cadena terminada
+  </button>
+</div>
+<ul role="list" data-cadena-participants-target="global">
+  <% cadena.participants.order(position: :asc).each do |participant| %>
+    <li class="h-16	px-5 flex items-center my-3 bg-midnight rounded-2xl first:mt-0 <%= cadena.next_paid_participant == participant ? 'border border-blue-600' : '' %>">
+      <div class="flex items-center justify-between w-full space-x-4">
+        <span class="text-silver"><%= participant.position %></span>
+        <div class="flex-shrink-0">
+          <%= link_to_cond(current_user&.is_admin?, participant.user) do %>
+            <% if participant.avatar.attached? %>
+              <%= image_tag 'default_avatar.png', data:{src: participant.avatar.url}, class:"lazy w-8 h-8 rounded-full hover:opacity-30", alt: 'Participant avatar' %>
+            <% else %>
+              <%= image_tag 'default_avatar.png', class: "w-8 h-8 rounded-full #{current_user&.is_admin ? 'hover:opacity-30' : ''}", alt:'Participant avatar' %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm font-medium text-white truncate">
+            <%= participant.name %>
+          </div>
+          <div class="text-xs text-placeholder_gray font-manrope <%= participant.paid_by_everyone ? 'line-through' : '' %>">
+            <%= participant.withdrawal_date.strftime('%d/%m/%Y') %>
+          </div>
+        </div>
+        <% if participant.user == cadena.admin.user && participant.user == current_user %>
+          <p class="user-type-pill">Yo/Admin</p>
+        <% elsif participant.user == cadena.admin.user %>
+          <p class="user-type-pill">Admin</p>
+        <% elsif participant.user == current_user %>
+          <p class="user-type-pill">Yo</p>
+        <% end %>
+        <% if participant.paid_by_everyone %>
+          <%= inline_svg_tag('svg/check.svg', class: 'w-5 text-white rounded-full bg-blue-600 p-1') %>
+        <% else %>
+          <span class="w-5 h-5 border rounded-full border-midnight_light bg-midnight_light/10"></span>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+</ul>
+</div>

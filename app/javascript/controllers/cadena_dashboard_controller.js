@@ -3,8 +3,15 @@ import { Controller } from "@hotwired/stimulus";
 // Connects to data-controller="cadena-dashboard"
 export default class extends Controller {
   static targets = ["details", "state", "chevron", "nextpayment"];
+  static values = { state: String };
 
-  connect() {}
+  initilize() {}
+
+  connect() {
+    if (this.stateValue === "finished") {
+      this.toggleDetails();
+    }
+  }
 
   toggleDetails() {
     this.detailsTarget.classList.toggle("hidden");
