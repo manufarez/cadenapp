@@ -29,6 +29,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
           if @participation.valid?
             @participation.save
             invitation.update(accepted: true)
+            invitation.cadena.reload
             invitation.cadena.complete if invitation.cadena.missing_participants.zero?
           else
             raise "Invalid participation: #{@participation.errors.full_messages.join(', ')}"
