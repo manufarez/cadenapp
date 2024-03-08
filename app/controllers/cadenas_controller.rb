@@ -1,6 +1,6 @@
 class CadenasController < ApplicationController
   include ActiveStorage::SetCurrent
-  before_action :set_cadena, only: %i[show edit update destroy assign_positions change_state]
+  before_action :set_cadena, only: %i[show edit update destroy assign_positions change_state start_participants_approval remove_participant]
   before_action :ask_profile_completion
 
   # GET /cadenas or /cadenas.json
@@ -75,7 +75,6 @@ class CadenasController < ApplicationController
   end
 
   def start_participants_approval
-    @cadena = Cadena.find(params[:id])
     incomplete_users = @cadena.users.reject(&:profile_complete?)
     unless incomplete_users.empty?
       return redirect_to @cadena, notice: t('cadena.incomplete_profile_found', participant: incomplete_users.first.name)
@@ -109,7 +108,6 @@ class CadenasController < ApplicationController
   end
 
   def remove_participant
-    @cadena = Cadena.find(params[:id])
     return redirect_to cadena_path(@cadena), alert: t('notices.cadena.too_late') unless @cadena.start_date_is_future
 
     @participant = Participant.find(params[:participant_id])
