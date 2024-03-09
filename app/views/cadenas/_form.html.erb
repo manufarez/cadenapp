@@ -26,7 +26,7 @@
     </div>
   </div>
   <div class="mb-4">
-    <%= f.text_field :installment_value, placeholder: t('cadena.installment_value'), class: 'input w-full', min: 100000, data:{cadena_target:"installmentValue", action:"cadena#updateSavingGoal"} %>
+    <%= f.number_field :installment_value, placeholder: t('cadena.installment_value'), class: 'input w-full', min: 100000, data:{cadena_target:"installmentValue", action:"cadena#updateSavingGoal"} %>
   </div>
   <div class="mb-4">
     <%= f.label :start_date, t('cadena.start_date'), class:'text-silver text-sm' %>
@@ -34,7 +34,7 @@
   </div>
   <div class="mb-4">
     <%= f.label :end_date, t('cadena.end_date'), class:'text-silver text-sm' %>
-    <%= f.date_field :end_date, readonly: true, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 w-full hover:cursor-not-allowed", data:{cadena_target:"endDate"} %>
+    <%= f.date_field :end_date, readonly: true, class: "block border-none date rounded-xl end_date text-white bg-steel outline-none p-4 w-full hover:cursor-not-allowed", data:{cadena_target:"endDate"} %>
   </div>
   <div class="mb-4">
     <%= f.label :saving_goal, t('cadena.saving_goal'), class:'text-silver text-sm' %>

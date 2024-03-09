@@ -1,5 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 import flatpickr from "flatpickr";
+import moment from "moment";
 
 // Connects to data-controller="cadena"
 export default class extends Controller {
@@ -66,15 +67,20 @@ export default class extends Controller {
         },
       },
     });
+    flatpickr(".end_date", {
+      dateFormat: "d/m/Y",
+      defaultDate: "",
+      clickOpens: false,
+    });
   }
 
   updateEndDate() {
     const installments = parseInt(this.installmentsTarget.value, 10);
-    const startDate = this.startDateTarget.value.split("/").reverse().join("-");
+    const startDate = this.startDateTarget.value;
     const periodicity = this.periodicityTarget.value;
 
     if (installments && startDate) {
-      const endDate = new Date(startDate);
+      const endDate = moment(startDate, "DD/MM/YYYY").toDate();
       if (periodicity === "daily") {
         endDate.setDate(endDate.getDate() + installments);
       } else if (periodicity === "monthly") {
@@ -82,8 +88,7 @@ export default class extends Controller {
       } else if (periodicity === "bimonthly") {
         endDate.setDate(endDate.getDate() + installments * 15);
       }
-      const formattedEndDate = endDate.toISOString().split("T")[0];
-      this.endDateTarget.value = formattedEndDate;
+      this.endDateTarget.value = moment(endDate).format("DD/MM/YYYY");
     } else {
       this.endDateTarget.value = "";
     }
