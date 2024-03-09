@@ -49,7 +49,7 @@ class Payment < ApplicationRecord
   def cadena_started?
     return true if cadena.started? && Time.zone.now.to_date >= cadena.start_date
 
-    errors.add(:cadena, "no ha empezado (#{cadena.start_date.strftime('%d/%m/%y')}) o ha sido pausada")
+    errors.add(:cadena, "no ha empezado (empieza: #{cadena.start_date.strftime('%d/%m/%y')}) o ha sido pausada")
   end
 
   def decrement_payments
