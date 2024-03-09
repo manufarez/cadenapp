@@ -170,6 +170,7 @@ GEM
     importmap-rails (1.1.0)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
+    initials (0.4.3)
     inline_svg (1.9.0)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
@@ -425,6 +426,7 @@ DEPENDENCIES
   htmlbeautifier
   image_processing (~> 1.2)
   importmap-rails
+  initials
   inline_svg
   jbuilder
   letter_opener

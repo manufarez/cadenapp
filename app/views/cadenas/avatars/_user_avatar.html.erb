@@ -1,0 +1,3 @@
+<%= link_to_cond(current_user&.is_admin?, user) do %>
+  <%= image_tag 'default_avatar.png', data:{src: user.avatar.url}, class: "lazy w-8 h-8 rounded-full #{current_user&.is_admin ? 'hover:opacity-30' : ''}", alt:"Participant avatar" %>
+<% end %>

@@ -1,0 +1,7 @@
+<% if current_user.is_admin %>
+  <%= link_to @cadena.next_paid_participant.user do %>
+    <%= image_tag 'default_avatar.png', data:{src: @cadena.next_paid_participant.avatar.url}, class:"lazy w-8 h-8 rounded-full hover:opacity-30", alt: 'Participant avatar' %>
+  <% end %>
+<% else %>
+  <%= image_tag 'default_avatar.png', data:{src: @cadena.next_paid_participant.avatar.url}, class:"lazy w-8 h-8 rounded-full", alt: 'Participant avatar' %>
+<% end %>

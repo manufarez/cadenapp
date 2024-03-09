@@ -2,9 +2,11 @@
 import "@hotwired/turbo-rails";
 import "controllers";
 import "flowbite";
+import LazyLoad from "vanilla-lazyload";
 import Alpine from "alpinejs";
 window.Alpine = Alpine;
 
 document.addEventListener("DOMContentLoaded", function (event) {
   window.Alpine.start();
+  new LazyLoad();
 });

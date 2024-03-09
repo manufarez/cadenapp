@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include ActiveStorage::SetCurrent
   include ActionView::Helpers::NumberHelper
   skip_before_action :authenticate_user!, only: %i[complete_profile update]
   before_action :set_user, except: %i[index]
