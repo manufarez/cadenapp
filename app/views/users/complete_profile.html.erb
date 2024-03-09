@@ -11,7 +11,7 @@
       <%= form_for(@user, url: user_update_profile_path(@user)) do |f| %>
         <%= render "users/shared/error_messages", resource: @user %>
         <div class="flex mb-4 space-x-3">
-          <%= image_tag 'default_avatar.png', data: {src: @user.avatar.url }, class:'lazy rounded-full w-24 h-24 object-fit mx-auto', alt:'User avatar' %>
+          <%= image_tag 'default_avatar.png', data: {src: @user.avatar.url }, class:'lazy rounded-full w-24 h-24 object-cover mx-auto', alt:'User avatar' %>
         </div>
         <div class="flex flex-col mb-4" data-controller="avatar">
           <label for="avatar-input" class="text-sm text-silver"><%= t('user.profile_pic') %></label>
