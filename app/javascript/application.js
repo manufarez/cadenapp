@@ -6,7 +6,7 @@ import LazyLoad from "vanilla-lazyload";
 import Alpine from "alpinejs";
 window.Alpine = Alpine;
 
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener("turbo:load", function () {
   window.Alpine.start();
   new LazyLoad();
 });
