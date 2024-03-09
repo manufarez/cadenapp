@@ -12,7 +12,8 @@ class User < ApplicationRecord
   has_one_attached :avatar
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :avatar, presence: { message: 'must be attached' }, on: :update
+  validates :avatar, presence: { message: 'tiene que ser vinculado al perfil' }, on: :update
+  validates :avatar, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..(2.megabytes) }
   validates :sex, presence: true, on: :update
   validates :dob, presence: true, on: :update
   validates :phone, presence: true, on: :update
