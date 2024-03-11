@@ -9,6 +9,11 @@ Rails.application.configure do
       cron: '0 8 * * *',
       class: "PaymentReminderJob",
       set: { priority: -10 }
-    }
+    },
+    every_day_at_11_55: {
+      cron: '01 00 * * *',
+      class: "CheckCadenasPaymentsJob",
+      set: { priority: -10 }
+    },
   }
 end
