@@ -109,6 +109,13 @@ class Cadena < ApplicationRecord
     withdrawal_dates.min || nil
   end
 
+  def last_payment_date
+    return unless started?
+
+    withdrawal_dates = participants.pluck(:withdrawal_date).compact.select { |date| date < Time.zone.now.to_date }
+    withdrawal_dates.min || nil
+  end
+
   def days_to_payment
     return unless started? && next_payment_date
 

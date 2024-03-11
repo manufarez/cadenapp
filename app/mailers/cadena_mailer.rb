@@ -15,7 +15,7 @@ class CadenaMailer < ApplicationMailer
     @cadena = cadena
     @participant = invitation
     mail(
-      to: @cadena.admin.user.email,
+      to: @cadena.admin.email,
       subject: "#{@participant.name} se ha unido a la cadena #{@cadena.name}",
       from: 'contacto@cadenapp.com',
       track_opens: true,
@@ -27,7 +27,7 @@ class CadenaMailer < ApplicationMailer
     @cadena = cadena
     @participant = participant
     mail(
-      to: @participant.user.email,
+      to: @participant.email,
       subject: "Bienvenido a la cadena #{@cadena.name}",
       from: 'contacto@cadenapp.com',
       track_opens: true,
@@ -39,7 +39,7 @@ class CadenaMailer < ApplicationMailer
     @cadena = cadena
     @participant = participant
     mail(
-      to: @participant.user.email,
+      to: @participant.email,
       subject: "El orden de la cadena #{@cadena.name} ha sido definido",
       from: 'contacto@cadenapp.com',
       track_opens: true,
@@ -51,7 +51,7 @@ class CadenaMailer < ApplicationMailer
     @cadena = cadena
     @participant = participant
     mail(
-      to: @participant.user.email,
+      to: @participant.email,
       subject: "La lista de participantes de la cadena #{@cadena.name} está completa",
       from: 'contacto@cadenapp.com',
       track_opens: true,
@@ -62,7 +62,7 @@ class CadenaMailer < ApplicationMailer
   def period_complete_email(participant)
     @participant = participant
     mail(
-      to: @participant.user.email,
+      to: @participant.email,
       subject: "Todos los participantes de #{@participant.cadena.name} han pagado su cuota para el periodo",
       from: 'contacto@cadenapp.com',
       track_opens: true,
@@ -73,7 +73,7 @@ class CadenaMailer < ApplicationMailer
   def cadena_over_email(participant)
     @participant = participant
     mail(
-      to: @participant.user.email,
+      to: @participant.email,
       subject: "La cadena #{@participant.cadena.name} ha terminado",
       from: 'contacto@cadenapp.com',
       track_opens: true,
@@ -84,8 +84,19 @@ class CadenaMailer < ApplicationMailer
   def participant_removed_email(participant)
     @participant = participant
     mail(
-      to: @participant.user.email,
+      to: @participant.email,
       subject: "Has sido retirado de la cadena #{@participant.cadena.name}",
+      from: 'contacto@cadenapp.com',
+      track_opens: true,
+      message_stream: 'outbound'
+    )
+  end
+
+  def unpaid_turn_detected(participant)
+    @participant = participant
+    mail(
+      to: @participant.email,
+      subject: "Retraso de pago en la cadena #{@participant.cadena.name}",
       from: 'contacto@cadenapp.com',
       track_opens: true,
       message_stream: 'outbound'

@@ -2,11 +2,17 @@ class CheckCadenasPaymentsJob < ApplicationJob
   queue_as :default
 
   def perform
-    cadenas = Cadena.where(state: ['started', 'stopped'])
-    return if cadenas.empty?
+    ongoing_cadenas = Cadena.where(state: ['started', 'stopped'])
+    return if ongoing_cadenas.empty?
 
-    cadenas.each do |cadena|
-      cadena.update(state: 'stopped') if cadena.unpaid_previous_participants.present?
+    unpaid_cadenas = ongoing_cadenas.select do |cadena|
+      cadena.unpaid_previous_participants.present?
+    end
+    return if unpaid_cadenas.empty?
+
+    unpaid_cadenas.each do |cadena|
+      cadena.participants.each { |participant| CadenaMailer.unpaid_turn_detected(participant).deliver_later }
+      cadena.update(state: 'stopped')
     end
   end
 end

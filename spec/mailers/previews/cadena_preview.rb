@@ -44,4 +44,9 @@ class CadenaPreview < ActionMailer::Preview
     participant = Participant.find { |p| p.withdrawal_date && p.position }
     CadenaMailer.participant_removed_email(participant)
   end
+
+  def unpaid_turn_detected
+    participant = Cadena.find { |c| c.payments && c.periodicity == 'daily' && c.started? }.participants.first
+    CadenaMailer.unpaid_turn_detected(participant)
+  end
 end
