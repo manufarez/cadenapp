@@ -64,11 +64,11 @@ class Cadena < ApplicationRecord
   end
 
   def end_date_matches_installments
-    if periodicity == 'daily' && end_date != start_date + desired_installments.days
+    if periodicity == 'daily' && end_date != start_date + desired_installments.days - 1.day
       errors.add(:end_date, "does not match number of remaining days")
-    elsif periodicity == 'monthly' && end_date != start_date + desired_installments.months
+    elsif periodicity == 'monthly' && end_date != start_date + desired_installments.months - 1.day
       errors.add(:end_date, "does not match number of remaining months")
-    elsif periodicity == 'bimonthly' && end_date != start_date + (desired_installments * 15.days)
+    elsif periodicity == 'bimonthly' && end_date != start_date + (desired_installments * 15.days) - 1.day
       errors.add(:end_date, "does not match number of remaining quincenas")
     end
   end
@@ -177,7 +177,7 @@ class Cadena < ApplicationRecord
 
     participants.order(:position).each.with_index(1) do |participant, index|
       participant.update(
-        withdrawal_date: start_date + (index * periodicity_multiplier),
+        withdrawal_date: start_date - 1.day + (index * periodicity_multiplier),
         payments_expected: desired_installments - 1
       )
     end
