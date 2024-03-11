@@ -9,6 +9,7 @@ class Participant < ApplicationRecord
   delegate :first_name, to: :user
   delegate :last_name, to: :user
   delegate :avatar, to: :user
+  delegate :email, to: :user
 
   after_create :send_participant_email, unless: -> { Rails.application.config.seeding }
 

@@ -1,0 +1,15 @@
+<%= render layout: 'shared/email_layout' do %>
+  <p class="intro">Hola <%= @participant.name %>,</p>
+  <p>Hemos detectado un retraso de pago en la cadena <b><%= link_to @participant.cadena.name, @participant.cadena %></b>, por lo tanto la tuvimos que pausar.</p>
+  <b>Ningun participante podrá retirar su saldo Cadenapp hasta que se corrija el retraso.</b>
+  <p>Les recordamos que como participantes de esta cadena, tienen la responsabilidad colectiva de asegurarse que todos paguen a tiempo lo que les corresponde.</p>
+  <p>La ultima fecha de recaudo era el <u><b><%= @participant.cadena&.last_payment_date&.strftime('%d/%m/%Y') %></b></u>, el retraso es inputable a los siguientes participantes de la cadena :</p>
+  <ul>
+    <% @participant.cadena.unpaid_previous_participants.each do |participant| %>
+      <li><%= participant.name %></li>
+    <% end %>
+  </ul>
+  <p>Los participantes antes mencionados pueden pagar la cuota que deben haciendo click <b><%= link_to "aqui", @participant.cadena %></b>.</p>
+  <p>La cadena sera automaticamente desbloqueada después de que todos los pagos faltantes sean cobrados.</p>
+  <p>El calendario global de la cadena sera reajustado en funcion del retraso.</p>
+<% end %>
