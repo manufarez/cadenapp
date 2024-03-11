@@ -16,9 +16,9 @@ Invitation.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!(Invitation.table_name)
 puts 'Invitations destroyed!'
 User.destroy_all
-ActiveRecord::Base.connection.reset_pk_sequence!(User.table_name)
-puts 'Users destroyed!'
-Cadena.destroy_all
+# ActiveRecord::Base.connection.reset_pk_sequence!(User.table_name)
+# puts 'Users destroyed!'
+# Cadena.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!(Cadena.table_name)
 puts 'Cadenas destroyed!'
 Payment.destroy_all
@@ -40,36 +40,36 @@ puts 'Payments destroyed!'
 #   end
 # end
 
-puts 'Creating 100 fake users...'
-100.times do |i|
-  email = Faker::Internet.email
-  user = User.new(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    identification_number: Faker::IDNumber.valid,
-    identification_type: ['C.C.', 'C.I.', 'Passport'].sample,
-    identification_issued_at: Faker::Date.between(from: 10.years.ago, to: Date.today),
-    sex: %w[M F].sample,
-    dob: Faker::Date.birthday(min_age: 18, max_age: 65),
-    email: email,
-    password: email,
-    password_confirmation: email,
-    phone: Faker::PhoneNumber.cell_phone,
-    city: Faker::Address.city,
-    zip: Faker::Address.zip_code,
-    address: Faker::Address.street_address,
-    accepts_terms: true,
-    balance: [0, 500000, 1000000, 5000000].sample
-    )
-    if Rails.env.production?
-      image = URI.parse('https://i.pravatar.cc/256').open
-      user.avatar.attach(io: image, filename: 'avatar.png', content_type: 'image/png')
-    elsif Rails.env.development?
-      user.avatar.attach(io: File.open("public/avatars/avatar_#{i}.png"), filename: 'avatar.png', content_type: 'image/png')
-    end
-  user.save!
-  puts "User #{user.id} created"
-end
+# puts 'Creating 100 fake users...'
+# 100.times do |i|
+#   email = Faker::Internet.email
+#   user = User.new(
+#     first_name: Faker::Name.first_name,
+#     last_name: Faker::Name.last_name,
+#     identification_number: Faker::IDNumber.valid,
+#     identification_type: ['C.C.', 'C.I.', 'Passport'].sample,
+#     identification_issued_at: Faker::Date.between(from: 10.years.ago, to: Date.today),
+#     sex: %w[M F].sample,
+#     dob: Faker::Date.birthday(min_age: 18, max_age: 65),
+#     email: email,
+#     password: email,
+#     password_confirmation: email,
+#     phone: Faker::PhoneNumber.cell_phone,
+#     city: Faker::Address.city,
+#     zip: Faker::Address.zip_code,
+#     address: Faker::Address.street_address,
+#     accepts_terms: true,
+#     balance: [0, 500000, 1000000, 5000000].sample
+#     )
+#     if Rails.env.production?
+#       image = URI.parse('https://i.pravatar.cc/256').open
+#       user.avatar.attach(io: image, filename: 'avatar.png', content_type: 'image/png')
+#     elsif Rails.env.development?
+#       user.avatar.attach(io: File.open("public/avatars/avatar_#{i}.png"), filename: 'avatar.png', content_type: 'image/png')
+#     end
+#   user.save!
+#   puts "User #{user.id} created"
+# end
 
 puts 'Creating 10 fake cadenas with 10 participants...'
 10.times do |i|
