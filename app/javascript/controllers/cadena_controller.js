@@ -80,9 +80,11 @@ export default class extends Controller {
     const periodicity = this.periodicityTarget.value;
 
     if (installments && startDate) {
-      const endDate = moment(startDate, "DD/MM/YYYY").toDate();
+      const endDate = moment(startDate, "DD/MM/YYYY")
+        .subtract(1, "days")
+        .toDate();
       if (periodicity === "daily") {
-        endDate.setDate(endDate.getDate() + installments - 1);
+        endDate.setDate(endDate.getDate() + installments);
       } else if (periodicity === "monthly") {
         endDate.setMonth(endDate.getMonth() + installments);
       } else if (periodicity === "bimonthly") {
