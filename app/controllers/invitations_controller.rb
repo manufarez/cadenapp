@@ -3,7 +3,7 @@ class InvitationsController < ApplicationController
   before_action :set_cadena, only: %i[index new create accept decline]
 
   def index
-    @invitations = Invitation.where(cadena_id: params[:cadena_id])
+    @invitations = Invitation.where(cadena_id: params[:cadena_id]).order(accepted: :desc, first_name: :asc)
   end
 
   def new

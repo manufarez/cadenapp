@@ -5,7 +5,7 @@
     <p class="px-4 mb-12 text-lg font-bold text-center text-gray-100 md:text-xl animate__animated animate__fadeInUp animate__fast font-manrope">Monta tu cadena entre amigos y familiares. <br>
       Administra tus ahorros facilmente sin pasar por un banco.</p>
     <div class="px-4 py-2 mx-auto mb-12 font-medium text-center text-white rounded-lg md:mb-0 w-fit bg-gradient-to-br from-blue-500 to-blue-600/60 hover:cursor-pointer hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-lavender">
-      Abrir cuenta
+      <%= link_to "Abrir cuenta", cadenas_path %>
     </div>
   </div>
   <%= image_tag "mockup.png", class:'invisible w-64 h-full', onload:"this.classList.remove('invisible')", alt:"Application mockup" %>

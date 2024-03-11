@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def index
     if current_user.is_admin?
-      @users = User.includes(:made_payments, :received_payments).all
+      @users = User.includes(:made_payments, :received_payments).all.order(:first_name, :last_name)
     else
       redirect_to cadenas_path, notice: t('notices.user.not_admin', user_email: current_user.email)
     end
@@ -17,7 +17,8 @@ class UsersController < ApplicationController
 
   def show
     if @user == current_user || current_user.is_admin?
-      @payments = (@user.made_payments + @user.received_payments).sort_by(&:created_at)
+      @cadenas = @user.cadenas.order(state: :desc, name: :asc)
+      @payments = (@user.made_payments + @user.received_payments).sort_by(&:created_at).reverse
     else
       redirect_to(current_user, notice: t('notices.user.access_forbidden'))
     end

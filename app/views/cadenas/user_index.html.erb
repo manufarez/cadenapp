@@ -1,38 +1,6 @@
 <div class="flex justify-center max-w-md mx-auto">
   <div class="w-full px-6 mb-6 text-white font-manrope">
-    <div class="flex items-end justify-between mt-2">
-      <h1 class="mt-6 mb-2 text-lg font-semibold">Mis cadenas</h1>
-      <% if current_user.cadenas.any? %>
-        <%= link_to t('cadena.create_new'), new_cadena_path, class:'btn-primary w-fit text-xs font-semibold px-3 mb-4 rounded-lg py-2' %>
-      <% end %>
-    </div>
-    <div class="flex flex-col space-y-4">
-      <% if current_user.cadenas.any? %>
-        <% current_user.cadenas.each do |cadena| %>
-          <%= link_to cadena do %>
-            <div class="flex items-center justify-between p-4 font-sans text-sm font-medium rounded-xl bg-midnight hover:bg-black_rock">
-              <div class="flex items-center">
-                <div class="flex mr-2">
-                  <%= render 'cadenas/avatars/avatars_preview' %>
-                </div>
-                <span class="mr-3"><%= cadena.name %></span>
-                <% if current_user.admin_of?(cadena) || current_user.admin_of?(cadena) %>
-                  <span class="px-2 py-1 text-xs uppercase border rounded-lg border-jaguar_light text-jaguar_light">ADMIN</span>
-                <% end %>
-              </div>
-              <span class="font-normal <%= state_color(cadena.state) %>">
-                <%= t("cadena.state.#{cadena.state}") %>
-              </span>
-            </div>
-          <% end %>
-        <% end %>
-      <% else %>
-        <div class="flex flex-col items-center p-6 border border-gray-700 border-dashed rounded-xl">
-          <p class="mb-4 text-sm font-medium text-gray-600"><%= t('cadena.belongs_to_none') %></p>
-          <%= link_to t('cadena.create'), new_cadena_path, class:'btn-primary w-fit text-xs font-semibold px-3 rounded-md py-2 mb-1' %>
-        </div>
-      <% end %>
-    </div>
+    <%= render 'users/my_cadenas' %>
     <%= render 'users/my_balance' %>
     <%= render 'users/my_payments' %>
   </div>

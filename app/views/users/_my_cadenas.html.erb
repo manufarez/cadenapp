@@ -1,12 +1,12 @@
 <div class="flex items-end justify-between mt-2">
   <h1 class="mt-6 mb-2 text-lg font-semibold"><%= current_user == @user ? 'Mis cadenas' : 'Cadenas' %></h1>
-  <% if @user.cadenas.any? %>
+  <% if @cadenas.any? %>
     <%= link_to t('cadena.create_new'), new_cadena_path, class:'btn-primary w-fit text-xs font-semibold px-3 mb-4 rounded-lg py-2' %>
   <% end %>
 </div>
 <div class="flex flex-col space-y-4">
-  <% if @user.cadenas.any? %>
-    <% @user.cadenas.each do |cadena| %>
+  <% if @cadenas.any? %>
+    <% @cadenas.each do |cadena| %>
       <%= link_to cadena do %>
         <div class="flex items-center justify-between p-4 font-sans text-sm font-medium rounded-xl bg-midnight hover:bg-black_rock">
           <div class="flex items-center">
@@ -18,7 +18,7 @@
               <span class="px-2 py-1 text-xs uppercase border rounded-lg border-jaguar_light text-jaguar_light">ADMIN</span>
             <% end %>
           </div>
-          <span class="font-normal <%= state_color(cadena) %>">
+          <span class="font-normal <%= state_color(cadena.state) %>">
             <%= t("cadena.state.#{cadena.state}") %>
           </span>
         </div>

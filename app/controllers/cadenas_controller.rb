@@ -6,12 +6,13 @@ class CadenasController < ApplicationController
   # GET /cadenas or /cadenas.json
 
   def index
-    @cadenas = current_user.is_admin ? Cadena.includes(:participants).all : current_user.cadenas
     if current_user.is_admin
+      @cadenas = Cadena.includes(:participants).all.order(state: :asc, name: :asc)
       render template: 'cadenas/admin_index'
     else
       @user = current_user
-      @payments = (@user.made_payments + @user.received_payments).sort_by(&:created_at)
+      @cadenas = @user.cadenas.order(state: :desc, name: :asc)
+      @payments = (@user.made_payments + @user.received_payments).sort_by(&:created_at).reverse
       render template: 'cadenas/user_index'
     end
   end
