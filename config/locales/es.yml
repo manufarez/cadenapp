@@ -5,6 +5,10 @@ es:
       models:
         payment:
           insufficient_funds: ⛔ Fondos insuficientes!
+      messages:
+        content_type: " - no es un formato válido"
+        min_size_error: " - tamaño de archivo debe ser mayor a %{min_size}"
+        max_size_error: " - tamaño de archivo debe ser menor a %{max_size}"
   cadena:
     admin_terms_acceptance: You must accept the admin terms
     approve_list: Enviar confirmacion lista
@@ -154,6 +158,9 @@ es:
       send_instructions: Vas a recibir instrucciones para desbloquear tu cuenta en unos pocos minutos.
       send_paranoid_instructions: Si tu cuenta existe, vas a recibir instrucciones para desbloquear tu cuenta en unos pocos minutos.
       unlocked: Tu cuenta ha sido desbloqueada. Ya puedes iniciar sesión.
+  errors:
+    messages:
+      not_saved: Las informaciones no han sido guardadas
   invitation:
     accept: Aceptar invitación
     decline: Rechazar invitación
