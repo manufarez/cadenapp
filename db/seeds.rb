@@ -79,9 +79,16 @@ puts 'Creating 10 fake cadenas with 10 participants...'
   cadena.desired_participants = 10
   cadena.installment_value = (200_000..1_000_000).step(100_000).to_a.sample
   cadena.saving_goal = cadena.desired_installments * cadena.installment_value
-  cadena.start_date = Date.today + 2.days
-  cadena.end_date = cadena.start_date + cadena.desired_installments.months
-  cadena.periodicity = 'monthly'
+  cadena.start_date = Date.today + 1.day
+  cadena.periodicity = ['monthly', 'bimonthly', 'daily'].sample
+  puts cadena.periodicity
+  periodicity_multiplier = case cadena.periodicity
+                           when 'monthly' then 1.month
+                           when 'bimonthly' then 15.days
+                           when 'daily' then 1.day
+                           end
+  cadena.end_date = cadena.start_date + (cadena.desired_installments * periodicity_multiplier) - 1.day
+  puts cadena.end_date.strftime('%d/%m/%Y')
   cadena.accepts_admin_terms = true
   if cadena.valid?
     cadena.save
