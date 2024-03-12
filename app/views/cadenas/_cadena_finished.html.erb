@@ -4,7 +4,7 @@
     🎉 Cadena terminada
   </button>
 </div>
-<ul role="list" data-cadena-participants-target="global">
+<ul role="list">
   <% cadena.participants.order(position: :asc).each do |participant| %>
     <li class="h-16	px-5 flex items-center my-3 bg-midnight rounded-2xl first:mt-0 <%= cadena.next_paid_participant == participant ? 'border border-blue-600' : '' %>">
       <div class="flex items-center justify-between w-full space-x-4">
