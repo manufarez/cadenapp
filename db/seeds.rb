@@ -16,9 +16,9 @@ Invitation.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!(Invitation.table_name)
 puts 'Invitations destroyed!'
 User.destroy_all
-# ActiveRecord::Base.connection.reset_pk_sequence!(User.table_name)
-# puts 'Users destroyed!'
-# Cadena.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!(User.table_name)
+puts 'Users destroyed!'
+Cadena.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!(Cadena.table_name)
 puts 'Cadenas destroyed!'
 Payment.destroy_all
