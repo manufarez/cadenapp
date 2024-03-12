@@ -51,4 +51,7 @@
   .progress-bar {
     @apply flex items-center justify-center h-4 text-white transition-all duration-1000 ease-out bg-blue-600 rounded-full;
   }
+  .active-period {
+    @apply bg-primary_blue hover:bg-blue-700;
+  }
 }

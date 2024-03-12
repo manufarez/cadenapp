@@ -19,36 +19,36 @@ export default class extends Controller {
   }
 
   showPeriod() {
-    this.toggleView();
-    this.tab1Target.classList.add("bg-primary_blue", "hover:bg-blue-700");
-    this.tab2Target.classList.remove("bg-primary_blue", "hover:bg-blue-700");
-    this.tab1Target.classList.remove("hover:bg-midnight");
-    this.tab2Target.classList.add("hover:bg-midnight");
-    if (this.hasPeriodProgressTarget) {
-      setTimeout(() => {
-        this.periodProgressTarget.style.width =
-          this.periodProgressTarget.dataset.periodProgress + "%";
-      }, "1");
-    }
-    if (this.hasGlobalProgressTarget) {
-      this.globalProgressTarget.style.width = "0%";
+    if (!this.tab1Target.classList.contains("active-period")) {
+      this.toggleView();
+      this.tab2Target.classList.replace("active-period", "hover:bg-midnight");
+      this.tab1Target.classList.replace("hover:bg-midnight", "active-period");
+      if (this.hasPeriodProgressTarget) {
+        setTimeout(() => {
+          this.periodProgressTarget.style.width =
+            this.periodProgressTarget.dataset.periodProgress + "%";
+        }, "1");
+      }
+      if (this.hasGlobalProgressTarget) {
+        this.globalProgressTarget.style.width = "0%";
+      }
     }
   }
 
   showGlobal() {
-    this.toggleView();
-    this.tab1Target.classList.remove("bg-primary_blue", "hover:bg-blue-700");
-    this.tab2Target.classList.add("bg-primary_blue", "hover:bg-blue-700");
-    this.tab2Target.classList.remove("hover:bg-midnight");
-    this.tab1Target.classList.add("hover:bg-midnight");
-    if (this.hasGlobalProgressTarget) {
-      setTimeout(() => {
-        this.globalProgressTarget.style.width =
-          this.globalProgressTarget.dataset.globalProgress + "%";
-      }, "1");
-    }
-    if (this.hasPeriodProgressTarget) {
-      this.periodProgressTarget.style.width = "0%";
+    if (!this.tab2Target.classList.contains("active-period")) {
+      this.toggleView();
+      this.tab1Target.classList.replace("active-period", "hover:bg-midnight");
+      this.tab2Target.classList.replace("hover:bg-midnight", "active-period");
+      if (this.hasGlobalProgressTarget) {
+        setTimeout(() => {
+          this.globalProgressTarget.style.width =
+            this.globalProgressTarget.dataset.globalProgress + "%";
+        }, "1");
+      }
+      if (this.hasPeriodProgressTarget) {
+        this.periodProgressTarget.style.width = "0%";
+      }
     }
   }
 

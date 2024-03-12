@@ -1,6 +1,6 @@
 <div data-controller="cadena-participants">
   <div class="flex mb-4 space-x-3">
-    <button class="px-4 py-1.5 text-sm text-white rounded-full bg-primary_blue hover:bg-blue-700" data-cadena-participants-target="tab1" data-action="click->cadena-participants#showPeriod">
+    <button class="px-4 py-1.5 text-sm text-white rounded-full active-period" data-cadena-participants-target="tab1" data-action="click->cadena-participants#showPeriod">
       Este periodo
       (<%= case cadena.periodicity
         when 'monthly'
