@@ -48,7 +48,7 @@ es:
       pending: Incompleta
       started: En curso
       finished: Terminada
-    this_half_month: quincena
+    half_month: quincena
     month: mes
     day: día
     withdrawal_date: Dia de recaudo
