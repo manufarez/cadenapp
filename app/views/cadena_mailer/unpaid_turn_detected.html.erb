@@ -3,7 +3,7 @@
   <p>Hemos detectado un retraso de pago en la cadena <b><%= link_to @participant.cadena.name, @participant.cadena %></b>, por lo tanto la tuvimos que pausar.</p>
   <b>Ningun participante podrá retirar su saldo Cadenapp hasta que se corrija el retraso.</b>
   <p>Les recordamos que como participantes de esta cadena, tienen la responsabilidad colectiva de asegurarse que todos paguen a tiempo lo que les corresponde.</p>
-  <p>La ultima fecha de recaudo era el <u><b><%= @participant.cadena&.last_payment_date&.strftime('%d/%m/%Y') %></b></u>, el retraso es inputable a los siguientes participantes de la cadena :</p>
+  <p>La ultima fecha de recaudo era el <u><b><%= @participant.cadena&.last_payment_date&.strftime('%d/%m/%Y') %></b></u>, el retraso es imputable a los siguientes participantes de la cadena :</p>
   <ul>
     <% @participant.cadena.unpaid_previous_participants.each do |participant| %>
       <li><%= participant.name %></li>
