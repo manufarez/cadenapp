@@ -40,8 +40,8 @@ puts 'Payments destroyed!'
 #   end
 # end
 
-puts 'Creating 100 fake users...'
-100.times do |i|
+puts 'Creating 170 fake users...'
+170.times do |i|
   email = Faker::Internet.email
   user = User.new(
     first_name: Faker::Name.first_name,
@@ -72,7 +72,7 @@ puts 'Creating 100 fake users...'
 end
 
 puts 'Creating 10 fake cadenas with 10 participants...'
-10.times do |i|
+17.times do |i|
   cadena = Cadena.new
   cadena.name = Faker::Restaurant.name
   cadena.desired_installments = 10
