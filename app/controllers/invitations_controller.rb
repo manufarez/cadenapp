@@ -28,7 +28,8 @@ class InvitationsController < ApplicationController
       flash[:notice] = t('notices.cadena.invitation.welcome')
       @participation.save
       @invitation.update(accepted: true)
-      @cadena.complete if @cadena.missing_participants.zero?
+      @cadena.reload
+      @cadena.complete! if @cadena.missing_participants.zero?
       redirect_to @cadena
     else
       redirect_to new_user_registration_path(params: { token: params[:token] })

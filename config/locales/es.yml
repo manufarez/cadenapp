@@ -170,6 +170,7 @@ es:
       access_forbidden: ⛔️ Usted no tiene acceso a esta cadena
       creation_success: ✨ Cadena creada
       destroyed: Cadena borrada
+      full: Esta cadena ya esta completa
       too_late: ⛔️ La cadena empezó/está por empezar, acción inválida
       invitation:
         destroyed: La invitacion ha sido eliminada

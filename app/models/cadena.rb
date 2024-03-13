@@ -20,6 +20,7 @@ class Cadena < ApplicationRecord
 
   state_machine :state, initial: :pending do
     after_transition on: :start, do: :assign_positions
+    after_transition to: :complete, do: :remind_admin_to_send_list
 
     event :back_to_pending do
       transition [:complete, :participants_approval] => :pending
@@ -169,6 +170,10 @@ class Cadena < ApplicationRecord
 
   def received_installments
     participants.where(payments_received: desired_installments - 1).count
+  end
+
+  def remind_admin_to_send_list
+    CadenaMailer.remind_admin_to_send_list(self).deliver_later
   end
 
   private

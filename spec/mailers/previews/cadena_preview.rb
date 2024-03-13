@@ -49,4 +49,9 @@ class CadenaPreview < ActionMailer::Preview
     participant = Cadena.find { |c| c.payments && c.periodicity == 'daily' && c.started? }.participants.first
     CadenaMailer.unpaid_turn_detected(participant)
   end
+
+  def remind_admin_to_send_list
+    cadena = Cadena.where(state: 'complete').first
+    CadenaMailer.remind_admin_to_send_list(cadena)
+  end
 end

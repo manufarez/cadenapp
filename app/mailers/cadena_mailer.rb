@@ -102,4 +102,15 @@ class CadenaMailer < ApplicationMailer
       message_stream: 'outbound'
     )
   end
+
+  def remind_admin_to_send_list(cadena)
+    @cadena = cadena
+    mail(
+      to: @cadena.admin.email,
+      subject: "La cadena #{@cadena.name} esta completa, puedes enviar la lista",
+      from: 'contacto@cadenapp.com',
+      track_opens: true,
+      message_stream: 'outbound'
+    )
+  end
 end

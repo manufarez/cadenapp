@@ -114,6 +114,7 @@ class CadenasController < ApplicationController
     @participant = Participant.find(params[:participant_id])
     CadenaMailer.participant_removed_email(@participant).deliver_later
     @participant.destroy
+    @cadena.reload
     @cadena.back_to_pending
     redirect_to cadena_path(@cadena), notice: t('notices.cadena.user.removed')
   end
