@@ -21,6 +21,7 @@ class Cadena < ApplicationRecord
   state_machine :state, initial: :pending do
     after_transition on: :start, do: :assign_positions
     after_transition to: :complete, do: :remind_admin_to_send_list
+    after_transition to: :participants_approval, do: :remind_admin_to_generate_order
 
     event :back_to_pending do
       transition [:complete, :participants_approval] => :pending
@@ -66,11 +67,17 @@ class Cadena < ApplicationRecord
 
   def end_date_matches_installments
     if periodicity == 'daily' && end_date != start_date + desired_installments.days - 1.day
-      errors.add(:end_date, "does not match number of remaining days")
-    elsif periodicity == 'monthly' && end_date != start_date + desired_installments.months
-      errors.add(:end_date, "does not match number of remaining months")
+      error_message = "Cadena #{id} end date does not match number of remaining days"
+      logger.error error_message
+      errors.add(:end_date, error_message)
+    elsif periodicity == 'monthly' && end_date != start_date + desired_installments.months - 1.day
+      error_message = "Cadena #{id} end date does not match number of remaining months"
+      logger.error error_message
+      errors.add(:end_date, error_message)
     elsif periodicity == 'bimonthly' && end_date != start_date + (desired_installments * 15.days) - 1.day
-      errors.add(:end_date, "does not match number of remaining quincenas")
+      error_message = "Cadena #{id} end date does not match number of remaining quincenas"
+      logger.error error_message
+      errors.add(:end_date, error_message)
     end
   end
 
@@ -173,7 +180,15 @@ class Cadena < ApplicationRecord
   end
 
   def remind_admin_to_send_list
+    return if Rails.application.config.seeding
+
     CadenaMailer.remind_admin_to_send_list(self).deliver_later
+  end
+
+  def remind_admin_to_generate_order
+    return if Rails.application.config.seeding
+
+    CadenaMailer.remind_admin_to_generate_order(self).deliver_later
   end
 
   private
