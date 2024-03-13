@@ -1,7 +1,7 @@
 <%= render layout: 'shared/email_layout' do %>
   <p class="intro">Hola <%= @cadena.admin.name %>,</p>
   <p>Las invitaciones para la cadena <b><%= link_to @cadena.name, @cadena %></b> lograron reunir los <%= @cadena.desired_participants %> participantes necesarios. ¡Felicidades!</p>
-  <p>Como administrador de la cadena, ahora te toca <b>verificar la lista de los participantes</b> haciendo click en el botón amarillo <b><%= link_to "aqui", @cadena %></b>.</p>
+  <p>Como administrador(a) de la cadena, ahora te toca <b>verificar la lista de los participantes</b> haciendo click en el botón azul <b><%= link_to "aqui", @cadena %></b>.</p>
   <p>Si algun participante te genera desconfianza, puedes retirarlo de la lista pulsando el boton <b>"Eliminar"</b>, <br>
     pero recuerda que tendrás que reemplazarlo invitando a otro participante después.</p>
   <p>Una vez que confirmes la lista, todos los participantes tendran un plazo de 1 dia después del cual ya no podran darse de baja.</p>
