@@ -67,7 +67,7 @@ class Cadena < ApplicationRecord
   def end_date_matches_installments
     if periodicity == 'daily' && end_date != start_date + desired_installments.days - 1.day
       errors.add(:end_date, "does not match number of remaining days")
-    elsif periodicity == 'monthly' && end_date != start_date + desired_installments.months - 1.day
+    elsif periodicity == 'monthly' && end_date != start_date + desired_installments.months
       errors.add(:end_date, "does not match number of remaining months")
     elsif periodicity == 'bimonthly' && end_date != start_date + (desired_installments * 15.days) - 1.day
       errors.add(:end_date, "does not match number of remaining quincenas")

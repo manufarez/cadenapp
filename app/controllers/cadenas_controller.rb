@@ -111,10 +111,9 @@ class CadenasController < ApplicationController
   def remove_participant
     return redirect_to cadena_path(@cadena), alert: t('notices.cadena.too_late') unless @cadena.start_date_is_future
 
-    @participant = Participant.find(params[:participant_id])
-    CadenaMailer.participant_removed_email(@participant).deliver_later
+    @participant = @cadena.participants.find(params[:participant_id])
     @participant.destroy
-    @cadena.reload
+    CadenaMailer.participant_removed_email(@participant).deliver_later
     @cadena.back_to_pending
     redirect_to cadena_path(@cadena), notice: t('notices.cadena.user.removed')
   end

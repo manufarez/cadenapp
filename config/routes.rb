@@ -37,7 +37,7 @@ Rails.application.routes.draw do
       end
     end
     member do
-      delete 'remove_participant/:participant_id', to: 'cadenas#remove_participant', as: 'remove_participant'
+      delete 'remove_participant/:participant_id', to: 'cadenas#remove_participant', as: :remove_participant
       patch :start_participants_approval
       patch :assign_positions
       patch :change_state

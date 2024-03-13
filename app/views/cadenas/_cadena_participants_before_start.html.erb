@@ -1,0 +1,44 @@
+<ul role="list" data-controller="cadena-participants">
+  <% cadena.participants.each do |participant| %>
+    <li class="flex items-center h-16 px-5 my-4 bg-midnight rounded-2xl first:mt-0"">
+      <div class="flex items-center w-full space-x-4">
+        <div class="flex-shrink-0">
+          <%= link_to_cond(current_user&.is_admin?, participant.user) do %>
+            <%= render 'cadenas/avatars/user_avatar', user: participant.user %>
+          <% end %>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-medium text-white truncate">
+            <%= participant.name %>
+          </p>
+          <p class="text-xs truncate text-placeholder_gray">
+            <% if controller_name == 'cadenas' %>
+              <%= participant.email %>
+            <% else %>
+              <%= participant.email[0..4] %><span class="blur">###@####</span><%= participant.email[-5..-1] %>
+            <% end %>
+          </p>
+        </div>
+        <% if participant.user == cadena.admin.user && participant.user == current_user %>
+          <p class="user-type-pill">Yo/Admin</p>
+        <% elsif participant.user == cadena.admin.user %>
+          <p class="user-type-pill">Admin</p>
+        <% elsif participant.user == current_user %>
+          <p class="user-type-pill">Yo</p>
+        <% end %>
+        <% if current_user&.admin_of?(cadena) && participant.user != cadena.admin.user || current_user&.is_admin && participant.user != cadena.admin.user %>
+          <button id="dropdownUser<%= participant.id %>" aria-label="dropdown" data-dropdown-toggle="dropdownDotsUser<%= participant.id %>" type="button" class="dropdown-button">
+            <%= inline_svg_tag "svg/dot_dropdown.svg", class: "w-5" %>
+          </button>
+          <div id="dropdownDotsUser<%= participant.id %>" class="z-10 hidden divide-y divide-gray-600 rounded-lg shadow bg-steel_light w-fit">
+            <ul class="text-sm text-gray-200 " aria-labelledby="dropdownMenuIconHorizontalButton">
+              <li>
+                <%= button_to "Eliminar", remove_participant_cadena_path(cadena, participant, format: :html), method: :delete, class:'block rounded-lg px-4 py-2 mr-0 text-left w-full hover:bg-jaguar_light' %>
+              </li>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+</ul>
