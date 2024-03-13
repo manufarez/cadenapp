@@ -54,4 +54,9 @@ class CadenaPreview < ActionMailer::Preview
     cadena = Cadena.where(state: 'complete').first
     CadenaMailer.remind_admin_to_send_list(cadena)
   end
+
+  def remind_admin_to_generate_order
+    cadena = Cadena.where(state: 'participants_approval').first
+    CadenaMailer.remind_admin_to_generate_order(cadena)
+  end
 end

@@ -113,4 +113,15 @@ class CadenaMailer < ApplicationMailer
       message_stream: 'outbound'
     )
   end
+
+  def remind_admin_to_generate_order(cadena)
+    @cadena = cadena
+    mail(
+      to: @cadena.admin.email,
+      subject: "Puedes generar el orden de la cadena #{@cadena.name}",
+      from: 'contacto@cadenapp.com',
+      track_opens: true,
+      message_stream: 'outbound'
+    )
+  end
 end
