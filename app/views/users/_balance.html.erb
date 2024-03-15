@@ -1,6 +1,6 @@
 <div class="flex flex-col items-center px-4 pt-4 mb-6 shadow-inner bg-midnight rounded-2xl">
   <% if user.balance < @cadena.installment_value %>
-    <p class="mb-2 font-semibold text-red-500 font-manrope">Saldo insuficiente para prox. pago</p>
+    <p class="mb-2 font-semibold text-white font-manrope">Saldo <u class="underline-offset-2">insuficiente</u> para prox. pago</p>
   <% else %>
     <p class="mb-2 font-semibold text-lavender font-manrope">Saldo Cadenapp</p>
   <% end %>
