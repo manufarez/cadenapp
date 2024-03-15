@@ -1,6 +1,6 @@
 <%= render layout: 'shared/email_layout' do %>
-  <p class="intro">Hola <%= @payment.participant.name %>,</p>
+  <p class="intro">Hola <%= @payment.receiver.name %>,</p>
   <span class="intro_space"></span>
-  <p>Te informamos que has recibido un pago de <b><%= number_to_currency(@payment.amount, precision: 2) %></b> por parte de <b><%= @payment.user.name %></b> en el marco de la cadena <b><%= @payment.cadena.name %></b>.</p>
+  <p>Te informamos que has recibido un pago de <b><%= number_to_currency(@payment.amount, precision: 2) %></b> por parte de <b><%= @payment.sender.name %></b> en el marco de la cadena <b><%= @payment.cadena.name %></b>.</p>
   <p>Puedes seguir el avance de los pagos que te tocan haciendo click  <b><%= link_to "aqui", @payment.cadena  %></b>.</p>
 <% end %>

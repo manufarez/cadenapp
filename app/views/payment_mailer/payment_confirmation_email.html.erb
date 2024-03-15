@@ -1,6 +1,6 @@
 <%= render layout: 'shared/email_layout' do %>
-  <p class="intro">Hola <%= @sender_user.name %>,</p>
-  <p>Te confirmamos que hiciste un pago de <b><%= number_to_currency(@receiver_participant.cadena.installment_value, precision: 2) %></b> para <b><%= @receiver_participant.name %></b> en el marco de la cadena <b><%= @receiver_participant.cadena.name %></b>.</p>
-  <p>La proxima fecha de pagos es el <b><%= @receiver_participant.cadena.next_payment_date.strftime('%d/%m/%Y') %></b>.</p>
-  <p>Puedes seguir el calendario de pagos haciendo click  <b><%= link_to "aqui", @receiver_participant.cadena  %></b>.</p>
+  <p class="intro">Hola <%= @payment.sender.name %>,</p>
+  <p>Te confirmamos que hiciste un pago de <b><%= number_to_currency(@payment.amount, precision: 2) %></b> para <b><%= @payment.receiver.name %></b> en el marco de la cadena <b><%= @payment.cadena.name %></b>.</p>
+  <p>La proxima fecha de pagos es el <b><%= @payment.cadena.next_payment_date.strftime('%d/%m/%Y') %></b>.</p>
+  <p>Puedes seguir el calendario de pagos haciendo click  <b><%= link_to "aqui", @payment.cadena  %></b>.</p>
 <% end %>

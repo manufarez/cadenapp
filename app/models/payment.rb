@@ -32,6 +32,14 @@ class Payment < ApplicationRecord
     end
   end
 
+  def sender
+    Participant.find(participant_id)
+  end
+
+  def receiver
+    User.find(user_id)
+  end
+
   private
 
   def sufficient_balance
