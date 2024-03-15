@@ -1,0 +1,3 @@
+<span data-action="click->cadena-dashboard#toggleDetails" class="state-pill <%= state_color(cadena.state) %>" style="font-size:11px">
+  <%= t("cadena.state.#{cadena.state}") %><%= inline_svg_tag('svg/chevron_down.svg', class: "w-3 ml-1 #{@invitation.present? ? 'rotate-180' : ''}", data: { cadena_dashboard_target: 'chevron' }) %>
+</span>

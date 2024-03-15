@@ -1,0 +1,34 @@
+<div class="cadena-dashboard" data-controller="cadena-dashboard" data-cadena-dashboard-state-value="<%= @cadena.state %>">
+  <div class="flex items-start justify-between">
+    <h2 class="cadena-title"><%= cadena.name %></h2>
+    <%= render 'cadenas/dashboard/dropdown_button', cadena: cadena %>
+  </div>
+  <div class="flex items-center justify-between mt-4" data-cadena-dashboard-target="state">
+    <div class="w-full mt-2">
+      <% if current_user %>
+        <%= render 'cadenas/action_button', cadena: cadena %>
+      <% end %>
+    </div>
+  </div>
+  <div data-cadena-dashboard-target="details" class="<%= @invitation.present? ? '' : 'hidden' %>" id="details">
+    <% if cadena.started? && current_user.member_of?(cadena) %>
+      <%= render 'cadenas/dashboard/timeline', cadena: cadena %>
+    <% else %>
+      <div class="flex justify-between my-5">
+        <%= render 'cadenas/dashboard/start_date', cadena: cadena %>
+        <%= render 'cadenas/dashboard/end_date', cadena: cadena %>
+      </div>
+    <% end %>
+    <div class="flex justify-between mb-5">
+      <%= render 'cadenas/dashboard/installment_value', cadena: cadena %>
+      <%= render 'cadenas/dashboard/paid_installments', cadena: cadena %>
+    </div>
+    <div class="flex justify-between">
+      <%= render 'cadenas/dashboard/saving_goal', cadena: cadena %>
+      <%= render 'cadenas/dashboard/number_of_participants', cadena: cadena %>
+    </div>
+  </div>
+  <% unless current_user&.member_of?(cadena) || current_user&.is_admin %>
+    <%= render 'cadenas/invitations_buttons', cadena: cadena %>
+  <% end %>
+</div>

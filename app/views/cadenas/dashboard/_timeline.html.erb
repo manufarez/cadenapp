@@ -1,0 +1,20 @@
+<div class="flex flex-col w-full mb-5 mt-7 font-manrope">
+  <div class="flex items-center">
+    <div class="flex flex-col items-center rounded-xl"><span class="px-2 py-1 border rounded-lg text-gray-300 font-semibold border-gray-700 bg-mirage mb-1.5"><%= (cadena.start_date).strftime('%d/%m') %></span></div>
+    <div class="flex items-center w-full mb-1.5">
+      <span class="w-full border-t border-gray-700"></span>
+      <span class="mr-1 -ml-2 text-xl text-gray-700 font-extralight" style="margin-bottom:3px">></span>
+    </div>
+    <div class="flex flex-col items-center rounded-xl"><span class="px-2 py-1 border rounded-lg border-gray-700 bg-steel font-semibold mb-1.5"><%= current_user&.participant(cadena).withdrawal_date.strftime('%d/%m') %></span></div>
+    <div class="flex items-center w-full mb-1.5">
+      <span class="w-full border-t border-gray-700"></span>
+      <span class="mr-1 -ml-2 text-xl text-gray-700 font-extralight" style="margin-bottom:3px">></span>
+    </div>
+    <div class="flex flex-col items-center rounded-xl"><span class="px-2 py-1 border rounded-lg text-gray-300 font-semibold border-gray-700 bg-mirage mb-1.5"><%= (cadena.end_date).strftime('%d/%m') %></div>
+    </div>
+    <div class="flex justify-between">
+      <div class="flex flex-col items-center rounded-xl"><span class="text-xs text-placeholder_gray">Inicio cadena</span></div>
+      <div class="flex flex-col items-center rounded-xl"><span class="flex text-xs text-gray-200">Mi dia de recaudo</span></div>
+      <div class="flex flex-col items-center rounded-xl"><span class="text-xs text-placeholder_gray">Fin cadena</span></div>
+    </div>
+  </div>

@@ -1,0 +1,7 @@
+<div class="text-right font-manrope">
+  <div class="flex items-center justify-end">
+    <span class="text-2xl font-bold <%= cadena.started? ? 'text-white' : '' %>"><%= cadena.received_installments %>/<%= cadena.desired_installments %></span>
+    <%= inline_svg_tag('svg/check-circle.svg', class:'w-4 ml-1 text-placeholder_gray') %>
+  </div>
+  <p class="text-sm text-right lowercase text-placeholder_gray"><%= t('cadena.installments_paid') %></p>
+</div>

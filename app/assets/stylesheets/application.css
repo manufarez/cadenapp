@@ -95,7 +95,7 @@
 
 @keyframes pulse-animation {
   0% {
-    box-shadow: 0 0 0 0px rgba(239, 68, 68, 0.4);
+    box-shadow: 0 0 0 0px rgba(74, 222, 128, 0.4);
   }
   100% {
     box-shadow: 0 0 0 5px rgba(239, 68, 68, 0);

@@ -29,7 +29,7 @@ es:
     installment_value: Valor de cada cuota
     installment_value_min: Valor cuota
     installments: Numero de cuotas
-    installments_min: Cuotas
+    installments_paid: Cuotas pagadas
     invite_more: Invitar más
     my_withdrawal_date: Mi dia de recaudo
     name: Nombre

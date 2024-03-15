@@ -117,6 +117,12 @@ class Cadena < ApplicationRecord
     withdrawal_dates.min || nil
   end
 
+  def next_payment_cycle_start
+    return unless started? || next_payment_date.nil?
+
+    next_payment_date + 1.day
+  end
+
   def last_payment_date
     return unless started?
 

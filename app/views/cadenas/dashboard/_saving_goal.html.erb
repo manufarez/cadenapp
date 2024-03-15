@@ -1,0 +1,5 @@
+<div class="font-manrope">
+  <div class="flex items-center text-2xl font-bold text-gray-300"><%= number_to_currency(cadena.desired_installments * cadena.installment_value, precision: 0  ) %>
+    <%= inline_svg_tag('svg/target.svg', class:'ml-2 text-placeholder_gray') %></div>
+  <p class="text-sm lowercase text-placeholder_gray"><%= cadena.finished? ? t('cadena.saved') : t('cadena.saving_goal') %></p>
+</div>

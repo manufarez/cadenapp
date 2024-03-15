@@ -54,4 +54,10 @@
   .active-period {
     @apply bg-primary_blue hover:bg-blue-700;
   }
+  .cadena-title {
+    @apply text-2xl font-bold leading-7 text-left text-white font-nimbus-ext;
+  }
+  .cadena-dashboard {
+    @apply p-6 mb-6 text-white border border-gray-700 rounded-2xl;
+  }
 }

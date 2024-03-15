@@ -7,7 +7,5 @@
 <% elsif cadena.participants_approval? && !current_user.admin_of?(cadena) && !current_user.is_admin %>
   <%= button_to t('cadena.give_up'), remove_participant_cadena_path(cadena, Participant.where(cadena: cadena, user: current_user).first, format: :html), form: {data: {turbo_confirm: "Are you sure you want to leave #{cadena.name}? This action is irreversible"}}, method: :delete, class:'btn-warning text-sm px-4 py-2 h-8 flex items-center' %>
 <% elsif cadena.started? && (current_user.member_of?(cadena) || current_user.is_admin?)  %>
-  <div class="font-manrope" data-cadena-dashboard-target="nextpayment">
-    <%= render 'cadenas/next_payment_date', cadena: cadena %>
-  </div>
+  <%= render 'cadenas/dashboard/next_payment_date', cadena: cadena %>
 <% end %>

@@ -1,0 +1,6 @@
+<div class="font-manrope">
+  <div class="flex items-center justify-end text-2xl font-bold <%= cadena.missing_participants.positive? ? 'text-pinky' : 'text-gray-300' %>">
+    <%= cadena.participant_count %><%= inline_svg_tag('svg/users.svg', class:'w-4 ml-2 text-placeholder_gray') %>
+  </div>
+  <p class="text-sm lowercase text-placeholder_gray"><%= t('cadena.participants') %></p>
+</div>
