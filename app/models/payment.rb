@@ -15,8 +15,8 @@ class Payment < ApplicationRecord
 
   def process_payment
     ActiveRecord::Base.transaction do
-      sender = user
-      receiver = participant
+      sender = self.sender
+      receiver = self.receiver
       begin
         save!
         sender.balance -= amount
@@ -32,11 +32,11 @@ class Payment < ApplicationRecord
     end
   end
 
-  def sender
+  def receiver
     Participant.find(participant_id)
   end
 
-  def receiver
+  def sender
     User.find(user_id)
   end
 

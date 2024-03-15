@@ -9,7 +9,7 @@ class PaymentsController < ApplicationController
         format.html { redirect_to cadena_url(@payment.cadena), notice: t('cadena.payment_success') }
         format.json { render json: @payment.cadena, status: :created, location: @payment.cadena }
         unless Rails.application.config.seeding
-          PaymentMailer.payment_confirmation_email(@payment.user, @payment.participant).deliver_later
+          PaymentMailer.payment_confirmation_email(@payment).deliver_later
           PaymentMailer.new_payment_email(@payment).deliver_later
         end
       else
