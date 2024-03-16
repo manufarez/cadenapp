@@ -1,4 +1,6 @@
-<p class="mb-3 text-xs leading-7 text-center text-gray-100 font-manrope">Hasta cuando puedo pagar el turno de <span class="font-medium underline text-primary_blue underline-offset-2"><%= cadena.next_paid_participant.first_name %></span> ?</p>
+<p class="mb-3 text-xs leading-7 text-center text-gray-100 font-manrope">Hasta cuando puedo pagar el turno de <span class="font-medium underline text-primary_blue underline-offset-2">
+    <%= cadena.next_paid_participant ? cadena.next_paid_participant.first_name : cadena.participants.order(:position).last.first_name %></span> ?
+</p>
 <div class="grid grid-cols-2 gap-x-5 font-manrope">
   <div class="flex flex-col items-center px-2 pt-1 pb-2 rounded-lg bg-steel_light">
     <span class="text-2xl font-bold leading-tight text-white"><%= cadena&.next_payment_date&.strftime('%d/%m/%y') %></span>
