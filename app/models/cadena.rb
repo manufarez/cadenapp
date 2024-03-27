@@ -118,7 +118,7 @@ class Cadena < ApplicationRecord
   end
 
   def next_payment_cycle_start
-    return unless started? || next_payment_date.nil?
+    return unless started? && !next_payment_date.nil?
 
     next_payment_date + 1.day
   end

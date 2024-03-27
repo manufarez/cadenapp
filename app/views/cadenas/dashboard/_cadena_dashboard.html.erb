@@ -3,15 +3,14 @@
     <h2 class="cadena-title"><%= cadena.name %></h2>
     <%= render 'cadenas/dashboard/dropdown_button', cadena: cadena %>
   </div>
-  <div class="flex items-center justify-between mt-4" data-cadena-dashboard-target="state">
-    <div class="w-full mt-2">
-      <% if current_user %>
+  <% if current_user && !cadena.finished?  %>
+    <div class="flex items-center justify-between mt-4" data-cadena-dashboard-target="state">
+      <div class="w-full mt-2">
         <%= render 'cadenas/action_button', cadena: cadena %>
-      <% end %>
+      </div>
     </div>
-  </div>
-  <div data-cadena-dashboard-target="details" class="<%= @invitation.present? ? '' : 'hidden' %>" id="details">
-    <hr class="mt-6 border-gray-700/50">
+  <% end %>
+  <div data-cadena-dashboard-target="details" class="<%= @invitation.present? ? '' : 'hidden' %> border-t border-gray-700/50 mt-6" id="details">
     <div class="flex justify-between my-5">
       <%= render 'cadenas/dashboard/installment_value', cadena: cadena %>
       <%= render 'cadenas/dashboard/paid_installments', cadena: cadena %>
