@@ -13,7 +13,7 @@ class Cadena < ApplicationRecord
   validates :end_date, presence: true
   validates :saving_goal, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :installment_value, presence: true
-  validates :accepts_admin_terms, acceptance: { message: 'You must accept the admin terms' }
+  validates :accepts_admin_terms, acceptance: { message: I18n.t('cadena.errors.t&c_must_be_accepted') }
   validate :end_date_matches_installments
   validate :installments_match_participants, on: :create
   enum periodicity: { daily: 'daily', bimonthly: 'bimonthly', monthly: 'monthly' }, _default: 'monthly'
@@ -66,16 +66,18 @@ class Cadena < ApplicationRecord
   end
 
   def end_date_matches_installments
+    return if desired_installments.blank?
+
     if periodicity == 'daily' && end_date != start_date + desired_installments.days - 1.day
-      error_message = "Cadena #{id} end date does not match number of remaining days"
+      error_message = I18n.t('cadena.errors.end_date_does_not_match_remaining_days')
       logger.error error_message
       errors.add(:end_date, error_message)
     elsif periodicity == 'monthly' && end_date != start_date + desired_installments.months - 1.day
-      error_message = "Cadena #{id} end date does not match number of remaining months"
+      error_message = I18n.t('cadena.errors.end_date_does_not_match_remaining_months')
       logger.error error_message
       errors.add(:end_date, error_message)
     elsif periodicity == 'bimonthly' && end_date != start_date + (desired_installments * 15.days) - 1.day
-      error_message = "Cadena #{id} end date does not match number of remaining quincenas"
+      error_message = I18n.t('cadena.errors.end_date_does_not_match_remaining_quincenas')
       logger.error error_message
       errors.add(:end_date, error_message)
     end
@@ -84,7 +86,7 @@ class Cadena < ApplicationRecord
   def installments_match_participants
     return if desired_installments == desired_participants
 
-    errors.add(:desired_installments, 'do not match the number of participants')
+    errors.add(:desired_installments, I18n.t('cadena.errors.desired_installments_do_not_match_participants'))
   end
 
   def participants_names

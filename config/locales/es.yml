@@ -8,8 +8,17 @@ es:
         first_name: Nombre
         last_name: Apellido
         password_confirmation: Confirmación contraseña
+      cadena:
+        desired_participants: Numero de participantes
+        desired_installments: Numero de cuotas
+        name: Nombre
+        end_date: Fecha de fin
+        installment_value: Valor de cuota
+        accepts_admin_terms: Términos y condiciones
     errors:
       models:
+        cadena:
+          not_saved: Las informaciones no han sido guardadas
         payment:
           insufficient_funds: ⛔ Fondos insuficientes!
         user:
@@ -22,7 +31,7 @@ es:
             password_confirmation:
               confirmation: no coincide con la contraseña
       messages:
-        blank: " no puede estar vacío"
+        blank: " no puede estar vacío/a"
         content_type: " - no es un formato válido"
         min_size_error: " - tamaño de archivo debe ser mayor a %{min_size}"
         max_size_error: " - tamaño de archivo debe ser menor a %{max_size}"
@@ -39,6 +48,12 @@ es:
     days_to_payment: "Deadline"
     desired_participants: Numero de participantes
     end_date: Fecha de fin
+    errors:
+      end_date_does_not_match_remaining_days: Fecha de fin no corresponde a la cantidad de dias restantes
+      end_date_does_not_match_remaining_months: Fecha de fin no corresponde a la cantidad de meses restantes
+      end_date_does_not_match_remaining_quincenas: Fecha de fin no corresponde a la cantidad de quincenas restantes
+      desired_installments_do_not_match_participants: El numero de participantes no corresponde al numero de cuotas
+      t&c_must_be_accepted: tienen que se aceptados
     fast_paid: ⚡️ Pagaste las cuotas restantes
     full: La cadena esta completa
     give_up: Darme de baja
