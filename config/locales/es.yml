@@ -1,11 +1,28 @@
 ---
 es:
   activerecord:
+    attributes:
+      user:
+        email: Correo electrónico
+        password: Contraseña
+        first_name: Nombre
+        last_name: Apellido
+        password_confirmation: Confirmación contraseña
     errors:
       models:
         payment:
           insufficient_funds: ⛔ Fondos insuficientes!
+        user:
+          attributes:
+            email:
+              blank: no puede estar vacío
+            password:
+              blank: no puede estar vacía
+              too_short: demasiado corta (mínimo %{count} caracteres)
+            password_confirmation:
+              confirmation: no coincide con la contraseña
       messages:
+        blank: " no puede estar vacío"
         content_type: " - no es un formato válido"
         min_size_error: " - tamaño de archivo debe ser mayor a %{min_size}"
         max_size_error: " - tamaño de archivo debe ser menor a %{max_size}"
@@ -149,6 +166,7 @@ es:
         sign_in: Iniciar sesión
         sign_in_with_provider: Iniciar sesión con %{provider}
         sign_up: Registrarse
+        sign_out: Desconectarse
       minimum_password_length:
         one: (%{count} caracter como mínimo)
         other: (%{count} caracteres como mínimo)
