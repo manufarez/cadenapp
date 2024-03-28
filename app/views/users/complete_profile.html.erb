@@ -70,8 +70,9 @@
           <%= f.submit t('user.finish_profile'), class:'btn-primary' %>
         </div>
       <% end %>
-      <div class="mt-4 text-sm text-center text-silver font-manrope">No eres <%= @user.name %> ?<br>
-        <%= link_to "Desconectarse",destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?" }, class:'text-blue-600 hover:underline' %></div>
+      <div class="mt-4 text-sm text-center text-silver font-manrope">No eres <%= @user.name %> / quieres cambiar tu contraseña?<br>
+        <%= link_to "Desconectarse",destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?" }, class:'text-blue-600 hover:underline' %>
+      </div>
     </div>
   </div>
 </div>
