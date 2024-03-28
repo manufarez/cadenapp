@@ -48,6 +48,7 @@ es:
     installments: Numero de cuotas
     turns_over: turnos terminados
     invite_more: Invitar más
+    modify: Guardar cambios
     my_withdrawal_date: Mi dia de recaudo
     name: Nombre
     next_payment_date: Próximo día de pago

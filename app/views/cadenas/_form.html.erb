@@ -40,11 +40,11 @@
     <%= f.label :saving_goal, t('cadena.saving_goal'), class:'text-silver text-sm' %>
     <%= f.number_field :saving_goal, readonly: true, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 w-full hover:cursor-not-allowed", data:{cadena_target:"savingGoal"} %>
   </div>
-  <div class="flex items-center mb-4 space-x-2 text-sm field text-silver">
+  <div class="flex items-center mb-4 space-x-2 text-sm field text-silver <%= f.object.new_record? ? '' : 'hidden' %>">
     <%= f.check_box :accepts_admin_terms, class:'rounded bg-steel focus:ring-0 focus:ring-offset-0 hover:cursor-pointer' %>
     <label for="user[accepts_admin_terms]" id="user_accepts_terms"><%= t('user.consent') %> <a class="text-primary_blue hover:underline" href="/terms"><%= t('user.admin_terms&conditions') %></a></label>
   </div>
   <div class="inline">
-    <%= f.submit t('cadena.create'), class: "btn-primary" %>
+    <%= f.submit f.object.new_record? ? t('cadena.create') : t('cadena.modify'), class: "btn-primary" %>
   </div>
 <% end %>
