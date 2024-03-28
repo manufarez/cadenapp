@@ -1,6 +1,9 @@
 <div class="flex w-full max-w-md px-6 mx-auto">
   <div class="w-full mx-auto">
     <%= render @cadena %>
+    <div class="flex justify-center w-full">
+      <%= link_to "Ver invitaciones ->", cadena_invitations_path(@cadena), class:'mb-4 text-xs text-center text-gray-500 transition ease-in-out hover:text-silver font-manrope' %>
+    </div>
     <% if current_user.is_admin? %>
       <div class="p-4 my-6 border border-gray-700 border-dashed rounded-xl">
         <p class="px-1 mb-2 -mt-6 text-xs font-medium tracking-wide text-gray-600 uppercase w-fit bg-mirage font-manrope">Super Admin</p>
