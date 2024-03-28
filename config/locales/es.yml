@@ -51,6 +51,7 @@ es:
     created_at: Creada
     days_to_payment: "Deadline"
     desired_participants: Numero de participantes
+    destroy_confirmation: ¿Estás seguro de que quieres eliminar la cadena? Esta acción es irreversible.
     end_date: Fecha de fin
     errors:
       end_date_does_not_match_remaining_days: Fecha de fin no corresponde a la cantidad de dias restantes
@@ -65,6 +66,7 @@ es:
     installment_value: Valor de cada cuota
     installment_value_min: Valor cuota
     installments: Numero de cuotas
+    invitation_reject_confirmation: Estas segurgo? El rechazo es irreversible
     turns_over: turnos terminados
     invite_more: Invitar más
     modify: Guardar cambios
@@ -75,16 +77,20 @@ es:
     payment_success: 👏 Pago exitoso!
     period_progress: "% periodo"
     periodicity: Frecuencia
+    reject_participation: ¿Estas seguro de querer salirte de %{cadena_name}? Toda salida es irreversible
+    resume_confirmation: ¿Estás seguro de que quieres reanudar la cadena?
     saved: Ahorrados
     saving_goal: Objetivo de ahorro
     start_date: Fecha de inicio
+    stop_confirmation: ¿Estás seguro de que quieres pausar la cadena?
     cadena_state: Estado
     state:
       complete: Completa
+      finished: Terminada
       participants_approval: Verif. participantes
       pending: Incompleta
       started: En curso
-      finished: Terminada
+      stopped: Pausada
     half_month: quincena
     month: mes
     day: día
@@ -173,6 +179,7 @@ es:
       updated_but_not_signed_in: Su cuenta se ha actualizado correctamente, pero como se cambió su contraseña, debe iniciar sesión nuevamente
     sessions:
       already_signed_out: Sesión finalizada.
+      logout_confirmation: ¿Estás seguro de que quieres cerrar sesión?
       new:
         sign_in: Iniciar sesión
       signed_in: Sesión iniciada.

@@ -1,4 +1,4 @@
 <div class="flex flex-col mt-5 space-y-5">
   <%= link_to t('invitation.accept'), accept_cadena_invitation_path(token: params[:token], id: cadena.id, cadena_id: cadena.id), class: 'text-white btn-primary w-full text-center' %>
-  <%= button_to t('invitation.decline'), decline_cadena_invitation_path(token: params[:token], id: cadena.id, cadena_id: cadena.id), form:{data: {turbo_confirm: 'Estas segurgo? El rechazo es irreversible'}}, class: 'btn-danger w-full text-center' %>
+  <%= button_to t('invitation.decline'), decline_cadena_invitation_path(token: params[:token], id: cadena.id, cadena_id: cadena.id), form:{data: {turbo_confirm: t('cadena.invitation_reject_confirmation')}}, class: 'btn-danger w-full text-center' %>
 </div>
