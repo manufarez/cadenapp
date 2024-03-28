@@ -1,8 +1,8 @@
 <%= form_with(model: [@cadena, @invitation], class: "contents") do |form| %>
   <% if invitation.errors.any? %>
-    <div id="error_explanation" class="px-3 py-2 mt-3 font-medium text-red-500 rounded-lg bg-red-50">
-      <h2><%= pluralize(invitation.errors.count, "error") %> prohibited this invitation from being saved:</h2>
-      <ul>
+    <div id="error_explanation" class="px-3 py-2 my-3 text-sm font-medium text-red-500 rounded-lg bg-red-50">
+      <h2>Errores impiden que se guarde esta invitacion :</h2>
+      <ul class="list-disc list-inside">
         <% invitation.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,7 +11,7 @@
   <% end %>
   <div class="mb-4">
     <%#= form.label :phone, t('user.phone'), class:'text-sm text-silver' %>
-    <%= form.text_field :phone, class: "w-full input", placeholder: t('user.phone') %>
+    <%#= form.text_field :phone, class: "w-full input", placeholder: t('user.phone') %>
   </div>
   <div class="mb-4">
     <%#= form.label :email, t('user.email'), class:'text-sm text-silver' %>

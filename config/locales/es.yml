@@ -8,6 +8,10 @@ es:
         first_name: Nombre
         last_name: Apellido
         password_confirmation: Confirmación contraseña
+      invitation:
+        email: Correo electrónico
+        first_name: Nombre
+        last_name: Apellido
       cadena:
         desired_participants: Numero de participantes
         desired_installments: Numero de cuotas
