@@ -3,7 +3,7 @@
     <h2 class="cadena-title"><%= cadena.name %></h2>
     <%= render 'cadenas/dashboard/dropdown_button', cadena: cadena %>
   </div>
-  <% if (current_user.admin_of?(cadena) || current_user.is_admin) && !cadena.finished?  %>
+  <% if current_user.present? && ((!cadena.finished? && !cadena.stopped?) && (current_user.is_admin || current_user.admin_of?(cadena))) %>
     <div class="flex items-center justify-between mt-4" data-cadena-dashboard-target="state">
       <div class="w-full mt-2">
         <%= render 'cadenas/action_button', cadena: cadena %>
