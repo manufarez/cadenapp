@@ -15,13 +15,13 @@
         </div>
       <% end %>
       <div class="mb-10 actions">
-        <%= f.submit "Conectarse", class:'btn-primary' %>
+        <%= f.submit t('devise.shared.links.sign_in'), class:'btn-primary' %>
       </div>
     <% end %>
     <div class="flex flex-col items-center space-y-4 text-sm">
-      <%= link_to "Problemas de conexion ?", new_password_path(resource_name), class:'text-primary_blue hover:underline' %>
+      <%= link_to t('devise.shared.links.forgot_your_password'), new_password_path(resource_name), class:'text-primary_blue hover:underline' %>
       <span class="w-16 border-t border-black_coral"></span>
-      <%= link_to "Inscripción", new_registration_path(resource_name), class:'text-silver hover:underline' %>
+      <%= link_to t('devise.shared.links.sign_up'), new_registration_path(resource_name), class:'text-silver hover:underline' %>
     </div>
   </div>
 </div>

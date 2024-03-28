@@ -23,7 +23,7 @@
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class:'input w-full', placeholder: 'Confirmación contraseña' %>
         </div>
         <div class="actions">
-          <%= f.submit "Inscribirse", class:'btn-primary' %>
+          <%= f.submit t('devise.shared.links.sign_up'), class:'btn-primary' %>
         </div>
         <% if valid_token_present? %>
           <%= hidden_field_tag :invitation_token, params[:token] %>
@@ -31,7 +31,7 @@
       <% end %>
     </div>
     <div class="flex flex-col items-center space-y-4 text-sm">
-      <%= link_to "Conectarse", new_session_path(resource_name), class:'text-primary_blue hover:underline' %>
+      <%= link_to t('devise.shared.links.sign_in'), new_session_path(resource_name), class:'text-primary_blue hover:underline' %>
     </div>
   </div>
 </div>
