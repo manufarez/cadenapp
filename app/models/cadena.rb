@@ -16,6 +16,8 @@ class Cadena < ApplicationRecord
   validates :accepts_admin_terms, acceptance: { message: I18n.t('cadena.errors.t&c_must_be_accepted') }
   validate :end_date_matches_installments
   validate :installments_match_participants, on: :create
+  validates :installment_value, inclusion: { in: 100_000..500_000, message: "tiene que ser entre 100k y 500k" }
+  validates :desired_participants, inclusion: { in: 3..19, message: "tiene que ser entre 3 y 19" }
   enum periodicity: { daily: 'daily', bimonthly: 'bimonthly', monthly: 'monthly' }, _default: 'monthly'
 
   state_machine :state, initial: :pending do

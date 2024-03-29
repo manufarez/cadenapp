@@ -14,7 +14,7 @@
     <%= f.text_field :name, placeholder: t('cadena.cadena_name'), class: "input w-full" %>
   </div>
   <div class="mb-4">
-    <%= f.number_field :desired_participants, placeholder: t('cadena.desired_participants'), class: "input w-full", min: 2, data: {cadena_target: "participants", action:"cadena#updateInstallments cadena#updateEndDate"} %>
+    <%= f.number_field :desired_participants, placeholder: t('cadena.desired_participants'), class: "input w-full", min: 3, max: 19, data: {cadena_target: "participants", action:"cadena#updateInstallments cadena#updateEndDate"} %>
   </div>
   <div class="flex items-end mb-4 space-x-3">
     <div class="w-1/2">
@@ -22,11 +22,11 @@
       <%= f.select :periodicity, options_for_select([['Diaria', 'daily'], ['Quincenal', 'bimonthly'], ['Mensual', 'monthly']]), {}, class: "block border-none rounded-xl text-white bg-steel outline-none p-4 w-full", data: {cadena_target: "periodicity", action:"cadena#updateInstallments cadena#updateEndDate"} %>
     </div>
     <div class="w-1/2">
-      <%= f.number_field :desired_installments, placeholder: t('cadena.installments'), class: 'input w-full', min: 2, data: {cadena_target:"installments"}, readonly: true %>
+      <%= f.number_field :desired_installments, placeholder: t('cadena.installments'), class: 'input w-full', min: 3, max: 19, data: {cadena_target:"installments"}, readonly: true %>
     </div>
   </div>
   <div class="mb-4">
-    <%= f.number_field :installment_value, placeholder: t('cadena.installment_value'), class: 'input w-full', min: 100000, data:{cadena_target:"installmentValue", action:"cadena#updateSavingGoal"} %>
+    <%= f.number_field :installment_value, placeholder: t('cadena.installment_value'), class: 'input w-full', min: 100_000, max: 500_000, data:{cadena_target:"installmentValue", action:"cadena#updateSavingGoal"} %>
   </div>
   <div class="mb-4">
     <%= f.label :start_date, t('cadena.start_date'), class:'text-silver text-sm' %>

@@ -54,9 +54,9 @@ es:
     destroy_confirmation: ¿Estás seguro de que quieres eliminar la cadena? Esta acción es irreversible.
     end_date: Fecha de fin
     errors:
-      end_date_does_not_match_remaining_days: Fecha de fin no corresponde a la cantidad de dias restantes
-      end_date_does_not_match_remaining_months: Fecha de fin no corresponde a la cantidad de meses restantes
-      end_date_does_not_match_remaining_quincenas: Fecha de fin no corresponde a la cantidad de quincenas restantes
+      end_date_does_not_match_remaining_days: no corresponde a la cantidad de dias restantes
+      end_date_does_not_match_remaining_months: no corresponde a la cantidad de meses restantes
+      end_date_does_not_match_remaining_quincenas: no corresponde a la cantidad de quincenas restantes
       desired_installments_do_not_match_participants: El numero de participantes no corresponde al numero de cuotas
       t&c_must_be_accepted: tienen que se aceptados
     fast_paid: ⚡️ Pagaste las cuotas restantes
