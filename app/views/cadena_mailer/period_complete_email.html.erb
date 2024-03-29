@@ -2,7 +2,7 @@
   <p class="intro">Hola <%= @participant.name %>,</p>
   <p>Te informamos que todos los participantes de la cadena <b><%= link_to @participant.cadena.name, @participant.cadena %></b> han pagado la cuota de este periodo.</p>
   <p>¡Que chévere! Eso es un grupo de confianza juicioso.</p>
-  <p>Te recordamos que el próximo día de recaudo es el <b><%= @participant.cadena.next_payment_date.strftime('%d/%m/%Y') %></b>.</p>
-  <p>Puedes hacer el próximo pago haciendo click <b><%= link_to "aqui", @participant.cadena %></b>.</p>
+  <p>Te recordamos que el próximo día de recaudo es el <b><%= @participant.cadena.next_payment_date&.strftime('%d/%m/%Y') %></b>.</p>
+  <p>Podrás hacer el próximo pago a partir de esa fecha haciendo click <b><%= link_to "aqui", @participant.cadena %></b>.</p>
   <p>Gracias nuevamente por tu participación.</p>
 <% end %>

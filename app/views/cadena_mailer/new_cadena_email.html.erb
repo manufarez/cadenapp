@@ -1,7 +1,8 @@
 <%= render layout: 'shared/email_layout' do %>
   <p class="intro">Hola <%= @admin.name %>,</p>
   <p>Te felicitamos por haber creado una  cadena cuyo nombre es <b><%= link_to @cadena.name, @cadena %></b>.</p>
-  <p>Puedes gestionarla haciendo click <b><%= link_to "aqui", @cadena %></b>.</p>
+  <p>Puedes gestionarla haciendo click aqui:</p>
+  <%= link_to 'Gestionar cadena', @cadena, class:'btn-primary' %>
   <p>Te recordamos que como administrador de esta cadena, tienes una gran responsabilidad en su desarrollo exitoso.</p>
   <p>De la confianza que tienes en los amigos o familiares que invitaste depende que todo funcione de maravilla.</p>
   <p>Tienes que estar pendiente de la satisfacción de todos los miembros de la cadena y de su pago juicioso en cada turno.</p>

@@ -1,6 +1,7 @@
 <%= render layout: 'shared/email_layout' do %>
   <p class="intro">Hola <%= @payment.sender.name %>,</p>
   <p>Te confirmamos que hiciste un pago de <b><%= number_to_currency(@payment.amount, precision: 2) %></b> para <b><%= @payment.receiver.name %></b> en el marco de la cadena <b><%= @payment.cadena.name %></b>.</p>
-  <p>La proxima fecha de pagos es el <b><%= @payment.cadena.next_payment_date.strftime('%d/%m/%Y') %></b>.</p>
-  <p>Puedes seguir el calendario de pagos haciendo click  <b><%= link_to "aqui", @payment.cadena  %></b>.</p>
+  <p>La proxima fecha de pagos es el <b><%= @payment.cadena.next_payment_date&.strftime('%d/%m/%Y') %></b>.</p>
+  <p>Puedes seguir el calendario de pagos haciendo click en la pestaña "Global" en el siguiente enlace:</p>
+  <%= link_to 'Ver calendario de pagos', @payment.cadena, class:'btn-primary' %>
 <% end %>

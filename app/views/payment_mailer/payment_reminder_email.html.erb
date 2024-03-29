@@ -2,5 +2,6 @@
   <p class="intro">Hola <%= @participant.name %>,</p>
   <p>Recuerda que hoy es el último día para enviarle a <b><%= @next_paid_participant.name %></b> el monto de <b><%= number_to_currency(@participant.cadena.installment_value, precision: 2) %></b>.</p>
   <p>Este monto corresponde a la cuota que lo deben todos los participantes de la cadena <b><%= @participant.cadena.name %></b>.</p>
-  <p>Puedes pagar haciendo click <b><%= link_to "aqui", @participant.cadena  %></b>.</p>
+  <p>Puedes pagar haciendo click aqui:</p>
+  <%= link_to 'Pagar mi turno', @participant.cadena, class:'btn-primary' %>
 <% end %>

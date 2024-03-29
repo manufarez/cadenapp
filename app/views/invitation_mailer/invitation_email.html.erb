@@ -2,6 +2,7 @@
   <p class="intro">Hola <%= @invitation.first_name %> <%= @invitation.last_name %>,</p>
   <p>Has sido invitado por <b><%= @invitation.sender.first_name + ' ' + @invitation.sender.last_name %></b> para hacer parte de la cadena de ahorro <b><%= @invitation.cadena.name %></b>.</p>
   <p>Puedes hacer click en el siguiente enlace para ver la invitación:</p>
-  <b><%= link_to 'Ingresar Cadena', cadena_preview_url(@invitation.token) %></b>
+  <%= link_to 'Ingresar Cadena', cadena_preview_url(@invitation.token), class:'btn-primary' %>
+  <p>Si ya tienes cuenta Cadenapp, conectate primero, haciendo click <b><%= link_to "aqui", new_user_session_url %></b>, y vuelve a abrir el link de la invitacion después 👆</p>
   <p>Si no esperabas esta invitación, simplemente puedes ignorar este correo electrónico.</p>
 <% end %>

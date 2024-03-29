@@ -1,5 +1,6 @@
 <%= render layout: 'shared/email_layout' do %>
   <p class="intro">Hola <%= @participant.name %>,</p>
   <p>El orden de la cadena <b><%= link_to @cadena.name, @cadena %></b> ha sido sorteado.</p>
-  <p>Puedes ver cual es tu posición en la cadena haciendo click <b><%= link_to "aqui", @cadena %></b></p>
+  <p>Puedes ver cual es tu posición en la cadena haciendo click aqui:</p>
+  <%= link_to 'Ver mi posición', @cadena, class:'btn-primary' %>
 <% end %>

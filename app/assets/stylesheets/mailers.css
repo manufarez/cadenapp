@@ -21,3 +21,14 @@ a {
 .signature {
   margin-top: 2rem;
 }
+
+.btn-primary {
+  background: #9b5cae;
+  padding: 8px 12px;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  margin: 0.2rem 0;
+}

@@ -2,5 +2,6 @@
   <p class="intro">Hola <%= @participant.name %>,</p>
   <p>Has aceptado la invitación para ser parte de la cadena <b><%= link_to @cadena.name, @cadena %></b>. ¡Bienvenido!</p>
   <p>Te recordamos que como participante de esta cadena, tienes una gran responsabilidad en su desarrollo exitoso.</p>
-  <p>Puedes gestionar tu participación haciendo click <b><%= link_to "aqui", @cadena %></b>.</p>
+  <p>Puedes gestionar tu participación haciendo click aqui:</p>
+  <%= link_to 'Gestionar mi participación', @cadena, class:'btn-primary' %>
 <% end %>
