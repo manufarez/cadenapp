@@ -23,14 +23,19 @@
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class:'input w-full', placeholder: 'Confirmación contraseña' %>
         </div>
         <div class="actions">
-          <%= f.submit t('devise.shared.links.sign_up'), class:'btn-primary' %>
+          <%= f.submit t('devise.shared.links.sign_up'), class:'btn-primary mb-4' %>
+          <div class="flex justify-center space-x-1 text-silver">
+            <%= inline_svg_tag('svg/info.svg', class:'w-4') %>
+            <p class="text-xs font-manrope"><%= t('devise.shared.check_spams') %></p>
+          </div>
         </div>
         <% if valid_token_present? %>
           <%= hidden_field_tag :invitation_token, params[:token] %>
         <% end %>
       <% end %>
     </div>
-    <div class="flex flex-col items-center space-y-4 text-sm">
+    <div class="flex flex-col items-center space-y-4 text-sm text-silver">
+      <%= t('devise.sessions.already_signed_up') %>
       <%= link_to t('devise.shared.links.sign_in'), new_session_path(resource_name), class:'text-primary_blue hover:underline' %>
     </div>
   </div>

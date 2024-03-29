@@ -8,7 +8,11 @@
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'input w-full', placeholder:'E-mail' %>
         </div>
         <div class="actions">
-          <%= f.submit "Mandar instrucciones", class:'btn-primary' %>
+          <%= f.submit "Mandar instrucciones", class:'btn-primary mb-4' %>
+          <div class="flex justify-center space-x-1 text-silver">
+            <%= inline_svg_tag('svg/info.svg', class:'w-4') %>
+            <p class="text-xs font-manrope"><%= t('devise.shared.check_spams') %></p>
+          </div>
         </div>
       <% end %>
     </div>

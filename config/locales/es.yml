@@ -179,12 +179,14 @@ es:
       updated_but_not_signed_in: Su cuenta se ha actualizado correctamente, pero como se cambió su contraseña, debe iniciar sesión nuevamente
     sessions:
       already_signed_out: Sesión finalizada.
+      already_signed_up: ¿Ya tienes cuenta?
       logout_confirmation: ¿Estás seguro de que quieres cerrar sesión?
       new:
         sign_in: Iniciar sesión
       signed_in: Sesión iniciada.
       signed_out: Sesión finalizada.
     shared:
+      check_spams: Verifica que nuestros correos no lleguen en tus spams
       links:
         back: Atrás
         didn_t_receive_confirmation_instructions: ¿No ha recibido las instrucciones de confirmación?
