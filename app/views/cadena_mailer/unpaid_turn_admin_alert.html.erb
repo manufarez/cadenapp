@@ -1,0 +1,10 @@
+<%= render layout: 'shared/email_layout' do %>
+  <p class="intro">Hola Superadmin,</p>
+  <p>Se ha detectado un retraso de pago en la cadena <b><%= link_to @cadena.name, @cadena %></b>, por lo tanto se tuvo que pausar.</p>
+  <p>La ultima fecha de recaudo era el <u><b><%= @cadena&.last_payment_date&.strftime('%d/%m/%Y') %></b></u>, el retraso es imputable a los siguientes participantes de la cadena :</p>
+  <ul>
+    <% @cadena.unpaid_previous_participants.each do |participant| %>
+      <li><%= participant.name %></li>
+    <% end %>
+  </ul>
+<% end %>

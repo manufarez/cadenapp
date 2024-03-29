@@ -12,6 +12,7 @@ class CheckCadenasPaymentsJob < ApplicationJob
 
     unpaid_cadenas.each do |cadena|
       cadena.participants.each { |participant| CadenaMailer.unpaid_turn_detected(participant).deliver_later }
+      CadenaMailer.unpaid_turn_admin_alert(cadena).deliver_later
       cadena.update(state: 'stopped')
     end
   end

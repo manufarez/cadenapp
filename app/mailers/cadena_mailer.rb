@@ -103,6 +103,17 @@ class CadenaMailer < ApplicationMailer
     )
   end
 
+  def unpaid_turn_admin_alert(cadena)
+    @cadena = cadena
+    mail(
+      to: User.where(is_admin: true).pluck(:email),
+      subject: "Alerta : Retraso de pago en la cadena #{@cadena.name}",
+      from: 'contacto@cadenapp.com',
+      track_opens: true,
+      message_stream: 'outbound'
+    )
+  end
+
   def remind_admin_to_send_list(cadena)
     @cadena = cadena
     mail(
