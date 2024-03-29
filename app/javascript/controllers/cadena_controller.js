@@ -66,6 +66,9 @@ export default class extends Controller {
           ],
         },
       },
+      onChange: function () {
+        this.updateEndDate();
+      }.bind(this),
     });
     flatpickr(".end_date", {
       dateFormat: "d/m/Y",
