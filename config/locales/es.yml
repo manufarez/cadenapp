@@ -42,6 +42,7 @@ es:
   cadena:
     admin_terms_acceptance: You must accept the admin terms
     approve_list: Enviar confirmacion lista
+    auto_calc: Calc. automático
     incomplete_profile_found: Para proseguir %{participant} tiene que completar su perfil
     assign_positions: Generar orden
     belongs_to_none: No perteneces a ninguna cadena
