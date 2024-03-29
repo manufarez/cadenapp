@@ -58,6 +58,8 @@ es:
       end_date_does_not_match_remaining_months: no corresponde a la cantidad de meses restantes
       end_date_does_not_match_remaining_quincenas: no corresponde a la cantidad de quincenas restantes
       desired_installments_do_not_match_participants: El numero de participantes no corresponde al numero de cuotas
+      installments_range: tiene que ser entre 100k y 500k
+      participants_range: tiene que ser entre 3 y 19
       t&c_must_be_accepted: tienen que se aceptados
     fast_paid: ⚡️ Pagaste las cuotas restantes
     full: La cadena esta completa
