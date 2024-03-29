@@ -1,0 +1,8 @@
+<%= render layout: 'shared/email_layout' do %>
+  <p class="intro">Hola <%= @user.name %>,</p>
+  <p>Gracias por inscribirte en Cadenapp.</p>
+  <p>Recuerda que tienes que terminar de <b>completar tu perfil</b> para poder administrar o participar en cualquier cadena.</p>
+  <p>Puedes terminar tu inscripción haciendo click aqui:</p>
+  <%= link_to 'Completar mi perfil', @user, class:'btn-primary' %>
+  <p>Si ya lo hiciste por favor ignora este correo.</p>
+<% end %>
