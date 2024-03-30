@@ -13,16 +13,16 @@ es:
         first_name: Nombre
         last_name: Apellido
       cadena:
+        accepts_admin_terms: Términos y condiciones
         desired_participants: Numero de participantes
         desired_installments: Numero de cuotas
-        name: Nombre
         end_date: Fecha de fin
         installment_value: Valor de cuota
-        accepts_admin_terms: Términos y condiciones
+        name: Nombre
+        saving_goal: Objetivo de ahorro
+        start_date: Fecha de inicio
     errors:
       models:
-        cadena:
-          not_saved: Las informaciones no han sido guardadas
         payment:
           insufficient_funds: ⛔ Fondos insuficientes!
         user:
@@ -39,6 +39,8 @@ es:
         content_type: " - no es un formato válido"
         min_size_error: " - tamaño de archivo debe ser mayor a %{min_size}"
         max_size_error: " - tamaño de archivo debe ser menor a %{max_size}"
+        not_a_number: no es un numero
+        not_saved: Las informaciones no han sido guardadas
   cadena:
     admin_terms_acceptance: You must accept the admin terms
     approve_list: Enviar confirmacion lista
@@ -84,6 +86,7 @@ es:
     resume_confirmation: ¿Estás seguro de que quieres reanudar la cadena?
     saved: Ahorrados
     saving_goal: Objetivo de ahorro
+    should_be_future: tiene que ser en el futuro
     start_date: Fecha de inicio
     stop_confirmation: ¿Estás seguro de que quieres pausar la cadena?
     cadena_state: Estado

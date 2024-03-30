@@ -1,7 +1,7 @@
 <%= form_with(model: cadena, class: "text-white w-full max-w-md font-manrope mx-auto", data: { controller: "cadena"}) do |f| %>
   <% if cadena.errors.any? %>
     <div id="error_explanation" class="px-3 py-2 my-3 text-sm font-medium text-red-500 rounded-lg bg-red-50">
-      <h2>t('')</h2>
+      <h2><%= t('activerecord.errors.messages.not_saved') %></h2>
       <ul class="list-disc list-inside">
         <% cadena.errors.each do |error| %>
           <li><%= error.full_message %></li>

@@ -62,7 +62,7 @@ class Cadena < ApplicationRecord
     return false unless start_date.present? && %w[started stopped archived].exclude?(state)
 
     if start_date <= Time.zone.today
-      errors.add(:start_date, "(#{start_date.strftime('%d/%m/%Y')}) should be in the future")
+      errors.add(:start_date, "(#{start_date.strftime('%d/%m/%Y')}) #{I18n.t('cadena.should_be_future')}")
     end
     errors.empty?
   end
