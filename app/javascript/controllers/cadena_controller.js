@@ -24,6 +24,8 @@ export default class extends Controller {
       decimalCharacter: ",",
       digitGroupSeparator: ".",
       upDownStep: "10000",
+      minimumValue: "0",
+      maximumValue: "1000000",
     });
     flatpickr(".start_date", {
       dateFormat: "d/m/Y",

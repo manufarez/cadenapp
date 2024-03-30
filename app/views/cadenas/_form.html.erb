@@ -20,29 +20,30 @@
   <div class="flex items-end mb-4 space-x-3">
     <div class="w-1/2">
       <%= f.label :periodicity, t('cadena.periodicity'), class:'text-silver text-sm' %>
-      <%= f.select :periodicity, options_for_select([['Diaria', 'daily'], ['Quincenal', 'bimonthly'], ['Mensual', 'monthly']]), {}, class: "block border-none rounded-xl text-white bg-steel outline-none p-4 w-full", data: {cadena_target: "periodicity", action:"cadena#updateInstallments cadena#updateEndDate"} %>
+      <%= f.select :periodicity, options_for_select([['Diaria', 'daily'], ['Quincenal', 'bimonthly'], ['Mensual', 'monthly']]), {}, class: "input w-full", data: {cadena_target: "periodicity", action:"cadena#updateInstallments cadena#updateEndDate"} %>
     </div>
     <div class="w-1/2">
       <%= f.label :end_date, t('cadena.installments') + '*', class:'text-silver text-sm' %>
-      <%= f.number_field :desired_installments, placeholder: t('cadena.auto_calc'), class: 'input w-full', min: 3, max: 19, data: {cadena_target:"installments"}, readonly: true %>
+      <%= f.number_field :desired_installments, placeholder: t('cadena.auto_calc'), class: 'input w-full !ring-placeholder_gray hover:cursor-not-allowed', min: 3, max: 19, data: {cadena_target:"installments"}, readonly: true %>
     </div>
   </div>
   <div class="mb-4">
+    <%= f.label :installment_value, t('cadena.installment_value'), class:'text-silver text-sm' %>
     <input placeholder="Min: 100k - Max: 500k" class="w-full input" min="100000" max="500000" data-cadena-target="installmentDisplay" data-action="cadena#updateSavingGoal" id="installmentDisplay" type="text">
     <%= f.hidden_field :installment_value, data:{cadena_target:"installmentValue"}, id:"installmentValue" %>
   </div>
   <div class="mb-4">
     <%= f.label :start_date, t('cadena.start_date'), class:'text-silver text-sm' %>
-    <%= f.date_field :start_date, value: f.object.start_date&.strftime("%d/%m/%Y"), class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 w-full start_date placeholder:text-sm", data:{cadena_target:"startDate", action:'cadena#updateEndDate'}, placeholder: 'En el futuro - ex: ' + Time.zone.now.next_day.strftime('%d/%m/%Y') %>
+    <%= f.date_field :start_date, value: f.object.start_date&.strftime("%d/%m/%Y"), class: "date input w-full start_date", data:{cadena_target:"startDate", action:'cadena#updateEndDate'}, placeholder: 'En el futuro - ex: ' + Time.zone.now.next_day.strftime('%d/%m/%Y') %>
   </div>
   <div class="mb-4">
     <%= f.label :end_date, t('cadena.end_date') + '*', class:'text-silver text-sm' %>
-    <%= f.date_field :end_date, readonly: true, placeholder: t('cadena.auto_calc'), class: "block border-none date rounded-xl end_date text-white bg-steel outline-none p-4 w-full hover:cursor-not-allowed placeholder:text-sm", data:{cadena_target:"endDate"} %>
+    <%= f.date_field :end_date, readonly: true, placeholder: t('cadena.auto_calc'), class: "date end_date w-full !ring-placeholder_gray input !cursor-not-allowed", data:{cadena_target:"endDate"} %>
   </div>
   <div class="mb-4">
     <%= f.label :saving_goal, t('cadena.saving_goal') + '*', class:'text-silver text-sm' %>
-    <input placeholder="<%= t('cadena.auto_calc') %>" class="w-full input" data-cadena-target="savingGoalDisplay" type="text">
-    <%= f.hidden_field :saving_goal, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 w-full hover:cursor-not-allowed", data:{cadena_target:"savingGoal"} %>
+    <input placeholder="<%= t('cadena.auto_calc') %>" class="w-full input !ring-placeholder_gray hover:cursor-not-allowed" data-cadena-target="savingGoalDisplay" type="text">
+    <%= f.hidden_field :saving_goal, data:{cadena_target:"savingGoal"} %>
   </div>
   <div class="flex items-center mb-4 space-x-2 text-sm field text-silver <%= f.object.new_record? ? '' : 'hidden' %>">
     <%= f.check_box :accepts_admin_terms, class:'rounded bg-steel focus:ring-0 focus:ring-offset-0 hover:cursor-pointer' %>

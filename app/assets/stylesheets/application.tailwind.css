@@ -25,7 +25,7 @@
     @apply p-4 rounded-xl bg-steel_light text-sm hover:cursor-not-allowed text-gray-300 font-medium shadow-lg;
   }
   .input {
-    @apply bg-steel rounded-xl placeholder:text-sm text-white border-none p-4;
+    @apply bg-steel rounded-xl placeholder:text-sm text-white border-none p-4 outline-none block;
   }
   .flash_notice {
     @apply w-full px-5 py-3 text-center rounded-lg pointer-events-none border backdrop-blur border-slate-50/[0.06] bg-mirage;
