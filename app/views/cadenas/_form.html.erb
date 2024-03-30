@@ -28,11 +28,12 @@
     </div>
   </div>
   <div class="mb-4">
-    <%= f.number_field :installment_value, placeholder: 'Min: 100k - Max: 500k', class: 'input w-full', min: 100_000, max: 500_000, data:{cadena_target:"installmentValue", action:"cadena#updateSavingGoal"} %>
+    <input placeholder="Min: 100k - Max: 500k" class="w-full input" min="100000" max="500000" data-cadena-target="installmentDisplay" data-action="cadena#updateSavingGoal" id="installmentDisplay" type="text">
+    <%= f.hidden_field :installment_value, data:{cadena_target:"installmentValue"}, id:"installmentValue" %>
   </div>
   <div class="mb-4">
     <%= f.label :start_date, t('cadena.start_date'), class:'text-silver text-sm' %>
-    <%= f.date_field :start_date, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 w-full start_date", data:{cadena_target:"startDate", action:'cadena#updateEndDate'}, placeholder: Time.zone.now.next_day.strftime('%d/%m/%Y') %>
+    <%= f.date_field :start_date, value: f.object.start_date&.strftime("%d/%m/%Y"), class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 w-full start_date placeholder:text-sm", data:{cadena_target:"startDate", action:'cadena#updateEndDate'}, placeholder: 'En el futuro - ex: ' + Time.zone.now.next_day.strftime('%d/%m/%Y') %>
   </div>
   <div class="mb-4">
     <%= f.label :end_date, t('cadena.end_date') + '*', class:'text-silver text-sm' %>
@@ -40,7 +41,8 @@
   </div>
   <div class="mb-4">
     <%= f.label :saving_goal, t('cadena.saving_goal') + '*', class:'text-silver text-sm' %>
-    <%= f.number_field :saving_goal, readonly: true, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 w-full hover:cursor-not-allowed", data:{cadena_target:"savingGoal"} %>
+    <input placeholder="<%= t('cadena.auto_calc') %>" class="w-full input" data-cadena-target="savingGoalDisplay" type="text">
+    <%= f.hidden_field :saving_goal, class: "block border-none date rounded-xl text-white bg-steel outline-none p-4 w-full hover:cursor-not-allowed", data:{cadena_target:"savingGoal"} %>
   </div>
   <div class="flex items-center mb-4 space-x-2 text-sm field text-silver <%= f.object.new_record? ? '' : 'hidden' %>">
     <%= f.check_box :accepts_admin_terms, class:'rounded bg-steel focus:ring-0 focus:ring-offset-0 hover:cursor-pointer' %>

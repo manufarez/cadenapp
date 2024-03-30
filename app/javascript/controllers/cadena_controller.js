@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 import flatpickr from "flatpickr";
 import moment from "moment";
+import AutoNumeric from "autonumeric";
 
 // Connects to data-controller="cadena"
 export default class extends Controller {
@@ -10,17 +11,23 @@ export default class extends Controller {
     "startDate",
     "endDate",
     "periodicity",
-    "savingGoal",
     "installmentValue",
+    "installmentDisplay",
+    "savingGoal",
+    "savingGoalDisplay",
   ];
 
   connect() {
-    this.updateEndDate();
-    this.updateInstallments();
-    this.updateSavingGoal();
+    this.installmentDisplayTarget.value = this.installmentValueTarget.value;
+    new AutoNumeric("#installmentDisplay", {
+      currencySymbol: " $",
+      decimalCharacter: ",",
+      digitGroupSeparator: ".",
+      upDownStep: "10000",
+    });
     flatpickr(".start_date", {
       dateFormat: "d/m/Y",
-      defaultDate: this.startDateTarget.placeholder,
+      defaultDate: this.startDateTarget.value,
       locale: {
         firstDayOfWeek: 1,
         weekdays: {
@@ -69,10 +76,13 @@ export default class extends Controller {
     });
     flatpickr(".end_date", {
       dateFormat: "d/m/Y",
-      defaultDate: "",
+      defaultDate: this.endDateTarget.value,
       clickOpens: false,
       disableMobile: "true",
     });
+    this.updateEndDate();
+    this.updateInstallments();
+    this.updateSavingGoal();
   }
 
   updateEndDate() {
@@ -81,15 +91,13 @@ export default class extends Controller {
     const periodicity = this.periodicityTarget.value;
 
     if (installments && startDate) {
-      const endDate = moment(startDate, "DD/MM/YYYY")
-        .subtract(1, "days")
-        .toDate();
+      let endDate = moment(startDate, "DD/MM/YYYY").subtract(1, "days");
       if (periodicity === "daily") {
-        endDate.setDate(endDate.getDate() + installments);
+        endDate = moment(endDate).add(installments, "days");
       } else if (periodicity === "monthly") {
-        endDate.setMonth(endDate.getMonth() + installments);
+        endDate = moment(endDate).add(installments, "months");
       } else if (periodicity === "bimonthly") {
-        endDate.setDate(endDate.getDate() + installments * 15);
+        endDate = moment(endDate).add(installments * 15, "days");
       }
       this.endDateTarget.value = moment(endDate).format("DD/MM/YYYY");
     } else {
@@ -98,20 +106,20 @@ export default class extends Controller {
   }
 
   updateInstallments() {
-    const participants = parseInt(this.participantsTarget.value, 10);
-    if (!participants) return;
-    this.installmentsTarget.value = participants.toString();
+    this.installmentsTarget.value = this.participantsTarget.value;
     this.updateSavingGoal();
   }
 
   updateSavingGoal() {
-    const installments = parseInt(this.installmentsTarget.value, 10);
-    const installmentValue = parseFloat(this.installmentValueTarget.value);
-    if (installments && installmentValue) {
-      const savingGoal = installments * installmentValue;
-      this.savingGoalTarget.value = savingGoal.toFixed(2);
-    } else {
-      this.savingGoalTarget.value = 0;
+    const installmentsNumber = this.installmentsTarget.value;
+    const installmentValue = AutoNumeric.getNumber("#installmentDisplay");
+    if (installmentsNumber && installmentValue) {
+      this.installmentValueTarget.value = installmentValue;
+      const savingGoal = installmentsNumber * installmentValue;
+      this.savingGoalTarget.value = savingGoal;
+      this.savingGoalDisplayTarget.value = AutoNumeric.format(savingGoal, {
+        currencySymbol: " $",
+      });
     }
   }
 }

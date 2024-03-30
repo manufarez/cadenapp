@@ -10,3 +10,4 @@ pin "flowbite", to: "https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowb
 pin "flatpickr", to: "https://ga.jspm.io/npm:flatpickr@4.6.13/dist/esm/index.js"
 pin "vanilla-lazyload", to: "https://ga.jspm.io/npm:vanilla-lazyload@17.8.4/dist/lazyload.min.js"
 pin "moment", to: "https://ga.jspm.io/npm:moment@2.30.1/moment.js"
+pin "autonumeric", to: "https://ga.jspm.io/npm:autonumeric@4.10.5/dist/autoNumeric.min.js"
