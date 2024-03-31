@@ -101,3 +101,14 @@
     box-shadow: 0 0 0 5px rgba(239, 68, 68, 0);
   }
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
