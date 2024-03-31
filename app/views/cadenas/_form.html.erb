@@ -42,7 +42,7 @@
   </div>
   <div class="mb-4">
     <%= f.label :saving_goal, t('cadena.saving_goal') + '*', class:'text-silver text-sm' %>
-    <input placeholder="<%= t('cadena.auto_calc') %>" class="w-full input !ring-placeholder_gray hover:cursor-not-allowed" data-cadena-target="savingGoalDisplay" type="text">
+    <input placeholder="<%= t('cadena.auto_calc') %>" class="w-full input !ring-placeholder_gray hover:cursor-not-allowed" readonly disabled data-cadena-target="savingGoalDisplay" type="text">
     <%= f.hidden_field :saving_goal, data:{cadena_target:"savingGoal"} %>
   </div>
   <div class="flex items-center mb-4 space-x-2 text-sm field text-silver <%= f.object.new_record? ? '' : 'hidden' %>">
