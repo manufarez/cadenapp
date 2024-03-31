@@ -10,9 +10,14 @@ Rails.application.configure do
       class: "PaymentReminderJob",
       set: { priority: -10 }
     },
-    every_day_at_11_55: {
+    every_day_at_01: {
       cron: '01 00 * * *',
       class: "CheckCadenasPaymentsJob",
+      set: { priority: -10 }
+    },
+    every_day_at_23_59: {
+      cron: '59 23 * * *',
+      class: "UpdateUnstartedCadenasJob",
       set: { priority: -10 }
     },
   }
