@@ -176,6 +176,7 @@ es:
         we_need_your_current_password_to_confirm_your_changes: necesitamos su contraseña actual para confirmar los cambios
       new:
         sign_up: Registrarse
+        open_account: Abrir cuenta
       signed_up: Bienvenido. Tu cuenta fue creada.
       signed_up_but_inactive: Tu cuenta ha sido creada correctamente. Sin embargo, no hemos podido iniciar la sesión porque tu cuenta aún no está activada.
       signed_up_but_locked: Tu cuenta ha sido creada correctamente. Sin embargo, no hemos podido iniciar la sesión porque que tu cuenta está bloqueada.
@@ -188,6 +189,7 @@ es:
       already_signed_up: ¿Ya tienes cuenta?
       logout_confirmation: ¿Estás seguro de que quieres cerrar sesión?
       new:
+        connect: Conectarse
         sign_in: Iniciar sesión
       signed_in: Sesión iniciada.
       signed_out: Sesión finalizada.
