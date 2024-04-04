@@ -4,5 +4,6 @@
   <p>Puedes hacer click en el siguiente enlace para ver la invitación:</p>
   <%= link_to 'Ingresar Cadena', cadena_preview_url(@invitation.token), class:'btn-primary' %>
   <p>Si ya tienes cuenta Cadenapp, conectate primero, haciendo click <b><%= link_to "aqui", new_user_session_url %></b>, y vuelve a abrir el link de la invitacion después 👆</p>
+  <p>Los links de invitaciones tienen validez de <u>1h</u>, por seguridad. Después de este plazo <b>tendras que volver a mandar otra invitación.</b></p>
   <p>Si no esperabas esta invitación, simplemente puedes ignorar este correo electrónico.</p>
 <% end %>
