@@ -202,7 +202,8 @@ class Cadena < ApplicationRecord
   end
 
   def admin
-    return nil unless admin_id.present?
+    return nil if admin_id.blank?
+
     Participant.find(admin_id)
   end
 

@@ -48,6 +48,8 @@ class User < ApplicationRecord
   end
 
   def admin_of?(cadena)
+    return false if admin.blank?
+
     self == cadena.admin.user
   end
 
