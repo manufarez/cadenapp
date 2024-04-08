@@ -201,6 +201,10 @@ class Cadena < ApplicationRecord
     CadenaMailer.remind_admin_to_generate_order(self).deliver_later
   end
 
+  def admin
+    Participant.find(admin_id)
+  end
+
   private
 
   def calculate_withdrawal_dates
