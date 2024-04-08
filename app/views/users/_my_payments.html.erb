@@ -1,23 +1,10 @@
 <h1 class="mt-6 mb-2 text-lg font-semibold"><%= current_user == @user ? 'Mis pagos' : 'Pagos' %></h1>
 <div class="flex flex-col space-y-4">
   <% if @payments.any? %>
-    <% @payments.each do |payment| %>
-      <div class="flex items-center justify-between h-16 p-4 font-sans text-sm font-medium rounded-xl bg-midnight">
-        <%= render 'cadenas/avatars/payment_avatar', payment: payment %>
-        <div class="flex items-center justify-between w-full">
-          <div class="flex flex-col">
-            <div class="flex">
-              <%= inline_svg_tag('svg/arrow_right.svg', class:"w-4 #{ payment.user == @user ? 'rotate-180 text-pinky' : 'text-primary_blue'}") %>
-              <span><%= payment.user == @user ? payment.participant.name : payment.user.name %></span>
-            </div>
-            <div class="ml-4 text-xs text-placeholder_gray"><%= payment.cadena.name %></div>
-          </div>
-          <div class="flex flex-col text-right">
-            <span class="mb-1 tabular-nums"><%= payment.user == @user ? '-' : '+' %> <%= number_to_currency(payment.amount, precision: 0, unit:'$') %></span>
-            <span class="text-xs font-light text-placeholder_gray"><%= payment.paid_at.strftime('%d/%m/%Y') %></span>
-          </div>
-        </div>
-      </div>
+    <% @payments.group_by(&:cadena).each do |cadena, payments| %>
+      <%= link_to cadena_payments_path(cadena) do %>
+        <%= render 'cadenas/cadena_title_box', cadena: cadena %>
+      <% end %>
     <% end %>
   <% else %>
     <div class="flex flex-col items-center p-6 border border-gray-700 border-dashed rounded-xl">

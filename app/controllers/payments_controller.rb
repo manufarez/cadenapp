@@ -1,5 +1,16 @@
 class PaymentsController < ApplicationController
+  include ActiveStorage::SetCurrent
   before_action :set_cadena
+
+  def index
+    if params[:user]
+      @user = User.find(params[:user])
+      @payments = (@user.made_payments + @user.received_payments).sort_by(&:created_at).reverse
+      @payments.select{|payment|payment.cadena == @cadena}
+    else
+      @payments = Payment.where(cadena: @cadena)
+    end
+  end
 
   def create
     @payment = Payment.new(payment_params)
