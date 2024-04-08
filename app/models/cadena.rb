@@ -7,7 +7,7 @@ class Cadena < ApplicationRecord
   before_create :set_saving_goal
   validates :desired_participants, presence: true
   validates :desired_installments, presence: true
-  validates :name, presence: true
+  validates :name, presence: true, length: { minimum: 3, maximum: 33 }
   validates :periodicity, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true

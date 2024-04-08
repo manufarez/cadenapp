@@ -41,6 +41,8 @@ es:
         max_size_error: " - tamaño de archivo debe ser menor a %{max_size}"
         not_a_number: no es un numero
         not_saved: Las informaciones no han sido guardadas
+        too_long: "es demasiado largo (maximo %{count} caracteres)"
+        too_short: "es demasiado corto (minimo %{count} caracteres)"
   cadena:
     admin_terms_acceptance: You must accept the admin terms
     approve_list: Enviar confirmacion lista

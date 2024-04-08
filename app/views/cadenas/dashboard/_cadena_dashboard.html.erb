@@ -1,6 +1,6 @@
 <div class="cadena-dashboard" data-controller="cadena-dashboard" data-cadena-dashboard-state-value="<%= @cadena.state %>">
   <div class="flex items-start justify-between">
-    <h2 class="cadena-title"><%= cadena.name %></h2>
+    <h2 class="overflow-hidden cadena-title text-ellipsis"><%= cadena.name %></h2>
     <%= render 'cadenas/dashboard/dropdown_button', cadena: cadena %>
   </div>
   <% if current_user.present? && ((!cadena.finished? && !cadena.stopped?) && (current_user.is_admin || current_user.admin_of?(cadena))) %>
