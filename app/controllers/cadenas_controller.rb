@@ -41,9 +41,10 @@ class CadenasController < ApplicationController
   def create
     @cadena = Cadena.new(cadena_params)
     respond_to do |format|
-      if @cadena.save
+      if @cadena.save && current_user
+        admin = Participant.create(cadena: @cadena, user: current_user)
+        @cadena.update(admin_id: admin.id)
         CadenaMailer.new_cadena_email(@cadena, current_user).deliver_later
-        Participant.create(cadena: @cadena, user: current_user) if current_user
         format.html { redirect_to cadena_url(@cadena), notice: t('notices.cadena.creation_success') }
         format.json { render :show, state: :created, location: @cadena }
       else
