@@ -8,6 +8,7 @@ class Payment < ApplicationRecord
   validate :sufficient_balance
   validate :max_payments
   validate :cadena_started?, unless: -> { Rails.application.config.seeding }
+  validate :unique_payment_from_sender_to_receiver
 
   after_create_commit :global_complete?
   before_destroy :decrement_payments
@@ -41,6 +42,12 @@ class Payment < ApplicationRecord
   end
 
   private
+
+  def unique_payment_from_sender_to_receiver
+    return unless Payment.where(cadena: cadena, user: sender, participant_id: receiver).any?
+
+    errors.add(:base, "Ya existe un pago de #{sender.name} a #{receiver.name} en esta cadena")
+  end
 
   def sufficient_balance
     return unless amount > user.balance
