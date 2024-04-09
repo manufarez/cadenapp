@@ -1,0 +1,20 @@
+<div class="flex justify-around w-full gap-2 py-4">
+  <%= link_to cadena_invitations_path(cadena), class:'flex flex-col items-center justify-center space-y-2' do %>
+    <button type="button" class="circle-button">
+      <%= inline_svg_tag('svg/mail.svg', class:'w-5') %>
+    </button>
+    <span class="text-xs text-white font-manrope">Invitaciones</span>
+  <% end %>
+  <%= link_to cadena_payments_path(cadena), class:'flex flex-col items-center justify-center space-y-2' do %>
+    <button type="button" class="circle-button">
+      <%= inline_svg_tag('svg/bills.svg', class:'w-5') %>
+    </button>
+    <span class="text-xs text-white font-manrope">Pagos</span>
+  <% end %>
+  <%= link_to "/faq", class:'flex flex-col items-center justify-center space-y-2' do %>
+    <button type="button" class="circle-button">
+      <%= inline_svg_tag('svg/question.svg', class:'w-5') %>
+    </button>
+    <span class="text-xs text-white font-manrope">Ayuda</span>
+  <% end %>
+</div>

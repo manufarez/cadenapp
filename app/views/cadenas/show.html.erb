@@ -1,42 +1,7 @@
 <div class="flex w-full max-w-md px-6 mx-auto">
   <div class="w-full mx-auto">
     <%= render @cadena %>
-    <div class="flex justify-around w-full gap-2 py-4">
-      <%= link_to cadena_invitations_path(@cadena), class:'flex flex-col items-center justify-center space-y-2' do %>
-        <button type="button" class="circle-button">
-          <%= inline_svg_tag('svg/mail.svg', class:'w-5') %>
-        </button>
-        <span class="text-xs text-white font-manrope">Invitaciones</span>
-      <% end %>
-      <%= link_to cadena_payments_path(@cadena), class:'flex flex-col items-center justify-center space-y-2' do %>
-        <button type="button" class="circle-button">
-          <%= inline_svg_tag('svg/bills.svg', class:'w-5') %>
-        </button>
-        <span class="text-xs text-white font-manrope">Pagos</span>
-      <% end %>
-      <%= link_to "/faq", class:'flex flex-col items-center justify-center space-y-2' do %>
-        <button type="button" class="circle-button">
-          <%= inline_svg_tag('svg/question.svg', class:'w-5') %>
-        </button>
-        <span class="text-xs text-white font-manrope">Ayuda</span>
-      <% end %>
-    </div>
-    <% if current_user.is_admin? %>
-      <div class="p-4 my-6 border border-gray-700 border-dashed rounded-xl">
-        <p class="px-1 mb-2 -mt-6 text-xs font-medium tracking-wide text-gray-600 uppercase w-fit bg-mirage font-manrope">Super Admin</p>
-        <div class="grid gap-3 <%= @cadena.started? || @cadena.stopped? ? 'grid-cols-3' : 'grid-cols-2' %>">
-          <%= link_to 'Edit', edit_cadena_path(@cadena), class: "btn-outline-primary" %>
-          <% if @cadena.started? %>
-            <%= link_to 'Pay ⚡️', cadena_make_all_payments_path(@cadena), class:'btn-secondary text-sm text-center py-2.5 rounded-lg font-medium' %>
-            <%= button_to "Stop", change_state_cadena_path(@cadena, state: 'stopped'), method: :patch,form: { data: { turbo_confirm: t('cadena.stop_confirmation') } }, class: "btn-outline-danger" %>
-          <% elsif @cadena.stopped? %>
-            <%= button_to "Resume", change_state_cadena_path(@cadena, state: 'started'), method: :patch,form: { data: { turbo_confirm: t('cadena.resume_confirmation') } }, class: "btn-secondary text-sm text-center py-2.5 rounded-lg font-medium w-full" %>
-            <%= button_to 'Destroy', cadena_path(@cadena), method: :delete, form: {data: {turbo_confirm: t('cadena.destroy_confirmation')}}, class: "btn-outline-danger" %>
-          <% else %>
-            <%= button_to 'Destroy', cadena_path(@cadena), method: :delete, form: {data: {turbo_confirm: t('cadena.destroy_confirmation')}}, class: "btn-outline-danger" %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
+    <%= render 'cadena_subsections_links', cadena: @cadena %>
+    <%= render 'cadena_admin_section', cadena: @cadena %>
   </div>
 </div>

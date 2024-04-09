@@ -61,6 +61,6 @@
     @apply p-6 mb-6 text-white border border-gray-700 rounded-2xl;
   }
   .circle-button {
-    @apply p-3 text-blue-500 rounded-full bg-primary_blue/20 font-manrope focus:ring-0 focus:outline-none hover:bg-blue-700/50;
+    @apply p-3 text-primary_blue rounded-full bg-primary_blue/15 font-manrope focus:ring-0 focus:outline-none hover:bg-blue-700/40;
   }
 }
