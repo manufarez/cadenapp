@@ -52,7 +52,7 @@
     @apply flex items-center justify-center h-4 text-white transition-all duration-1000 ease-out bg-blue-600 rounded-full;
   }
   .active-period {
-    @apply bg-primary_blue hover:bg-blue-700;
+    @apply bg-primary_blue hover:bg-blue-700 shadow-gray-900 shadow;
   }
   .cadena-title {
     @apply text-2xl font-bold leading-7 text-left text-white font-nimbus-ext;

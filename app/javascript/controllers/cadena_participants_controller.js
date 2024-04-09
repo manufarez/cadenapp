@@ -21,8 +21,14 @@ export default class extends Controller {
   showPeriod() {
     if (!this.tab1Target.classList.contains("active-period")) {
       this.toggleView();
-      this.tab2Target.classList.replace("active-period", "hover:bg-midnight");
-      this.tab1Target.classList.replace("hover:bg-midnight", "active-period");
+      this.tab2Target.classList.replace(
+        "active-period",
+        "hover:bg-steel_light"
+      );
+      this.tab1Target.classList.replace(
+        "hover:bg-steel_light",
+        "active-period"
+      );
       if (this.hasPeriodProgressTarget) {
         setTimeout(() => {
           this.periodProgressTarget.style.width =
@@ -38,8 +44,14 @@ export default class extends Controller {
   showGlobal() {
     if (!this.tab2Target.classList.contains("active-period")) {
       this.toggleView();
-      this.tab1Target.classList.replace("active-period", "hover:bg-midnight");
-      this.tab2Target.classList.replace("hover:bg-midnight", "active-period");
+      this.tab1Target.classList.replace(
+        "active-period",
+        "hover:bg-steel_light"
+      );
+      this.tab2Target.classList.replace(
+        "hover:bg-steel_light",
+        "active-period"
+      );
       if (this.hasGlobalProgressTarget) {
         setTimeout(() => {
           this.globalProgressTarget.style.width =
