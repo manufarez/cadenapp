@@ -10,8 +10,8 @@ class Invitation < ApplicationRecord
   validate :cadena_must_be_pending
   validate :cadena_start_must_be_future, on: :create
 
-  def older_than_1h
-    Time.zone.today - 1.hour == created_at
+  def older_than_1day
+    Time.zone.now > created_at + 1.day
   end
 
   def name
