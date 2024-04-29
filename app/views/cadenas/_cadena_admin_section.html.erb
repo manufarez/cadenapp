@@ -8,7 +8,7 @@
         <%= button_to "Stop", change_state_cadena_path(@cadena, state: 'stopped'), method: :patch,form: { data: { turbo_confirm: t('cadena.stop_confirmation') } }, class: "btn-outline-danger" %>
       <% elsif @cadena.stopped? %>
         <%= button_to "Resume", change_state_cadena_path(@cadena, state: 'started'), method: :patch,form: { data: { turbo_confirm: t('cadena.resume_confirmation') } }, class: "btn-secondary text-sm text-center py-2.5 rounded-lg font-medium w-full" %>
-        <%= button_to 'Destroy', cadena_path(@cadena), method: :delete, form: {data: {turbo_confirm: t('cadena.destroy_confirmation')}}, class: "btn-outline-danger" %>
+        <%= button_to "Archive", change_state_cadena_path(@cadena, state: 'archived'), method: :patch,form: { data: { turbo_confirm: t('cadena.archive_confirmation') } }, class: "btn-outline-danger" %>
       <% else %>
         <%= button_to 'Destroy', cadena_path(@cadena), method: :delete, form: {data: {turbo_confirm: t('cadena.destroy_confirmation')}}, class: "btn-outline-danger" %>
       <% end %>

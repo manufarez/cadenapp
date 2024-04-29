@@ -53,6 +53,10 @@ class Cadena < ApplicationRecord
       transition [:stopped, :finished] => :started
     end
 
+    event :archive do
+      transition stopped: :archived
+    end
+
     state :pending, :complete, :participants_approval do
       validate :start_date_is_future
     end

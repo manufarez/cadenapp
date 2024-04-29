@@ -86,6 +86,7 @@ es:
     periodicity: Frecuencia
     reject_participation: ¿Estas seguro de querer salirte de %{cadena_name}? Toda salida es irreversible
     resume_confirmation: ¿Estás seguro de que quieres reanudar la cadena?
+    archive_confirmation: ¿Estás seguro de que quieres archivar la cadena?
     saved: Ahorrados
     saving_goal: Objetivo de ahorro
     should_be_future: tiene que ser en el futuro

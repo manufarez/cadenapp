@@ -72,6 +72,8 @@ class CadenasController < ApplicationController
       @cadena.resume
     elsif params[:state].present? && params[:state] == 'stopped'
       @cadena.stop
+    elsif params[:state].present? && params[:state] == 'archived'
+      @cadena.archive
     end
     redirect_to @cadena, notice: "State updated to #{@cadena.state}"
   end
