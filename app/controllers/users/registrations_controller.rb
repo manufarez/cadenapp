@@ -16,7 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
 
-    #careful: validation on captcha does not work locally
+    #careful: validation on captcha does not work locally (but Turnstile is off in development)
     if valid_captcha?(model: resource)
       resource.save
     else
