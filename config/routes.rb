@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   authenticate :user, ->(u) { u.is_admin? } do
     mount GoodJob::Engine, at: "good_job"
+    get 'newsletter_subscribers', to: 'newsletter_subscribers#index'
   end
   get '/cadena_preview/:token', to: 'cadena_preview#show', as: 'cadena_preview'
   devise_for :users, controllers: {
@@ -12,7 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :newsletter_subscribers
+  resources :newsletter_subscribers, only: [:new, :create]
 
   get 'users/:id', to: 'users#show', as: 'user'
   get 'users/:id/abandon_complete_profile', to: 'users#abandon_complete_profile', as: 'abandon_complete_profile'

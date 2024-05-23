@@ -1,0 +1,30 @@
+<div class="px-6 mx-auto text-white">
+  <div class="flex flex-col mb-6 space-y-2">
+    <h1 class="text-3xl font-bold leading-6 text-white font-nimbus-ext">Newsletter subscribers</h1>
+    <% if current_user.is_admin %>
+      <p class="super_admin">
+        Super Admin
+      </p>
+    <% end %>
+  </div>
+  <div class="relative mb-12 overflow-x-auto border rounded-lg shadow-md border-steel">
+    <table class="w-full text-sm text-left font-manrope">
+      <thead class="text-xs text-gray-200 uppercase bg-steel">
+        <tr>
+          <th scope="col" class="px-6 py-4"><%= t('cadena.id') %></th>
+          <th scope="col" class="px-6 py-4">E-mail</th>
+          <th scope="col" class="px-6 py-4"><%= t('user.created_at') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @newsletter_subscribers.each do |subscriber| %>
+          <tr class="text-white odd:bg-transparent even:bg-gray-600/10 hover:bg-jaguar_light/50 hover:cursor-pointer">
+            <td class="px-6 py-4"><%= subscriber.id %></td>
+            <td class="px-6 py-4 font-sans"><%= subscriber.email %></td>
+            <td class="px-6 py-4 font-light"><%= subscriber.created_at.strftime('%d/%m/%y') %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

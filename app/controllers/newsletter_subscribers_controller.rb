@@ -10,6 +10,10 @@ class NewsletterSubscribersController < ApplicationController
     end
   end
 
+  def index
+    @newsletter_subscribers = NewsletterSubscriber.all
+  end
+
   private
 
   def lead_params
