@@ -18,8 +18,6 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_user!
-    puts "THE CONTROLLER NAME IS #{controller_name} AND THE ACTION #{action_name}"
-
     if user_signed_in? || (devise_controller? && %w[new create destroy update].include?(action_name)) || params[:token] || controller_name == 'newsletter_subscribers' || (controller_name == 'passwords' && action_name == 'edit')
       return
     end

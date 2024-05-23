@@ -134,6 +134,10 @@ GEM
       railties (>= 5.0.0)
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
+    faraday (2.9.0)
+      faraday-net_http (>= 2.0, < 3.2)
+    faraday-net_http (3.1.0)
+      net-http
     ffi (1.15.5)
     formatador (1.1.0)
     fugit (1.8.1)
@@ -162,6 +166,7 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    hashie (5.0.0)
     htmlbeautifier (1.4.2)
     htmlentities (4.3.4)
     i18n (1.14.4)
@@ -211,6 +216,8 @@ GEM
     minitest (5.22.3)
     msgpack (1.5.2)
     nenv (0.3.0)
+    net-http (0.4.1)
+      uri
     net-imap (0.2.3)
       digest
       net-protocol
@@ -388,10 +395,15 @@ GEM
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
+    turnstile-captcha (0.1.5)
+      faraday
+      hashie
+      rails (>= 6.1.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
     uniform_notifier (1.16.0)
+    uri (0.13.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -454,6 +466,7 @@ DEPENDENCIES
   tailwindcss-rails
   timecop
   turbo-rails
+  turnstile-captcha
   tzinfo-data
   web-console
   webdrivers
