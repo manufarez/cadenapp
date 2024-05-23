@@ -11,6 +11,7 @@
         <%= f.submit 'Inscribirse', class: 'font-manrope font-semibold cursor-pointer text-white bg-gradient-to-br border border-indigo-900/25 from-purple-500/20 to-lavender_dark/50 hover:cursor-pointer hover:bg-gradient-to-bl rounded-lg text-sm px-5 py-2.5 text-center' %>
       </div>
       <div class="text-sm font-medium text-gray-300 font-nimbus">Al inscribirte, aceptas los Términos de servicio y la Política de privacidad de Cadenapp.</div>
+      <%= captcha_tags action: "newsletter_subscribers" %>
     <% end %>
   </div>
 </aside>
