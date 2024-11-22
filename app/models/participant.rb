@@ -1,6 +1,6 @@
 class Participant < ApplicationRecord
   belongs_to :user, optional: true
-  belongs_to :cadena, optional: true
+  belongs_to :cadena, optional: false
   has_many :received_payments, class_name: 'Payment', dependent: :destroy
   validate :cadena_start_must_be_future, on: :create
   validate :cadena_must_have_capacity, on: :create

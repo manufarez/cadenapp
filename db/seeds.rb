@@ -9,21 +9,15 @@ Rails.application.config.seeding = true
 
 time = Time.now
 
-Participant.destroy_all
-ActiveRecord::Base.connection.reset_pk_sequence!(Participant.table_name)
-puts 'Participants destroyed!'
-Invitation.destroy_all
-ActiveRecord::Base.connection.reset_pk_sequence!(Invitation.table_name)
-puts 'Invitations destroyed!'
+Participant.delete_all
+Cadena.delete_all
+puts 'Cadenas destroyed! Dependencies will be destroyed next: Participants, Invitations and Payments.'
 User.destroy_all
-ActiveRecord::Base.connection.reset_pk_sequence!(User.table_name)
 puts 'Users destroyed!'
-Cadena.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!(Cadena.table_name)
-puts 'Cadenas destroyed!'
-Payment.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!(User.table_name)
+ActiveRecord::Base.connection.reset_pk_sequence!(Invitation.table_name)
 ActiveRecord::Base.connection.reset_pk_sequence!(Payment.table_name)
-puts 'Payments destroyed!'
 
 # Only uncomment this for the first installment, helps playing seeds faster
 # require 'open-uri'
@@ -59,7 +53,7 @@ puts 'Creating 170 fake users...'
     zip: Faker::Address.zip_code,
     address: Faker::Address.street_address,
     accepts_terms: true,
-    balance: [0, 500000, 1000000, 5000000].sample
+    balance: [500_000, 1_000_000, 5_000_000].sample
     )
     if Rails.env.production?
       image = URI.parse('https://i.pravatar.cc/256').open
@@ -77,7 +71,7 @@ puts 'Creating 10 fake cadenas with 10 participants...'
   cadena.name = Faker::Restaurant.name
   cadena.desired_installments = 10
   cadena.desired_participants = 10
-  cadena.installment_value = (200_000..1_000_000).step(100_000).to_a.sample
+  cadena.installment_value = (100_000..500_000).step(100_000).to_a.sample
   cadena.saving_goal = cadena.desired_installments * cadena.installment_value
   cadena.start_date = Date.today + 1.day
   cadena.periodicity = ['monthly', 'bimonthly', 'daily'].sample
@@ -100,11 +94,12 @@ puts 'Creating 10 fake cadenas with 10 participants...'
 end
 
 puts "Creating 10 participants for each cadena..."
-counter = 0
+counter = Cadena.first.id - 1
 Cadena.all.each do |cadena|
   counter += 1
-  cadena.admin = Participant.create(user: User.find(counter), cadena: cadena)
-  cadena.save
+  admin = Participant.create(user: User.find(counter), cadena: cadena)
+  cadena.admin_id = admin.id
+  cadena.save!
   9.times do
     counter += 1
     Participant.create(user: User.find(counter), cadena: cadena)
@@ -151,7 +146,7 @@ Cadena.all.each do |cadena|
 end
 
 puts "Creating Cadenapp's admins"
-manu = User.new(first_name: 'Manuel', last_name: 'Farez', email: 'manufarez@gmail.com', password: '0$6t^^GCq9x4',
+manu = User.new(first_name: 'Manuel', last_name: 'Farez', email: 'manufarez@gmail.com', password: 'manufarez@gmail.com',
                 is_admin: true, sex: 'M', dob: '25/06/1990', identification_type: 'C.E', identification_number: '11AK70585', address: 'Cra. 14#13-12', city: 'Bogota', zip: '20212', phone: '2653543095', accepts_terms: true)
 manu.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'zz.jpg')), filename: 'zz.jpg', content_type: 'image/jpeg')
 manu.save
@@ -175,10 +170,11 @@ puts "Advancing the progression of Cadena #{@cadena.id}"
     paid_at: Time.zone.now
   )
   if @payment.valid?
-    @payment.save
+    @payment.save!
+    puts "Payment #{@payment.id} created"
   else
+    puts "Payment #{@payment.id} not created"
     puts @payment.errors.full_messages.join(', ')
-    # return
   end
 end
 
