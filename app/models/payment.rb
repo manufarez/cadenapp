@@ -4,6 +4,7 @@ class Payment < ApplicationRecord
   belongs_to :cadena
   belongs_to :participant
   belongs_to :user
+  has_one :payment_proof, dependent: :destroy
 
   validate :sufficient_balance
   validate :max_payments

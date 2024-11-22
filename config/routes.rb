@@ -37,6 +37,7 @@ Rails.application.routes.draw do
         get :accept
       end
     end
+    resources :payment_proofs
     member do
       delete 'remove_participant/:participant_id', to: 'cadenas#remove_participant', as: :remove_participant
       patch :start_participants_approval

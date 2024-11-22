@@ -1,0 +1,5 @@
+<%= form_with(model: @payment_proof, url: [@cadena, @payment_proof]) do |form| %>
+  <%= form.label :image, "Upload Image" %>
+  <%= form.file_field :image %>
+  <%= form.submit "Submit" %>
+<% end %>

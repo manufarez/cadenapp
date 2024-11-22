@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_12_225500) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_22_161113) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -175,6 +175,25 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_12_225500) do
     t.index ["user_id"], name: "index_participants_on_user_id"
   end
 
+  create_table "payment_proofs", force: :cascade do |t|
+    t.string "amount"
+    t.string "number"
+    t.string "account_type"
+    t.string "account_number"
+    t.datetime "transfer_timestamp"
+    t.string "bank_name"
+    t.bigint "cadena_id", null: false
+    t.bigint "payment_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "participant_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cadena_id"], name: "index_payment_proofs_on_cadena_id"
+    t.index ["participant_id"], name: "index_payment_proofs_on_participant_id"
+    t.index ["payment_id"], name: "index_payment_proofs_on_payment_id"
+    t.index ["user_id"], name: "index_payment_proofs_on_user_id"
+  end
+
   create_table "payments", force: :cascade do |t|
     t.decimal "amount"
     t.datetime "paid_at"
@@ -223,6 +242,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_12_225500) do
   add_foreign_key "newsletter_subscribers", "users"
   add_foreign_key "participants", "cadenas"
   add_foreign_key "participants", "users"
+  add_foreign_key "payment_proofs", "cadenas"
+  add_foreign_key "payment_proofs", "participants"
+  add_foreign_key "payment_proofs", "payments"
+  add_foreign_key "payment_proofs", "users"
   add_foreign_key "payments", "cadenas"
   add_foreign_key "payments", "participants"
   add_foreign_key "payments", "users"
