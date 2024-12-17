@@ -39,7 +39,7 @@
 ### 3.	Aggregate and sell crypto for fiat:
 - When it’s time to pay the designated member, the Rails app triggers a process to:
 - Aggregate the stablecoin deposits from the platform wallet.
-- Use a crypto-to-fiat service like [Circle](https://www.circle.com/), [Coinbase Commerce](https://www.coinbase.com/commerce), or a decentralized exchange with fiat off-ramps (if available) to convert the stablecoin back to fiat.
+- Use a crypto-to-fiat service like [Circle](https://www.circle.com/), [Coinbase Commerce](https://www.coinbase.com/commerce), or a decentralized exchange with fiat off-ramps to convert the stablecoin back to fiat.
 
 ### 4.	Send Fiat to the designated member:
 - The converted fiat funds are transferred to the designated member via a fiat payment gateway (in the U.S: PayPal, Stripe, or a direct bank transfer API like [Plaid](https://plaid.com/) or Wise).
