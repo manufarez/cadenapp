@@ -51,7 +51,7 @@
     - Accept fiat payments from users within the Rails app.
     - Convert these to stablecoins like USDC/COPM on the Polygon network.
     - Deposit the stablecoins into a custodial platform-controlled wallet.
-- Providers like Onramper offer white-label solutions where users don’t see any branding from the fiat-to-crypto provider.
+- Providers like [Onramper](https://onramper.com/) offer white-label solutions where users don’t see any branding from the fiat-to-crypto provider.
 - Advanced APIs from providers like [Circle](https://www.circle.com/) allow to programmatically initiate fiat-to-crypto conversions without exposing users to third-party interfaces.
 - Example flow:
   1. User enters payment amount (e.g., $5000).
