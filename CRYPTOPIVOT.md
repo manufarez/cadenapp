@@ -94,7 +94,8 @@
 2. Liquidity timing: the fiat conversion process may introduce delays depending on the gateway used. Ensure payouts align with user expectations.
 3. Custodial Risks: holding funds in a centralized platform wallet introduces potential security risks. Consider integrating additional security measures like multi-signature wallets.
 4. Transaction costs: while crypto reduces some fees, fiat off-ramping and bank payouts may still have associated costs.
-5. Reliance on fiat-to-crypto gateways like Ramp or [Circle](https://www.circle.com/) means our system depends on their uptime and fees.
+5. Reliance on fiat-to-crypto gateways means our system depends on their uptime and fees.
+6. During the sell phase (crypto-to-fiat), while the risk of conversion issues with small amounts is minimal, exchanges like Coinbase or Binance may request documentation about the origin and purpose of funds to comply with regulations.
 
 ## Solving the KYC challenge
 If we implement a custodial wallet and handle fiat-to-crypto conversions, we will likely need to comply with KYC (Know Your Customer) and AML (Anti-Money Laundering) regulations. Fiat-to-Crypto Gateways are legally required to ensure that users are legitimate and not engaging in fraud, money laundering, or other illegal activities. To perform this check, gateways typically require user data like: full name, address, date of birth, government-issued ID (passport, driver’s license, etc.). If our app acts as the intermediary, we must collect and securely transmit this information to the gateway to facilitate transactions.
