@@ -5,7 +5,8 @@ class ExtractTextJob < ApplicationJob
 
   def perform(payment_proof)
     image_path = ActiveStorage::Blob.service.path_for(payment_proof.image.key)
-    payment_proof.bank_name = RTesseract.new(image_path).to_s
-    payment_proof.save!
+    extracted_text = RTesseract.new(image_path).to_s
+    parsed_data = ::PaymentProofParser.parse(extracted_text)
+    payment_proof.update!(parsed_data)
   end
 end

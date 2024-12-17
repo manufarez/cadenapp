@@ -13,7 +13,11 @@
     <div class="flex flex-col space-y-4">
       <% if @payments.any? %>
         <% @payments.each do |payment| %>
-          <%= link_to cadena_payment_proof_path(id: payment.payment_proof.id), class: 'flex items-center justify-between p-4 border border-gray-700 rounded-xl' do %>
+          <% if payment.payment_proof.present? %>
+            <%= link_to cadena_payment_proof_path(id: payment.payment_proof.id), class: 'flex items-center justify-between p-4 border border-gray-700 rounded-xl' do %>
+              <%= render 'payments/single_payments', payment: payment %>
+            <% end %>
+          <% else %>
             <%= render 'payments/single_payments', payment: payment %>
           <% end %>
         <% end %>

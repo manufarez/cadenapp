@@ -3,7 +3,9 @@
   <%#= button_to cadena_payments_path(cadena, payment: {participant_id: cadena.next_paid_participant, user_id: current_user, amount: cadena.installment_value, paid_at: Time.zone.now, cadena_id: cadena.id}), class: 'btn-primary text-white/75 mb-4 text-sm shadow-xl', form_class: 'w-full' do %>
     <!-- Pagar <span class="text-white"><%= number_to_currency_with_k(cadena.installment_value, precision: 0) %></span> a <%= cadena.next_paid_participant.name %> -->
     <%# end %>
-    <%= link_to 'Pagar', new_cadena_payment_proof_path(cadena), class: 'btn-primary text-white/75 mb-4 text-sm shadow-xl' %>
+    <%= link_to new_cadena_payment_proof_path(cadena), class: 'btn-primary text-white/75 mb-4 text-sm shadow-xl text-center' do %>
+      Pagar <span class="text-white"><%= number_to_currency_with_k(cadena.installment_value, precision: 0) %></span> a <%= cadena.next_paid_participant.name %>
+    <% end %>
   <% elsif cadena.next_paid_participant.user == current_user %>
     <button disabled class="flex items-center justify-center w-full mb-4 rounded-xl btn-disabled">Es tu turno de recibir, no pagas <%= inline_svg_tag('svg/check.svg', class:'w-5 ml-1.5 text-lavender') %></button>
   <% else %>

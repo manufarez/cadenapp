@@ -1,5 +1,9 @@
-<%= form_with(model: @payment_proof, url: [@cadena, @payment_proof]) do |form| %>
-  <%= form.label :image, "Upload Image" %>
-  <%= form.file_field :image %>
-  <%= form.submit "Submit" %>
-<% end %>
+<div class="flex justify-center max-w-md mx-auto">
+  <div class="w-full px-6 mb-6 text-white font-manrope">
+    <%= form_with(model: @payment_proof, url: [@cadena, @payment_proof], class: 'flex flex-col items-center') do |form| %>
+      <%= form.label :image, "Subir imagen del comprobante de pago", class: "mb-10 font-semibold font-manrope" %>
+      <%= form.file_field :image, class: "mb-10" %>
+      <%= form.submit "Enviar", class: 'btn-primary' %>
+    <% end %>
+  </div>
+</div>
