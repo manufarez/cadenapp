@@ -17,13 +17,14 @@
 
 ## The problem we're trying to solve
 - We initially explored using a Banking-as-a-Service (BaaS) provider but found the costs prohibitive. The combination of high service fees, the complexity of their commercial terms, and the resources required in terms of time and technical capacity were too much for our available budget and operational needs.
-- We're investigating achieving the same functionality at a much lower cost using a combination of crypto-to-fiat gateways and a custodial wallet.
+- We're investigating achieving the same functionality at a much lower cost using a combination of crypto-to-fiat gateways and a custodial wallet: user deposits fiat that is converted to a stablecoin, stablecoin deposits are agregated and then sold for fiat, fiat conversions are then transferred to bank accounts.
 
 ## Starting principles
 - Matching the input and output methods (fiat-in/fiat-out OR crypto-in/crypto-out) is the best approach for user experience and simplicity.
 - Keeping the end user experience fiat-focused avoids the need to explain blockchain concepts, wallets, or cryptocurrencies, and broadens the potential user base.
 - Using crypto stablecoins to distribute funds internally avoids traditional banking fees and regulatory issues that are suboptimal for frequent micro-transactions in the context of a P2P saving platform.
 - Using crypto in the backend outmatches the cost of traditional transactions, but converting to fiat has a cost (both on deposit and withdrawal). We need to find a balance between the two.
+- One of the deciding factors for the success this crypto pivot will be finding a platform that can wire crypto sales to Colombian bank accounts.
 
 ## Workflow for abstracting crypto in a web-based P2P savings platform
 
@@ -38,34 +39,34 @@
 ### 3.	Aggregate and sell crypto for fiat:
 - When it’s time to pay the designated member, the Rails app triggers a process to:
 - Aggregate the stablecoin deposits from the platform wallet.
-- Use a crypto-to-fiat service like Circle, Coinbase Commerce, or a decentralized exchange with fiat off-ramps (if available) to convert the stablecoin back to fiat.
+- Use a crypto-to-fiat service like [Circle](https://www.circle.com/), [Coinbase Commerce](https://www.coinbase.com/commerce), or a decentralized exchange with fiat off-ramps (if available) to convert the stablecoin back to fiat.
 
 ### 4.	Send Fiat to the designated member:
-- The converted fiat funds are transferred to the designated member via a fiat payment gateway (e.g., PayPal, Stripe, or a direct bank transfer API like Plaid or Wise).
+- The converted fiat funds are transferred to the designated member via a fiat payment gateway (e.g., PayPal, Stripe, or a direct bank transfer API like [Plaid](https://plaid.com/) or Wise).
 -_It is of vital importance to find a platform that allows us to transfer to our users colombianbank accounts_
 
 ## Implementation Steps
 ### 1. Fiat-to-Crypto gateway integration
-- Use APIs from a fiat-to-crypto provider (MoonPay, Ramp, or Transak) to:
+- Use APIs from a fiat-to-crypto provider (MoonPay, Ramp, Transak or Minteo) to:
     - Accept fiat payments from users within the Rails app.
     - Convert these to stablecoins like USDC/COPM on the Polygon network.
     - Deposit the stablecoins into a custodial platform-controlled wallet.
 - Providers like Onramper offer white-label solutions where users don’t see any branding from the fiat-to-crypto provider.
-- Advanced APIs from providers like Circle allow to programmatically initiate fiat-to-crypto conversions without exposing users to third-party interfaces.
+- Advanced APIs from providers like [Circle](https://www.circle.com/) allow to programmatically initiate fiat-to-crypto conversions without exposing users to third-party interfaces.
 - Example flow:
   1. User enters payment amount (e.g., $5000).
   2. Fiat-to-crypto gateway handles fiat processing and sends $50 worth of USDC to the platform wallet.
 
 ### 2. Platform wallet management
 - Maintain a centralized custodial wallet for each group or for the entire app. A custodial wallet is technically a normal crypto wallet but differs in terms of ownership and management : the platform holds private keys and manages funds on behalf of its users. This simplifies the user experience since they don’t need to manage crypto wallets themselves.
-- Third-party services like Fireblocks, BitGo, or Venly can be used for custodial wallet management. A custodial wallet can also be built using libraries like web3.js or ethers.js.
-- The platform is responsible to track deposits and ensure the balance aligns with user payments. Blockchain APIs like Alchemy, Infura, or Moralis are recommended to track and manage user wallet balances on the Polygon network.
+- Third-party services like [Fireblocks](https://www.fireblocks.com/), [BitGo](https://www.bitgo.com/), or [Venly](https://www.venly.io/) can be used for custodial wallet management. A custodial wallet can also be built using libraries like web3.js or ethers.js.
+- The platform is responsible to track deposits and ensure the balance aligns with user payments. Blockchain APIs like [Alchemy](https://www.alchemy.com/), [Infura](https://www.infura.io/), or [Moralis](https://developers.moralis.com/) can be used to track and manage user wallet balances on the Polygon network.
 
 ### 3. Stablecoin aggregation and fiat conversion
 - At the end of a savings cycle, determine the total stablecoin balance owed to the designated member.
 - Use an exchange or fiat off-ramp to convert stablecoins to fiat:
-    - Circle: Allows conversion of USDC to fiat and direct deposits into bank accounts.
-    - Coinbase Commerce: Allows to manage crypto and offers off-ramp solutions.
+    - [Circle](https://www.circle.com/): Allows conversion of USDC to fiat and direct deposits into bank accounts.
+    - [Coinbase Commerce](https://www.coinbase.com/commerce) Commerce: Allows to manage crypto and offers offutions.
     - Centralized Exchanges: Transfer USDC to an exchange (e.g., Binance, Kraken), sell it for fiat, and withdraw fiat.
 
 ### 4. Fiat payout to designated member
@@ -73,6 +74,14 @@
     - Wise: Global bank transfers with low fees.
     - Stripe/PayPal: Instant payouts for users with accounts.
     - Plaid: ACH transfers.
+
+## Suggested stack recap
+- Fiat-to-Crypto gateway: MoonPay, Ramp, or Transak.
+- Custodial wallet: [Fireblocks](https://www.fireblocks.com/), [BitGo](https://www.bitgo.com/), or [Venly](https://www.venly.io/)
+- Deposits tracking API: [Alchemy](https://www.alchemy.com/), [Infura](https://www.infura.io/), or [Moralis](https://developers.moralis.com/)
+- Stablecoin management: [Polygon](https://polygonscan.com/)
+- Crypto-to-Fiat conversion: Circle for simplicity or Coinbase/Binance for flexibility.
+- Fiat Payouts: _to be defined_ (in the U.S. it could be Stripe, PayPal, or Wise)
 
 ## Benefits of this approach
 1. Users see only fiat transactions: users deposit fiat and receive fiat, without ever interacting with or seeing crypto.
@@ -85,7 +94,7 @@
 2. Liquidity timing: the fiat conversion process may introduce delays depending on the gateway used. Ensure payouts align with user expectations.
 3. Custodial Risks: holding funds in a centralized platform wallet introduces potential security risks. Consider integrating additional security measures like multi-signature wallets.
 4. Transaction costs: while crypto reduces some fees, fiat off-ramping and bank payouts may still have associated costs.
-5. Reliance on fiat-to-crypto gateways like Ramp or Circle means our system depends on their uptime and fees.
+5. Reliance on fiat-to-crypto gateways like Ramp or [Circle](https://www.circle.com/) means our system depends on their uptime and fees.
 
 ## Solving the KYC challenge
 If we implement a custodial wallet and handle fiat-to-crypto conversions, we will likely need to comply with KYC (Know Your Customer) and AML (Anti-Money Laundering) regulations. Fiat-to-Crypto Gateways are legally required to ensure that users are legitimate and not engaging in fraud, money laundering, or other illegal activities. To perform this check, gateways typically require user data like: full name, address, date of birth, government-issued ID (passport, driver’s license, etc.). If our app acts as the intermediary, we must collect and securely transmit this information to the gateway to facilitate transactions.
@@ -98,7 +107,7 @@ If we implement a custodial wallet and handle fiat-to-crypto conversions, we wil
 
 ### Options for Managing KYC/AML
 ##### *Option 1:* Delegate to fiat-to-crypto gateway
-- Use a third-party gateway (e.g., Ramp, MoonPay, Transak) that includes KYC/AML checks.
+- Use a third-party gateway that includes KYC/AML checks.
 - The gateway performs verification directly with users and manages compliance.
 - Advantages: reduces liability and operational burden, minimal implementation effort on our end (just an API or widget integration).
 - Disadvantages: we must share user data with the gateway, users might experience delays due to verification checks.
