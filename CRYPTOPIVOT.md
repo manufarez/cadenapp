@@ -1,5 +1,17 @@
 # Cadenapp - Pivoting to crypto
 
+## Summary
+
+- [Context](#context)
+- [The problem we're trying to solve](#the-problem-were-trying-to-solve)
+- [Starting principles](#starting-principles)
+- [Workflow](#workflow-for-abstracting-crypto-in-a-web-based-p2p-savings-platform)
+- [Implementation Steps](#implementation-steps)
+- [Benefits](#benefits-of-this-approach)
+- [Challenges](#challenges-to-consider)
+- [Solving the KYC challenge](#solving-the-kyc-challenge)
+
+
 ## Context
 [Cadenapp](https://cadenapp.com/) is a web-based platform that enables users to securely form saving groups among peers, organize their savings collectively, and quickly distribute funds between each other. We built and deployed a web application that allows members to join a saving group, organize a deposit calendar, define a withdrawal schedule, calculate saving goals, receive notifications, and more. We're now on our final sprint before launch which consists of integrating a set of solutions to handle transactions.
 
@@ -61,29 +73,29 @@
     - Stripe/PayPal: Instant payouts for users with accounts.
     - Plaid: ACH transfers in the U.S.
 
-### Benefits of this approach
+## Benefits of this approach
 1. Users see only fiat transactions: users deposit fiat and receive fiat, without ever interacting with or seeing crypto.
 2. Simplifies UX: no need for users to understand crypto wallets, stablecoins, or blockchain transactions.
 3. Reduces volatility risks: using stablecoins like USDC avoids crypto price volatility.
 4. Minimizes fees: by pooling transactions, we reduce the number of on-chain operations, lowering fees.
 
-### Challenges to consider
+## Challenges to consider
 1. Compliance & regulation: fiat-to-crypto gateways and crypto-to-fiat services often require KYC/AML compliance. See more below.
 2. Liquidity timing: the fiat conversion process may introduce delays depending on the gateway used. Ensure payouts align with user expectations.
 3. Custodial Risks: holding funds in a centralized platform wallet introduces potential security risks. Consider integrating additional security measures like multi-signature wallets.
 4. Transaction costs: while crypto reduces some fees, fiat off-ramping and bank payouts may still have associated costs.
 5. Reliance on fiat-to-crypto gateways like Ramp or Circle means your system depends on their uptime and fees.
 
-### Solving the KYC challenge
+## Solving the KYC challenge
 If you implement a custodial wallet and handle fiat-to-crypto conversions, you will likely need to comply with KYC (Know Your Customer) and AML (Anti-Money Laundering) regulations. Fiat-to-Crypto Gateways are legally required to ensure that users are legitimate and not engaging in fraud, money laundering, or other illegal activities. To perform this check, gateways typically require user data like: full name, address, date of birth, government-issued ID (passport, driver’s license, etc.). If our app acts as the intermediary, we must collect and securely transmit this information to the gateway to facilitate transactions.
 
-#### How this works in practice
+### How this works in practice
 1. User provides data during registration or payment: KYC verification is integrated as part of the onboarding process or at the time of the first fiat-to-crypto transaction.
 2. Data sent to fiat-to-crypto gateway: the API or SDK of the gateway is used to send the user’s data securely for verification.
 3. Gateway handles compliance: the gateway will validate the user’s identity and flag potential risks.
 4. Result: once the user’s identity is verified, the gateway allows transactions to proceed.
 
-#### Options for Managing KYC/AML
+### Options for Managing KYC/AML
 ##### *Option 1:* Delegate to fiat-to-crypto gateway
 - Use a third-party gateway (e.g., Ramp, MoonPay, Transak) that includes KYC/AML checks.
 - The gateway performs verification directly with users and manages compliance.
@@ -96,7 +108,7 @@ If you implement a custodial wallet and handle fiat-to-crypto conversions, you w
 - Advantages: complete control over user data and branding, can integrate the KYC process directly into app for a seamless experience.
 - Disadvantages: Expensive to implement and maintain, directly liable for compliance with local laws.
 
-#### Data Privacy Considerations
+### Data Privacy Considerations
 - Encryption: Ensure that data is encrypted in transit and at rest.
 - User consent: Clearly inform users about the data being shared and obtain their consent.
 - Data retention: Comply with regulations regarding how long you can store sensitive data.
