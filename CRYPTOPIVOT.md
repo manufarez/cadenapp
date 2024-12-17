@@ -1,16 +1,16 @@
 # Cadenapp - Pivoting to crypto
 
 ## Context
-Cadenapp is a web-based platform that enables users to securely form saving groups among peers, organize their savings collectively, and quickly distribute funds between each other. We built and deployed a web application that allows members to join a saving group, organize a deposit calendar, define a withdrawal schedule, calculate saving goals, receive notifications, and more. We're now on our final sprint before launch which consists of integrating a set of solutions to handle transactions.
+[Cadenapp](https://cadenapp.com/) is a web-based platform that enables users to securely form saving groups among peers, organize their savings collectively, and quickly distribute funds between each other. We built and deployed a web application that allows members to join a saving group, organize a deposit calendar, define a withdrawal schedule, calculate saving goals, receive notifications, and more. We're now on our final sprint before launch which consists of integrating a set of solutions to handle transactions.
 
 ## The problem we're trying to solve
-- We initially explored using a Banking-as-a-Service (BaaS) provider but found the costs prohibitive. The combination of high service fees, the complexity of their commercial terms, and the resources required—both in terms of time and technical capacity—created a significant imbalance relative to our available budget and operational needs.
+- We initially explored using a Banking-as-a-Service (BaaS) provider but found the costs prohibitive. The combination of high service fees, the complexity of their commercial terms, and the resources required in terms of time and technical capacity were too much for our available budget and operational needs.
 - We're investigating achieving the same functionality at a much lower cost using a combination of crypto-to-fiat gateways and a custodial wallet.
 
-## Defining principles
+## Starting principles
 - Matching the input and output methods (fiat-in/fiat-out OR crypto-in/crypto-out) is the best approach for user experience and simplicity.
 - Keeping the end user experience fiat-focused avoids the need to explain blockchain concepts, wallets, or cryptocurrencies, and broadens the potential user base.
-- Using crypto stablecoins to distribute funds internally avoids traditional banking fees and regulatory issues that are suboptimal for frequent micro-transactions in the context of a P2P platform.
+- Using crypto stablecoins to distribute funds internally avoids traditional banking fees and regulatory issues that are suboptimal for frequent micro-transactions in the context of a P2P saving platform.
 - Using crypto in the backend outmatches the cost of traditional transactions, but converting to fiat has a cost (both on deposit and withdrawal). We need to find a balance between the two.
 
 ## Workflow for abstracting crypto in a web-based P2P savings platform
@@ -101,16 +101,3 @@ If you implement a custodial wallet and handle fiat-to-crypto conversions, you w
 - User consent: Clearly inform users about the data being shared and obtain their consent.
 - Data retention: Comply with regulations regarding how long you can store sensitive data.
 - Jurisdiction: Be aware of the legal requirements in the countries of operation.
-
-### Timeline estimate
-- Fiat-to-crypto gateway integration : x hours
-    - Subtasks
-- Platform wallet setup	: x hours
-    - Subtasks
-- Crypto-to-fiat conversion integration : x hours
-    - Subtasks
-- Fiat payout integration : x hours
-    - Subtasks
-- Notifications and testing	: x hours
-    - Subtasks
-- Total	: x hours
