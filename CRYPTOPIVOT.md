@@ -13,7 +13,7 @@
 
 
 ## Context
-[Cadenapp](https://cadenapp.com/) is a web-based platform that enables users to securely form saving groups among peers, organize their savings collectively, and quickly distribute funds between each other. We built and deployed a web application (Rails app) that allows members to join a saving group, organize a deposit calendar, define a withdrawal schedule, calculate saving goals, receive notifications, and more. We're now on our final sprint before launch which consists of integrating a set of solutions to handle transactions.
+[Cadenapp](https://cadenapp.com/) is a web-based platform that enables users to securely form saving groups among peers, organize their savings collectively, and quickly distribute funds between each other. We built and deployed a web application ([Rails app](https://cadenapp.com/)) that allows members to join a saving group, organize a deposit calendar, define a withdrawal schedule, calculate saving goals, receive notifications, and more. We're now on our final sprint before launch which consists of integrating a set of solutions to handle transactions.
 
 ## The problem we're trying to solve
 - We initially explored using a Banking-as-a-Service (BaaS) provider but found the costs prohibitive. The combination of high service fees, the complexity of their commercial terms, and the resources required in terms of time and technical capacity were too much for our available budget and operational needs.
@@ -24,17 +24,17 @@
 - Keeping the end user experience fiat-focused avoids the need to explain blockchain concepts, wallets, or cryptocurrencies, and broadens the potential user base.
 - Using crypto stablecoins to distribute funds internally avoids traditional banking fees and regulatory issues that are suboptimal for frequent micro-transactions in the context of a P2P saving platform.
 - Using crypto in the backend outmatches the cost of traditional transactions, but converting to fiat has a cost (both on deposit and withdrawal). We need to find a balance between the two.
-- One of the deciding factors for the success this crypto pivot will be finding a platform that can wire crypto sales to Colombian bank accounts.
+- One of the deciding factors for the success this crypto pivot will be finding a platform that can wire crypto sales to Colombian bank accounts and chosing between [COPM](https://minteo.com/) and USDC.
 
 ## Workflow for abstracting crypto in a web-based P2P savings platform
 
 ### 1.	User deposits fiat (using Fiat-to-Crypto gateway):
 - Users make a fiat payment through a gateway
-- The gateway converts the fiat payment to a stablecoin (e.g. USDC or COPM) and transfers it to a custodial wallet owned by our platform.
+- The gateway converts the fiat payment to a stablecoin (USDC or COPM) and transfers it to a custodial wallet owned by our platform.
 
 ### 2.	Hold funds in crypto:
-- All users’ stablecoin deposits are collected in a platform-controlled wallet on the Polygon network.
-- These funds remain as stablecoin (USDC) until it’s time for withdrawal.
+- All users’ stablecoin deposits are collected in a platform-controlled wallet on the [Polygon](https://polygonscan.com/) network.
+- These funds remain as stablecoin until it’s time for withdrawal.
 
 ### 3.	Aggregate and sell crypto for fiat:
 - When it’s time to pay the designated member, the Rails app triggers a process to:
@@ -42,12 +42,12 @@
 - Use a crypto-to-fiat service like [Circle](https://www.circle.com/), [Coinbase Commerce](https://www.coinbase.com/commerce), or a decentralized exchange with fiat off-ramps (if available) to convert the stablecoin back to fiat.
 
 ### 4.	Send Fiat to the designated member:
-- The converted fiat funds are transferred to the designated member via a fiat payment gateway (e.g., PayPal, Stripe, or a direct bank transfer API like [Plaid](https://plaid.com/) or Wise).
--_It is of vital importance to find a platform that allows us to transfer to our users colombianbank accounts_
+- The converted fiat funds are transferred to the designated member via a fiat payment gateway (in the U.S: PayPal, Stripe, or a direct bank transfer API like [Plaid](https://plaid.com/) or Wise).
+- **It is of vital importance to find a platform that allows us to transfer to our users colombianbank accounts**
 
 ## Implementation Steps
 ### 1. Fiat-to-Crypto gateway integration
-- Use APIs from a fiat-to-crypto provider (MoonPay, Ramp, Transak or Minteo) to:
+- Use APIs from a fiat-to-crypto provider ([MoonPay](https://moonramp.github.io/), [Ramp](https://ramp.network/), [Transak](https://transak.com/)) to:
     - Accept fiat payments from users within the Rails app.
     - Convert these to stablecoins like USDC/COPM on the Polygon network.
     - Deposit the stablecoins into a custodial platform-controlled wallet.
@@ -80,7 +80,7 @@
 - Custodial wallet: [Fireblocks](https://www.fireblocks.com/), [BitGo](https://www.bitgo.com/), or [Venly](https://www.venly.io/)
 - Deposits tracking API: [Alchemy](https://www.alchemy.com/), [Infura](https://www.infura.io/), or [Moralis](https://developers.moralis.com/)
 - Stablecoin management: [Polygon](https://polygonscan.com/)
-- Crypto-to-Fiat conversion: Circle for simplicity or Coinbase/Binance for flexibility.
+- Crypto-to-Fiat conversion: [Circle](https://www.circle.com/ for simplicity or [Coinbase Commerce](https://www.coinbase.com/commerce)/Binance for flexibility.
 - Fiat Payouts: _to be defined_ (in the U.S. it could be Stripe, PayPal, or Wise)
 
 ## Benefits of this approach
@@ -114,7 +114,7 @@ If we implement a custodial wallet and handle fiat-to-crypto conversions, we wil
 
 ##### *Option 2*: Build a proprietary KYC process
 - Build and manage a KYC/AML verification system in our app.
-- Use third-party tools like SumSub, Jumio, or Onfido to verify user identities.
+- Use third-party tools like [SumSub](https://sumsub.com/), Jumio, or Onfido to verify user identities.
 - Advantages: complete control over user data and branding, can integrate the KYC process directly into app for a seamless experience.
 - Disadvantages: Expensive to implement and maintain, directly liable for compliance with local laws.
 
