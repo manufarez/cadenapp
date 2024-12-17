@@ -54,7 +54,7 @@
 - Providers like [Onramper](https://onramper.com/) offer white-label solutions where users don’t see any branding from the fiat-to-crypto provider.
 - Advanced APIs from providers like [Circle](https://www.circle.com/) allow to programmatically initiate fiat-to-crypto conversions without exposing users to third-party interfaces.
 - Example flow:
-  1. User enters payment amount (e.g., $5000).
+  1. User enters payment amount (e.g., $50).
   2. Fiat-to-crypto gateway handles fiat processing and sends $50 worth of USDC to the platform wallet.
 
 ### 2. Platform wallet management
@@ -66,11 +66,10 @@
 - At the end of a savings cycle, determine the total stablecoin balance owed to the designated member.
 - Use an exchange or fiat off-ramp to convert stablecoins to fiat:
     - [Circle](https://www.circle.com/): Allows conversion of USDC to fiat and direct deposits into bank accounts.
-    - [Coinbase Commerce](https://www.coinbase.com/commerce) Commerce: Allows to manage crypto and offers offutions.
     - Centralized Exchanges: Transfer USDC to an exchange (e.g., Binance, Kraken), sell it for fiat, and withdraw fiat.
 
 ### 4. Fiat payout to designated member
-- After the conversion, use a fiat payment gateway to pay the designated member:
+- After the conversion, use a fiat payment gateway to pay the designated member - in the U.S. it would typically be:
     - Wise: Global bank transfers with low fees.
     - Stripe/PayPal: Instant payouts for users with accounts.
     - Plaid: ACH transfers.
@@ -80,7 +79,7 @@
 - Custodial wallet: [Fireblocks](https://www.fireblocks.com/), [BitGo](https://www.bitgo.com/), or [Venly](https://www.venly.io/)
 - Deposits tracking API: [Alchemy](https://www.alchemy.com/), [Infura](https://www.infura.io/), or [Moralis](https://developers.moralis.com/)
 - Stablecoin management: [Polygon](https://polygonscan.com/)
-- Crypto-to-Fiat conversion: [Circle](https://www.circle.com/ for simplicity or [Coinbase Commerce](https://www.coinbase.com/commerce)/Binance for flexibility.
+- Crypto-to-Fiat conversion: [Circle](https://www.circle.com/), [Binance](https://binance.com/) or [Kraken](https://kraken.com/)
 - Fiat Payouts: _to be defined_ (in the U.S. it could be Stripe, PayPal, or Wise)
 
 ## Benefits of this approach
