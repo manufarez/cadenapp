@@ -127,7 +127,7 @@ If we implement a custodial wallet and handle fiat-to-crypto conversions, we wil
 - Jurisdiction: Be aware of the legal requirements in the countries of operation.
 
 ## Fees estimation
-Here’s a breakdown of fees on a basic scenario : 12 users, $100/person monthly deposits, $1,200 monthly payout. Assumptions are based on commonly available fee structures for these services. Actual fees may vary depending on specific integrations and agreements.
+Here’s a basic breakdown of fees on a basic scenario : 12 users, $100/person monthly deposits, $1,200 monthly payout. Assumptions are based on commonly available fee structures for these services. Actual fees may vary depending on specific integrations and agreements.
 
 #### 1. Fiat-to-Crypto Gateway - transaction fee (MoonPay, Ramp, or Transak)
 - Use case: Convert $100/person fiat into USDC.
