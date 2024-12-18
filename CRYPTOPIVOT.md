@@ -10,6 +10,7 @@
 - [Benefits](#benefits-of-this-approach)
 - [Challenges](#challenges-to-consider)
 - [Solving the KYC challenge](#solving-the-kyc-challenge)
+-
 
 
 ## Context
@@ -30,7 +31,8 @@
 
 ### 1.	User deposits fiat (using Fiat-to-Crypto gateway):
 - Users make a fiat payment through a gateway
-- The gateway converts the fiat payment to a stablecoin (USDC or COPM) and transfers it to a custodial wallet owned by our platform.
+- The gateway converts the fiat payment to a stablecoin (e.g. USDC or COPM) and transfers it to a custodial wallet owned by our platform.
+- _It is of vital importance to find a platform that allows users to buy crypto with COP_
 
 ### 2.	Hold funds in crypto:
 - All users’ stablecoin deposits are collected in a platform-controlled wallet on the [Polygon](https://polygonscan.com/) network.
@@ -123,3 +125,54 @@ If we implement a custodial wallet and handle fiat-to-crypto conversions, we wil
 - User consent: Clearly inform users about the data being shared and obtain their consent.
 - Data retention: Comply with regulations regarding how long we can store sensitive data.
 - Jurisdiction: Be aware of the legal requirements in the countries of operation.
+
+## Fees estimation
+Here’s a breakdown of fees on a basic scenario : 12 users, $100/person monthly deposits, $1,200 monthly payout. Assumptions are based on commonly available fee structures for these services. Actual fees may vary depending on specific integrations and agreements.
+
+#### 1. Fiat-to-Crypto Gateway - transaction fee (MoonPay, Ramp, or Transak)
+- Use case: Convert $100/person fiat into USDC.
+- Fees: ~1%-3.5% per transaction for fiat-to-crypto conversion (depending on the payment method - ex: [Transak](https://transak.notion.site/On-Ramp-Payment-Methods-Fees-Other-Details-b0761634feed4b338a69f4f186d906a5))
+- Fee for a credit card purchase = $1,100 × 0.035 = $35/month
+
+#### 2. Custodial wallet - plan fee (Fireblocks, BitGo, or Venly)
+- Use case: Securely store and manage crypto funds.
+- Fees: Typically flat monthly fees starting at $100-$500/month for platforms like Fireblocks. (Venly charges based on API usage, and BitGo has custom fees.)
+- Starter plan with Venly = $99/month (200k compute units)
+
+#### 3. Deposits tracking API (Alchemy, Infura, or Moralis)
+- Use case: Monitor transactions on the blockchain.
+- Fees: Based on API calls. Most services free starter plans so $0/month.
+
+#### 4. Stablecoin management (Polygon)
+- Use case: Transact using USDC on the Polygon network.
+- Fees: Polygon’s transaction fees are minimal (gas fees are ~$0.01 per transaction).
+- 12 transactions/month × $0.01 = $0.12/month
+
+#### 5. Crypto-to-Fiat conversion (Circle, Binance, or Kraken)
+- Use case: Convert USDC to fiat for payout.
+- Fees: Typically 0.1%-0.2% trading fee for exchanges.
+- Conversion amount = $1,200/month
+- Fee = $1,200 × 0.002 = $2.40/month
+
+#### 6. Fiat payouts - optional (Stripe, PayPal, Wise)
+- Use case: Transfer fiat to the designated member’s bank account.
+- Stripe: ~0.8% capped at $5 per payout.
+- Wise: ~0.5% for payouts to U.S. bank accounts.
+- Calculation (assuming Stripe):
+- Fee = $1,200 × 0.008 = $5 (capped)
+
+### Basic total monthly fees breakdown
+
+| Component                  | Monthly Fee (USD) |
+|----------------------------|--------------------|
+| Fiat-to-crypto gateway     | $35               |
+| Custodial Wallet           | $99               |
+| Deposits Tracking API      | $0                |
+| Stablecoin Management      | $0.12             |
+| Crypto-to-Fiat Conversion  | $2.40             |
+| Fiat Payouts               | $5                |
+| **Total Estimated Fees**   | **$141.52**       |
+
+### Basic fees per user
+- Total fees for a group/month = ~$142
+- Fees per user = $142 ÷ 12 = $11.3/user/month
