@@ -69,14 +69,10 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.default_url_options = { host: 'cadenapp.com' }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    authentication: :plain,
-    address: 'smtp.eu.mailgun.org',
-    port: 587,
-    domain: 'cadenapp.com',
-    user_name: 'contacto@cadenapp.com',
-    password: ENV['MAILGUN_SMTP_PASSWORD']
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: ENV['MAILGUN_API_KEY'],
+    domain: 'cadenapp.com'
   }
   config.action_mailer.asset_host = 'https://www.cadenapp.com'
 

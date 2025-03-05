@@ -5,10 +5,12 @@ class InvitationMailer < ApplicationMailer
     @invitation = invitation
     mail(
       to: @invitation.email,
-      subject: "Invitación para hacer parte de la cadena #{@invitation.cadena.name}",
-      from: 'contacto@cadenapp.com',
-      track_opens: true,
-      message_stream: 'outbound'
-    )
+      subject: "Invitación para hacer parte de la cadena #{@invitation.cadena.name}"
+    ).tap do |message|
+      message.mailgun_options = {
+        "tracking-opens" => true,
+        "tracking-clicks" => "htmlonly"
+      }
+    end
   end
 end

@@ -53,14 +53,10 @@ Rails.application.configure do
   # config.action_mailer.delivery_method = :letter_opener
   # config.action_mailer.perform_deliveries = true
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    authentication: :plain,
-    address: 'smtp.eu.mailgun.org',
-    port: 587,
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: Rails.application.credentials.dig(:mailgun, :api_key),
     domain: 'cadenapp.com',
-    user_name: 'contacto@cadenapp.com',
-    password: Rails.application.credentials.dig(:mailgun, :smtp_password)
   }
 
   config.action_mailer.perform_caching = false

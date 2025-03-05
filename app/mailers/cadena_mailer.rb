@@ -1,13 +1,12 @@
 class CadenaMailer < ApplicationMailer
+  default from: 'contacto@cadenapp.com'
+
   def new_cadena_email(cadena, admin)
     @cadena = cadena
     @admin = admin
     mail(
       to: @admin.email,
-      subject: "Cadena #{@cadena.name} creada",
-      from: 'contacto@cadenapp.com',
-      track_opens: true,
-      message_stream: 'outbound'
+      subject: "Cadena #{@cadena.name} creada"
     )
   end
 
@@ -16,10 +15,7 @@ class CadenaMailer < ApplicationMailer
     @participant = invitation
     mail(
       to: @cadena.admin.email,
-      subject: "#{@participant.name} se ha unido a la cadena #{@cadena.name}",
-      from: 'contacto@cadenapp.com',
-      track_opens: true,
-      message_stream: 'outbound'
+      subject: "#{@participant.name} se ha unido a la cadena #{@cadena.name}"
     )
   end
 
@@ -29,10 +25,6 @@ class CadenaMailer < ApplicationMailer
     mail(
       to: @participant.email,
       subject: "Bienvenido a la cadena #{@cadena.name}",
-      from: 'contacto@cadenapp.com',
-      track_opens: true,
-      message_stream: 'outbound'
-    )
   end
 
   def positions_assigned_email(cadena, participant)
@@ -40,10 +32,7 @@ class CadenaMailer < ApplicationMailer
     @participant = participant
     mail(
       to: @participant.email,
-      subject: "El orden de la cadena #{@cadena.name} ha sido definido",
-      from: 'contacto@cadenapp.com',
-      track_opens: true,
-      message_stream: 'outbound'
+      subject: "El orden de la cadena #{@cadena.name} ha sido definido"
     )
   end
 
@@ -52,10 +41,7 @@ class CadenaMailer < ApplicationMailer
     @participant = participant
     mail(
       to: @participant.email,
-      subject: "La lista de participantes de la cadena #{@cadena.name} está completa",
-      from: 'contacto@cadenapp.com',
-      track_opens: true,
-      message_stream: 'outbound'
+      subject: "La lista de participantes de la cadena #{@cadena.name} está completa"
     )
   end
 
@@ -63,10 +49,7 @@ class CadenaMailer < ApplicationMailer
     @participant = participant
     mail(
       to: @participant.email,
-      subject: "Todos los participantes de #{@participant.cadena.name} han pagado su cuota para el periodo",
-      from: 'contacto@cadenapp.com',
-      track_opens: true,
-      message_stream: 'outbound'
+      subject: "Todos los participantes de #{@participant.cadena.name} han pagado su cuota para el periodo"
     )
   end
 
@@ -74,10 +57,7 @@ class CadenaMailer < ApplicationMailer
     @participant = participant
     mail(
       to: @participant.email,
-      subject: "La cadena #{@participant.cadena.name} ha terminado",
-      from: 'contacto@cadenapp.com',
-      track_opens: true,
-      message_stream: 'outbound'
+      subject: "La cadena #{@participant.cadena.name} ha terminado"
     )
   end
 
@@ -85,10 +65,7 @@ class CadenaMailer < ApplicationMailer
     @participant = participant
     mail(
       to: @participant.email,
-      subject: "Has sido retirado de la cadena #{@participant.cadena.name}",
-      from: 'contacto@cadenapp.com',
-      track_opens: true,
-      message_stream: 'outbound'
+      subject: "Has sido retirado de la cadena #{@participant.cadena.name}"
     )
   end
 
@@ -96,10 +73,7 @@ class CadenaMailer < ApplicationMailer
     @participant = participant
     mail(
       to: @participant.email,
-      subject: "Retraso de pago en la cadena #{@participant.cadena.name}",
-      from: 'contacto@cadenapp.com',
-      track_opens: true,
-      message_stream: 'outbound'
+      subject: "Retraso de pago en la cadena #{@participant.cadena.name}"
     )
   end
 
@@ -107,10 +81,7 @@ class CadenaMailer < ApplicationMailer
     @cadena = cadena
     mail(
       to: User.where(is_admin: true).pluck(:email),
-      subject: "Alerta : Retraso de pago en la cadena #{@cadena.name}",
-      from: 'contacto@cadenapp.com',
-      track_opens: true,
-      message_stream: 'outbound'
+      subject: "Alerta : Retraso de pago en la cadena #{@cadena.name}"
     )
   end
 
@@ -118,10 +89,7 @@ class CadenaMailer < ApplicationMailer
     @cadena = cadena
     mail(
       to: @cadena.admin.email,
-      subject: "La cadena #{@cadena.name} esta completa, puedes enviar la lista",
-      from: 'contacto@cadenapp.com',
-      track_opens: true,
-      message_stream: 'outbound'
+      subject: "La cadena #{@cadena.name} esta completa, puedes enviar la lista"
     )
   end
 
@@ -129,10 +97,7 @@ class CadenaMailer < ApplicationMailer
     @cadena = cadena
     mail(
       to: @cadena.admin.email,
-      subject: "Puedes generar el orden de la cadena #{@cadena.name}",
-      from: 'contacto@cadenapp.com',
-      track_opens: true,
-      message_stream: 'outbound'
+      subject: "Puedes generar el orden de la cadena #{@cadena.name}"
     )
   end
 end

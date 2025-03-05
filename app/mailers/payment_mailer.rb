@@ -1,12 +1,11 @@
 class PaymentMailer < ApplicationMailer
+  default from: 'contacto@cadenapp.com'
+
   def new_payment_email(payment)
     @payment = payment
     mail(
       to: @payment.receiver.email,
-      subject: "Pago recibido por parte de #{@payment.sender.name}!",
-      from: 'contacto@cadenapp.com',
-      track_opens: true,
-      message_stream: 'outbound'
+      subject: "Pago recibido por parte de #{@payment.sender.name}!"
     )
   end
 
@@ -14,10 +13,7 @@ class PaymentMailer < ApplicationMailer
     @payment = payment
     mail(
       to: @payment.sender.email,
-      subject: "Gracias por pagarle a #{@payment.receiver.name}",
-      from: 'contacto@cadenapp.com',
-      track_opens: true,
-      message_stream: 'outbound'
+      subject: "Gracias por pagarle a #{@payment.receiver.name}"
     )
   end
 
@@ -26,10 +22,7 @@ class PaymentMailer < ApplicationMailer
     @next_paid_participant = next_paid_participant
     mail(
       to: @participant.user.email,
-      subject: "Es hoy! Pagale a #{@next_paid_participant.name}",
-      from: 'contacto@cadenapp.com',
-      track_opens: true,
-      message_stream: 'outbound'
+      subject: "Es hoy! Pagale a #{@next_paid_participant.name}"
     )
   end
 end
