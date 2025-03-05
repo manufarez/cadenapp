@@ -11,11 +11,6 @@ module Cadenapp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     config.middleware.use ActionDispatch::Session::CookieStore
-
-    config.action_mailer.postmark_settings = {
-      api_token: Rails.application.credentials.postmark_api_token
-    }
-
     config.i18n.default_locale = :es
     config.i18n.fallbacks = [:es, :en]
     config.generators do |g|

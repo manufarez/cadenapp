@@ -6,7 +6,7 @@ Cadenapp is a web-based platform that enables users to securely form saving grou
 
 ## Tech Stack
 
-The app is built using Ruby on Rails 7 (ruby 3.0.0), Tailwind CSS, Devise for authentication, Postmark for email notifications, AWS for image storage, Timecop for date simulation, Sidekiq for background jobs, HTML Beautifier, RuboCop for code style, Letter Opener for email simulation, Rack Mini Profiler, Bullet for performance monitoring, RSpec for testing, inline_svg to handle SVG rendering and some Stimulus / AlpineJS to bring interactivity on the client side (flash messages, modals, etc.).
+The app is built using Ruby on Rails 7 (ruby 3.0.0), Tailwind CSS, Devise for authentication, Mailgun for email notifications, AWS for image storage, Timecop for date simulation, Sidekiq for background jobs, HTML Beautifier, RuboCop for code style, Letter Opener for email simulation, Rack Mini Profiler, Bullet for performance monitoring, RSpec for testing, inline_svg to handle SVG rendering and some Stimulus / AlpineJS to bring interactivity on the client side (flash messages, modals, etc.).
 
 ## Setup
 
@@ -88,7 +88,7 @@ end
 
 ### Seeding and notifications
 
-To avoid spending Postmark's e-mail credits, we added a `config.seeding = false` configuration on `application.rb`. Of course, this means we have to prepend our `seed.rb` file with:
+To avoid spending Mailgun's e-mail credits, we added a `config.seeding = false` configuration on `application.rb`. Of course, this means we have to prepend our `seed.rb` file with:
 
 ```ruby
 Rails.application.config.seeding = true

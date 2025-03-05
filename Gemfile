@@ -55,8 +55,6 @@ gem 'devise'
 
 gem 'faker'
 
-gem 'postmark-rails'
-
 gem 'aws-sdk-s3', require: false
 
 gem 'inline_svg'
