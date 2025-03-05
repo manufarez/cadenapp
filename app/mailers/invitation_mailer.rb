@@ -8,8 +8,8 @@ class InvitationMailer < ApplicationMailer
       subject: "Invitación para hacer parte de la cadena #{@invitation.cadena.name}"
     ).tap do |message|
       message.mailgun_options = {
-        "tracking-opens" => true,
-        "tracking-clicks" => "htmlonly"
+        tracking_opens: true,
+        tracking_clicks: "htmlonly"
       }
     end
   end

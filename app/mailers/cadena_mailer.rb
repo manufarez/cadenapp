@@ -24,7 +24,8 @@ class CadenaMailer < ApplicationMailer
     @participant = participant
     mail(
       to: @participant.email,
-      subject: "Bienvenido a la cadena #{@cadena.name}",
+      subject: "Bienvenido a la cadena #{@cadena.name}"
+    )
   end
 
   def positions_assigned_email(cadena, participant)
