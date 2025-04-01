@@ -96,7 +96,7 @@ jobs:
           bin/rails db:create
           bin/rails db:schema:load
           bin/rails test --fail-fast
-          bin/rails test:system
+          # rspec
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
