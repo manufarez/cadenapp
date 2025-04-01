@@ -3,11 +3,11 @@ module ApplicationHelper
     "#{number_to_currency(number / 1000.0, options)}k"
   end
 
-  def link_to_cond(cond, *args, &block)
+  def link_to_cond(cond, *, &)
     if cond
-      link_to(*args, &block)
+      link_to(*, &)
     else
-      capture(&block)
+      capture(&)
     end
   end
 end

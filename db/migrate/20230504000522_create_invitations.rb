@@ -8,7 +8,7 @@ class CreateInvitations < ActiveRecord::Migration[7.0]
       t.string :last_name
       t.boolean :accepted
       t.references :cadena, null: false, foreign_key: true
-      t.integer :sender_id, null: false, foreign_key: { to_table: :users }
+      t.integer :sender_id, null: false, foreign_key: {to_table: :users}
 
       t.timestamps
     end

@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe User, type: :model do
-  let(:user) {build(:user)}
+  let(:user) { build(:user) }
 
   before do
     user.save(validate: false)

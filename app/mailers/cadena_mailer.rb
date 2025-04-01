@@ -1,5 +1,5 @@
 class CadenaMailer < ApplicationMailer
-  default from: 'contacto@cadenapp.com'
+  default from: "contacto@cadenapp.com"
 
   def new_cadena_email(cadena, admin)
     @cadena = cadena

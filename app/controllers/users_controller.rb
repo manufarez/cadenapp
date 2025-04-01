@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if current_user.is_admin?
       @users = User.includes(:made_payments, :received_payments).all.order(:first_name, :last_name)
     else
-      redirect_to cadenas_path, notice: t('notices.user.not_admin', user_email: current_user.email)
+      redirect_to cadenas_path, notice: t("notices.user.not_admin", user_email: current_user.email)
     end
   end
 
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       @cadenas = @user.cadenas.order(state: :desc, name: :asc)
       @payments = (@user.made_payments + @user.received_payments).sort_by(&:created_at).reverse
     else
-      redirect_to(current_user, notice: t('notices.user.access_forbidden'))
+      redirect_to(current_user, notice: t("notices.user.access_forbidden"))
     end
   end
 
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to current_user, notice: t('notices.user.update') }
+        format.html { redirect_to current_user, notice: t("notices.user.update") }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :complete_profile, status: :unprocessable_entity }
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   def payment_methods
     respond_to do |format|
       format.turbo_stream {
-        render turbo_stream: turbo_stream.replace("choose_payment_method_btn", partial: "payment_methods", locals: { deposit_amount: params[:deposit_amount] })
+        render turbo_stream: turbo_stream.replace("choose_payment_method_btn", partial: "payment_methods", locals: {deposit_amount: params[:deposit_amount]})
       }
     end
   end
@@ -69,15 +69,15 @@ class UsersController < ApplicationController
   private
 
   def ask_profile_completion
-    return if current_user.profile_complete? || action_name == 'complete_profile' || current_user.is_admin
+    return if current_user.profile_complete? || action_name == "complete_profile" || current_user.is_admin
 
-    redirect_to user_complete_profile_path(current_user), notice: t('notices.user.profile_incomplete')
+    redirect_to user_complete_profile_path(current_user), notice: t("notices.user.profile_incomplete")
   end
 
   def authorize_deposit_access
     return if current_user == @user || current_user.is_admin?
 
-    redirect_to root_path, alert: t('notices.user.access_forbidden')
+    redirect_to root_path, alert: t("notices.user.access_forbidden")
   end
 
   def set_user

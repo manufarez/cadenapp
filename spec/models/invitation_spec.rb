@@ -1,9 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Invitation, type: :model do
   let(:cadena) { build(:cadena) }
-  let(:user) {build(:user)}
-  let(:invitation) {build(:invitation, cadena: cadena, sender: user)}
+  let(:user) { build(:user) }
+  let(:invitation) { build(:invitation, cadena: cadena, sender: user) }
 
   it "is valid with valid attributes" do
     expect(invitation).to be_valid

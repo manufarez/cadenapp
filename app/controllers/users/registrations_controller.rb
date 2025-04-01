@@ -16,14 +16,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
 
-    #careful: validation on captcha does not work locally (but Turnstile is off in development)
+    # careful: validation on captcha does not work locally (but Turnstile is off in development)
     if valid_captcha?(model: resource)
       resource.save
     else
       resource.errors.details
     end
 
-    #resource.save
+    # resource.save
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?
@@ -40,7 +40,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
             invitation.cadena.reload
             invitation.cadena.complete if invitation.cadena.missing_participants.zero?
           else
-            raise "Invalid participation: #{@participation.errors.full_messages.join(', ')}"
+            raise "Invalid participation: #{@participation.errors.full_messages.join(", ")}"
           end
         end
         respond_with resource, location: after_sign_up_path_for(resource)
@@ -94,7 +94,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    #super(resource)
+    # super(resource)
     user_complete_profile_path(resource)
   end
 

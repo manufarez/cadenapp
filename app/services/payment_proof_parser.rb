@@ -14,12 +14,12 @@ class PaymentProofParser
 
   def self.extract_bank_name(text)
     # Match "Scotiabank COLPATRIA" and clean extra characters
-    text[/Scotiabank/i]&.gsub(/[^a-zA-Z\s]/, '') + ' COLPATRIA'
+    text[/Scotiabank/i]&.gsub(/[^a-zA-Z\s]/, "")&.+ " COLPATRIA"
   end
 
   def self.extract_amount(text)
     # Match the amount, e.g., "$128,290", and remove formatting
-    text[/Pago exitoso por\s+\$(\d[\d,]*)/, 1]&.delete(',')&.to_i
+    text[/Pago exitoso por\s+\$(\d[\d,]*)/, 1]&.delete(",")&.to_i
   end
 
   def self.extract_cus_id(text)
@@ -43,6 +43,6 @@ class PaymentProofParser
     return unless raw_timestamp
 
     # Parse into Rails-compatible datetime
-    DateTime.strptime(raw_timestamp, '%b %d, %Y - %I:%M %p').to_s
+    DateTime.strptime(raw_timestamp, "%b %d, %Y - %I:%M %p").to_s
   end
 end

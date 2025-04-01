@@ -6,7 +6,7 @@ class PaymentsController < ApplicationController
     if params[:user]
       @user = User.find(params[:user])
       @payments = (@user.made_payments + @user.received_payments).sort_by(&:created_at).reverse
-      @payments.select{|payment|payment.cadena == @cadena}
+      @payments.select { |payment| payment.cadena == @cadena }
     else
       @payments = Payment.where(cadena: @cadena)
     end
@@ -17,7 +17,7 @@ class PaymentsController < ApplicationController
     respond_to do |format|
       if @payment.valid?
         @payment.process_payment
-        format.html { redirect_to cadena_url(@payment.cadena), notice: t('cadena.payment_success') }
+        format.html { redirect_to cadena_url(@payment.cadena), notice: t("cadena.payment_success") }
         format.json { render json: @payment.cadena, status: :created, location: @payment.cadena }
         unless Rails.application.config.seeding
           PaymentMailer.payment_confirmation_email(@payment).deliver_later
@@ -48,9 +48,9 @@ class PaymentsController < ApplicationController
     end
     if @cadena.unpaid_turn_participants.count.positive?
       redirect_to @cadena
-      flash[:notice] = "#{t('activerecord.errors.models.payment.insufficient_funds')} - #{error_messages.first}"
+      flash[:notice] = "#{t("activerecord.errors.models.payment.insufficient_funds")} - #{error_messages.first}"
     else
-      redirect_to @cadena, notice: t('cadena.fast_paid')
+      redirect_to @cadena, notice: t("cadena.fast_paid")
     end
   end
 

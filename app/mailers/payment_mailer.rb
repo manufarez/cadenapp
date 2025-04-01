@@ -1,5 +1,5 @@
 class PaymentMailer < ApplicationMailer
-  default from: 'contacto@cadenapp.com'
+  default from: "contacto@cadenapp.com"
 
   def new_payment_email(payment)
     @payment = payment

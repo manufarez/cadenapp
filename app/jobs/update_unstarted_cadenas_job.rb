@@ -2,7 +2,7 @@ class UpdateUnstartedCadenasJob < ApplicationJob
   queue_as :default
 
   def perform
-    cadenas = Cadena.where(start_date: 1.day.from_now).where.not(state: 'started')
+    cadenas = Cadena.where(start_date: 1.day.from_now).where.not(state: "started")
     return if cadenas.empty?
 
     cadenas.each do |cadena|

@@ -7,7 +7,7 @@ FactoryBot.define do
     installment_value { 100_000 }
     start_date { Time.zone.tomorrow }
     periodicity { %w[monthly bimonthly].sample }
-    end_date { Time.zone.tomorrow + (periodicity == 'monthly' ? desired_installments : desired_installments / 2).months }
+    end_date { Time.zone.tomorrow + ((periodicity == "monthly") ? desired_installments : desired_installments / 2).months }
     participants_approval { false }
     positions_assigned { false }
     admin { association :participant, cadena: instance }

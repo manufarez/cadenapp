@@ -2,18 +2,18 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+    :recoverable, :rememberable, :validatable
 
   has_many :participants, dependent: :destroy
   has_many :cadenas, through: :participants
-  has_many :made_payments, class_name: 'Payment', dependent: :destroy
+  has_many :made_payments, class_name: "Payment", dependent: :destroy
   has_many :received_payments, through: :participants, source: :received_payments, dependent: :destroy
 
   has_one_attached :avatar
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :avatar, presence: { message: 'tiene que ser vinculado al perfil' }, on: :update
-  validates :avatar, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..(2.megabytes) }
+  validates :avatar, presence: {message: "tiene que ser vinculado al perfil"}, on: :update
+  validates :avatar, blob: {content_type: ["image/png", "image/jpg", "image/jpeg"], size_range: 1..(2.megabytes)}
   validates :sex, presence: true, on: :update
   validates :dob, presence: true, on: :update
   validates :phone, presence: true, on: :update
@@ -60,7 +60,7 @@ class User < ApplicationRecord
 
       age
     else
-      'Missing DOB'
+      "Missing DOB"
     end
   end
 end

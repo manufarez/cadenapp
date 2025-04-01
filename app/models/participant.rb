@@ -1,7 +1,7 @@
 class Participant < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :cadena, optional: false
-  has_many :received_payments, class_name: 'Payment', dependent: :destroy
+  has_many :received_payments, class_name: "Payment", dependent: :destroy
   validate :cadena_start_must_be_future, on: :create
   validate :cadena_must_have_capacity, on: :create
 
@@ -14,8 +14,8 @@ class Participant < ApplicationRecord
   after_create :send_participant_email, unless: -> { Rails.application.config.seeding }
 
   def self.find_by_name(name)
-    first_name, last_name = name.split(' ', 2)
-    joins(:user).find_by(users: { first_name: first_name, last_name: last_name })
+    first_name, last_name = name.split(" ", 2)
+    joins(:user).find_by(users: {first_name: first_name, last_name: last_name})
   end
 
   def paid_next_participant?
@@ -46,12 +46,12 @@ class Participant < ApplicationRecord
   def cadena_start_must_be_future
     return if cadena.start_date_is_future
 
-    errors.add(:cadena, 'start day is today or has already passed')
+    errors.add(:cadena, "start day is today or has already passed")
   end
 
   def cadena_must_have_capacity
     return if cadena.missing_participants.positive?
 
-    errors.add(:cadena, 'is full')
+    errors.add(:cadena, "is full")
   end
 end

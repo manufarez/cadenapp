@@ -12,17 +12,17 @@ class ApplicationController < ActionController::Base
 
   def set_date
     Timecop.travel(params[:global_date])
-    redirect_back(fallback_location: root_path, notice: t("notices.global_date", global_date: Time.zone.now.strftime('%d/%m/%Y')))
+    redirect_back(fallback_location: root_path, notice: t("notices.global_date", global_date: Time.zone.now.strftime("%d/%m/%Y")))
   end
 
   private
 
   def authenticate_user!
-    if user_signed_in? || (devise_controller? && %w[new create destroy update].include?(action_name)) || params[:token] || controller_name == 'newsletter_subscribers' || (controller_name == 'passwords' && action_name == 'edit')
+    if user_signed_in? || (devise_controller? && %w[new create destroy update].include?(action_name)) || params[:token] || controller_name == "newsletter_subscribers" || (controller_name == "passwords" && action_name == "edit")
       return
     end
 
-    redirect_to new_user_session_path, notice: t('notices.login_to_access')
+    redirect_to new_user_session_path, notice: t("notices.login_to_access")
   end
 
   def configure_permitted_parameters

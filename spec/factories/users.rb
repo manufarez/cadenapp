@@ -6,7 +6,7 @@ FactoryBot.define do
     identification_number { "MyString" }
     identification_type { "MyString" }
     identification_issued_at { Date.today }
-    sex { ['M', 'F'].sample }
+    sex { ["M", "F"].sample }
     dob { Date.today }
     password { Faker::Internet.password }
     password_confirmation { password }
@@ -20,7 +20,7 @@ FactoryBot.define do
     after(:build) do |user|
       user.avatar.attach(
         io: File.open("#{Rails.root}/app/assets/images/default_avatar.png"),
-        filename: 'default_avatar.png'
+        filename: "default_avatar.png"
       )
     end
   end

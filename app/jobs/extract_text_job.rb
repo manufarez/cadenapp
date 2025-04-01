@@ -1,7 +1,7 @@
 class ExtractTextJob < ApplicationJob
   queue_as :default
 
-  require 'rtesseract'
+  require "rtesseract"
 
   def perform(payment_proof)
     image_path = ActiveStorage::Blob.service.path_for(payment_proof.image.key)

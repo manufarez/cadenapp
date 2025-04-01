@@ -46,22 +46,22 @@ class CadenaPreview < ActionMailer::Preview
   end
 
   def unpaid_turn_detected
-    participant = Cadena.find { |c| c.payments && c.periodicity == 'daily' && c.started? }.participants.first
+    participant = Cadena.find { |c| c.payments && c.periodicity == "daily" && c.started? }.participants.first
     CadenaMailer.unpaid_turn_detected(participant)
   end
 
   def unpaid_turn_admin_alert
-    cadena = Cadena.find { |c| c.payments && c.periodicity == 'daily' && c.started? }
+    cadena = Cadena.find { |c| c.payments && c.periodicity == "daily" && c.started? }
     CadenaMailer.unpaid_turn_admin_alert(cadena)
   end
 
   def remind_admin_to_send_list
-    cadena = Cadena.where(state: 'complete').first
+    cadena = Cadena.where(state: "complete").first
     CadenaMailer.remind_admin_to_send_list(cadena)
   end
 
   def remind_admin_to_generate_order
-    cadena = Cadena.where(state: 'participants_approval').first
+    cadena = Cadena.where(state: "participants_approval").first
     CadenaMailer.remind_admin_to_generate_order(cadena)
   end
 end

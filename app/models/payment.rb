@@ -28,7 +28,7 @@ class Payment < ApplicationRecord
         receiver.save!
         receiver.user.save!
       rescue ActiveRecord::RecordInvalid => e
-        puts e.errors.full_messages.join(', ')
+        puts e.errors.full_messages.join(", ")
         raise ActiveRecord::Rollback
       end
     end
@@ -65,11 +65,11 @@ class Payment < ApplicationRecord
   def cadena_started?
     return true if cadena.started? && Time.zone.now.to_date >= cadena.start_date
 
-    errors.add(:cadena, "no ha empezado (empieza: #{cadena.start_date.strftime('%d/%m/%y')}) o ha sido pausada")
+    errors.add(:cadena, "no ha empezado (empieza: #{cadena.start_date.strftime("%d/%m/%y")}) o ha sido pausada")
   end
 
   def decrement_payments
-    raise 'No participant associated with this payment!' unless participant
+    raise "No participant associated with this payment!" unless participant
 
     participant.payments_received -= 1
     participant.save!
