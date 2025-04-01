@@ -80,8 +80,9 @@ jobs:
 
       - name: Create test database
         run: |
+          sudo -u postgres psql -c "CREATE USER cadenapp WITH PASSWORD '${{ secrets.CADENAPP_DATABASE_PASSWORD }}';"
+          sudo -u postgres psql -c "ALTER USER cadenapp WITH SUPERUSER;"
           sudo -u postgres createdb cadenapp_test
-          sudo -u postgres psql -c "ALTER USER cadenapp WITH PASSWORD '${{ secrets.CADENAPP_DATABASE_PASSWORD }}';"
 
       - name: Run tests
         env:
