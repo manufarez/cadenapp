@@ -58,10 +58,23 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres
+        ports: ["5432:5432"]
+        env:
+          POSTGRES_USER: cadenapp
+          POSTGRES_PASSWORD: ${{ secrets.CADENAPP_DATABASE_PASSWORD }}
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     env:
-      CADENAPP_DATABASE_PASSWORD: ${{ secrets.CADENAPP_DATABASE_PASSWORD }}
-      DATABASE_URL: postgresql://cadenapp:${{ secrets.CADENAPP_DATABASE_PASSWORD }}@localhost:5432/cadenapp_test
       RAILS_ENV: test
+      DATABASE_URL: postgres://cadenapp:${{ secrets.CADENAPP_DATABASE_PASSWORD }}@localhost:5432/cadenapp_test
 
     steps:
       - name: Install packages
@@ -76,21 +89,13 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Install PostgreSQL
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y postgresql postgresql-contrib
-          sudo service postgresql start
-          sudo service postgresql status
-
-      - name: Create test database
-        run: |
-          sudo -u postgres psql -c "CREATE USER cadenapp WITH PASSWORD '${{ secrets.CADENAPP_DATABASE_PASSWORD }}';"
-          sudo -u postgres psql -c "ALTER USER cadenapp WITH SUPERUSER;"
-          sudo -u postgres createdb cadenapp_test
-
       - name: Run tests
-        run: bin/rails db:create db:migrate db:test:prepare test test:system
+        run: |
+          bin/rails tailwindcss:build
+          bin/rails db:create
+          bin/rails db:schema:load
+          bin/rails test --fail-fast
+          bin/rails test:system
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
