@@ -11,7 +11,7 @@
     </div>
   <% end %>
   <li class="flex items-center h-16 px-5 my-4 border border-blue-600 bg-midnight rounded-2xl first:mt-0">
-    <div class="flex items-center justify-between w-full space-x-4">
+    <div class="flex items-center justify-between w-full gap-x-4">
       <div class="flex-shrink-0">
         <%= render 'cadenas/avatars/next_participant_avatar' %>
       </div>
@@ -33,7 +33,7 @@
   <p class="text-xs text-center uppercase text-placeholder_gray font-manrope">Pagaron (<%= cadena.period_ratio %>)</p>
   <% @except_next_paid.each do |participant| %>
     <li class="px-5 py-4 my-3 bg-midnight rounded-2xl first:mt-0">
-      <div class="flex items-center space-x-4">
+      <div class="flex items-center gap-x-4">
         <div class="flex-shrink-0">
           <%= render 'cadenas/avatars/participant_avatar', participant: participant %>
         </div>

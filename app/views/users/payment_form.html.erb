@@ -38,7 +38,7 @@
             <label class="text-sm text-silver" for="cc_number">Numero de la tarjeta</label>
             <input type="text" id="cc_number" name="cc_number" placeholder="1234 1234 1234 1234" value="<%= Faker::Finance.credit_card(:mastercard, :visa) %>" autofocus class="w-full bg-white input focus:ring-[#4F1665] text-mirage">
           </div>
-          <div class="flex mb-4 space-x-4">
+          <div class="flex mb-4 gap-x-4">
             <div>
               <label class="text-sm text-silver" for="validity_date">Fecha de vencimiento</label>
               <input type="text" id="validity_date" name="validity_date" placeholder="MM/YY" value="<%= (Date.today + 1.year).strftime("%m/%y") %>" autofocus class="w-full bg-white input focus:ring-[#4F1665] text-mirage">

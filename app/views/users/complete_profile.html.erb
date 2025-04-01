@@ -10,7 +10,7 @@
     <div class="mb-10">
       <%= form_for(@user, url: user_update_profile_path(@user)) do |f| %>
         <%= render "users/shared/error_messages", resource: @user %>
-        <div class="flex mb-4 space-x-3">
+        <div class="flex mb-4 gap-x-3">
           <%= image_tag 'default_avatar.png', data: {src: @user.avatar.url }, class:'lazy rounded-full w-24 h-24 object-cover mx-auto', alt:'User avatar' %>
         </div>
         <div class="flex flex-col mb-4" data-controller="avatar">
@@ -29,7 +29,7 @@
           </button>
           <%= f.file_field :avatar, id: "avatar-input", class:'hidden' %>
         </div>
-        <div class="flex mb-4 space-x-3">
+        <div class="flex mb-4 gap-x-3">
           <div>
             <%= f.label :sex, t('user.sex'), class:'text-silver text-sm' %>
             <select name="user[sex]" id="user_sex" class="w-full input">
@@ -62,7 +62,7 @@
           <%= f.text_field :zip, autofocus: true, class:'input w-full mb-4', placeholder: t('user.zip') %>
           <%= f.text_field :city, autofocus: true, class:'input w-full', placeholder: t('user.city') %>
         </div>
-        <div class="flex items-center mb-4 space-x-2 text-sm field text-silver">
+        <div class="flex items-center mb-4 gap-x-2 text-sm field text-silver">
           <%= f.check_box :accepts_terms, class:'rounded bg-steel focus:ring-0 focus:ring-offset-0 hover:cursor-pointer' %>
           <label for="user[accepts_terms]" id="user_accepts_terms"><%= t('user.consent') %> <a class="text-primary_blue hover:underline" href="/terms"><%= t('user.terms&conditions') %></a></label>
         </div>

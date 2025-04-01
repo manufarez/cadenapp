@@ -1,4 +1,4 @@
-<%= link_to cadenas_path, class:"p-2.5 flex space-x-1 text-sm font-base text-gray-300 bg-mirage border border-gray-600 rounded-xl focus:outline-none focus:z-10 focus:ring-4 focus:ring-gray-700 hover:text-white hover:bg-gray-700 mr-2.5 #{current_user.is_admin ? 'border-dashed' : ''}", aria: {label: 'Cadenas'} do  %>
+<%= link_to cadenas_path, class:"p-2.5 flex gap-x-1 text-sm font-base text-gray-300 bg-mirage border border-gray-600 rounded-xl focus:outline-none focus:z-10 focus:ring-4 focus:ring-gray-700 hover:text-white hover:bg-gray-700 mr-2.5 #{current_user.is_admin ? 'border-dashed' : ''}", aria: {label: 'Cadenas'} do  %>
   <%= inline_svg_tag 'svg/link.svg', class:'w-5' %>
   <% unless current_user.is_admin %>
     <span>Cadenas</span>
