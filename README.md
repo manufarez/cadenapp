@@ -6,7 +6,7 @@ Cadenapp is a web-based platform that enables users to securely form saving grou
 
 ## Tech Stack
 
-The app is built using Ruby on Rails 7 (ruby 3.0.0), Tailwind CSS, Devise for authentication, Mailgun for email notifications, AWS for image storage, Timecop for date simulation, Sidekiq for background jobs, HTML Beautifier, RuboCop for code style, Letter Opener for email simulation, Rack Mini Profiler, Bullet for performance monitoring, RSpec for testing, inline_svg to handle SVG rendering and some Stimulus / AlpineJS to bring interactivity on the client side (flash messages, modals, etc.).
+The app is built using Ruby on Rails 7 (ruby 3.0.0), Tailwind CSS, Devise for authentication, Mailgun for email notifications, AWS for image storage, Timecop for date simulation, Sidekiq for background jobs, HTML Beautifier, RuboCop for code style, Letter Opener for email simulation, Rack Mini Profiler, RSpec for testing, inline_svg to handle SVG rendering and some Stimulus / AlpineJS to bring interactivity on the client side (flash messages, modals, etc.).
 
 ## Setup
 

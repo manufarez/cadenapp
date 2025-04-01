@@ -1,10 +1,13 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.2'
+ruby '3.3.5'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.0.3'
+gem "rails", "~> 8.0.0"
+
+# Standard library gems (explicitly required for Ruby 3.5+ compatibility)
+gem "ostruct"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
@@ -13,7 +16,7 @@ gem 'sprockets-rails'
 gem 'pg', '~> 1.1'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 6.6'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
@@ -58,8 +61,6 @@ gem 'faker'
 gem 'aws-sdk-s3', require: false
 
 gem 'inline_svg'
-
-gem 'lograge'
 
 gem 'timecop'
 
@@ -109,8 +110,6 @@ group :development do
   gem 'rubocop-performance', require: false
 
   gem "letter_opener"
-
-  gem 'bullet'
 
   gem 'rack-mini-profiler'
 

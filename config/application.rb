@@ -9,8 +9,7 @@ Bundler.require(*Rails.groups)
 module Cadenapp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
-    config.middleware.use ActionDispatch::Session::CookieStore
+    config.load_defaults 8.0
     config.i18n.default_locale = :es
     config.i18n.fallbacks = [:es, :en]
     config.generators do |g|
@@ -23,16 +22,16 @@ module Cadenapp
       )
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
-    config.lograge.enabled = true
-    #mute active storage log entries
-    config.lograge.ignore_actions = [
-      "ActiveStorage::DiskController#show",
-      "ActiveStorage::RepresentationsController#show",
-    ]
 
     config.seeding = false
     config.active_job.queue_adapter = :good_job
     config.time_zone = "Bogota"
+
+    # Please, add to the `ignore` list any other `lib` subdirectories that do
+    # not contain `.rb` files, or that should not be reloaded or eager loaded.
+    # Common ones are `templates`, `generators`, or `middleware`, for example.
+    config.autoload_lib(ignore: %w[assets tasks])
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
