@@ -60,6 +60,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CADENAPP_DATABASE_PASSWORD: ${{ secrets.CADENAPP_DATABASE_PASSWORD }}
+      DATABASE_URL: postgresql://cadenapp:${{ secrets.CADENAPP_DATABASE_PASSWORD }}@localhost:5432/cadenapp_test
+      RAILS_ENV: test
 
     steps:
       - name: Install packages
@@ -88,8 +90,6 @@ jobs:
           sudo -u postgres createdb cadenapp_test
 
       - name: Run tests
-        env:
-          RAILS_ENV: test
         run: bin/rails db:create db:migrate db:test:prepare test test:system
 
       - name: Keep screenshots from failed system tests
