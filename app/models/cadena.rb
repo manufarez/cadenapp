@@ -18,7 +18,8 @@ class Cadena < ApplicationRecord
   validate :installments_match_participants, on: :create
   validates :installment_value, inclusion: { in: 100_000..500_000, message: I18n.t('cadena.errors.installments_range') }
   validates :desired_participants, inclusion: { in: 3..19, message: I18n.t('cadena.errors.participants_range') }
-  enum periodicity: { daily: 'daily', bimonthly: 'bimonthly', monthly: 'monthly' }, _default: 'monthly'
+  enum :periodicity, { daily: 'daily', bimonthly: 'bimonthly', monthly: 'monthly' }, default: 'monthly'
+
 
   state_machine :state, initial: :pending do
     after_transition on: :start, do: :assign_positions
