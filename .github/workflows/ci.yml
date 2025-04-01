@@ -61,11 +61,12 @@ jobs:
     timeout-minutes: 10
     services:
       postgres:
-        image: postgres
+        image: postgres:15
         ports: ["5432:5432"]
         env:
           POSTGRES_USER: cadenapp
           POSTGRES_PASSWORD: ${{ secrets.CADENAPP_DATABASE_PASSWORD }}
+          POSTGRES_DB: cadenapp_test
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
