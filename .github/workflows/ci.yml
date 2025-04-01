@@ -65,8 +65,8 @@ jobs:
         ports: ["5432:5432"]
         env:
           POSTGRES_USER: cadenapp
-          POSTGRES_PASSWORD: ${{ secrets.CADENAPP_DATABASE_PASSWORD }}
           POSTGRES_DB: cadenapp_test
+          POSTGRES_HOST_AUTH_METHOD: trust
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -75,7 +75,7 @@ jobs:
 
     env:
       RAILS_ENV: test
-      DATABASE_URL: postgres://cadenapp:${{ secrets.CADENAPP_DATABASE_PASSWORD }}@localhost:5432/cadenapp_test
+      DATABASE_URL: postgres://cadenapp@localhost:5432/cadenapp_test
 
     steps:
       - name: Install packages
