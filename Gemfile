@@ -92,6 +92,8 @@ group :development, :test do
 
   # Security scanning
   gem "brakeman"
+
+  gem "standard", ">= 1.35.1"
 end
 
 group :development do
