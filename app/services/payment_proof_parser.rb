@@ -10,8 +10,6 @@ class PaymentProofParser
     }
   end
 
-  private
-
   def self.extract_bank_name(text)
     # Match "Scotiabank COLPATRIA" and clean extra characters
     text[/Scotiabank/i]&.gsub(/[^a-zA-Z\s]/, "")&.+ " COLPATRIA"

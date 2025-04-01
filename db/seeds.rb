@@ -88,7 +88,7 @@ puts "Creating 10 fake cadenas with 10 participants..."
     cadena.save
   else
     puts cadena.errors.full_messages.join(", ")
-    return
+    next
   end
   puts "Cadena #{cadena.id} created with status #{cadena.state}"
 end
