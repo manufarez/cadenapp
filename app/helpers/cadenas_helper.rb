@@ -4,7 +4,7 @@ module CadenasHelper
       'complete' => 'text-ciel border-ciel',
       'pending' => 'text-pinky border-pinky',
       'participants_approval' => 'text-mayo border-mayo',
-      'started' => 'text-primary_blue border-blue-600',
+      'started' => 'text-primary-blue border-blue-600',
       'stopped' => 'text-red-500 border-red-500'
     }
     state_colors[state] || ''

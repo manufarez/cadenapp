@@ -1,6 +1,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
 <div class="mb-4">
-  <button class="px-4 py-1.5 text-sm text-white rounded-full bg-primary_blue hover:bg-blue-700" onclick="confetti()">
+  <button class="px-4 py-1.5 text-sm text-white rounded-full bg-primary-blue hover:bg-blue-700" onclick="confetti()">
     🎉 Cadena terminada
   </button>
 </div>
@@ -16,7 +16,7 @@
           <div class="text-sm font-medium text-white truncate">
             <%= participant.name %>
           </div>
-          <div class="text-xs text-placeholder_gray font-manrope <%= participant.paid_by_everyone ? 'line-through' : '' %>">
+          <div class="text-xs text-placeholder-gray font-manrope <%= participant.paid_by_everyone ? 'line-through' : '' %>">
             <%= participant.withdrawal_date.strftime('%d/%m/%Y') %>
           </div>
         </div>
@@ -30,7 +30,7 @@
         <% if participant.paid_by_everyone %>
           <%= inline_svg_tag('svg/check.svg', class: 'w-5 text-white rounded-full bg-blue-600 p-1') %>
         <% else %>
-          <span class="w-5 h-5 border rounded-full border-midnight_light bg-midnight_light/10"></span>
+          <span class="w-5 h-5 border rounded-full border-midnight-light bg-midnight-light/10"></span>
         <% end %>
       </div>
     </li>

@@ -21,7 +21,7 @@
                 <%= @user.avatar.blob.filename.to_s.truncate(42) %>
               </span>
             <% else %>
-              <div class="flex justify-between text-placeholder_gray">
+              <div class="flex justify-between text-placeholder-gray">
                 <span id="avatar-filename" class="text-sm"><%= t('user.upload_profile_pic') %></span>
                 <%= inline_svg_tag 'svg/clip.svg', class:'w-5' %>
               </div>
@@ -64,7 +64,7 @@
         </div>
         <div class="flex items-center mb-4 gap-x-2 text-sm field text-silver">
           <%= f.check_box :accepts_terms, class:'rounded bg-steel focus:ring-0 focus:ring-offset-0 hover:cursor-pointer' %>
-          <label for="user[accepts_terms]" id="user_accepts_terms"><%= t('user.consent') %> <a class="text-primary_blue hover:underline" href="/terms"><%= t('user.terms&conditions') %></a></label>
+          <label for="user[accepts_terms]" id="user_accepts_terms"><%= t('user.consent') %> <a class="text-primary-blue hover:underline" href="/terms"><%= t('user.terms&conditions') %></a></label>
         </div>
         <div class="actions">
           <%= f.submit @user.profile_complete? ? t('devise.registrations.edit.update') : t('user.finish_profile'), class:'btn-primary' %>

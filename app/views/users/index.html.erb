@@ -25,7 +25,7 @@
       </thead>
       <tbody>
         <% @users.each do |user| %>
-          <tr class="text-white odd:bg-transparent even:bg-gray-600/10 hover:bg-jaguar_light/50 hover:cursor-pointer" onclick="location.href='<%= url_for(user) %>'">
+          <tr class="text-white odd:bg-transparent even:bg-gray-600/10 hover:bg-jaguar-light/50 hover:cursor-pointer" onclick="location.href='<%= url_for(user) %>'">
             <td class="px-6 py-4"><%= user.id %></td>
             <td class="px-6 py-4 font-medium whitespace-nowrap"><%= user.first_name %> <%= user.last_name %></td>
             <td class="px-6 py-4 font-sans"><%= user.email %></td>
@@ -35,7 +35,7 @@
             <td class="px-6 py-4 text-center <%= user.received_payments.any? ? 'text-ciel' : '' %>"><%= user.received_payments.size %></td>
             <td class="px-6 py-4 text-center"><%= number_to_currency(user.balance, precision: 0) %></td>
             <td class="px-6 py-4 font-light"><%= user.created_at.strftime('%d/%m/%y') %></td>
-            <td class="px-6 py-4"><%= button_to t('user.impersonate'), login_as_user_path(user), class: 'font-medium text-primary_blue hover:underline', data: {turbo: false, confirm: 'Are you sure? You will be logged out as an admin'}, onclick: "return confirm('Are you sure? You will be logged out as an admin');" %></td>
+            <td class="px-6 py-4"><%= button_to t('user.impersonate'), login_as_user_path(user), class: 'font-medium text-primary-blue hover:underline', data: {turbo: false, confirm: 'Are you sure? You will be logged out as an admin'}, onclick: "return confirm('Are you sure? You will be logged out as an admin');" %></td>
           </tr>
         <% end %>
       </tbody>

@@ -23,10 +23,10 @@ export default class extends Controller {
       this.toggleView();
       this.tab2Target.classList.replace(
         "active-period",
-        "hover:bg-steel_light"
+        "hover:bg-steel-light"
       );
       this.tab1Target.classList.replace(
-        "hover:bg-steel_light",
+        "hover:bg-steel-light",
         "active-period"
       );
       if (this.hasPeriodProgressTarget) {
@@ -46,10 +46,10 @@ export default class extends Controller {
       this.toggleView();
       this.tab1Target.classList.replace(
         "active-period",
-        "hover:bg-steel_light"
+        "hover:bg-steel-light"
       );
       this.tab2Target.classList.replace(
-        "hover:bg-steel_light",
+        "hover:bg-steel-light",
         "active-period"
       );
       if (this.hasGlobalProgressTarget) {

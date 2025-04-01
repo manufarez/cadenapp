@@ -1,7 +1,7 @@
 <% if cadena.pending? && (current_user.admin_of?(cadena) || current_user.is_admin) %>
   <%= link_to t('cadena.invite_more'), cadena_invitations_path(cadena), class: "text-white h-9 inline-block bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-700 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
 <% elsif cadena.complete? && (current_user.admin_of?(cadena) || current_user.is_admin) %>
-  <%= button_to t('cadena.approve_list'), start_participants_approval_cadena_path(cadena), method: :patch, class: "text-white bg-primary_blue hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
+  <%= button_to t('cadena.approve_list'), start_participants_approval_cadena_path(cadena), method: :patch, class: "text-white bg-primary-blue hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2 text-center"  %>
 <% elsif cadena.participants_approval? && (current_user.admin_of?(cadena) || current_user.is_admin) %>
   <%= button_to t('cadena.assign_positions'), assign_positions_cadena_path(cadena), method: :patch, class: "btn-warning text-sm px-4 py-2"  %>
 <% elsif cadena.participants_approval? && !current_user.admin_of?(cadena) && !current_user.is_admin %>

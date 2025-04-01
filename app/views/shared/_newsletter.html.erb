@@ -8,7 +8,7 @@
           <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"><%= inline_svg_tag('svg/mail.svg', class:'w-5 h-5 text-gray-300') %></div>
           <%= f.email_field :email, class:'placeholder:font-nimbus bg-silver/10 border border-silver/20 text-white text-sm rounded-lg focus:ring-0 focus:border-white block w-full pl-10 p-2.5', placeholder: 'Tu correo electronico...' %>
         </div>
-        <%= f.submit 'Inscribirse', class: 'font-manrope font-semibold cursor-pointer text-white bg-gradient-to-br border border-indigo-900/25 from-purple-500/20 to-lavender_dark/50 hover:cursor-pointer hover:bg-gradient-to-bl rounded-lg text-sm px-5 py-2.5 text-center' %>
+        <%= f.submit 'Inscribirse', class: 'font-manrope font-semibold cursor-pointer text-white bg-gradient-to-br border border-indigo-900/25 from-purple-500/20 to-lavender-dark/50 hover:cursor-pointer hover:bg-gradient-to-bl rounded-lg text-sm px-5 py-2.5 text-center' %>
       </div>
       <div class="text-sm font-medium text-gray-300 font-nimbus">Al inscribirte, aceptas los Términos de servicio y la Política de privacidad de Cadenapp.</div>
       <%= captcha_tags action: "newsletter_subscribers" %>

@@ -24,7 +24,7 @@
     </div>
     <div class="w-1/2">
       <%= f.label :end_date, t('cadena.installments') + '*', class:'text-silver text-sm' %>
-      <%= f.number_field :desired_installments, placeholder: t('cadena.auto_calc'), class: 'input w-full !ring-placeholder_gray hover:cursor-not-allowed', min: 3, max: 19, data: {cadena_target:"installments"}, readonly: true %>
+      <%= f.number_field :desired_installments, placeholder: t('cadena.auto_calc'), class: 'input w-full !ring-placeholder-gray hover:cursor-not-allowed', min: 3, max: 19, data: {cadena_target:"installments"}, readonly: true %>
     </div>
   </div>
   <div class="mb-4">
@@ -38,19 +38,19 @@
   </div>
   <div class="mb-4">
     <%= f.label :end_date, t('cadena.end_date') + '*', class:'text-silver text-sm' %>
-    <%= f.date_field :end_date, readonly: true, placeholder: t('cadena.auto_calc'), class: "date end_date w-full !ring-placeholder_gray input !cursor-not-allowed", data:{cadena_target:"endDate"} %>
+    <%= f.date_field :end_date, readonly: true, placeholder: t('cadena.auto_calc'), class: "date end_date w-full !ring-placeholder-gray input !cursor-not-allowed", data:{cadena_target:"endDate"} %>
   </div>
   <div class="mb-4">
     <%= f.label :saving_goal, t('cadena.saving_goal') + '*', class:'text-silver text-sm' %>
-    <input placeholder="<%= t('cadena.auto_calc') %>" class="w-full input !ring-placeholder_gray hover:cursor-not-allowed" readonly disabled data-cadena-target="savingGoalDisplay" type="text">
+    <input placeholder="<%= t('cadena.auto_calc') %>" class="w-full input !ring-placeholder-gray hover:cursor-not-allowed" readonly disabled data-cadena-target="savingGoalDisplay" type="text">
     <%= f.hidden_field :saving_goal, data:{cadena_target:"savingGoal"} %>
   </div>
   <div class="flex items-center mb-4 gap-x-2 text-sm field text-silver <%= f.object.new_record? ? '' : 'hidden' %>">
     <%= f.check_box :accepts_admin_terms, class:'rounded bg-steel focus:ring-0 focus:ring-offset-0 hover:cursor-pointer' %>
-    <label for="user[accepts_admin_terms]" id="user_accepts_terms"><%= t('user.consent') %> <a class="text-primary_blue hover:underline" href="/terms"><%= t('user.admin_terms&conditions') %></a></label>
+    <label for="user[accepts_admin_terms]" id="user_accepts_terms"><%= t('user.consent') %> <a class="text-primary-blue hover:underline" href="/terms"><%= t('user.admin_terms&conditions') %></a></label>
   </div>
   <div class="inline">
     <%= f.submit f.object.new_record? ? t('cadena.create') : t('cadena.modify'), class: "btn-primary" %>
   </div>
 <% end %>
-<p class="mt-4 text-sm text-center text-placeholder_gray">*: Informaciones calculadas automáticamente</p>
+<p class="mt-4 text-sm text-center text-placeholder-gray">*: Informaciones calculadas automáticamente</p>

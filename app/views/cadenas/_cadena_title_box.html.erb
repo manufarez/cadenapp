@@ -1,11 +1,11 @@
-<div class="flex items-center justify-between p-4 font-sans text-sm font-medium rounded-xl bg-midnight hover:bg-black_rock">
+<div class="flex items-center justify-between p-4 font-sans text-sm font-medium rounded-xl bg-midnight hover:bg-black-rock">
   <div class="flex items-center">
     <div class="flex flex-shrink-0 mr-2">
       <%= render 'cadenas/avatars/avatars_preview' %>
     </div>
     <span class="mr-3 overflow-hidden whitespace-nowrap text-ellipsis max-w-40"><%= cadena.name %></span>
     <% if current_user.admin_of?(cadena) || @user.admin_of?(cadena) %>
-      <span class="px-2 py-1 text-xs uppercase border rounded-lg border-jaguar_light text-jaguar_light">ADMIN</span>
+      <span class="px-2 py-1 text-xs uppercase border rounded-lg border-jaguar-light text-jaguar-light">ADMIN</span>
     <% end %>
   </div>
   <span class="font-normal flex-shrink-0 ml-2 <%= state_color(cadena.state) %>">

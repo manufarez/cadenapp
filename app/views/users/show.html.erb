@@ -8,7 +8,7 @@
             <div class="flex items-center pl-2 pr-2.5 py-1 mr-2 text-xs text-center text-white bg-blue-600 hover:bg-blue-700 rounded-full w-fit"><%= inline_svg_tag('svg/id.svg', class:'w-3 text-white mr-1') %><%= @user.id %></div>
           <% end %>
         <% else %>
-          <div class="flex items-center pl-2 pr-2.5 py-1 mr-2 text-xs text-center text-placeholder_gray border-placeholder_gray border rounded-full w-fit"><%= inline_svg_tag('svg/hash.svg', class:'w-3 text-placeholder_gray mr-1') %><%= @user.id %></div>
+          <div class="flex items-center pl-2 pr-2.5 py-1 mr-2 text-xs text-center text-placeholder-gray border-placeholder-gray border rounded-full w-fit"><%= inline_svg_tag('svg/hash.svg', class:'w-3 text-placeholder-gray mr-1') %><%= @user.id %></div>
         <% end %>
       </div>
       <%= image_tag 'default_avatar.png', data: {src: @user.avatar.url}, class:"lazy rounded-full h-14 w-14 object-cover", alt:'User avatar' %>
@@ -18,39 +18,39 @@
       <div class="p-6 mb-4 font-sans rounded-xl bg-steel">
         <div class="flex justify-between mb-4 text-sm">
           <span class="text-silver"><%= t('user.phone') %></span>
-          <span class="text-right text-primary_blue"><%= @user.phone %></span>
+          <span class="text-right text-primary-blue"><%= @user.phone %></span>
         </div>
         <div class="flex justify-between mb-4 text-sm">
           <span class="text-silver"><%= t('user.email') %></span>
-          <span class="text-right text-primary_blue"><a href="mailto:<%= @user.email %>" target="_blank" class="hover:underline"><%= @user.email %></a></span>
+          <span class="text-right text-primary-blue"><a href="mailto:<%= @user.email %>" target="_blank" class="hover:underline"><%= @user.email %></a></span>
         </div>
         <div class="flex justify-between mb-4 text-sm">
           <span class="text-silver"><%= t('user.identification_type') %></span>
-          <span class="text-right text-primary_blue"><%= @user.identification_type == 'Passport' ? 'Pasaporte' : @user_identification_type %></span>
+          <span class="text-right text-primary-blue"><%= @user.identification_type == 'Passport' ? 'Pasaporte' : @user_identification_type %></span>
         </div>
         <div class="flex justify-between mb-4 text-sm">
           <span class="text-silver"><%= t('user.id_number') %></span>
-          <span class="text-right text-primary_blue"><%= @user.identification_number %></span>
+          <span class="text-right text-primary-blue"><%= @user.identification_number %></span>
         </div>
         <div class="flex justify-between mb-4 text-sm">
           <span class="text-silver"><%= t('user.address') %></span>
-          <span class="text-right text-primary_blue"><%= @user.address %></span>
+          <span class="text-right text-primary-blue"><%= @user.address %></span>
         </div>
         <div class="flex justify-between mb-4 text-sm">
           <span class="text-silver"><%= t('user.city') %></span>
-          <span class="text-right text-primary_blue"><%= @user.city %></span>
+          <span class="text-right text-primary-blue"><%= @user.city %></span>
         </div>
         <div class="flex justify-between mb-4 text-sm">
           <span class="text-silver"><%= t('user.zip') %></span>
-          <span class="text-right text-primary_blue"><%= @user.zip %></span>
+          <span class="text-right text-primary-blue"><%= @user.zip %></span>
         </div>
         <div class="flex justify-between mb-4 text-sm">
           <span class="text-silver"><%= t('user.dob') %></span>
-          <span class="text-right text-primary_blue"><%= @user&.dob&.strftime('%d/%m/%Y') %></span>
+          <span class="text-right text-primary-blue"><%= @user&.dob&.strftime('%d/%m/%Y') %></span>
         </div>
         <div class="flex justify-between text-sm">
           <span class="text-silver"><%= t('user.age') %></span>
-          <span class="text-right text-primary_blue"><%= @user.age %></span>
+          <span class="text-right text-primary-blue"><%= @user.age %></span>
         </div>
       </div>
     </div>
@@ -59,7 +59,7 @@
         <div class="w-full mb-4 text-center btn-primary">Editar perfil</div>
       <% end %>
       <%= link_to destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: t('devise.sessions.logout_confirmation') } do %>
-        <button type="button" class="flex items-center justify-center w-full btn-secondary text-placeholder_gray">
+        <button type="button" class="flex items-center justify-center w-full btn-secondary text-placeholder-gray">
           <span class="mr-2">Desconectarse</span>
           <%= inline_svg_tag 'svg/exit.svg', class:'w-5' %>
         </button>

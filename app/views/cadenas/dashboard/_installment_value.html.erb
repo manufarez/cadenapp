@@ -1,7 +1,7 @@
 <div class="font-manrope">
   <div class="flex items-center text-2xl font-bold <%= cadena.started? ? 'text-white' : '' %>"><%= number_to_currency(cadena.installment_value, precision: 0) %>
-    <%= inline_svg_tag('svg/bills.svg', class:'w-4 ml-2 text-placeholder_gray') %></div>
-  <p class="text-sm text-placeholder_gray">
+    <%= inline_svg_tag('svg/bills.svg', class:'w-4 ml-2 text-placeholder-gray') %></div>
+  <p class="text-sm text-placeholder-gray">
     <%= case cadena.periodicity when "daily" then "por dia" when "monthly" then "por mes" when "bimonthly" then "por quincena" else "unknown" end %>
-  </p>
-</div>
+    </p>
+  </div>

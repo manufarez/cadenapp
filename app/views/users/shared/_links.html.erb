@@ -1,18 +1,18 @@
-<div class="flex flex-col items-center justify-center space-y-2 text-sm divide-y divide-black_coral">
+<div class="flex flex-col items-center justify-center space-y-2 text-sm divide-y divide-black-coral">
   <%- if controller_name != 'sessions' %>
-    <%= link_to t('devise.shared.links.sign_in'), new_session_path(resource_name), class:'text-primary_blue hover:underline text-sm' %><br />
+    <%= link_to t('devise.shared.links.sign_in'), new_session_path(resource_name), class:'text-primary-blue hover:underline text-sm' %><br />
   <% end %>
   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-    <%= link_to t('devise.shared.links.sign_up'), new_registration_path(resource_name), class:'text-primary_blue hover:underline text-sm pt-4' %><br />
+    <%= link_to t('devise.shared.links.sign_up'), new_registration_path(resource_name), class:'text-primary-blue hover:underline text-sm pt-4' %><br />
   <% end %>
   <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-    <%= link_to t('devise.passwords.new.forgot_your_password'), new_password_path(resource_name), class:'text-primary_blue hover:underline text-sm' %><br />
+    <%= link_to t('devise.passwords.new.forgot_your_password'), new_password_path(resource_name), class:'text-primary-blue hover:underline text-sm' %><br />
   <% end %>
   <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-    <%= link_to t('devise.shared.links.didn_t_receive_confirmation_instructions'), new_confirmation_path(resource_name), class:'text-primary_blue hover:underline text-sm' %><br />
+    <%= link_to t('devise.shared.links.didn_t_receive_confirmation_instructions'), new_confirmation_path(resource_name), class:'text-primary-blue hover:underline text-sm' %><br />
   <% end %>
   <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-    <%= link_to t('devise.shared.links.didn_t_receive_unlock_instructions'), new_unlock_path(resource_name), class:'text-primary_blue hover:underline text-sm' %><br />
+    <%= link_to t('devise.shared.links.didn_t_receive_unlock_instructions'), new_unlock_path(resource_name), class:'text-primary-blue hover:underline text-sm' %><br />
   <% end %>
   <%- if devise_mapping.omniauthable? %>
     <%- resource_class.omniauth_providers.each do |provider| %>
