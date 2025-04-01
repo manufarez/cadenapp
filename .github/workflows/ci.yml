@@ -74,7 +74,9 @@ jobs:
       - name: Install PostgreSQL
         run: |
           sudo apt-get update
-          sudo apt-get install -y postgresql
+          sudo apt-get install -y postgresql postgresql-contrib
+          sudo service postgresql start
+          sudo service postgresql status
 
       - name: Create test database
         run: |
