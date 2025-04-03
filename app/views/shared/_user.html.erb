@@ -4,7 +4,7 @@
       <%= current_user.name %>
     </div>
     <div class="sm:hidden">
-      <%= current_user.initials %>
+      <%= inline_svg_tag('svg/user.svg', class: "size-5") %>
     </div>
   <% end %>
 <% end %>

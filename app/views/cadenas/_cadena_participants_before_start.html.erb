@@ -31,9 +31,9 @@
             <%= inline_svg_tag "svg/dot_dropdown.svg", class: "w-5" %>
           </button>
           <div id="dropdownDotsUser<%= participant.id %>" class="z-10 hidden divide-y divide-gray-600 rounded-lg shadow bg-steel-light w-fit">
-            <ul class="text-sm text-gray-200 " aria-labelledby="dropdownMenuIconHorizontalButton">
+            <ul class="text-sm text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
               <li>
-                <%= button_to "Eliminar", remove_participant_cadena_path(cadena, participant, format: :html), method: :delete, class:'block rounded-lg px-4 py-2 mr-0 text-left w-full hover:bg-jaguar-light' %>
+                <%= button_to "Eliminar", remove_participant_cadena_path(cadena, participant, format: :html), method: :delete, class:'block rounded-lg px-4 py-2 mr-0 text-left w-full hover:bg-jaguar-light cursor-pointer' %>
               </li>
             </ul>
           </div>

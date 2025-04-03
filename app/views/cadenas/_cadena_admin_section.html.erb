@@ -4,7 +4,7 @@
     <div class="grid gap-3 <%= @cadena.started? || @cadena.stopped? ? 'grid-cols-3' : 'grid-cols-2' %>">
       <%= link_to 'Edit', edit_cadena_path(@cadena), class: "btn-outline-primary" %>
       <% if @cadena.started? %>
-        <%= link_to 'Pay ⚡️', cadena_make_all_payments_path(@cadena), class:'btn-secondary text-sm text-center py-2.5 rounded-lg font-medium' %>
+        <%= link_to 'Pay ⚡️', cadena_make_all_payments_path(@cadena), class:'btn-secondary text-sm text-center !py-2.5 !rounded-lg font-medium' %>
         <%= button_to "Stop", change_state_cadena_path(@cadena, state: 'stopped'), method: :patch,form: { data: { turbo_confirm: t('cadena.stop_confirmation') } }, class: "btn-outline-danger" %>
       <% elsif @cadena.stopped? %>
         <%= button_to "Resume", change_state_cadena_path(@cadena, state: 'started'), method: :patch,form: { data: { turbo_confirm: t('cadena.resume_confirmation') } }, class: "btn-secondary text-sm text-center py-2.5 rounded-lg font-medium w-full" %>

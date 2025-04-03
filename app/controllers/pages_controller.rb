@@ -3,7 +3,13 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    @lead = NewsletterSubscriber.new
+    if current_user&.is_admin?
+      redirect_to cadenas_path
+    elsif current_user
+      redirect_to dashboard_path
+    else
+      @lead = NewsletterSubscriber.new
+    end
   end
 
   def terms

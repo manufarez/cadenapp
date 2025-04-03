@@ -20,7 +20,7 @@
   <div class="flex items-end mb-4 gap-x-3">
     <div class="w-1/2">
       <%= f.label :periodicity, t('cadena.periodicity'), class:'text-silver text-sm' %>
-      <%= f.select :periodicity, options_for_select([['Diaria', 'daily'], ['Quincenal', 'bimonthly'], ['Mensual', 'monthly']]), {}, class: "input w-full", data: {cadena_target: "periodicity", action:"cadena#updateInstallments cadena#updateEndDate"} %>
+      <%= f.select :periodicity, options_for_select([['Diaria', 'daily'], ['Quincenal', 'bimonthly'], ['Mensual', 'monthly']]), {}, class: "input w-full cursor-pointer", data: {cadena_target: "periodicity", action:"cadena#updateInstallments cadena#updateEndDate"} %>
     </div>
     <div class="w-1/2">
       <%= f.label :end_date, t('cadena.installments') + '*', class:'text-silver text-sm' %>
@@ -29,7 +29,7 @@
   </div>
   <div class="mb-4">
     <%= f.label :installment_value, t('cadena.installment_value'), class:'text-silver text-sm' %>
-    <input placeholder="Min: 100k - Max: 500k" class="w-full input" min="100000" max="500000" data-cadena-target="installmentDisplay" data-action="cadena#updateSavingGoal" id="installmentDisplay" type="text">
+    <input placeholder="Min: 100,000 - Max: 500,000" class="w-full input" min="100000" max="500000" data-cadena-target="installmentDisplay" data-action="cadena#updateSavingGoal" id="installmentDisplay" type="text">
     <%= f.hidden_field :installment_value, data:{cadena_target:"installmentValue"}, id:"installmentValue" %>
   </div>
   <div class="mb-4">

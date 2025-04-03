@@ -1,0 +1,26 @@
+<div class="flex justify-center max-w-md mx-auto">
+  <div class="w-full px-6 mb-6 text-white font-manrope">
+    <p class="text-jaguar-light text-2xl font-semibold">Hola,</p>
+    <p class="text-2xl font-semibold"><%= @user.name %></p>
+    <div class="mt-4 mb-8">
+      <p class="text-lavender text-center">Saldo Cadenapp</p>
+      <p class="text-white text-center text-3xl font-bold">500,000$</p>
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+      <%= link_to new_cadena_path, class: 'font-semibold bg-primary-blue p-4 rounded-2xl min-h-36 hover:bg-primary-blue/80 transition-colors duration-300' do %>
+        <%= inline_svg_tag('svg/plus_circle.svg', class: 'size-8 mb-2') %>
+        <p>Nueva<br>
+          cadena</p>
+      <% end %>
+      <%= link_to cadenas_path, class: 'font-semibold bg-shigo p-4 rounded-2xl min-h-36 hover:bg-shigo/80 transition-colors duration-300' do  %>
+        <%= inline_svg_tag('svg/list.svg', class: 'size-8 mb-2') %>
+        <p>Cadenas<br>
+          en curso</p>
+      <% end %>
+      <%= link_to user_path(current_user), class: 'font-semibold bg-placeholder-gray p-4 rounded-2xl min-h-36 hover:bg-placeholder-gray/80 transition-colors duration-300' do %>
+        <%= inline_svg_tag('svg/user_circle.svg', class: 'size-8 mb-2') %>
+        <p class='font-semibold'>Mi cuenta</p>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -2,10 +2,14 @@ class UsersController < ApplicationController
   include ActiveStorage::SetCurrent
   include ActionView::Helpers::NumberHelper
   skip_before_action :authenticate_user!, only: %i[complete_profile update]
-  before_action :set_user, except: %i[index]
+  before_action :set_user, except: %i[index dashboard]
   before_action :authenticate_user!, only: [:deposit]
   before_action :authorize_deposit_access, only: [:deposit]
   before_action :ask_profile_completion, except: %i[update abandon_complete_profile]
+
+  def dashboard
+    @user = current_user
+  end
 
   def index
     if current_user.is_admin?

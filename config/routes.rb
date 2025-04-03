@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get "dashboard", to: "users#dashboard", as: "dashboard"
+
   resources :newsletter_subscribers, only: [:new, :create]
 
   get "users/:id", to: "users#show", as: "user"

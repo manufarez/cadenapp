@@ -39,22 +39,22 @@
 }
 
 .btn-primary {
-  @apply tracking-wide focus:ring-4 bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-blue-800 w-full font-medium hover:cursor-pointer rounded-xl p-4;
+  @apply tracking-wide focus:ring-4 bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-blue-800 w-full font-medium hover:cursor-pointer rounded-xl p-4 cursor-pointer;
 }
 .btn-silver {
-  @apply tracking-wide focus:ring-4 bg-silver hover:bg-silver/80 focus:outline-none focus:ring-gray-500 w-full font-medium hover:cursor-pointer rounded-xl p-4;
+  @apply tracking-wide focus:ring-4 bg-silver hover:bg-silver/80 focus:outline-none focus:ring-gray-500 w-full font-medium hover:cursor-pointer rounded-xl p-4 cursor-pointer;
 }
 .btn-danger {
-  @apply tracking-wide focus:ring-4 text-gray-100 hover:border-red-500 border-gray-600 border hover:bg-red-600 focus:outline-none focus:ring-red-700 w-full font-medium hover:cursor-pointer rounded-xl p-4;
+  @apply tracking-wide focus:ring-4 text-gray-100 hover:border-red-500 border-gray-600 border hover:bg-red-600 focus:outline-none focus:ring-red-700 w-full font-medium hover:cursor-pointer rounded-xl p-4 cursor-pointer;
 }
 .btn-warning {
-  @apply text-mirage bg-gradient-to-r from-mayo via-yellow-300 to-yellow-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-500 font-medium rounded-lg p-4 hover:bg-yellow-500;
+  @apply text-mirage bg-gradient-to-r from-mayo via-yellow-300 to-yellow-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-500 font-medium rounded-lg p-4 hover:bg-yellow-500 cursor-pointer;
 }
 .btn-warning-outline {
-  @apply text-mayo border-mayo border hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-500 font-medium rounded-lg p-4 hover:bg-yellow-500;
+  @apply text-mayo border-mayo border hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-500 font-medium rounded-lg p-4 hover:bg-yellow-500 cursor-pointer;
 }
 .btn-secondary {
-  @apply p-4 font-medium text-gray-400 border border-gray-600 rounded-xl focus:outline-none focus:z-10 focus:ring-4 focus:ring-gray-700 hover:text-white hover:bg-gray-700;
+  @apply p-4 font-medium text-gray-400 border border-gray-600 rounded-xl focus:outline-none focus:z-10 focus:ring-4 focus:ring-gray-700 hover:text-white hover:bg-gray-700 cursor-pointer;
 }
 .btn-disabled {
   @apply p-4 rounded-xl bg-steel-light text-sm hover:cursor-not-allowed text-gray-300 font-medium shadow-lg;
@@ -75,13 +75,13 @@
   @apply px-2 py-1 text-xs text-gray-400 uppercase border border-gray-400 rounded-lg;
 }
 .btn-outline-primary {
-  @apply border focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center border-blue-600 text-blue-600 hover:text-white hover:bg-blue-600 focus:ring-blue-800 w-full;
+  @apply border focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center border-blue-600 text-blue-600 hover:text-white hover:bg-blue-600 focus:ring-blue-800 w-full cursor-pointer;
 }
 .btn-outline-danger {
-  @apply hover:text-white border focus:ring-4 w-full focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center border-red-500 text-red-500 hover:bg-red-600 focus:ring-red-900;
+  @apply hover:text-white border focus:ring-4 w-full focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center border-red-500 text-red-500 hover:bg-red-600 focus:ring-red-900 cursor-pointer;
 }
 .dropdown-button {
-  @apply inline-flex items-center text-base font-semibold rounded-full text-midnight bg-jaguar-light font-manrope hover:bg-black-coral focus:outline-none;
+  @apply inline-flex items-center text-base font-semibold rounded-full text-midnight bg-jaguar-light font-manrope hover:bg-black-coral focus:outline-none cursor-pointer;
 }
 .progress-bar {
   @apply flex items-center justify-center h-4 text-white transition-all duration-1000 ease-out bg-blue-600 rounded-full;
@@ -96,5 +96,5 @@
   @apply p-6 mb-6 text-white border border-gray-700 rounded-2xl;
 }
 .circle-button {
-  @apply p-3 text-primary-blue rounded-full bg-primary-blue/15 font-manrope focus:ring-0 focus:outline-none hover:bg-blue-700/40;
+  @apply p-3 text-primary-blue rounded-full bg-primary-blue/15 font-manrope focus:ring-0 focus:outline-none hover:bg-blue-700/40 cursor-pointer;
 }

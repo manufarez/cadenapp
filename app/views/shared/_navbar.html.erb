@@ -6,9 +6,9 @@
   <% if current_user %>
     <div class="flex">
       <%= render 'shared/date_selector' if current_user.is_admin %>
-      <%= render 'shared/cadenas_shortcut' %>
+      <%= render 'shared/cadenas_shortcut' if current_user.is_admin %>
       <%= render 'shared/users_shortcut' if current_user.is_admin %>
-      <%= render 'shared/user' %>
+      <%#= render 'shared/user' %>
     </div>
   <% end %>
 </div>

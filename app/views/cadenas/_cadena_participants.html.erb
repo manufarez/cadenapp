@@ -1,6 +1,6 @@
 <div data-controller="cadena-participants">
   <div class="flex p-1 mb-4 gap-x-1 rounded-full bg-steel">
-    <button class="px-4 py-1.5 text-sm text-white w-full rounded-full active-period" data-cadena-participants-target="tab1" data-action="click->cadena-participants#showPeriod">
+    <button class="px-4 py-1.5 text-sm text-white w-full rounded-full active-period cursor-pointer" data-cadena-participants-target="tab1" data-action="click->cadena-participants#showPeriod">
       Este periodo
       (<%= case cadena.periodicity
         when 'monthly'
@@ -11,7 +11,7 @@
           t('cadena.half_month')
       end %>)
     </button>
-    <button class="px-4 py-1.5 text-sm text-white w-full rounded-full hover:bg-steel-light" data-cadena-participants-target="tab2" data-action="click->cadena-participants#showGlobal">Global</button>
+    <button class="px-4 py-1.5 text-sm text-white w-full rounded-full hover:bg-steel-light cursor-pointer" data-cadena-participants-target="tab2" data-action="click->cadena-participants#showGlobal">Global</button>
   </div>
   <%= render 'cadenas/cadena_participants/period', cadena: cadena   %>
   <%= render 'cadenas/cadena_participants/global', cadena: cadena %>

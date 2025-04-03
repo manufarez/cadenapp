@@ -2,7 +2,7 @@
   <div class="w-full px-6 text-white font-manrope">
     <div class="flex items-center justify-between mb-10">
       <%= link_to abandon_complete_profile_path(@user) do %>
-        <%= inline_svg_tag('svg/arrow_left.svg', class:'text-white w-6') %>
+        <%= inline_svg_tag('svg/arrow_left.svg', class:'text-white w-6 hover:text-lavender transition-colors duration-300') %>
       <% end %>
       <h1 class="text-lg font-bold text-white text font-manrope"><%= t('user.complete_profile') %></h1>
       <span class="w-5"></span>
@@ -15,7 +15,7 @@
         </div>
         <div class="flex flex-col mb-4" data-controller="avatar">
           <label for="avatar-input" class="text-sm text-silver"><%= t('user.profile_pic') %></label>
-          <button class="p-4 text-left border-none bg-steel rounded-xl placeholder:text-sm" id="custom-avatar-button">
+          <button class="p-4 text-left border-none bg-steel rounded-xl placeholder:text-sm cursor-pointer" id="custom-avatar-button">
             <% if @user.avatar.attached? %>
               <span id="avatar-filename">
                 <%= @user.avatar.blob.filename.to_s.truncate(42) %>
@@ -32,15 +32,15 @@
         <div class="flex mb-4 gap-x-3">
           <div>
             <%= f.label :sex, t('user.sex'), class:'text-silver text-sm' %>
-            <select name="user[sex]" id="user_sex" class="w-full input">
+            <select name="user[sex]" id="user_sex" class="w-full input cursor-pointer">
               <option value="F">F</option>
               <option value="M">M</option>
               <option value="O"><%= t('user.other') %></option>
             </select>
           </div>
-          <div>
+          <div data-controller="user">
             <%= f.label :dob, t('user.dob'), class:'text-silver text-sm' %>
-            <%= f.date_field :dob, class: "input w-full date" %>
+            <%= f.date_field :dob, class: "input w-full date", data: {user_target: "dob"} %>
           </div>
         </div>
         <div class="mb-4">
@@ -49,7 +49,7 @@
         </div>
         <div class="mb-4">
           <%= f.label :identification_type, t('user.identification_type'), class:'text-silver text-sm' %>
-          <select class="w-full mb-4 input" name="user[identification_type]" id="user_identification_type">
+          <select class="w-full mb-4 input cursor-pointer" name="user[identification_type]" id="user_identification_type">
             <option value="CC"><%= t('user.citizenship_card') %></option>
             <option value="CE"><%= t('user.foreigner_card') %></option>
             <option value="PP"><%= t('user.passport') %></option>
@@ -59,11 +59,11 @@
         <div class="mb-4">
           <%= f.label :address, t('user.residence'), class:'text-silver text-sm' %>
           <%= f.text_field :address, autofocus: true, class:'input w-full mb-4', placeholder:t('user.address') %>
-          <%= f.text_field :zip, autofocus: true, class:'input w-full mb-4', placeholder: t('user.zip') %>
+          <%#= f.text_field :zip, autofocus: true, class:'input w-full mb-4', placeholder: t('user.zip') %>
           <%= f.text_field :city, autofocus: true, class:'input w-full', placeholder: t('user.city') %>
         </div>
         <div class="flex items-center mb-4 gap-x-2 text-sm field text-silver">
-          <%= f.check_box :accepts_terms, class:'rounded bg-steel focus:ring-0 focus:ring-offset-0 hover:cursor-pointer' %>
+          <%= f.check_box :accepts_terms, class:"rounded bg-steel focus:ring-0 focus:ring-offset-0 #{@user.accepts_terms? ? 'cursor-not-allowed' : 'cursor-pointer'}", disabled: @user.accepts_terms? %>
           <label for="user[accepts_terms]" id="user_accepts_terms"><%= t('user.consent') %> <a class="text-primary-blue hover:underline" href="/terms"><%= t('user.terms&conditions') %></a></label>
         </div>
         <div class="actions">
