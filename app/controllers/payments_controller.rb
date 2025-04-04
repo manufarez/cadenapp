@@ -20,7 +20,7 @@ class PaymentsController < ApplicationController
         render turbo_stream: turbo_stream.replace(
           "payments_list",
           partial: "payments/payments_list",
-          locals: { payments: @payments }
+          locals: {payments: @payments}
         )
       end
     end
