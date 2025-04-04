@@ -1,5 +1,6 @@
-<%= form_with(model: [@cadena, @invitation], class: "contents") do |form| %>
-  <% if invitation.errors.any? %>
+<%= form_with(model: [@cadena, @invitation], class: "text-white w-full max-w-md font-manrope mx-auto") do |form| %>
+  <%# if invitation.errors.any? %>
+  <% if false %>
     <div id="error_explanation" class="px-3 py-2 my-3 text-sm font-medium text-red-500 rounded-lg bg-red-50">
       <h2><%= t('activerecord.errors.messages.not_saved') %></h2>
       <ul class="list-disc list-inside">
@@ -11,19 +12,31 @@
   <% end %>
   <div class="mb-4">
     <%#= form.label :phone, t('user.phone'), class:'text-sm text-silver' %>
-    <%#= form.text_field :phone, class: "w-full input", placeholder: t('user.phone') %>
+    <%= form.text_field :phone, class: "w-full input", placeholder: t('user.phone') %>
+    <% if @invitation.errors[:phone].any? %>
+      <p class="error-message"><%= @invitation.errors[:phone].first.strip.capitalize %></p>
+    <% end %>
   </div>
   <div class="mb-4">
     <%#= form.label :email, t('user.email'), class:'text-sm text-silver' %>
     <%= form.text_field :email, class: "w-full input", placeholder: t('user.email') %>
+    <% if @invitation.errors[:email].any? %>
+      <p class="error-message"><%= @invitation.errors[:email].first.strip.capitalize %></p>
+    <% end %>
   </div>
   <div class="mb-4">
     <%#= form.label :first_name, t('user.first_name'), class:'text-sm text-silver' %>
     <%= form.text_field :first_name, class: "w-full input", placeholder: t('user.first_name') %>
+    <% if @invitation.errors[:first_name].any? %>
+      <p class="error-message"><%= @invitation.errors[:first_name].first.strip.capitalize %></p>
+    <% end %>
   </div>
   <div class="mb-4">
     <%#= form.label :last_name, t('user.last_name'), class:'text-sm text-silver' %>
     <%= form.text_field :last_name, class: "w-full input", placeholder: t('user.last_name') %>
+    <% if @invitation.errors[:last_name].any? %>
+      <p class="error-message"><%= @invitation.errors[:last_name].first.strip.capitalize %></p>
+    <% end %>
   </div>
   <%= form.submit "Enviar", class: "btn-primary text-white mb-4" %>
   <div class="flex justify-center gap-x-1 text-silver">

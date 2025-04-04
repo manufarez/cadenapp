@@ -1,14 +1,14 @@
 <div class="max-w-md px-6 mx-auto">
   <div class="flex items-center justify-between mb-10">
     <%= link_to @cadena do %>
-      <%= inline_svg_tag('svg/arrow_left.svg', class:'text-white w-6') %>
+      <%= inline_svg_tag('svg/arrow_left.svg', class:'text-white w-6 back-button') %>
     <% end %>
     <div class="text-center text-white text font-manrope">
       <h1 class="text-lg font-bold">Invitaciones</h1>
       <span class="block overflow-hidden font-medium text-silver max-w-64 text-ellipsis whitespace-nowrap"><%= @cadena.name %></span>
     </div>
     <% if @cadena.pending? %>
-      <%= link_to new_cadena_invitation_path, class: "rounded-full p-1 -ml-1.5 bg-blue-600 text-white block font-medium" do %>
+      <%= link_to new_cadena_invitation_path, class: "rounded-full p-1 -ml-1.5 bg-blue-600 text-white block font-medium hover:bg-blue-700 transition-all duration-300" do %>
         <%= inline_svg_tag('svg/plus.svg', class:'w-6') %>
       <% end %>
     <% else %>

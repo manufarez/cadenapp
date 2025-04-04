@@ -98,3 +98,9 @@
 .circle-button {
   @apply p-3 text-primary-blue rounded-full bg-primary-blue/15 font-manrope focus:ring-0 focus:outline-none hover:bg-blue-700/40 cursor-pointer;
 }
+.error-message {
+  @apply text-lavender-light text-xs mt-0.5;
+}
+.back-button {
+  @apply text-white w-6 cursor-pointer hover:text-lavender transition-colors duration-300;
+}
