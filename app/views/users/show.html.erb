@@ -52,12 +52,12 @@
     </div>
     <div class="grid grid-cols-2 gap-3.5">
       <%= link_to user_complete_profile_path(@user) do  %>
-        <div class="w-full mb-4 text-center btn-primary">Editar perfil</div>
+        <div class="w-full mb-4 text-center btn-primary text-sm md:text-base">Editar perfil</div>
       <% end %>
       <%= link_to destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: t('devise.sessions.logout_confirmation') } do %>
         <button type="button" class="flex items-center justify-center w-full btn-secondary text-placeholder-gray">
-          <span class="mr-2">Desconectarse</span>
-          <%= inline_svg_tag 'svg/exit.svg', class:'size-5' %>
+          <span class="mr-2 text-sm md:text-base">Desconectarse</span>
+          <%= inline_svg_tag 'svg/exit.svg', class:'size-5 min-w-5' %>
         </button>
       <% end %>
     </div>
