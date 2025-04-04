@@ -526,6 +526,7 @@ DEPENDENCIES
   devise
   factory_bot_rails
   faker
+  faraday (~> 2.12, >= 2.12.2)
   good_job
   guard-rspec
   htmlbeautifier
