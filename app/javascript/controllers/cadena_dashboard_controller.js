@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
+import { confetti } from "@tsparticles/confetti";
 
 // Connects to data-controller="cadena-dashboard"
 export default class extends Controller {
@@ -8,14 +9,21 @@ export default class extends Controller {
   initilize() {}
 
   connect() {
+    console.log("Connected cadena-dashboard controller");
+
     if (this.stateValue === "finished") {
       this.toggleDetails();
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.3 },
-      });
+      this.fireConfetti();
     }
+  }
+
+  fireConfetti() {
+    console.log("Firing confetti");
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.3 },
+    });
   }
 
   toggleDetails() {

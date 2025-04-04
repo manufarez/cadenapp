@@ -1,3 +1,4 @@
 <%= link_to_cond(current_user&.is_admin?, payment.user == @user ? payment.participant.user : payment.user) do %>
-  <%= image_tag 'default_avatar.png', data:{src: payment.user == @user ? payment.participant.avatar.url : payment.user.avatar.url}, class:'lazy w-8 h-8 min-h-8 min-w-8 object-cover rounded-full hover:opacity-30 mr-2', alt:'User avatar' %>
+  <% avatar_url = payment.user == @user ? payment.participant.avatar.attached? ? payment.participant.avatar.url : 'default_avatar.png' : payment.user.avatar.attached? ? payment.user.avatar.url : 'default_avatar.png' %>
+  <%= image_tag avatar_url, class:'w-8 h-8 min-h-8 min-w-8 object-cover rounded-full hover:opacity-30 mr-2', alt:'User avatar' %>
 <% end %>

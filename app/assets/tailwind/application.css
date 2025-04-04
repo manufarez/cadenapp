@@ -104,3 +104,9 @@
 .back-button {
   @apply text-white w-6 cursor-pointer hover:text-lavender transition-colors duration-300;
 }
+
+/* Confetti */
+#confetti,
+#confetti canvas {
+  pointer-events: none !important;
+}

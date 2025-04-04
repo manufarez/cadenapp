@@ -8,7 +8,21 @@ class PaymentsController < ApplicationController
       @payments = (@user.made_payments + @user.received_payments).sort_by(&:created_at).reverse
       @payments.select { |payment| payment.cadena == @cadena }
     else
-      @payments = Payment.where(cadena: @cadena)
+      @payments = Payment.where(cadena: @cadena, participant: @cadena.participants.order(:position).first)
+      if params[:participant_id].present?
+        @payments = Payment.where(cadena: @cadena, participant_id: params[:participant_id])
+      end
+    end
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          "payments_list",
+          partial: "payments/payments_list",
+          locals: { payments: @payments }
+        )
+      end
     end
   end
 
